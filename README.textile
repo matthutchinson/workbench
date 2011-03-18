@@ -1,0 +1,3 @@
+h1. My Vim
+
+My vim configuration files.  Use with the latest vim compiled with Ruby support.  Visit my "vim wiki page":https://github.com/matthutchinson/matthutchinson.github.com/wiki/Vim for more information.
