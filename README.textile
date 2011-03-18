@@ -1,3 +1,9 @@
 h1. My Vim
 
-My vim configuration files.  Use with the latest vim compiled with Ruby support.  Visit my "vim wiki page":https://github.com/matthutchinson/matthutchinson.github.com/wiki/Vim for more information.
+My vim configuration files.  Currently setup with the following plugins;
+
+* "Buffer Explorer":http://www.vim.org/scripts/script.php?script_id=42
+* "Lusty Explorer":http://www.vim.org/scripts/script.php?script_id=1890
+* "NERD Tree":http://www.vim.org/scripts/script.php?script_id=1658
+
+Configure vim with Ruby support and visit my "vim wiki page":https://github.com/matthutchinson/matthutchinson.github.com/wiki/Vim for help and more information.
