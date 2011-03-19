@@ -80,6 +80,7 @@ map <leader>tm :tabmove
 " Custom mappings
 " CTRL+t opens lusty file
 map <c-t> <leader>lf 
+map <c-b> <leader>be
 
 " Turn OFF arrow keys
 map <up> <nop>
