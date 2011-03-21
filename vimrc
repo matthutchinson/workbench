@@ -17,7 +17,6 @@ runtime macros/matchit.vim        " Load the matchit plugin.
 set showcmd                       " Display incomplete commands.
 set showmode                      " Display the mode you're in.
 
-set autochdir                     " Automatically change working dir to files dir
 set backspace=indent,eol,start    " Intuitive backspacing.
 
 set hidden                        " Handle multiple buffers better.
