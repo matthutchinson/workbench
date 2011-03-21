@@ -7,3 +7,8 @@ My vim configuration files.  Currently setup with the following plugins;
 * "NERD Tree":http://www.vim.org/scripts/script.php?script_id=1658
 
 Configure vim with Ruby support and visit my "vim wiki page":https://github.com/matthutchinson/matthutchinson.github.com/wiki/Vim for help and more information.
+
+h2. Cheat sheets
+
+* "Graphical vi-vim cheat sheet":http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html
+* "Vimmy (iPhone cheat-sheet)":http://itunes.apple.com/gb/app/vimmy/id361221825?mt=8
