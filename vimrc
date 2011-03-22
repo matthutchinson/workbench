@@ -3,13 +3,13 @@ set nocompatible
 
 " Colors
 set t_Co=256
-set background=dark
 
 if &t_Co >= 256 || has("gui_running")
+  set background=dark
   colorscheme ir_black
 endif
 
-syntax enable                     " Turn on syntax highlighting.
+syntax on                         " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
 
 runtime macros/matchit.vim        " Load the matchit plugin.
@@ -54,7 +54,6 @@ set shiftwidth=2                  " And again, related.
 set expandtab                     " Use spaces instead of tabs
 set smarttab                      " Insert tabs on the start of a line according to shiftwidth, not
 set shiftround                    " Use multiple of shiftwidth when indenting with '<' and '>'
-set showmatch                     " Set show matching parenthesis
 
 " Status line
 set laststatus=2                  " Show the status line all the time
@@ -92,7 +91,9 @@ map <right> <nop>
 " autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
 
 " Custom syntax highlighting
-autocmd BufRead,BufNewFile Gemfile set filetype=ruby
+au BufRead,BufNewFile Gemfile set filetype=ruby
+au BufRead,BufNewFile *.as set filetype=actionscript
+au BufRead,BufNewFile *.mxml set filetype=mxml
 
 " Always open with these commands
 " autocmd VimEnter * NERDTree
