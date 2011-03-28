@@ -2,7 +2,6 @@ h1. My Vim
 
 My vim configuration files.  Currently setup with the following plugins;
 
-* "Buffer Explorer":http://www.vim.org/scripts/script.php?script_id=42
 * "Lusty Explorer":http://www.vim.org/scripts/script.php?script_id=1890
 * "NERD Tree":http://www.vim.org/scripts/script.php?script_id=1658
 

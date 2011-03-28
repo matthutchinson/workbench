@@ -77,8 +77,9 @@ map <leader>tm :tabmove
 
 " Custom mappings
 " CTRL+t opens lusty file
+" CTRL+b opens lusty buffer
 map <c-t> <leader>lf
-map <c-b> <leader>be
+map <c-b> <leader>lb
 
 " Turn OFF arrow keys
 map <up> <nop>
