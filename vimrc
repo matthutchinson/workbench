@@ -79,6 +79,7 @@ map <leader>tm :tabmove
 " CTRL+t opens lusty file
 map <c-t> <leader>lf
 map <c-b> <leader>be
+map <c-F> :Ack 
 
 " Turn OFF arrow keys
 map <up> <nop>
