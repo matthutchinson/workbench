@@ -1,5 +1,4 @@
-" Set this first (avoid use of -N for vi compatibility)
-set nocompatible
+" Set this first (avoid use of -N for vi compatibility) set nocompatible
 
 " Colors
 set t_Co=256
@@ -77,9 +76,10 @@ map <leader>tm :tabmove
 
 " Custom mappings
 " CTRL+t opens lusty file
+" CTRL+b opens lusty buffer
 map <c-t> <leader>lf
-map <c-b> <leader>be
 map <c-F> :Ack 
+map <c-b> <leader>lb
 
 " Turn OFF arrow keys
 map <up> <nop>
