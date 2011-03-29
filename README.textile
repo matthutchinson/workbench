@@ -4,6 +4,7 @@ My vim configuration files.  Currently setup with the following plugins;
 
 * "Lusty Explorer":http://www.vim.org/scripts/script.php?script_id=1890
 * "NERD Tree":http://www.vim.org/scripts/script.php?script_id=1658
+* "Ack":http://www.vim.org/scripts/script.php?script_id=2572
 
 Configure vim with Ruby support and visit my "vim wiki page":https://github.com/matthutchinson/matthutchinson.github.com/wiki/Vim for help and more information.
 

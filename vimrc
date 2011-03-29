@@ -81,6 +81,11 @@ map <c-t> <leader>lf
 map <c-F> :Ack 
 map <c-b> <leader>lb
 
+" On OSX
+" CTRL+c,p copies and pastes from the system paste buffer
+vmap <C-c> y:call system("pbcopy", getreg("\""))<CR> 
+nmap <C-p> :call setreg("\"",system("pbpaste"))<CR>p 
+
 " Turn OFF arrow keys
 map <up> <nop>
 map <down> <nop>
