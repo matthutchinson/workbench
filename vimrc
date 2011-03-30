@@ -80,9 +80,9 @@ map <leader>tm :tabmove
 " CTRL+F opens Ack search
 " CTRL+f recursively searches for a file (see functions below)
 map <C-t> <leader>lf
-map <C-F> :Ack 
+map <C-f> :Ack 
 map <C-b> <leader>lb
-map <C-f> :Find 
+map <leader>f :Find 
 
 " On OSX
 " CTRL+c,p copies and pastes from the system paste buffer
