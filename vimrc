@@ -86,11 +86,15 @@ map <leader>tm :tabmove
 " CTRL+t opens lusty file
 " CTRL+b opens lusty buffer
 " CTRL+F opens Ack search
-" CTRL+f recursively searches for a file (see functions below)
-map <C-t> <leader>lf
-map <C-f> :Ack 
-map <C-b> <leader>lb
-map <leader>f :Find 
+" \f recursively searches for a file (see functions below)
+" F5 indents/formats entire document
+map  <C-t> <leader>lf
+map  <C-f> :Ack 
+map  <C-b> <leader>lb
+map  <leader>f :Find 
+map  <silent> <F5> mmgg=G'm
+imap <silent> <F5> <Esc> mmgg=G'm
+
 
 " On OSX
 " CTRL+c,p copies and pastes from the system paste buffer
@@ -143,9 +147,9 @@ function! Find(...)
     set efm=%f
 
     if exists(":cgetfile")
-        execute "silent! cgetfile " . tmpfile
+      execute "silent! cgetfile " . tmpfile
     else
-        execute "silent! cfile " . tmpfile
+      execute "silent! cfile " . tmpfile
     endif
 
     let &efm = old_efm
