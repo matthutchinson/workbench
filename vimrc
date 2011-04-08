@@ -55,8 +55,16 @@ set smarttab                      " Insert tabs on the start of a line according
 set shiftround                    " Use multiple of shiftwidth when indenting with '<' and '>'
 
 " Status line
+hi User1 ctermbg=black ctermfg=green guibg=black guifg=green
+hi User2 ctermbg=black ctermfg=red guibg=black guifg=red
+
 set laststatus=2                  " Show the status line all the time
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
+set statusline+=%1*
+set statusline+=\ %{exists('g:loaded_rvm')?rvm#statusline():''} " RVM
+set statusline+=%2*
+set statusline+=\ [%{GitBranch()}]
+set statusline+=%*
 
 " Folding
 set foldmethod=syntax
@@ -107,7 +115,6 @@ au BufRead,BufNewFile *.mxml set filetype=mxml
 " Always open with these commands
 " autocmd VimEnter * NERDTree
 " autocmd VimEnter * wincmd p
-
 
 " Functions
 
