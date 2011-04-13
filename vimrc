@@ -1,8 +1,8 @@
-" Set this first (avoid use of -N for vi compatibility) set nocompatible
+" Set this first (avoid use of -N for vi compatibility) 
+set nocompatible
 
 " Colors
 set t_Co=256
-
 if &t_Co >= 256 || has("gui_running")
   set background=dark
   colorscheme ir_black
@@ -47,23 +47,24 @@ set nobackup                      " Don't make a backup before overwriting a fil
 set nowritebackup                 " And again.
 set directory=$HOME/.vim/tmp//,.  " Keep swap files in one location
 
-set softtabstop=2                 " soft tabs, ie. number of spaces for tab
+set softtabstop=2                 " Soft tabs, ie. number of spaces for tab
 set tabstop=2                     " Global tab width.
 set shiftwidth=2                  " And again, related.
 set expandtab                     " Use spaces instead of tabs
 set smarttab                      " Insert tabs on the start of a line according to shiftwidth, not
 set shiftround                    " Use multiple of shiftwidth when indenting with '<' and '>'
 
-" Status line
+" Status line colors
 hi User1 ctermbg=black ctermfg=green guibg=black guifg=green
 hi User2 ctermbg=black ctermfg=red guibg=black guifg=red
 
-set laststatus=2                  " Show the status line all the time
+" Status line config
+set laststatus=2                  
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 set statusline+=%1*
-set statusline+=\ %{exists('g:loaded_rvm')?rvm#statusline():''} " RVM
+set statusline+=\ %{exists('g:loaded_rvm')?rvm#statusline():''} " RVM info in green
 set statusline+=%2*
-set statusline+=\ [%{GitBranch()}]
+set statusline+=\ [%{GitBranch()}] " GIT branch in red
 set statusline+=%*
 
 " Folding
@@ -89,14 +90,12 @@ map <leader>tm :tabmove
 " \f recursively searches for a file (see functions below)
 " F5 indents/formats entire document
 map  <C-t> <leader>lf
-map  <C-f> :Ack 
 map  <C-b> <leader>lb
-map  <leader>f :Find 
+map  <C-F> :Ack 
+map  <F6> <leader>t
 map  <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
 
-
-" On OSX
 " CTRL+c,p copies and pastes from the system paste buffer
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR> 
 nmap <C-p> :call setreg("\"",system("pbpaste"))<CR>p 
@@ -107,57 +106,11 @@ map <down> <nop>
 map <left> <nop>
 map <right> <nop>
 
-" Automatic fold settings for specific files. Uncomment to use.
-" autocmd FileType ruby setlocal foldmethod=syntax
-" autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
-
 " Custom syntax highlighting
 au BufRead,BufNewFile Gemfile set filetype=ruby
-au BufRead,BufNewFile *.as set filetype=actionscript
-au BufRead,BufNewFile *.mxml set filetype=mxml
+au BufRead,BufNewFile *.as    set filetype=actionscript
+au BufRead,BufNewFile *.mxml  set filetype=mxml
 
 " Always open with these commands
 " autocmd VimEnter * NERDTree
 " autocmd VimEnter * wincmd p
-
-" Functions
-
-" from http://vim.wikia.com/wiki/VimTip1234
-" Find file in current directory and edit it.
-" Find file in current directory and edit it.
-function! Find(...)
-  let path="."
-  if a:0==2
-    let path=a:2
-  endif
-  let l:list=system("find ".path. " -name '".a:1."' | grep -v .git ")
-  let l:num=strlen(substitute(l:list, "[^\n]", "", "g"))
-  if l:num < 1
-    echo "'".a:1."' not found"
-    return
-  endif
-  if l:num == 1
-    exe "open " . substitute(l:list, "\n", "", "g")
-  else
-    let tmpfile = tempname()
-    exe "redir! > " . tmpfile
-    silent echon l:list
-    redir END
-    let old_efm = &efm
-    set efm=%f
-
-    if exists(":cgetfile")
-      execute "silent! cgetfile " . tmpfile
-    else
-      execute "silent! cfile " . tmpfile
-    endif
-
-    let &efm = old_efm
-
-    " Open the quickfix window below the current window
-    botright copen
-
-    call delete(tmpfile)
-  endif
-endfunction
-command! -nargs=* Find :call Find(<f-args>)
