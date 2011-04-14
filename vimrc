@@ -84,15 +84,15 @@ map <leader>tl :tablast<cr>
 map <leader>tm :tabmove
 
 " Custom mappings
-" CTRL+t opens lusty file
+" CTRL+t opens Command-T 
 " CTRL+b opens lusty buffer
 " CTRL+F opens Ack search
-" \f recursively searches for a file (see functions below)
+" F6 opens lusty file
 " F5 indents/formats entire document
-map  <C-t> <leader>lf
+map  <C-t> <leader>t
 map  <C-b> <leader>lb
 map  <C-F> :Ack 
-map  <F6> <leader>t
+map  <F6> <leader>lf
 map  <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
 
