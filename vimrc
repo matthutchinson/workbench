@@ -73,11 +73,16 @@ set foldcolumn=4
 set nofoldenable
 
 " Custom mappings
-map <C-t> <leader>t                  " Ctrl+t opens Command-T 
-map <C-b> <leader>lb                 " Ctrl+b opens LustyBuffer
-map <C-c> <leader>c<Space>           " Ctrl+c toggles commenting
-map <C-F> :Ack                       " Ctrl+f opens Ack
-map <silent> <F5> mmgg=G'm           " F5 tidies syntax in entire file
+" Ctrl+t opens Command-T 
+" Ctrl+b opens LustyBuffer
+" Ctrl+c toggles commenting
+" Ctrl+f opens Ack
+" F5 tidies syntax in entire file
+map <C-t> <leader>t
+map <C-b> <leader>lb
+map <C-c> <leader>c<Space>
+map <C-F> :Ack
+map <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
 
 " quickly edit and resource vimrc
