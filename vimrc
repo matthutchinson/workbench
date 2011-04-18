@@ -1,4 +1,4 @@
-" Set this first (avoid use of -N for vi compatibility) 
+"Set this first (avoid use of -N for vi compatibility)
 set nocompatible
 
 " Colors
@@ -72,39 +72,23 @@ set foldmethod=syntax
 set foldcolumn=4
 set nofoldenable
 
-" Tab mappings.
-map <leader>tt :tabnew<cr>
-map <leader>te :tabedit
-map <leader>tc :tabclose<cr>
-map <leader>to :tabonly<cr>
-map <leader>tn :tabnext<cr>
-map <leader>tp :tabprevious<cr>
-map <leader>tf :tabfirst<cr>
-map <leader>tl :tablast<cr>
-map <leader>tm :tabmove
-
 " Custom mappings
-" CTRL+t opens Command-T 
-" CTRL+b opens lusty buffer
-" CTRL+F opens Ack search
-" F6 opens lusty file
-" F5 indents/formats entire document
-map  <C-t> <leader>t
-map  <C-b> <leader>lb
-map  <C-F> :Ack 
-map  <F6> <leader>lf
-map  <silent> <F5> mmgg=G'm
+map <C-t> <leader>t                  " Ctrl+t opens Command-T 
+map <C-b> <leader>lb                 " Ctrl+b opens LustyBuffer
+map <C-c> <leader>c<Space>           " Ctrl+c toggles commenting
+map <C-F> :Ack                       " Ctrl+f opens Ack
+map <silent> <F5> mmgg=G'm           " F5 tidies syntax in entire file
 imap <silent> <F5> <Esc> mmgg=G'm
 
-" CTRL+c,p copies and pastes from the system paste buffer
-vmap <C-c> y:call system("pbcopy", getreg("\""))<CR> 
-nmap <C-p> :call setreg("\"",system("pbpaste"))<CR>p 
+" quickly edit and resource vimrc
+map <leader>v :sp ~/.vimrc<cr>       " \v opens ~/.vimrc in a split
+map <leader>u :source ~/.vimrc<cr>   " \u sources ~/.vimrc
 
-" Turn OFF arrow keys
+" Turn OFF arrow keys, left and right move through buffers
 map <up> <nop>
 map <down> <nop>
-map <left> <nop>
-map <right> <nop>
+nnoremap <left> :bp<cr>
+nnoremap <right> :bn<cr>
 
 " Custom syntax highlighting
 au BufRead,BufNewFile Gemfile set filetype=ruby
