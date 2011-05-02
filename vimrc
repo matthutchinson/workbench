@@ -81,7 +81,7 @@ set nofoldenable
 map <C-t> <leader>t
 map <C-b> <leader>lb
 map <C-c> <leader>c<Space>
-map <C-F> :Ack
+map <C-F> :Ack 
 map <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
 
