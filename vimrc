@@ -1,7 +1,12 @@
 "Set this first (avoid use of -N for vi compatibility)
 set nocompatible
 
-" Colors
+" allow mouse input
+if has("mouse")
+  set mouse=a
+  set mousehide
+endif
+
 set t_Co=256
 if &t_Co >= 256 || has("gui_running")
   set background=dark
@@ -99,6 +104,12 @@ nnoremap <right> :bn<cr>
 au BufRead,BufNewFile Gemfile set filetype=ruby
 au BufRead,BufNewFile *.as    set filetype=actionscript
 au BufRead,BufNewFile *.mxml  set filetype=mxml
+
+" Clipboard
+nmap <F1> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+imap <F1> <Esc>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+nmap <F2> :.w !pbcopy<CR><CR>
+vmap <F2> :w !pbcopy<CR><CR>
 
 " Always open with these commands
 " autocmd VimEnter * NERDTree
