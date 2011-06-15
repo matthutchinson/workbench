@@ -94,6 +94,9 @@ imap <silent> <F5> <Esc> mmgg=G'm
 map <leader>v :sp ~/.vimrc<cr>       " \v opens ~/.vimrc in a split
 map <leader>u :source ~/.vimrc<cr>   " \u sources ~/.vimrc
 
+" git blame with /g in visual mode
+vmap <Leader>g :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+
 " Turn OFF arrow keys, left and right move through buffers
 map <up> <nop>
 map <down> <nop>
