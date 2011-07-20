@@ -1,6 +1,10 @@
 "Set this first (avoid use of -N for vi compatibility)
 set nocompatible
 
+" user comma for map leader
+let mapleader = ","
+let g:mapleader = ","
+
 " allow mouse input
 if has("mouse")
   set mouse=a
@@ -90,12 +94,15 @@ map <C-F> :Ack
 map <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
 
-" quickly edit and resource vimrc
+" fast saving
+nmap <leader>w :w!<cr>
+
+" fast edit and source vimrc
 map <leader>v :sp ~/.vimrc<cr>       " \v opens ~/.vimrc in a split
 map <leader>u :source ~/.vimrc<cr>   " \u sources ~/.vimrc
 
-" git blame with /g in visual mode
-vmap <Leader>g :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+" fast git blame with /g in visual mode
+vmap <Leader>gb :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
 " Turn OFF arrow keys, left and right move through buffers
 map <up> <nop>
