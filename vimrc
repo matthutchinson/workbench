@@ -124,3 +124,6 @@ vmap <F2> :w !pbcopy<CR><CR>
 " Always open with these commands
 " autocmd VimEnter * NERDTree
 " autocmd VimEnter * wincmd p
+
+" Strip whitespace in vim
+autocmd BufWritePre * :%s/\s\+$//e
