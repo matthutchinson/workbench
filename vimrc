@@ -1,4 +1,4 @@
-"Set this first (avoid use of -N for vi compatibility)
+" set this first (avoid use of -N for vi compatibility)
 set nocompatible
 
 " user comma for map leader
@@ -63,12 +63,12 @@ set expandtab                     " Use spaces instead of tabs
 set smarttab                      " Insert tabs on the start of a line according to shiftwidth, not
 set shiftround                    " Use multiple of shiftwidth when indenting with '<' and '>'
 
-" Status line colors
+" status line colors
 hi User1 ctermbg=black ctermfg=green guibg=black guifg=green
 hi User2 ctermbg=black ctermfg=red guibg=black guifg=red
 
-" Status line config
-set laststatus=2                  
+" status line config
+set laststatus=2
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 set statusline+=%1*
 set statusline+=\ %{exists('g:loaded_rvm')?rvm#statusline():''} " RVM info in green
@@ -76,13 +76,13 @@ set statusline+=%2*
 set statusline+=\ [%{GitBranch()}] " GIT branch in red
 set statusline+=%*
 
-" Folding
+" folding
 set foldmethod=syntax
 set foldcolumn=4
 set nofoldenable
 
-" Custom mappings
-" Ctrl+t opens Command-T 
+" custom mappings
+" Ctrl+t opens Command-T
 " Ctrl+b opens LustyBuffer
 " Ctrl+c toggles commenting
 " Ctrl+f opens Ack
@@ -90,7 +90,7 @@ set nofoldenable
 map <C-t> <leader>t
 map <C-b> <leader>lb
 map <C-c> <leader>c<Space>
-map <C-F> :Ack 
+map <C-F> :Ack
 map <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
 
@@ -104,26 +104,26 @@ map <leader>u :source ~/.vimrc<cr>   " \u sources ~/.vimrc
 " fast git blame with /g in visual mode
 vmap <Leader>gb :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
-" Turn OFF arrow keys, left and right move through buffers
+" turn OFF arrow keys, left and right move through buffers
 map <up> <nop>
 map <down> <nop>
 nnoremap <left> :bp<cr>
 nnoremap <right> :bn<cr>
 
-" Custom syntax highlighting
+" custom syntax highlighting
 au BufRead,BufNewFile Gemfile set filetype=ruby
 au BufRead,BufNewFile *.as    set filetype=actionscript
 au BufRead,BufNewFile *.mxml  set filetype=mxml
 
-" Clipboard
+" clipboard
 nmap <F1> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 imap <F1> <Esc>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
 nmap <F2> :.w !pbcopy<CR><CR>
 vmap <F2> :w !pbcopy<CR><CR>
 
-" Always open with these commands
+" always open with these commands
 " autocmd VimEnter * NERDTree
 " autocmd VimEnter * wincmd p
 
-" Strip whitespace in vim
+" strip whitespace in vim when saving
 autocmd BufWritePre * :%s/\s\+$//e
