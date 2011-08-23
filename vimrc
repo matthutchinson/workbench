@@ -104,6 +104,9 @@ map <leader>u :source ~/.vimrc<cr>   " \u sources ~/.vimrc
 " fast git blame with /g in visual mode
 vmap <Leader>gb :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
+" run spec at line number
+map <leader>rs :<C-U>!spec <C-R>=expand("%:p") <CR> -c -l <C-R>=line(".") <CR> <CR>
+
 " turn OFF arrow keys, left and right move through buffers
 map <up> <nop>
 map <down> <nop>
