@@ -66,14 +66,15 @@ set shiftround                    " Use multiple of shiftwidth when indenting wi
 " status line colors
 hi User1 ctermbg=black ctermfg=green guibg=black guifg=green
 hi User2 ctermbg=black ctermfg=red guibg=black guifg=red
+hi User3 ctermbg=black ctermfg=yellow guibg=black  guifg=yellow
 
 " status line config
 set laststatus=2
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 set statusline+=%1*
 set statusline+=\ %{exists('g:loaded_rvm')?rvm#statusline():''} " RVM info in green
-set statusline+=%2*
-set statusline+=\ [%{GitBranch()}] " GIT branch in red
+set statusline+=%3*
+set statusline+=\ %{fugitive#statusline()} " Git info in red
 set statusline+=%*
 
 " folding
@@ -101,15 +102,22 @@ nmap <leader>w :w!<cr>
 map <leader>v :sp ~/.vimrc<cr>       " \v opens ~/.vimrc in a split
 map <leader>u :source ~/.vimrc<cr>   " \u sources ~/.vimrc
 
-" fast git blame with /g in visual mode
-vmap <Leader>gb :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+" fugitive git bindings
+map <leader>gs :Gstatus<cr>
+map <leader>gb :Gblame<cr>
+map <leader>gd :Gdiff<cr>
+map <leader>gg :Ggrep<Space>
+map <leader>ge :Gedit<cr>
+map <leader>gl :Glog -250<cr><cr>:copen<cr><cr>
+map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
+map <leader>gc :Gcommit
 
-" run spec at line number
+" rspec run spec under cursor
 map <leader>rs :<C-U>!spec <C-R>=expand("%:p") <CR> -c -l <C-R>=line(".") <CR> <CR>
 
-" turn OFF arrow keys, left and right move through buffers
-map <up> <nop>
-map <down> <nop>
+" turn OFF arrow keys, left/right move, down closes, up lists
+nnoremap <up>   :ls<cr>:b
+nnoremap <down> :bd<cr>
 nnoremap <left> :bp<cr>
 nnoremap <right> :bn<cr>
 
