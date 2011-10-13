@@ -83,17 +83,25 @@ set foldcolumn=4
 set nofoldenable
 
 " custom mappings
-" Ctrl+t opens Command-T
-" Ctrl+b opens LustyBuffer
+" Ctrl+t opens CommandT
+" Ctrl+r opens CommandTFlush
 " Ctrl+c toggles commenting
 " Ctrl+f opens Ack
 " F5 tidies syntax in entire file
-map <C-t> <leader>t
-map <C-b> <leader>lb
+nmap <silent> <C-t> :CommandT<CR>
+nmap <silent> <C-r> :CommandTFlush<CR>
 map <C-c> <leader>c<Space>
 map <C-F> :Ack
 map <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
+
+" CommandT config
+
+let g:CommandTMaxFiles=25000
+let g:CommandTMaxDepth=15
+let g:CommandTCancelMap='<C-x>'
+set wildignore+=*.o,*.obj,.git,.svn,**/vendor/apache-ant-1.8.2/**,**/vendor/rails/**
+
 
 " fast saving
 nmap <leader>w :w!<cr>
