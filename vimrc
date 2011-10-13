@@ -84,12 +84,12 @@ set nofoldenable
 
 " custom mappings
 " Ctrl+t opens CommandT
-" Ctrl+r opens CommandTFlush
+" F6 runs CommandTFlush
 " Ctrl+c toggles commenting
 " Ctrl+f opens Ack
 " F5 tidies syntax in entire file
 nmap <silent> <C-t> :CommandT<CR>
-nmap <silent> <C-r> :CommandTFlush<CR>
+nmap <silent> <F6> :CommandTFlush<CR>
 map <C-c> <leader>c<Space>
 map <C-F> :Ack
 map <silent> <F5> mmgg=G'm
