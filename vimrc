@@ -5,6 +5,9 @@ set nocompatible
 let mapleader = ","
 let g:mapleader = ","
 
+" textwidth
+set textwidth=115
+
 " allow mouse input
 if has("mouse")
   set mouse=a
