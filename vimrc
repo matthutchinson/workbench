@@ -5,8 +5,9 @@ set nocompatible
 let mapleader = ","
 let g:mapleader = ","
 
-" textwidth
-set textwidth=115
+" textwidth and format options
+set textwidth=80
+set fo-=t
 
 " allow mouse input
 if has("mouse")
@@ -78,6 +79,7 @@ set statusline+=%1*
 set statusline+=\ %{exists('g:loaded_rvm')?rvm#statusline():''} " RVM info in green
 set statusline+=%3*
 set statusline+=\ %{fugitive#statusline()} " Git info in red
+set statusline+=\[%{&fo}] " Git info in red
 set statusline+=%*
 
 " folding
