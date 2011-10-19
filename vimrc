@@ -76,7 +76,6 @@ hi User3 ctermbg=black ctermfg=yellow guibg=black  guifg=yellow
 set laststatus=2
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 set statusline+=%1*
-set statusline+=\ %{exists('g:loaded_rvm')?rvm#statusline():''} " RVM info in green
 set statusline+=%3*
 set statusline+=\ %{fugitive#statusline()} " Git info in red
 set statusline+=\[%{&fo}] " Git info in red
