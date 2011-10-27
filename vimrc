@@ -1,6 +1,8 @@
 " set this first (avoid use of -N for vi compatibility)
 set nocompatible
 
+runtime macros/matchit.vim        " Load the matchit plugin.
+
 " user comma for map leader
 let mapleader = ","
 let g:mapleader = ","
