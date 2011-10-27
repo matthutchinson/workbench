@@ -24,8 +24,6 @@ endif
 syntax on                         " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
 
-runtime macros/matchit.vim        " Load the matchit plugin.
-
 set showcmd                       " Display incomplete commands.
 set showmode                      " Display the mode you're in.
 
@@ -53,8 +51,6 @@ set scrolloff=3                   " Show 3 lines of context around the cursor.
 
 set title                         " Set the terminal's title
 set visualbell                    " No beeping.
-set history=1000                  " Remember more commands and search history
-set undolevels=1000               " Use many muchos levels of undo
 
 set nobackup                      " Don't make a backup before overwriting a file.
 set nowritebackup                 " And again.
@@ -66,6 +62,10 @@ set shiftwidth=2                  " And again, related.
 set expandtab                     " Use spaces instead of tabs
 set smarttab                      " Insert tabs on the start of a line according to shiftwidth, not
 set shiftround                    " Use multiple of shiftwidth when indenting with '<' and '>'
+
+set synmaxcol=128                 " For speed, only syntax highlight the first 128 chars
+set ttyfast                       " For speed
+
 
 " status line colors
 hi User1 ctermbg=black ctermfg=green guibg=black guifg=green
@@ -100,12 +100,10 @@ map <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
 
 " CommandT config
-
 let g:CommandTMaxFiles=25000
 let g:CommandTMaxDepth=15
 let g:CommandTCancelMap='<C-x>'
 set wildignore+=*.o,*.obj,.git,.svn,**/vendor/apache-ant-1.8.2/**,**/vendor/rails/**
-
 
 " fast saving
 nmap <leader>w :w!<cr>
@@ -139,14 +137,14 @@ au BufRead,BufNewFile *.as    set filetype=actionscript
 au BufRead,BufNewFile *.mxml  set filetype=mxml
 
 " clipboard
-nmap <F1> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
-imap <F1> <Esc>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
-nmap <F2> :.w !pbcopy<CR><CR>
-vmap <F2> :w !pbcopy<CR><CR>
+"nmap <F1> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+"imap <F1> <Esc>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
+"nmap <F2> :.w !pbcopy<CR><CR>
+"vmap <F2> :w !pbcopy<CR><CR>
 
 " always open with these commands
-" autocmd VimEnter * NERDTree
-" autocmd VimEnter * wincmd p
+"autocmd VimEnter * NERDTree
+"autocmd VimEnter * wincmd p
 
-" strip whitespace in vim when saving
+" auto strip whitespace when saving
 autocmd BufWritePre * :%s/\s\+$//e
