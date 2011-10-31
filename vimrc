@@ -67,7 +67,6 @@ set shiftround                    " Use multiple of shiftwidth when indenting wi
 
 set synmaxcol=80                  " For speed, only syntax highlight the first 80 chars (ruby style guide)
 set ttyfast                       " For speed
-set listchars+=trail:░            " Show trailing chars as the ░ char
 
 " status line colors
 hi User1 ctermbg=black ctermfg=green guibg=black guifg=green
@@ -105,7 +104,7 @@ imap <silent> <F5> <Esc> mmgg=G'm
 let g:CommandTMaxFiles=25000
 let g:CommandTMaxDepth=15
 let g:CommandTCancelMap='<C-x>'
-set wildignore+=*.o,*.obj,.git,*.png,*.PNG,*.JPG,*.jpg,*.GIF,*.gif,*.zip,*.ZIP,*.eot,*.svg,*.csv,*.ttf,*.svg,*.eof,*.ico,*.woff,vendor/**,coverage/**,tmp/**,rdoc/**,*.sqlite3,.svn,**/vendor/apache-ant-1.8.2/**,**/vendor/rails/**
+set wildignore+=*.o,*.obj,.git,.svn,**/vendor/apache-ant-1.8.2/**,**/vendor/rails/**,**/coverage/**
 
 " fast saving
 nmap <leader>w :w!<cr>
