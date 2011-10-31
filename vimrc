@@ -65,9 +65,9 @@ set expandtab                     " Use spaces instead of tabs
 set smarttab                      " Insert tabs on the start of a line according to shiftwidth, not
 set shiftround                    " Use multiple of shiftwidth when indenting with '<' and '>'
 
-set synmaxcol=128                 " For speed, only syntax highlight the first 128 chars
+set synmaxcol=80                  " For speed, only syntax highlight the first 80 chars (ruby style guide)
 set ttyfast                       " For speed
-
+set listchars+=trail:░            " Show trailing chars as the ░ char
 
 " status line colors
 hi User1 ctermbg=black ctermfg=green guibg=black guifg=green
@@ -105,7 +105,7 @@ imap <silent> <F5> <Esc> mmgg=G'm
 let g:CommandTMaxFiles=25000
 let g:CommandTMaxDepth=15
 let g:CommandTCancelMap='<C-x>'
-set wildignore+=*.o,*.obj,.git,.svn,**/vendor/apache-ant-1.8.2/**,**/vendor/rails/**
+set wildignore+=*.o,*.obj,.git,*.png,*.PNG,*.JPG,*.jpg,*.GIF,*.gif,*.zip,*.ZIP,*.eot,*.svg,*.csv,*.ttf,*.svg,*.eof,*.ico,*.woff,vendor/**,coverage/**,tmp/**,rdoc/**,*.sqlite3,.svn,**/vendor/apache-ant-1.8.2/**,**/vendor/rails/**
 
 " fast saving
 nmap <leader>w :w!<cr>
@@ -124,29 +124,27 @@ map <leader>gl :Glog -250<cr><cr>:copen<cr><cr>
 map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
 map <leader>gc :Gcommit
 
-" rspec run spec under cursor
+" RSpec run spec under cursor
 map <leader>rs :<C-U>!spec <C-R>=expand("%:p") <CR> -c -l <C-R>=line(".") <CR> <CR>
 
-" turn OFF arrow keys, left/right move, down closes, up lists
-nnoremap <up>   :ls<cr>:b
-nnoremap <down> :bd<cr>
-nnoremap <left> :bp<cr>
-nnoremap <right> :bn<cr>
+" move buffers tab/shift-tab moves
+nnoremap <tab> :bn<cr>
+nnoremap <S-tab> :bp<cr>
+" close buffer
+nmap <leader>d :bd<cr>
+" close all buffers
+nmap <leader>D :bufdo bd<cr>
+
+" turn OFF arrow keys
+nnoremap <Up>    <nop>
+nnoremap <Down>  <nop>
+nnoremap <Left>  <nop>
+nnoremap <Right> <nop>
 
 " custom syntax highlighting
 au BufRead,BufNewFile Gemfile set filetype=ruby
 au BufRead,BufNewFile *.as    set filetype=actionscript
 au BufRead,BufNewFile *.mxml  set filetype=mxml
-
-" clipboard
-"nmap <F1> :set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
-"imap <F1> <Esc>:set paste<CR>:r !pbpaste<CR>:set nopaste<CR>
-"nmap <F2> :.w !pbcopy<CR><CR>
-"vmap <F2> :w !pbcopy<CR><CR>
-
-" always open with these commands
-"autocmd VimEnter * NERDTree
-"autocmd VimEnter * wincmd p
 
 " auto strip whitespace when saving
 autocmd BufWritePre * :%s/\s\+$//e
