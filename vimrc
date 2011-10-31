@@ -65,7 +65,7 @@ set expandtab                     " Use spaces instead of tabs
 set smarttab                      " Insert tabs on the start of a line according to shiftwidth, not
 set shiftround                    " Use multiple of shiftwidth when indenting with '<' and '>'
 
-set synmaxcol=80                  " For speed, only syntax highlight the first 80 chars (ruby style guide)
+"set synmaxcol=80                 " For speed, only syntax highlight the first 80 chars (ruby style guide)
 set ttyfast                       " For speed
 
 " status line colors
