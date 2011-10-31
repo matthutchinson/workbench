@@ -104,7 +104,7 @@ imap <silent> <F5> <Esc> mmgg=G'm
 let g:CommandTMaxFiles=25000
 let g:CommandTMaxDepth=15
 let g:CommandTCancelMap='<C-x>'
-set wildignore+=*.o,*.obj,.git,.svn,**/vendor/apache-ant-1.8.2/**,**/vendor/rails/**,**/vendor/bundle/**
+set wildignore+=*.o,*.obj,.git,.svn,**/vendor/apache-ant-1.8.2/**,**/vendor/rails/**,**/vendor/bundle/**,**/tmp/cache/**
 
 " fast saving
 nmap <leader>w :w!<cr>
