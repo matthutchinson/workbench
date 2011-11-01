@@ -1,7 +1,8 @@
 " set this first (avoid use of -N for vi compatibility)
 set nocompatible
 
-runtime macros/matchit.vim        " Load the matchit plugin.
+" load the matchit plugin.
+runtime macros/matchit.vim
 
 " user comma for map leader
 let mapleader = ","
@@ -17,63 +18,64 @@ if has("mouse")
   set mousehide
 endif
 
+" 256 color scheme
 set t_Co=256
 if &t_Co >= 256 || has("gui_running")
   set background=dark
   colorscheme ir_black
 endif
 
-syntax on                         " Turn on syntax highlighting.
-filetype plugin indent on         " Turn on file type detection.
+syntax on                         " turn on syntax highlighting.
+filetype plugin indent on         " turn on file type detection.
 
-set showcmd                       " Display incomplete commands.
-set showmode                      " Display the mode you're in.
+set showcmd                       " display incomplete commands.
+set showmode                      " display the mode you're in.
 
-set backspace=indent,eol,start    " Intuitive backspacing.
+set backspace=indent,eol,start    " intuitive backspacing.
 
-set hidden                        " Handle multiple buffers better.
+set hidden                        " handle multiple buffers better.
 
-set wildmenu                      " Enhanced command line completion.
-set wildmode=list:longest         " Complete files like a shell.
+set wildmenu                      " enhanced command line completion.
+set wildmode=list:longest         " complete files like a shell.
 
-set ignorecase                    " Case-insensitive searching.
-set smartcase                     " But case-sensitive if expression contains a capital letter.
+set ignorecase                    " case-insensitive searching.
+set smartcase                     " but case-sensitive if expression contains a capital letter.
 
-set number                        " Show line numbers.
-set ruler                         " Show cursor position.
+set number                        " show line numbers.
+set ruler                         " show cursor position.
 
-set incsearch                     " Highlight matches as you type.
-set hlsearch                      " Highlight matches.
+set incsearch                     " highlight matches as you type.
+set hlsearch                      " highlight matches.
 
-set autoindent                    " Always set autoindenting on
-set copyindent                    " Copy the previous indentation on autoindenting
+set autoindent                    " always set autoindenting on
+set copyindent                    " copy the previous indentation on autoindenting
 
-set nowrap                        " Turn on line wrapping.
-set scrolloff=3                   " Show 3 lines of context around the cursor.
+set nowrap                        " turn on line wrapping.
+set scrolloff=3                   " show 3 lines of context around the cursor.
 
-set title                         " Set the terminal's title
-set visualbell                    " No beeping.
+set title                         " set the terminal's title
+set visualbell                    " no beeping.
 
-set nobackup                      " Don't make a backup before overwriting a file.
-set nowritebackup                 " And again.
-set directory=$HOME/.vim/tmp//,.  " Keep swap files in one location
+set nobackup                      " don't make a backup before overwriting a file.
+set nowritebackup                 " and again.
+set directory=$HOME/.vim/tmp//,.  " keep swap files in one location
 
-set softtabstop=2                 " Soft tabs, ie. number of spaces for tab
-set tabstop=2                     " Global tab width.
-set shiftwidth=2                  " And again, related.
-set expandtab                     " Use spaces instead of tabs
-set smarttab                      " Insert tabs on the start of a line according to shiftwidth, not
-set shiftround                    " Use multiple of shiftwidth when indenting with '<' and '>'
+set softtabstop=2                 " soft tabs, ie. number of spaces for tab
+set tabstop=2                     " global tab width.
+set shiftwidth=2                  " and again, related.
+set expandtab                     " use spaces instead of tabs
+set smarttab                      " insert tabs on the start of a line according to shiftwidth, not
+set shiftround                    " use multiple of shiftwidth when indenting with '<' and '>'
 
-"set synmaxcol=80                 " For speed, only syntax highlight the first 80 chars (ruby style guide)
-set ttyfast                       " For speed
+"set synmaxcol=80                 " for speed, only syntax highlight the first 80 chars (ruby style guide)
+set ttyfast                       " for speed
 
 " status line colors
 hi User1 ctermbg=black ctermfg=green guibg=black guifg=green
 hi User2 ctermbg=black ctermfg=red guibg=black guifg=red
 hi User3 ctermbg=black ctermfg=yellow guibg=black  guifg=yellow
 
-" status line config
+" status line
 set laststatus=2
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 set statusline+=%1*
@@ -88,11 +90,11 @@ set foldcolumn=4
 set nofoldenable
 
 " custom mappings
-" Ctrl+t opens CommandT
-" F6 runs CommandTFlush
+" Ctrl+t opens commandT
+" F6 flushes commandT
 " Ctrl+c toggles commenting
 " Ctrl+f opens Ack
-" F5 tidies syntax in entire file
+" F5 formats/tidies
 nmap <silent> <C-t> :CommandT<CR>
 nmap <silent> <F6> :CommandTFlush<CR>
 map <C-c> <leader>c<Space>
@@ -100,7 +102,7 @@ map <C-F> :Ack
 map <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
 
-" CommandT config
+" commandT config
 let g:CommandTMaxFiles=25000
 let g:CommandTMaxDepth=15
 let g:CommandTCancelMap='<C-x>'
@@ -123,18 +125,19 @@ map <leader>gl :Glog -250<cr><cr>:copen<cr><cr>
 map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
 map <leader>gc :Gcommit
 
-" RSpec run spec under cursor
-map <leader>rs :<C-U>!spec <C-R>=expand("%:p") <CR> -c -l <C-R>=line(".") <CR> <CR>
+" ruby
+" runner (saves first)
+map <leader>rr :w ! ruby<CR>
+" rspec
+map <leader>rs :<C-U>!spec <c-r>=expand("%:p") <CR> -c -l <c-r>=line(".") <CR> <CR>
 
-" move buffers tab/shift-tab moves
+" buffers
 nnoremap <tab> :bn<cr>
 nnoremap <S-tab> :bp<cr>
-" close buffer
 nmap <leader>d :bd<cr>
-" close all buffers
 nmap <leader>D :bufdo bd<cr>
 
-" turn OFF arrow keys
+" turn OFF arrow keys altogther
 nnoremap <Up>    <nop>
 nnoremap <Down>  <nop>
 nnoremap <Left>  <nop>
