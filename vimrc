@@ -1,6 +1,9 @@
 " set this first (avoid use of -N for vi compatibility)
 set nocompatible
 
+" use pathogen
+call pathogen#infect()
+
 " load the matchit plugin.
 runtime macros/matchit.vim
 
@@ -9,14 +12,8 @@ let mapleader = ","
 let g:mapleader = ","
 
 " textwidth and format options
-set textwidth=80
+set textwidth=72
 set fo-=t
-
-" allow mouse input
-if has("mouse")
-  set mouse=a
-  set mousehide
-endif
 
 " 256 color scheme
 set t_Co=256
@@ -67,8 +64,8 @@ set expandtab                     " use spaces instead of tabs
 set smarttab                      " insert tabs on the start of a line according to shiftwidth, not
 set shiftround                    " use multiple of shiftwidth when indenting with '<' and '>'
 
-"set synmaxcol=80                 " for speed, only syntax highlight the first 80 chars (ruby style guide)
-set ttyfast                       " for speed
+"set synmaxcol=72                 " for speed, only syntax highlight the first 72 chars (ruby style guide)
+set ttyfast                       " for speed and better rendering
 
 " status line colors
 hi User1 ctermbg=black ctermfg=green guibg=black guifg=green
@@ -150,3 +147,4 @@ au BufRead,BufNewFile *.mxml  set filetype=mxml
 
 " auto strip whitespace when saving
 autocmd BufWritePre * :%s/\s\+$//e
+
