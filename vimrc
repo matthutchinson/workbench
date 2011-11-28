@@ -2,7 +2,7 @@
 set nocompatible
 
 " use pathogen
-call pathogen#infect()
+call pathogen#infect('pathogen')
 
 " load the matchit plugin.
 runtime macros/matchit.vim
@@ -77,7 +77,7 @@ set laststatus=2
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 set statusline+=%1*
 set statusline+=%3*
-set statusline+=\ %{fugitive#statusline()} " Git info in red
+"set statusline+=\ %{fugitive#statusline()} " Git info in red
 set statusline+=\[%{&fo}] " Git info in red
 set statusline+=%*
 
