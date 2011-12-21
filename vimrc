@@ -31,8 +31,6 @@ set showmode                      " display the mode you're in.
 set backspace=indent,eol,start    " intuitive backspacing.
 
 set hidden                        " handle multiple buffers better.
-
-set wildmenu                      " enhanced command line completion.
 set wildmode=list:longest         " complete files like a shell.
 
 set ignorecase                    " case-insensitive searching.
@@ -126,7 +124,7 @@ map <leader>gc :Gcommit
 " runner (saves first)
 map <leader>rr :w ! ruby<CR>
 " rspec
-map <leader>rs :<C-U>!spec <c-r>=expand("%:p") <CR> -c -l <c-r>=line(".") <CR> <CR>
+map <leader>rs :<C-U>!bundle exec spec <c-r>=expand("%:p") <CR> -c -l <c-r>=line(".") <CR> <CR>
 
 " buffers
 nnoremap <tab> :bn<cr>
@@ -147,5 +145,9 @@ au BufRead,BufNewFile *.as    set filetype=actionscript
 au BufRead,BufNewFile *.mxml  set filetype=mxml
 
 " auto strip whitespace when saving
-autocmd BufWritePre * :%s/\s\+$//e
+let machine = substitute(system('hostname'), "\n", "", "")
+" don't auto strip on these machines
+if machine !~ "[calcifer]"
+  autocmd BufWritePre * :%s/\s\+$//e
+endif
 
