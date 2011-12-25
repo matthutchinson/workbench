@@ -72,12 +72,8 @@ hi User3 ctermbg=black ctermfg=yellow guibg=black  guifg=yellow
 
 " status line
 set laststatus=2
-set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
-set statusline+=%1*
-set statusline+=%3*
-"set statusline+=\ %{fugitive#statusline()} " Git info in red
-set statusline+=\[%{&fo}] " Git info in red
-set statusline+=%*
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %=%-16(\ %l,%c-%v\ %)%P
+set statusline+=\ %{fugitive#statusline()}
 
 " folding
 set foldmethod=syntax
@@ -93,7 +89,7 @@ set nofoldenable
 nmap <silent> <C-t> :CommandT<CR>
 nmap <silent> <F6> :CommandTFlush<CR>
 map <C-c> <leader>c<Space>
-map <C-F> :Ack
+map <C-F> :Ack<Space>
 map <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
 
@@ -120,10 +116,15 @@ map <leader>gl :Glog -250<cr><cr>:copen<cr><cr>
 map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
 map <leader>gc :Gcommit
 
-" ruby
-" runner (saves first)
-map <leader>rr :w ! ruby<CR>
-" rspec
+" ruby save and run
+map <leader>rn :w ! ruby<CR>
+
+" rails
+map <leader>ra :A<CR>
+map <leader>rr :.Rake<CR>
+map <leader>rm :Rmodel<CR>
+map <leader>rv :Rview<CR>
+map <leader>rc :Rcontroller<CR>
 map <leader>rs :<C-U>!bundle exec spec <c-r>=expand("%:p") <CR> -c -l <c-r>=line(".") <CR> <CR>
 
 " buffers
