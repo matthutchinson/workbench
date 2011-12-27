@@ -1,0 +1,13 @@
+--type-set=xcode=.pbxproj,.pbxuser,.perspectivev3
+--type-set=tmstuff=.tmproj,.tm_build_errors
+--type-set=plaintext=.md,.mdown,.markdown,.mkdn,.textile,.rst,.txt
+--type-set=buildout=.cfg
+--type-set=csv=.txt,.csv,.tsv
+--notmstuff
+--noxcode
+--ignore-dir=metric_fu
+--ignore-dir=log
+--ignore-dir=tmp
+--ignore-dir=coverage
+--smart-case
+--follow

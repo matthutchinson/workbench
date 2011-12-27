@@ -1,0 +1,18 @@
+# ~/.tmuxinator/ht.yml
+
+project_name: HouseTrip
+project_root: /u/apps/housetrip
+tabs:
+  - housetrip:
+      layout: main-vertical
+      panes:
+        - rbenv shell ree-1.8.7-2011.03 && vi .
+        - rbenv shell ree-1.8.7-2011.03 && ss
+        - rbenv shell ree-1.8.7-2011.03 && sc
+  - monitoring:
+      layout: main-vertical
+      panes:
+        - rbenv shell ree-1.8.7-2011.03 && tail -f log/development.log | egrep "Parameters|Completed"
+        - rbenv shell ree-1.8.7-2011.03 && be rake jobs:work
+  - irc: dago
+  - misc: rbenv shell ree-1.8.7-2011.03 && script/start_solr_for_development

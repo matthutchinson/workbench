@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# send via rsync
+rsync -azP --delete --delete-excluded --exclude-from=/Users/matt/.rsync /Users/matt/Documents b97310@hanjin.dreamhost.com:~/rsync/hoth
+rsync -azP --delete --delete-excluded --exclude-from=/Users/matt/.rsync /Users/matt/Sites b97310@hanjin.dreamhost.com:~/rsync/hoth
+rsync -azP --delete --delete-excluded --exclude-from=/Users/matt/.rsync /Users/matt/work b97310@hanjin.dreamhost.com:~/rsync/hoth
+rsync -azP --delete --delete-excluded --exclude-from=/Users/matt/.rsync /Users/matt/resources b97310@hanjin.dreamhost.com:~/rsync/hoth 
+rsync -azP --delete --delete-excluded --exclude-from=/Users/matt/.rsync /u b97310@hanjin.dreamhost.com:~/rsync/hoth

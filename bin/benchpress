@@ -1,0 +1,21 @@
+#!/bin/sh
+
+echo 'Installing the workbench, please standby ...'
+
+DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $DIR/../
+
+WORKBENCH="$( pwd )"
+
+for filename in *; do
+  if [[ "$filename" =~ README ]]; then
+    continue
+  elif [[ "$filename" =~ bin ]]; then
+    ln -sfh $WORKBENCH/$filename $HOME/
+  else
+    ln -sfh $WORKBENCH/$filename $HOME/.$filename
+  fi
+  echo "  linked ${filename}"
+done
+
+echo 'All done!'

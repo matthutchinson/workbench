@@ -1,0 +1,16 @@
+# ~/.tmuxinator/faqtory.yml
+# you can make as many tabs as you wish...
+
+project_name: Faqtory
+project_root: /u/apps/faqtory
+tabs:
+  - editor:
+      layout: main-vertical
+      panes:
+        - rbenv shell 1.9.2-p290 && vim
+        - rbenv shell 1.9.2-p290 && rails c
+        - rbenv shell 1.9.2-p290 && git st
+  - database: psql faqtory_development
+  - server: rbenv shell 1.9.2-p290 && rails s
+  - logs: rbenv shell 1.9.2-p290 && tail -f log/development.log
+  - server: rbenv shell 1.9.2-p290 && dago

@@ -1,0 +1,63 @@
+[user]
+	name = Matthew Hutchinson
+  email = matt@hiddenloop.com
+[color]
+  status = auto
+  diff = auto
+  branch = auto
+  interactive = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[alias]
+  br = branch
+  df = diff
+  lg = log -p
+  st = status
+  ci = commit
+  co = checkout
+  staged = diff --cached
+  unstaged = diff
+  both = diff HEAD
+  logline = log --pretty=oneline
+  amend = commit --amend
+  plre = pull --rebase
+  unstage = reset HEAD
+  today = log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
+  recent = log --stat --since='1 Hour Ago' --graph --pretty=oneline --abbrev-commit --date=relative
+  me = log --author='Matthew Hutchinson'
+  # automatically commit change and pre-configure the rebase prompt to fold it into the last commit
+  fix = "!f() { git commit -a -m \"fixup! $(git log -1 --pretty=format:%s)\" && git rebase -i --autosquash HEAD~4; }; f"
+[format]
+  # git log uses --pretty format by default, so this changes the default
+  # e.g. 4436819 [23 hours ago] (Gabe Berke-Williams) One line prompt
+  pretty = %C(yellow)%h%Creset %Cgreen[%cr]%Creset (%an) %s
+[merge]
+  tool = opendiff
+[sendemail]
+  smtpserver = smtp.example.com
+  aliasesfile = /Users/matt/.gitaliases
+  aliasfiletype = mailrc
+[core]
+  legacyheaders = false
+  excludesfile = /Users/matt/.gitignore
+  editor = vim
+[repack]
+  usedeltabaseoffset = true
+[apply]
+  whitespace = nowarn
+[push]
+  # push current branch even if you've never pushed it before
+  default = current
+[heroku]
+	account = personal

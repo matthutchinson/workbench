@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# idea from http://andy.delcambre.com/2008/12/06/growl-notifications-with-irssi.html
+# add this script to your login items
+# if this script gets killed due to ssh inactivity timeouts (e.g. from your firewall) try this in /etc/ssh_config
+#   ServerAliveInterval 150
+#   ServerAliveCountMax 3
+
+(ssh matt@frutch.exoftware.com -p22 -o PermitLocalCommand=no  \
+  ": > .irssi/fnotify ; tail -f .irssi/fnotify " |  \
+while read heading message; do                      \
+  growlnotify -s -t "${heading}" -m "${message}";      \
+  say "${heading} says, ${message}";                \
+done)&

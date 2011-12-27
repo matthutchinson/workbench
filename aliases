@@ -1,0 +1,100 @@
+#!/bin/bash
+
+# General
+alias ls='ls -alh'
+alias top='top -o cpu'
+alias syns_start='synergys -f --config ~/.synergy'
+alias syns_connect='synergyc -f Hoth.local'
+alias a2rs='sudo apachectl restart'
+alias tmux='TERM=xterm-256color tmux'
+
+# Quick cd
+alias cdpmf='cd /u/apps/faqtory'
+alias cdpms='cd /u/apps/pmfaqtory-store'
+alias cdbe='cd /u/apps/beyondendurance'
+alias cdhbb='cd /u/apps/bugle'
+alias cdts='cd /u/apps/ticketsolve'
+alias cdcc='cd /u/code/catapult'
+alias cdht='cd /u/apps/housetrip'
+
+# Textmate
+alias et='mate . &'
+alias ett='mate stories themes app config lib db public script spec test vendor/plugins features README.* Gemfile &'
+
+# Rails
+alias gofast='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = true\"" config/environments/development.rb'
+alias goslow='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = false\"" config/environments/development.rb'
+alias sse='mongrel_rails start -e functional -p 3333'
+alias ssj='java -jar vendor/seleniumrc/selenium_server/selenium-server-standalone-2.0.0.jar -port 4444'
+alias tdl='tail -f ./log/development.log'
+alias ttl='tail -f ./log/test.log'
+
+sc () {
+  if [ -f ./script/rails ]; then
+    bundle exec rails c $@
+  else
+    ./script/console $@
+  fi
+}
+
+sg () {
+  if [ -f ./script/rails ]; then
+    bundle exec rails g $@
+  else
+    ./script/generate $@
+  fi
+}
+
+ss () {
+  if [ -f ./script/rails ]; then
+    bundle exec rails s $@
+  else
+    ./script/server $@
+  fi
+}
+
+sspe () {
+  if [ -f ./script/rails ]; then
+    sudo bundle exec rails s -p80 $@
+  else
+    sudo ./script/server -p80 $@
+  fi
+}
+
+# Bundler
+alias be='bundle exec'
+alias ber='bundle exec rake'
+alias bes='bundle exec spec'
+alias bec='bundle exec cucumber'
+alias fb='bundle exec rake flex:build:ant[compile]'
+alias rsp='bundle exec rake spec'
+alias rdbm='bundle rake db:migrate'
+alias rdbp='bundle rake db:test:prepare'
+
+# Ruby
+alias rbenvit='rbenv shell `cat .rbenv-version`'
+
+# svn
+alias scm="svn commit --username matt "
+alias saa="svn status | grep "^\?" | sed -e 's/? *//' | sed -e 's/ /\ /g' | xargs svn add"
+alias sdm="svn status | grep "^\!" | sed -e 's/! *//' | sed -e 's/ /\ /g' | xargs svn delete"
+alias srr="find . -name .svn -print0 | xargs -0 rm -rf"
+alias signore='svn propedit svn:ignore'
+
+# git
+alias grr="git ls-files --deleted | xargs git rm"
+alias gaa="git add ."
+alias gb="git branch"
+alias gd="git diff | vi -"
+alias gl="git pull"
+alias gp="git push"
+alias gst="git status"
+
+# mysql
+alias mysql='mysql -uroot'
+alias mybug='mysql bugle_development'
+alias mybe='mysql beyondendurance_development'
+alias mypmf='mysql faqtory_development'
+alias mytsd='mysql ticketsolve_development'
+alias myhtd='mysql housetrip_development'
+alias myhtt='mysql housetrip_test'

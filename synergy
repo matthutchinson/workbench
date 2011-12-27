@@ -1,0 +1,16 @@
+# sample synergy configuration file
+#
+# comments begin with the # character and continue to the end of
+# line.  comments may appear anywhere the syntax permits.
+
+section: screens
+	Hoth.local:
+	Alderann.local:
+end
+
+section: links
+	Hoth.local:
+		left = Alderann.local
+	Alderann.local:
+		right = Hoth.local
+end
