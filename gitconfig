@@ -34,7 +34,7 @@
   plre = pull --rebase
   unstage = reset HEAD
   today = log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
-  recent = log --stat --since='1 Hour Ago' --graph --pretty=oneline --abbrev-commit --date=relative
+  recent = log --stat --since='3 Hours Ago' --graph --pretty=oneline --abbrev-commit --date=relative
   me = log --author='Matthew Hutchinson'
   # automatically commit change and pre-configure the rebase prompt to fold it into the last commit
   fix = "!f() { git commit -a -m \"fixup! $(git log -1 --pretty=format:%s)\" && git rebase -i --autosquash HEAD~4; }; f"
