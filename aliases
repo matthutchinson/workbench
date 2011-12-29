@@ -61,15 +61,15 @@ sspe () {
   fi
 }
 
-# Bundler
+# Bundler / Rake / Spec / Cucumber
 alias be='bundle exec'
 alias ber='bundle exec rake'
 alias bes='bundle exec spec'
 alias bec='bundle exec cucumber'
 alias fb='bundle exec rake flex:build:ant[compile]'
-alias rsp='bundle exec rake spec'
 alias rdbm='bundle exec rake db:migrate'
 alias rdbp='bundle exec rake db:test:prepare'
+alias rsp='bundle exec rake spec'
 
 # Ruby
 alias rbenvit='rbenv shell `cat .rbenv-version`'
