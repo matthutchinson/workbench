@@ -68,8 +68,8 @@ alias bes='bundle exec spec'
 alias bec='bundle exec cucumber'
 alias fb='bundle exec rake flex:build:ant[compile]'
 alias rsp='bundle exec rake spec'
-alias rdbm='bundle rake db:migrate'
-alias rdbp='bundle rake db:test:prepare'
+alias rdbm='bundle exec rake db:migrate'
+alias rdbp='bundle exec rake db:test:prepare'
 
 # Ruby
 alias rbenvit='rbenv shell `cat .rbenv-version`'
