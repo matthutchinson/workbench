@@ -151,4 +151,3 @@ let machine = substitute(system('hostname'), "\n", "", "")
 if machine !~ "[calcifer]"
   autocmd BufWritePre * :%s/\s\+$//e
 endif
-

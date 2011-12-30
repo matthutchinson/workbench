@@ -1,8 +1,10 @@
 #!/bin/sh
 
-# send via rsync
-rsync -azP --delete --delete-excluded --exclude-from=/Users/matt/.rsync /Users/matt/Documents b97310@hanjin.dreamhost.com:~/rsync/hoth
-rsync -azP --delete --delete-excluded --exclude-from=/Users/matt/.rsync /Users/matt/Sites b97310@hanjin.dreamhost.com:~/rsync/hoth
-rsync -azP --delete --delete-excluded --exclude-from=/Users/matt/.rsync /Users/matt/work b97310@hanjin.dreamhost.com:~/rsync/hoth
-rsync -azP --delete --delete-excluded --exclude-from=/Users/matt/.rsync /Users/matt/resources b97310@hanjin.dreamhost.com:~/rsync/hoth 
-rsync -azP --delete --delete-excluded --exclude-from=/Users/matt/.rsync /u b97310@hanjin.dreamhost.com:~/rsync/hoth
+HOSTNAME="$( hostname )"
+
+# backup folders to dreamhost via rsync
+rsync -azP --delete --delete-excluded --exclude-from=/Users/matt/.rsync /Users/matt/Documents dreamhost_backup:~/rsync/$HOSTNAME
+rsync -azP --delete --delete-excluded --exclude-from=/Users/matt/.rsync /Users/matt/Sites dreamhost_backup:~/rsync/$HOSTNAME
+rsync -azP --delete --delete-excluded --exclude-from=/Users/matt/.rsync /Users/matt/work dreamhost_backup:~/rsync/$HOSTNAME
+rsync -azP --delete --delete-excluded --exclude-from=/Users/matt/.rsync /Users/matt/resources dreamhost_backup:~/rsync/$HOSTNAME 
+rsync -azP --delete --delete-excluded --exclude-from=/Users/matt/.rsync /u dreamhost_backup:~/rsync/$HOSTNAME

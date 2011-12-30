@@ -1,5 +1,4 @@
 # ~/.tmuxinator/faqtory.yml
-# you can make as many tabs as you wish...
 
 project_name: Faqtory
 project_root: /u/apps/faqtory

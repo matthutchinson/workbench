@@ -21,7 +21,6 @@ Hirb::View.enable
 
 IRB.conf[:AUTO_INDENT] = true
 
-
 # load railsrc if it exists
 railsrc_path = File.expand_path('~/.railsrc')
 if (ENV['RAILS_ENV'] || defined? Rails) && File.exist?(railsrc_path)

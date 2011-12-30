@@ -3,29 +3,33 @@
 # General
 alias ls='ls -alh'
 alias top='top -o cpu'
-alias syns_start='synergys -f --config ~/.synergy'
-alias syns_connect='synergyc -f Hoth.local'
 alias a2rs='sudo apachectl restart'
 alias tmux='TERM=xterm-256color tmux'
 
-# Quick cd
+# Synergy http://synergy-foss.org/
+alias syns_start='synergys -f --config ~/.synergy'
+alias syns_connect='synergyc -f Hoth.local'
+
+# Quick project cds
 alias cdpmf='cd /u/apps/faqtory'
 alias cdpms='cd /u/apps/pmfaqtory-store'
 alias cdbe='cd /u/apps/beyondendurance'
 alias cdhbb='cd /u/apps/bugle'
-alias cdts='cd /u/apps/ticketsolve'
 alias cdcc='cd /u/code/catapult'
 alias cdht='cd /u/apps/housetrip'
+alias cdts='cd /u/apps/ticketsolve'
 
 # Textmate
 alias et='mate . &'
 alias ett='mate stories themes app config lib db public script spec test vendor/plugins features README.* Gemfile &'
 
+# Ticketsolve
+alias sse='mongrel_rails start -e functional -p 3333'
+alias ssj='java -jar vendor/seleniumrc/selenium_server/selenium-server-standalone-2.0.0.jar -port 4444'
+
 # Rails
 alias gofast='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = true\"" config/environments/development.rb'
 alias goslow='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = false\"" config/environments/development.rb'
-alias sse='mongrel_rails start -e functional -p 3333'
-alias ssj='java -jar vendor/seleniumrc/selenium_server/selenium-server-standalone-2.0.0.jar -port 4444'
 alias tdl='tail -f ./log/development.log'
 alias ttl='tail -f ./log/test.log'
 
@@ -91,6 +95,7 @@ alias gp="git push"
 alias gst="git status"
 
 # mysql
+alias myrestart='mysql.server restart'
 alias mysql='mysql -uroot'
 alias mybug='mysql bugle_development'
 alias mybe='mysql beyondendurance_development'
