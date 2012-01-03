@@ -8,7 +8,7 @@ export EVENT_NOKQUEUE=1
 export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home"
 test -r /sw/bin/init.sh && . /sw/bin/init.sh
 
-# Ruby GC settings - https://gist.github.com/865706
+# Ruby GC settings for REE - https://gist.github.com/865706
 export RUBY_HEAP_MIN_SLOTS=600000
 export RUBY_HEAP_SLOTS_INCREMENT=10000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1.8
