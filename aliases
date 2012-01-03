@@ -86,6 +86,7 @@ alias srr="find . -name .svn -print0 | xargs -0 rm -rf"
 alias signore='svn propedit svn:ignore'
 
 # git
+alias gdv="git diff | vi -"
 alias grr="git ls-files --deleted | xargs git rm"
 alias gaa="git add ."
 alias gb="git branch"
