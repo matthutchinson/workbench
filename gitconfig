@@ -33,7 +33,7 @@
   amend = commit --amend
   plre = pull --rebase
   unstage = reset HEAD
-  today = log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
+  today = log --since='1 Day Ago'
   recent = log --stat --since='3 Hours Ago' --graph --pretty=oneline --abbrev-commit --date=relative
   me = log --author='Matthew Hutchinson'
   # automatically commit change and pre-configure the rebase prompt to fold it into the last commit
