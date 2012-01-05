@@ -7,7 +7,7 @@ tabs:
   - editor:
       layout: main-vertical
       panes:
-        - vim
+        - vi .
         - rails c
         - git st
   - database: psql faqtory_development
