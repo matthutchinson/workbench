@@ -61,6 +61,7 @@ set shiftwidth=2                  " and again, related.
 set expandtab                     " use spaces instead of tabs
 set smarttab                      " insert tabs on the start of a line according to shiftwidth, not
 set shiftround                    " use multiple of shiftwidth when indenting with '<' and '>'
+set grepprg=ack                   " use Ack instead of grep
 
 "set synmaxcol=72                 " for speed, only syntax highlight the first 72 chars (ruby style guide)
 set ttyfast                       " for speed and better rendering
