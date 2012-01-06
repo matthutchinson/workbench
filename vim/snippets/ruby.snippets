@@ -3,6 +3,10 @@ snippet rbug
 	require 'ruby-debug'
 	debugger
 
+# rails log
+snippet logr
+	Rails.logger.info("===========> ${1:message} ${2}")
+
 # #!/usr/bin/env ruby
 snippet #!
 	#!/usr/bin/env ruby

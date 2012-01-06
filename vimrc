@@ -70,6 +70,9 @@ hi User1 ctermbg=black ctermfg=green guibg=black guifg=green
 hi User2 ctermbg=black ctermfg=red guibg=black guifg=red
 hi User3 ctermbg=black ctermfg=yellow guibg=black  guifg=yellow
 
+" ctags file search order
+set tags=./tags;
+
 " status line
 set laststatus=2
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %=%-16(\ %l,%c-%v\ %)%P
@@ -121,10 +124,14 @@ map <leader>rn :w ! ruby<CR>
 
 " rails
 map <leader>ra :A<CR>
-map <leader>rr :.Rake<CR>
+map <leader>rr :Rake<CR>
+map <leader>rf :1R<Space>
+map <leader>rg :Rgenerate migration<Space>
 map <leader>rm :Rmodel<CR>
 map <leader>rv :Rview<CR>
 map <leader>rc :Rcontroller<CR>
+map <leader>ru :RVunittest<CR>
+map <leader>rt :RVfunctionaltest<CR>
 map <leader>rs :<C-U>!bundle exec spec <c-r>=expand("%:p") <CR> -c -l <c-r>=line(".") <CR> <CR>
 
 " buffers

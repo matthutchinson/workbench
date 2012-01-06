@@ -11,8 +11,10 @@ for filename in *; do
   if [[ "$filename" =~ README ]]; then
     continue
   elif [[ "$filename" =~ bin ]]; then
+    unlink $HOME/$filename
     ln -sfh $WORKBENCH/$filename $HOME/
   else
+    unlink $HOME/.$filename
     ln -sfh $WORKBENCH/$filename $HOME/.$filename
   fi
   echo "  linked ${filename}"
