@@ -24,6 +24,7 @@ endif
 
 syntax on                         " turn on syntax highlighting.
 filetype plugin indent on         " turn on file type detection.
+set encoding=utf-8                " encoding
 
 set showcmd                       " display incomplete commands.
 set showmode                      " display the mode you're in.
@@ -50,10 +51,11 @@ set scrolloff=3                   " show 3 lines of context around the cursor.
 
 set title                         " set the terminal's title
 set visualbell                    " no beeping.
+set noerrorbells
 
-set nobackup                      " don't make a backup before overwriting a file.
-set nowritebackup                 " and again.
-set directory=$HOME/.vim/tmp//,.  " keep swap files in one location
+set backup                        " save backups
+set backupdir=$HOME/.vim/tmp      " keep backup files in one location
+set noswapfile                    " don't use swp files
 
 set softtabstop=2                 " soft tabs, ie. number of spaces for tab
 set tabstop=2                     " global tab width.
@@ -96,6 +98,7 @@ map <C-c> <leader>c<Space>
 map <C-F> :Ack<Space>
 map <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
+map <F7> :setlocal spell! spelllang=en<CR>
 
 " commandT config
 let g:CommandTMaxFiles=25000
