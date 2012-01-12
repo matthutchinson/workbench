@@ -125,7 +125,8 @@ map <leader>rn :w ! ruby<CR>
 
 " rails
 map <leader>ra :A<CR>
-map <leader>rr :Rake<CR>
+map <leader>rr :Rake<CR>  " Rake
+map <leader>fr :.Rake<CR> " focused Rake
 map <leader>rf :1R<Space>
 map <leader>rg :Rgenerate migration<Space>
 map <leader>rm :Rmodel<CR>
