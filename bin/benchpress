@@ -1,11 +1,15 @@
 #!/bin/sh
 
-echo 'Installing the workbench, please standby ...'
+echo 'Installing the workbench'
 
 DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $DIR/../
 
 WORKBENCH="$( pwd )"
+
+echo '  Pulling latest ...'
+echo "  $(git pull)"
+echo '  Creating symlinks ...'
 
 for filename in *; do
   if [[ "$filename" =~ README ]]; then
@@ -17,7 +21,7 @@ for filename in *; do
     rm -f $HOME/.$filename
     ln -sfh $WORKBENCH/$filename $HOME/.$filename
   fi
-  echo "  linked ${filename}"
+  echo "    linked ${filename}"
 done
 
-echo 'All done!'
+echo '  All done!'
