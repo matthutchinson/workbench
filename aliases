@@ -5,6 +5,7 @@ alias ls='ls -alh'
 alias top='top -o cpu'
 alias a2rs='sudo apachectl restart'
 alias tmux='TERM=xterm-256color tmux'
+alias pw='pws'
 
 # Synergy http://synergy-foss.org/
 alias syns_start='synergys -f --config ~/.synergy'
