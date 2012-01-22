@@ -89,12 +89,13 @@ set nofoldenable
 " custom mappings
 " Ctrl+t opens commandT
 " F6 flushes commandT
-" Ctrl+c toggles commenting
+" Ctrl+c or ,c toggles commenting
 " Ctrl+f opens Ack
 " F5 formats/tidies
 nmap <silent> <C-t> :CommandT<CR>
 nmap <silent> <F6> :CommandTFlush<CR>
-map <C-c> <leader>c<Space>
+map <C-c> \\\
+nmap <leader>c \\\
 map <C-F> :Ack<Space>
 map <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
