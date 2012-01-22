@@ -7,3 +7,12 @@
 [submodule "vim/pathogen/vim-commentary"]
 	path = vim/pathogen/vim-commentary
 	url = http://github.com/tpope/vim-commentary.git
+[submodule "vim/pathogen/vim-bundler"]
+	path = vim/pathogen/vim-bundler
+	url = http://github.com/tpope/vim-bundler.git
+[submodule "vim/pathogen/vim-haml"]
+	path = vim/pathogen/vim-haml
+	url = http://github.com/tpope/vim-haml.git
+[submodule "vim/pathogen/vim-rails"]
+	path = vim/pathogen/vim-rails
+	url = http://github.com/tpope/vim-rails.git
