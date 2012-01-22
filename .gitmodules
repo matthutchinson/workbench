@@ -1,0 +1,9 @@
+[submodule "vim/pathogen/vim-fugitive"]
+	path = vim/pathogen/vim-fugitive
+	url = http://github.com/tpope/vim-fugitive.git
+[submodule "vim/pathogen/vim-cucumber"]
+	path = vim/pathogen/vim-cucumber
+	url = http://github.com/tpope/vim-cucumber.git
+[submodule "vim/pathogen/vim-commentary"]
+	path = vim/pathogen/vim-commentary
+	url = http://github.com/tpope/vim-commentary.git
