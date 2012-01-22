@@ -1,7 +1,7 @@
 # ~/.tmuxinator/faqtory.yml
 
-project_name: Faqtory
-project_root: /u/apps/faqtory
+project_name: pmFAQtory store
+project_root: /u/apps/pmfaqtory-store
 rbenv: 1.9.3-p0
 tabs:
   - editor:
@@ -10,10 +10,9 @@ tabs:
         - vi .
         - rails c
         - git st
-  - database: psql faqtory_development
+  - database: psql pmfaqtory-store-development
   - server:
       layout: main-vertical
       panes:
         - tail -f log/development.log | egrep "Parameters|Completed"
         - rails s
-  - remote: dago
