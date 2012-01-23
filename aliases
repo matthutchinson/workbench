@@ -51,7 +51,9 @@ sg () {
 }
 
 ss () {
-  if [ -f ./script/rails ]; then
+  if [ -f ./Procfile ]; then
+    bundle exec foreman start $@
+  elif [ -f ./script/rails ]; then
     bundle exec rails s $@
   else
     ./script/server $@
@@ -59,7 +61,9 @@ ss () {
 }
 
 sspe () {
-  if [ -f ./script/rails ]; then
+  if [ -f ./Procfile ]; then
+    sudo bundle exec rails server thin -p 80 $@
+  elif [ -f ./script/rails ]; then
     sudo bundle exec rails s -p80 $@
   else
     sudo ./script/server -p80 $@

@@ -8,11 +8,11 @@ tabs:
       layout: main-vertical
       panes:
         - vi .
-        - rails c
+        - sc
         - git st
   - database: psql pmfaqtory-store-development
   - server:
       layout: main-vertical
       panes:
         - tail -f log/development.log | egrep "Parameters|Completed"
-        - rails s
+        - ss
