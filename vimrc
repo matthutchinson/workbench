@@ -111,8 +111,10 @@ set wildignore+=*.o,*.obj,.git,.svn,**/vendor/apache-ant-1.8.2/**,**/vendor/rail
 nmap <leader>w :w!<cr>
 
 " fast edit and source vimrc
-map <leader>v :sp ~/.vimrc<cr>       " \v opens ~/.vimrc in a split
-map <leader>u :source ~/.vimrc<cr>   " \u sources ~/.vimrc
+map <leader>v :sp ~/.vimrc<cr>       " opens ~/.vimrc in a split
+map <leader>u :source ~/.vimrc<cr>   " sources ~/.vimrc
+map <leader>e :e <C-R>=expand("%:p:h") . '/'<cr><cr>
+map <leader>ev :vnew <C-R>=expand("%:p:h") . '/'<cr><cr>
 
 " fugitive git bindings
 map <leader>gs :Gstatus<cr>
@@ -145,6 +147,10 @@ nnoremap <tab> :bn<cr>
 nnoremap <S-tab> :bp<cr>
 nmap <leader>d :bd<cr>
 nmap <leader>D :bufdo bd<cr>
+
+" results
+nnoremap <C-n> :cn<cr>
+nnoremap <C-p> :cp<cr>
 
 " turn OFF arrow keys altogther
 nnoremap <Up>    <nop>

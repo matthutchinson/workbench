@@ -9,5 +9,6 @@
 --ignore-dir=log
 --ignore-dir=tmp
 --ignore-dir=coverage
+--ignore-dir=rails
 --smart-case
 --follow

@@ -108,3 +108,6 @@ alias mypmf='mysql faqtory_development'
 alias mytsd='mysql ticketsolve_development'
 alias myhtd='mysql housetrip_development'
 alias myhtt='mysql housetrip_test'
+
+# vim
+alias ctagme='ctags -R --exclude=.git --exclude=log *'
