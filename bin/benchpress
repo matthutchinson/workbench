@@ -14,7 +14,7 @@ echo "  $(git submodule foreach git pull origin master)"
 echo '  Creating symlinks ...'
 
 for filename in *; do
-  if [[ "$filename" =~ README ]]; then
+  if [[ "$filename" =~ README|fonts ]]; then
     continue
   elif [[ "$filename" =~ bin ]]; then
     rm -f $HOME/$filename

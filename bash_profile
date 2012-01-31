@@ -34,7 +34,6 @@ function proml {
   esac
 
 PS1="${TITLEBAR}\
-$BLUE[$RED\$(date +%H:%M)$BLUE]\
 $BLUE[$WHITE\u@\h:\w$GREEN\$(parse_git_branch)$BLUE]\
 $WHITE\$ "
 PS2='> '
