@@ -6,6 +6,7 @@ alias top='top -o cpu'
 alias a2rs='sudo apachectl restart'
 alias tmux='TERM=xterm-256color tmux'
 alias pw='pws'
+alias gpgme='gpg -e -u "matt@hiddenloop.com" -r "matt@hiddenloop.com"'
 
 # Synergy http://synergy-foss.org/
 alias syns_start='synergys -f --config ~/.synergy'
@@ -27,6 +28,9 @@ alias ett='mate stories themes app config lib db public script spec test vendor/
 # Ticketsolve
 alias sse='mongrel_rails start -e functional -p 3333'
 alias ssj='java -jar vendor/seleniumrc/selenium_server/selenium-server-standalone-2.0.0.jar -port 4444'
+
+# HouseTrip
+alias sshec2ht='ssh -i ~/.ssh/matt-housetrip-aws.pem'
 
 # Rails
 alias gofast='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = true\"" config/environments/development.rb'
