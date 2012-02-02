@@ -90,13 +90,13 @@ set nofoldenable
 " Ctrl+t opens commandT
 " F6 flushes commandT
 " Ctrl+c or ,c toggles commenting
-" Ctrl+f opens Ack
+" Ctrl+f opens grep
 " F5 formats/tidies
 nmap <silent> <C-t> :CommandT<CR>
 nmap <silent> <F6> :CommandTFlush<CR>
 map <C-c> \\\
 nmap <leader>c \\\
-map <C-F> :Ack<Space>
+map <C-F> :grep<Space>
 map <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
 map <F7> :setlocal spell! spelllang=en<CR>

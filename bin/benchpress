@@ -1,29 +1,30 @@
-#!/bin/sh
+#!/usr/bin/env ruby
 
-echo 'Installing the workbench'
+puts 'Installing the workbench'
 
-DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd $DIR/../
+path = File.expand_path('./', File.dirname(__FILE__))
+bin_path = File.symlink?(path) ? File.readlink(path) : path
+workbench_path = File.expand_path('.././', bin_path)
 
-WORKBENCH="$( pwd )"
+Dir.chdir(workbench_path) do
+  puts "  Working in #{Dir.pwd}"
+  puts '  Pulling latest ...'
+  puts "  #{`git pull`}"
+  puts '  Updating submodules ...'
+  puts "  #{`git submodule foreach git pull origin master`}"
+  puts '  Creating symlinks ...'
 
-echo '  Pulling latest ...'
-echo "  $(git pull)"
-echo '  Updating submodules ...'
-echo "  $(git submodule foreach git pull origin master)"
-echo '  Creating symlinks ...'
+  Dir.foreach(Dir.pwd) do |item|
+    next if item == '.' or item == '..' or item[0] == '.' or ['README.md', 'fonts', 'tags'].include?(item)
+    if item == 'bin'
+      `rm -f ~/bin`
+      `ln -sfh #{workbench_path}/bin ~/`
+    else
+      `rm -f #{workbench_path}/.#{item}`
+      `ln -sfh #{workbench_path}/#{item} ~/.#{item}`
+    end
+    puts "    linked #{item}"
+  end
+end
 
-for filename in *; do
-  if [[ "$filename" =~ README|fonts ]]; then
-    continue
-  elif [[ "$filename" =~ bin ]]; then
-    rm -f $HOME/$filename
-    ln -sfh $WORKBENCH/$filename $HOME/
-  else
-    rm -f $HOME/.$filename
-    ln -sfh $WORKBENCH/$filename $HOME/.$filename
-  fi
-  echo "    linked ${filename}"
-done
-
-echo '  All done!'
+puts '  All done!'
