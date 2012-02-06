@@ -8,6 +8,9 @@ alias tmux='TERM=xterm-256color tmux'
 alias pw='pws'
 alias gpgme='gpg -e -u "matt@hiddenloop.com" -r "matt@hiddenloop.com"'
 
+# https://github.com/trapd00r/ls--/issues/14
+alias ll=' LC_ALL=en_US.UTF-8 LANG=en ls++ '
+
 # Synergy http://synergy-foss.org/
 alias syns_start='synergys -f --config ~/.synergy'
 alias syns_connect='synergyc -f Hoth.local'
