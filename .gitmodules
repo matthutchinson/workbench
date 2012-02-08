@@ -16,3 +16,6 @@
 [submodule "vim/pathogen/vim-rails"]
 	path = vim/pathogen/vim-rails
 	url = http://github.com/tpope/vim-rails.git
+[submodule "vim/pathogen/vim-markdown"]
+	path = vim/pathogen/vim-markdown
+	url = https://github.com/tpope/vim-markdown.git

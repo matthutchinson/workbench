@@ -21,7 +21,7 @@ function create_puppet_mod {
   touch "$1/manifests/init.pp"
 }
 
-function parse_git_branch {
+function git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
@@ -40,7 +40,7 @@ function proml {
   esac
 
 PS1="${TITLEBAR}\
-$BLUE[$WHITE\u@\h:\w$GREEN\$(parse_git_branch)$BLUE]\
+$BLUE[$WHITE\u@\h:\w$GREEN\$(git_branch)$BLUE]\
 $WHITE\$ "
 PS2='> '
 PS4='+ '
