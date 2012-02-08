@@ -30,6 +30,7 @@ function proml {
   local         RED="\[\033[0;31m\]"
   local       GREEN="\[\033[0;32m\]"
   local       WHITE="\[\033[0;37m\]"
+  local   DARK_GRAY="\[\033[1;30m\]"
   case $TERM in
     xterm*)
     TITLEBAR='\[\033]0;\u@\h:\w\007\]'
@@ -40,7 +41,7 @@ function proml {
   esac
 
 PS1="${TITLEBAR}\
-$BLUE[$WHITE\u@\h:\w$GREEN\$(git_branch)$BLUE]\
+$DARK_GRAY\$(rbenv-prompt) $BLUE[$WHITE\u@\h:\w$GREEN\$(git_branch)$BLUE]\
 $WHITE\$ "
 PS2='> '
 PS4='+ '
