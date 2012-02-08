@@ -42,7 +42,7 @@ function proml {
 
 # use \u@h: for user@host:
 PS1="${TITLEBAR}\
-$DARK_GRAY\$(rbenv-prompt) $BLUE[$WHITE\w$GREEN\$(git_branch)$BLUE]\
+\$(rbenv-prompt) $BLUE[$WHITE\u@\h:\w$GREEN\$(git_branch)$BLUE]\
 $WHITE\$ "
 PS2='> '
 PS4='+ '
