@@ -11,7 +11,7 @@ Dir.chdir(workbench_path) do
   puts '  Pulling latest ...'
   puts "  #{`git pull`}"
   puts '  Updating submodules ...'
-  puts "  #{`git submodule foreach git pull origin master`}"
+  puts "  #{`git submodule update --init --recursive`}"
   puts '  Creating symlinks ...'
 
   Dir.foreach(Dir.pwd) do |item|
@@ -20,7 +20,7 @@ Dir.chdir(workbench_path) do
       `rm -f ~/bin`
       `ln -sfh #{workbench_path}/bin ~/`
     else
-      `rm -f #{workbench_path}/.#{item}`
+      `rm -f ~/.#{item}`
       `ln -sfh #{workbench_path}/#{item} ~/.#{item}`
     end
     puts "    linked #{item}"
