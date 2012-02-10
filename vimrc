@@ -171,3 +171,7 @@ let machine = substitute(system('hostname'), "\n", "", "")
 if machine !~ "[calcifer]"
   autocmd BufWritePre * :%s/\s\+$//e
 endif
+
+" copy and paste with pbcopy/pbpaste in visual mode
+vmap <C-x> y:call system("pbcopy", getreg("\""))<CR>
+nmap <C-V> :call setreg("\"",system("pbpaste"))<CR>p
