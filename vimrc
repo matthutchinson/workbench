@@ -94,8 +94,8 @@ set nofoldenable
 " F5 formats/tidies
 nmap <silent> <C-t> :CommandT<CR>
 nmap <silent> <F6> :CommandTFlush<CR>
-map <C-c> \\\
 nmap <leader>c \\\
+vmap <leader>c \\\
 map <C-F> :grep<Space>
 map <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
@@ -173,5 +173,5 @@ if machine !~ "[calcifer]"
 endif
 
 " copy and paste with pbcopy/pbpaste in visual mode
-vmap <C-x> y:call system("pbcopy", getreg("\""))<CR>
+vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
 nmap <C-V> :call setreg("\"",system("pbpaste"))<CR>p
