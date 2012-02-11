@@ -1,4 +1,4 @@
-# ~/.tmuxinator/faqtory.yml
+# ~/.tmuxinator/faq.yml
 
 project_name: Faqtory
 project_root: /u/apps/faqtory
@@ -8,12 +8,12 @@ tabs:
       layout: main-vertical
       panes:
         - vi .
-        - rails c
+        - be rails c
         - git st
-  - database: psql faqtory_development
+  - database: be rails dbconsole
   - server:
       layout: main-vertical
       panes:
         - tail -f log/development.log | egrep "Parameters|Completed"
-        - rails s
+        - be rails s
   - remote: dago
