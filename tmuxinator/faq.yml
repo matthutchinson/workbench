@@ -2,13 +2,13 @@ project_name: Faqtory
 project_root: /u/apps/faqtory
 rbenv: 1.9.3-p0
 tabs:
-  - editor:
+  - FAQtory:
       layout: main-vertical
       panes:
         - vi .
         - be rails c
         - git st
-  - database: be rails dbconsole
+  - postgresql: be rails dbconsole
   - server:
       layout: main-vertical
       panes:

@@ -127,8 +127,11 @@ map <leader>gl :Glog -250<cr><cr>:copen<cr><cr>
 map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
 map <leader>gc :Gcommit
 
-" ruby save and run
+" ruby 
+" save and run
 map <leader>rn :w ! ruby<CR>
+" convert hashes to 1.9 style
+map <leader>rh :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
 
 " rails
 map <leader>ra :A<CR>
