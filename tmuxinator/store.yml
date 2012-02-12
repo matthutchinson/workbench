@@ -1,6 +1,4 @@
-# ~/.tmuxinator/store.yml
-
-project_name: pmFAQtory store
+project_name: pmFAQtory Store
 project_root: /u/apps/pmfaqtory-store
 rbenv: 1.9.3-p0
 tabs:

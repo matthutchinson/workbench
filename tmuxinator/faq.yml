@@ -1,5 +1,3 @@
-# ~/.tmuxinator/faq.yml
-
 project_name: Faqtory
 project_root: /u/apps/faqtory
 rbenv: 1.9.3-p0
