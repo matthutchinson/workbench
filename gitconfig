@@ -44,6 +44,9 @@
   pretty = %C(yellow)%h%Creset %Cgreen[%cr]%Creset (%an) %s
 [merge]
   tool = opendiff
+[merge "pofile"]
+  name = Gettext merge driver
+  driver = git merge-po %O %A %B
 [sendemail]
   smtpserver = smtp.example.com
   aliasesfile = /Users/matt/.gitaliases
@@ -61,3 +64,5 @@
   default = current
 [heroku]
 	account = personal
+[mergetool]
+	keepBackup = false
