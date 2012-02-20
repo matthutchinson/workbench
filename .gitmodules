@@ -19,3 +19,6 @@
 [submodule "vim/pathogen/vim-markdown"]
 	path = vim/pathogen/vim-markdown
 	url = https://github.com/tpope/vim-markdown.git
+[submodule "vim/pathogen/ctrlp.vim"]
+	path = vim/pathogen/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git

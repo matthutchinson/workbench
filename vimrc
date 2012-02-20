@@ -87,13 +87,11 @@ set foldcolumn=4
 set nofoldenable
 
 " custom mappings
-" Ctrl+t opens commandT
-" F6 flushes commandT
+" Ctrl+t opens ctrlp.vim
 " Ctrl+c or ,c toggles commenting
 " Ctrl+f opens grep
 " F5 formats/tidies
-nmap <silent> <C-t> :CommandT<CR>
-nmap <silent> <F6> :CommandTFlush<CR>
+nmap <silent> <C-t> :CtrlP<CR>
 nmap <leader>c \\\
 vmap <leader>c \\\
 map <C-F> :grep<Space>
@@ -105,7 +103,8 @@ map <F7> :setlocal spell! spelllang=en<CR>
 let g:CommandTMaxFiles=25000
 let g:CommandTMaxDepth=15
 let g:CommandTCancelMap='<C-x>'
-set wildignore+=*.o,*.obj,.git,.svn,**/vendor/apache-ant-1.8.2/**,**/vendor/rails/**,**/vendor/bundle/**,**/tmp/cache/**
+set wildignore+=*.o,*.obj,**/vendor/apache-ant-1.8.2/**,**/vendor/rails/**,**/vendor/bundle/**,**/tmp/cache/**
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so
 
 " fast saving
 nmap <leader>w :w!<cr>
