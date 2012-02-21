@@ -9,6 +9,7 @@
 --ignore-dir=log
 --ignore-dir=tmp
 --ignore-dir=public/destinations
+--ignore-dir=vendor/bundle
 --ignore-dir=coverage
 --ignore-dir=rails
 --smart-case

@@ -152,8 +152,8 @@ nmap <leader>d :bd<cr>
 nmap <leader>D :bufdo bd<cr>
 
 " results
-nnoremap <C-n> :cn<cr>
-nnoremap <C-p> :cp<cr>
+nnoremap <C-k> :cn<cr>
+nnoremap <C-j> :cp<cr>
 
 " turn OFF arrow keys altogther
 nnoremap <Up>    <nop>
