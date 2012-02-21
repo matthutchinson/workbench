@@ -103,7 +103,7 @@ map <F7> :setlocal spell! spelllang=en<CR>
 let g:CommandTMaxFiles=25000
 let g:CommandTMaxDepth=15
 let g:CommandTCancelMap='<C-x>'
-set wildignore+=*.o,*.obj,**/vendor/apache-ant-1.8.2/**,**/vendor/rails/**,**/vendor/bundle/**,**/tmp/cache/**
+set wildignore+=*.o,*.obj,**/vendor/apache-ant-1.8.2/**,**/vendor/rails/**,**/vendor/bundle/**,**/tmp/cache/**,**/public/destinations/**
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so
 
 " fast saving
