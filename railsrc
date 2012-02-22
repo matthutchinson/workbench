@@ -21,7 +21,7 @@ class Hirb::Helpers::Route < Hirb::Helpers::AutoTable
         }) )
   end
 end
-Hirb.add_view ActionDispatch::Routing::Route, :class => Hirb::Helpers::Route
+Hirb.add_view ActionDispatch::Routing::RouteSet, :class => Hirb::Helpers::Route
 
 # short and long route list
 def routes(long_output = false)
@@ -50,7 +50,7 @@ end
 
 # access to routeset for easy recognize / generate
 def r 
-  ActionController::Routing::Routes
+  ActionDispatch::Routing::RouteSet
 end
 
 # include test helper files in test env
