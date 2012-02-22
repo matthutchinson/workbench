@@ -3,7 +3,7 @@ require 'rubygems' rescue nil
 require 'wirble'
 require 'hirb'
 require 'ap'
-
+require 'pry'
 
 # load wirble
 Wirble.init
@@ -32,4 +32,4 @@ if (ENV['RAILS_ENV'] || defined? Rails) && File.exist?(railsrc_path)
   end
 end
 
-puts "> all systems are go wirble/hirb/ap/sql/routes <"
+puts "> all systems are go pry/wirble/hirb/ap/sql/routes <"
