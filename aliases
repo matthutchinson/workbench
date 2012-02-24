@@ -9,6 +9,8 @@ alias a2rs='sudo apachectl restart'
 alias tmux='TERM=xterm-256color tmux'
 alias pw='pws'
 alias gpgme='gpg -e -u "matt@hiddenloop.com" -r "matt@hiddenloop.com"'
+alias rerunfix='sed '/^$/d' ./rerun.txt > ~/Desktop/rerun.txt'
+alias mydropbox='HOME=$HOME/My\ Dropbox /Applications/Dropbox.app/Contents/MacOS/Dropbox'
 
 # https://github.com/trapd00r/ls--/issues/14
 alias ll=' LC_ALL=en_US.UTF-8 LANG=en ls++ -a'
