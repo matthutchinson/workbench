@@ -9,7 +9,7 @@ tabs:
         - be rails s
         - be rails c
   - postgresql: be rails dbconsole
-  - server:
+  - logs:
       layout: main-vertical
       panes:
         - tail -f log/development.log | egrep "Parameters|Completed"
