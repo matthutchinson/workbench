@@ -25,3 +25,6 @@
 [submodule "vim/pathogen/vim-turbux"]
 	path = vim/pathogen/vim-turbux
 	url = git@github.com:matthutchinson/vim-turbux.git
+[submodule "vim-turbux"]
+	path = vim-turbux
+	url = git@github.com:matthutchinson/vim-turbux.git
