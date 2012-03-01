@@ -22,6 +22,3 @@
 [submodule "vim/pathogen/ctrlp.vim"]
 	path = vim/pathogen/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim.git
-[submodule "vim/pathogen/vim-turbux"]
-	path = vim/pathogen/vim-turbux
-	url = git@github.com:matthutchinson/vim-turbux.git
