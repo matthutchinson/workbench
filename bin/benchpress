@@ -12,6 +12,7 @@ Dir.chdir(workbench_path) do
   puts "  #{`git pull`}"
   puts '  Updating submodules ...'
   puts "  #{`git submodule update --init --recursive`}"
+  puts "  #{`git submodule foreach git pull origin master`}"
   puts '  Creating symlinks ...'
 
   Dir.foreach(Dir.pwd) do |item|
