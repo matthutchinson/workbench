@@ -90,11 +90,14 @@ set nofoldenable
 " Ctrl+t opens ctrlp.vim
 " Ctrl+c or ,c toggles commenting
 " Ctrl+f opens grep
+" F3 alphabetizes inner css
 " F5 formats/tidies
+" F7 spell checks
 nmap <silent> <C-t> :CtrlP<CR>
 nmap <leader>c \\\
 vmap <leader>c \\\
 map <C-F> :grep<Space>
+nmap <F3> :g#\({\n\)\@<=#.,/}/sort<CR>
 map <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
 map <F7> :setlocal spell! spelllang=en<CR>
