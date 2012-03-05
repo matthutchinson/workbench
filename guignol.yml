@@ -1,0 +1,38 @@
+# https://github.com/HouseTrip/guignol
+# ~/.guignol.yml
+--- 
+- :name:                kermit
+  :domain:              housetripdev.com.
+  :uuid:                68C3C0C2-1BA3-465F-8626-E065E4EF904A
+  :region:              eu-west-1
+  :image_id:            ami-15f7c961                            # 32 bits
+  :flavor_id:           m1.small
+  :key_name:            matt-housetrip-aws
+  :security_group_ids:  
+    - sg-7e638109                                               # housetrip-basic
+  :volumes:
+    - :name: kermit-swap
+      :uuid: 9D5A278E-432C-41DB-9FB5-8AF5C1BD021A
+      :dev:  /dev/sdf
+      :size: 4
+      :delete_on_termination: true
+    - :name: kermit-data
+      :uuid: E180203F-9DE1-4C6A-B09B-33B2FAC8F36C
+      :dev:  /dev/sdg
+      :size: 20
+      :delete_on_termination: false
+  :user_data: |
+    #!/bin/sh
+    set -x
+    if test -z "$LOGGING" ; then
+      export LOGGING=YES
+      exec "$0" > /tmp/user_data.log 2>&1
+    fi
+
+    mkswap -f /dev/xvdf > /dev/null && swapon /dev/xvdf
+
+    mount_data() {
+      mount -t ext4 /dev/xvdg /mnt
+    }
+    mount_data || { mkfs.ext4 /dev/xvdg && mount_data ; }
+    date >> /tmp/stamp
