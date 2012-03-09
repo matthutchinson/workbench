@@ -13,6 +13,6 @@ tabs:
       panes:
         - tail -f log/development.log | egrep "Parameters|Completed"
         - be rake jobs:work
-  - irc: dago
   - mysql: script/dbconsole
-  - misc: script/start_solr_for_development
+  - irc: dago
+  - misc: git st
