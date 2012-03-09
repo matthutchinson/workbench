@@ -28,6 +28,10 @@ alias cdcc='cd /u/code/catapult'
 alias cdht='cd /u/apps/housetrip'
 alias cdts='cd /u/apps/ticketsolve'
 
+# vnc
+alias hoth='open vnc://hoth.myvnc.com'
+alias alderann='open vnc://alderann.myvnc.com'
+
 # Textmate
 alias et='mate . &'
 alias ett='mate stories themes app config lib db public script spec test vendor/plugins features README.* Gemfile &'
