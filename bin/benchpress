@@ -15,8 +15,8 @@ Dir.chdir(workbench_path) do
   puts "  #{`git submodule foreach git pull origin master`}"
   puts '  Creating symlinks ...'
 
-  Dir.foreach(Dir.pwd) do |item|
-    next if item == '.' or item == '..' or item[0] == '.' or ['README.md', 'fonts', 'tags'].include?(item)
+   Dir.glob('*') do |item|
+    next if ['README.md', 'fonts', 'tags'].include?(item)
     if item == 'bin'
       `rm -f ~/bin`
       `ln -sfh #{workbench_path}/bin ~/`

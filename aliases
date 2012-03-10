@@ -30,7 +30,7 @@ alias cdts='cd /u/apps/ticketsolve'
 
 # vnc
 alias hoth='open vnc://hoth.myvnc.com'
-alias alderann='open vnc://alderann.myvnc.com'
+alias alderann='open vnc://alderann.myvnc.com:54322'
 
 # Textmate
 alias et='mate . &'
