@@ -66,10 +66,10 @@ sg () {
 }
 
 ss () {
-  if [ -f ./Procfile ]; then
-    bundle exec foreman start $@
-  elif [ -f ./script/rails ]; then
+  if [ -f ./script/rails ]; then
     bundle exec rails s $@
+  elif [ -f ./Procfile ]; then
+    bundle exec foreman start $@
   else
     ./script/server $@
   fi
