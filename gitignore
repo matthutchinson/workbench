@@ -1,6 +1,7 @@
 tags
 .DS_Store
 .bundle
+vendor/bundle
 tmp/*
 log/*.log
 db/*.sqlite3
