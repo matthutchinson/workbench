@@ -74,7 +74,9 @@ hi User2 ctermbg=black ctermfg=red guibg=black guifg=red
 hi User3 ctermbg=black ctermfg=yellow guibg=black  guifg=yellow
 
 " ctags file search order
-set tags=./tags,./.git/tags
+" ctags are maintained/refreshed using this technique with git
+" http://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
+" set tags=./.git/tags
 
 " status line
 set laststatus=2
