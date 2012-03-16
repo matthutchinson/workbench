@@ -74,7 +74,7 @@ hi User2 ctermbg=black ctermfg=red guibg=black guifg=red
 hi User3 ctermbg=black ctermfg=yellow guibg=black  guifg=yellow
 
 " ctags file search order
-set tags=./tags;
+set tags=./tags,./.git/tags
 
 " status line
 set laststatus=2
