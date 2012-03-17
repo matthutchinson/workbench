@@ -1,4 +1,4 @@
 -R
 --exclude=.git
---exclude=vendor/bundle
 --exclude=log *
+--languages=-javascript,sql
