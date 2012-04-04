@@ -113,7 +113,7 @@ nmap <leader>w :w!<cr>
 " fast edit and source vimrc
 map <leader>v :sp ~/.vimrc<cr>       " opens ~/.vimrc in a split
 map <leader>u :source ~/.vimrc<cr>   " sources ~/.vimrc
-map <leader>e :e <C-R>=expand("%:p:h") . '/'<cr><cr>
+map <leader>e :Explore<cr>
 map <leader>ev :vnew <C-R>=expand("%:p:h") . '/'<cr><cr>
 
 " fugitive git bindings
