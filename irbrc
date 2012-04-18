@@ -1,8 +1,10 @@
 require 'rubygems' rescue nil
 
+
+# use gem install wirble hirb awesome_print pry pry-doc pry-nav
 require 'wirble'
 require 'hirb'
-require 'ap'
+require 'awesome_print'
 require 'pry'
 
 # load wirble

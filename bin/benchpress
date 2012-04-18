@@ -28,4 +28,7 @@ Dir.chdir(workbench_path) do
   end
 end
 
+# make sure vim backup dir exists
+puts `mkdir -p ~/.vim/tmp`
+
 puts '  All done!'
