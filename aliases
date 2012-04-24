@@ -9,7 +9,8 @@ alias a2rs='sudo apachectl restart'
 alias tmux='TERM=xterm-256color tmux'
 alias pw='pws'
 alias gpgme='gpg -e -u "matt@hiddenloop.com" -r "matt@hiddenloop.com"'
-alias rerunfix='sed '/^$/d' ./rerun.txt > ~/Desktop/rerun.txt'
+# note how to escape single quotes in bash :)
+alias rerunfix='ruby -p -e '\''$_.gsub!(/ /, "\n")'\'' ./rerun.txt > ~/Desktop/rerun.txt'
 alias mydropbox='HOME=$HOME/My\ Dropbox /Applications/Dropbox.app/Contents/MacOS/Dropbox'
 
 # https://github.com/trapd00r/ls--/issues/14
