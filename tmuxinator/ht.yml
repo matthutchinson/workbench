@@ -14,5 +14,4 @@ tabs:
         - tail -f log/development.log | egrep "Parameters|Completed"
         - be rake jobs:work
   - mysql: script/dbconsole
-  - irc: dago
   - misc: git st
