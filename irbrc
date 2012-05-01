@@ -1,25 +1,52 @@
-require 'rubygems' rescue nil
-
-
 # use gem install wirble hirb awesome_print pry pry-doc pry-nav
-require 'wirble'
-require 'hirb'
-require 'awesome_print'
-require 'pry'
+require 'rubygems'
+
+@loaded = []
+
+# awesome print
+begin
+  require 'awesome_print'
+  @loaded << 'ap'
+rescue
+end
+
+# handy methods
+def save_to(filename, data) 
+  file = File.new(filename, "w")
+  file.write(data.to_s)
+  file.close
+end
+
+# load pry
+begin
+  require 'pry'
+  @loaded << 'pry'
+rescue 
+end
 
 # load wirble
-Wirble.init
-Wirble.colorize
+begin
+  require 'wirble'
+  Wirble.init
+  Wirble.colorize
 
-colors = Wirble::Colorize.colors.merge({
-  :object_class => :purple,
-  :symbol => :purple,
-  :symbol_prefix => :purple
-})
-Wirble::Colorize.colors = colors
+  colors = Wirble::Colorize.colors.merge({
+    :object_class => :purple,
+    :symbol => :purple,
+    :symbol_prefix => :purple
+  })
+  Wirble::Colorize.colors = colors
+  @loaded << 'wirble'
+rescue
+end
 
 # load hirb
-Hirb::View.enable
+begin 
+  require 'hirb'
+  Hirb::View.enable
+  @loaded << 'hirb'
+rescue
+end
 
 IRB.conf[:AUTO_INDENT] = true
 
@@ -28,10 +55,12 @@ railsrc_path = File.expand_path('~/.railsrc')
 if (ENV['RAILS_ENV'] || defined? Rails) && File.exist?(railsrc_path)
   begin
     load railsrc_path
-    puts "> ~/.railsrc loaded <"
+    @loaded << 'railsrc'
+    @loaded << 'sql'
+    @loaded << 'routes'
   rescue Exception
     warn "Could not load: #{ railsrc_path }" # because of $!.message
   end
 end
 
-puts "> all systems are go pry/wirble/hirb/ap/sql/routes <"
+puts "> all systems are go #{@loaded.join('/') if @loaded.length > 0} <"

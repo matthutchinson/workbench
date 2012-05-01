@@ -126,7 +126,7 @@ map <leader>gl :Glog -250<cr><cr>:copen<cr><cr>
 map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
 map <leader>gc :Gcommit
 
-" ruby 
+" ruby
 " save and run
 map <leader>rn :w ! ruby<CR>
 " convert hashes to 1.9 style
