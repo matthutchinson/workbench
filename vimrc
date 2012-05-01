@@ -12,7 +12,7 @@ let mapleader = ","
 let g:mapleader = ","
 
 " textwidth and format options
-set textwidth=72
+set textwidth=80
 set fo-=t
 
 " 256 color scheme
