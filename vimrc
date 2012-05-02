@@ -88,6 +88,10 @@ set foldmethod=syntax
 set foldcolumn=4
 set nofoldenable
 
+" turbux config
+let g:turbux_prefix = "bundle exec"
+let g:turbux_rspec  = "spec"
+
 " custom mappings
 " Ctrl+t opens ctrlp.vim
 " Ctrl+c or ,c toggles commenting
