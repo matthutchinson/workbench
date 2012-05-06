@@ -89,8 +89,8 @@ set foldcolumn=4
 set nofoldenable
 
 " turbux config
-let g:turbux_prefix = "bundle exec"
-let g:turbux_rspec  = "spec"
+let g:turbux_command_prefix = 'bundle exec'
+let g:turbux_command_rspec = 'spec'
 
 " custom mappings
 " Ctrl+t opens ctrlp.vim
