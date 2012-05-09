@@ -2,7 +2,7 @@ if [ -f ~/.aliases ]; then . ~/.aliases ; fi
 if [ -f ~/.secret ]; then . ~/.secret ; fi
 
 export TERM="xterm-256color"
-export PATH="/usr/local/Cellar/gettext/0.18.1.1/bin:/usr/local/php/bin:/Users/matt/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
+export PATH="/usr/local/Cellar/gettext/0.18.1.1/bin:/Applications/Firefox 3.app/Contents/MacOS:/usr/local/php/bin:/Users/matt/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
 export EDITOR="/usr/local/bin/vim"
 export EVENT_NOKQUEUE=1
 export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home"
