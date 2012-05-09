@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Downloads latest bzipped dump file from 
+# a remote server and imports to a local database
+#
+# `brew install bar`
+# http://www.theiling.de/projects/bar.html
+#
+# Matthew Hutchinson 2012 - HouseTrip SA.
+
+DB_NAME=housetrip_production_like
+REMOTE_SERVER=db1p
+REMOTE_DIR=/mnt/dumps
+LOCAL_DIR=/tmp/dumps
+FILE_PREFIX=housetrip_millersoft
+
+# create local folder if it doesnt already exist
+mkdir -p $LOCAL_DIR
+
+# grab latest dump file from remote server
+scp $REMOTE_SERVER:`ssh $REMOTE_SERVER ls -1td $REMOTE_DIR/$FILE_PREFIX\*.bz2 | head -1` $LOCAL_DIR
+
+# drop and recreate db
+mysql -u root -e "DROP DATABASE IF EXISTS $DB_NAME"
+mysql -u root -e "CREATE DATABASE $DB_NAME"
+
+# decompress and import this into database (show progress with bar)
+bar -n `ls -1td $LOCAL_DIR/$FILE_PREFIX*.bz2 | head -1` | bzip2 -dck | mysql -uroot $DB_NAME
