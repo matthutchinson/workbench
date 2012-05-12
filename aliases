@@ -30,8 +30,8 @@ alias cdht='cd /u/apps/housetrip'
 alias cdts='cd /u/apps/ticketsolve'
 
 # vnc
-alias hoth='open vnc://hoth.myvnc.com'
-alias alderann='open vnc://alderann.myvnc.com:54322'
+alias vnchoth='open vnc://hoth.myvnc.com'
+alias vncalderann='open vnc://alderann.myvnc.com:54322'
 
 # Textmate
 alias et='mate . &'
@@ -42,7 +42,8 @@ alias sse='mongrel_rails start -e functional -p 3333'
 alias ssj='java -jar vendor/seleniumrc/selenium_server/selenium-server-standalone-2.0.0.jar -port 4444'
 
 # HouseTrip
-alias sshec2ht='ssh -i ~/.ssh/matt-housetrip-aws.pem'
+alias htps='be rake parallel:prepare[4];be rake parallel:spec[4]'
+alias htpf='be rake parallel:prepare[4];be rake parallel:safe_features[4]'
 
 # Rails
 alias gofast='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = true\"" config/environments/development.rb'
