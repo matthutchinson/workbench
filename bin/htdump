@@ -18,7 +18,11 @@ FILE_PREFIX=housetrip_millersoft
 mkdir -p $LOCAL_DIR
 
 # grab latest dump file from remote server
-scp $REMOTE_SERVER:`ssh $REMOTE_SERVER ls -1td $REMOTE_DIR/$FILE_PREFIX\*.bz2 | head -1` $LOCAL_DIR
+if [ $1 == "local" ]; then
+  echo "skipping dump download"
+else
+  scp $REMOTE_SERVER:`ssh $REMOTE_SERVER ls -1td $REMOTE_DIR/$FILE_PREFIX\*.bz2 | head -1` $LOCAL_DIR
+fi
 
 # drop and recreate db
 mysql -u root -e "DROP DATABASE IF EXISTS $DB_NAME"
