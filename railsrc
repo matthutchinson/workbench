@@ -1,13 +1,9 @@
 # show queries
-ActiveRecord::Base.logger     = Logger.new STDOUT
+ActiveRecord::Base.logger = Logger.new STDOUT
 ActiveRecord::Base.clear_reloadable_connections!
 
 # show requests 
 ActionController::Base.logger = Logger.new STDOUT
-
-# access routes
-include Rails.application.routes.url_helpers
-default_url_options[:host] = Rails.application.class.parent_name.downcase
 
 # hirb view for a route
 class Hirb::Helpers::Route < Hirb::Helpers::AutoTable
@@ -46,16 +42,6 @@ def route(index_or_name)
   when Symbol # named route
     Rails.application.routes.named_routes.get index_or_name
   end
-end
-
-# access to routeset for easy recognize / generate
-def r 
-  ActionDispatch::Routing::RouteSet
-end
-
-# include test helper files in test env
-if (ENV['RAILS_ENV'] == 'test') || (Rails.env == 'test')
-  require 'test/test_helper'
 end
 
 # show app name and env in irb prompt
