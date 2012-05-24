@@ -8,7 +8,7 @@
 #
 # Matthew Hutchinson 2012 - HouseTrip SA.
 
-DB_NAME=housetrip_production_like
+DB_NAME=housetrip_development
 REMOTE_SERVER=db1p
 REMOTE_DIR=/mnt/dumps
 LOCAL_DIR=/tmp/dumps
@@ -18,7 +18,8 @@ FILE_PREFIX=housetrip_millersoft
 mkdir -p $LOCAL_DIR
 
 # grab latest dump file from remote server
-if [ $1 == "local" ]; then
+if [ "$1" == "local" ]
+then
   echo "skipping dump download"
 else
   scp $REMOTE_SERVER:`ssh $REMOTE_SERVER ls -1td $REMOTE_DIR/$FILE_PREFIX\*.bz2 | head -1` $LOCAL_DIR
