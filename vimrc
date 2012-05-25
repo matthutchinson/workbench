@@ -173,7 +173,7 @@ au BufRead,BufNewFile {Capfile,Gemfile,Rakefile,Thorfile,config.ru,.caprc,.irbrc
 " auto strip whitespace when saving
 let machine = substitute(system('hostname'), "\n", "", "")
 " don't auto strip on these machines
-if machine !~ "[calcifer]"
+if machine !~ 'calcifer'
   autocmd BufWritePre * :%s/\s\+$//e
 endif
 
