@@ -25,3 +25,6 @@
 [submodule "vim/pathogen/vim-turbux"]
 	path = vim/pathogen/vim-turbux
 	url = https://github.com/jgdavey/vim-turbux.git
+[submodule "vim/pathogen/vim-coffee-script"]
+	path = vim/pathogen/vim-coffee-script
+	url = https://github.com/kchmck/vim-coffee-script.git
