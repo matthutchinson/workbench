@@ -34,16 +34,6 @@ def routes(long_output = false)
   end
 end
 
-# get a specific route via index or name
-def route(index_or_name)
-  route = case index_or_name
-  when Integer
-    Rails.application.routes.routes[ index_or_name ]
-  when Symbol # named route
-    Rails.application.routes.named_routes.get index_or_name
-  end
-end
-
 # show app name and env in irb prompt
 app_name = Rails.application.class.parent_name.downcase
 app_env  = Rails.env[0...3]

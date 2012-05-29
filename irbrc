@@ -11,7 +11,7 @@ rescue
 end
 
 # handy methods
-def save_to(filename, data) 
+def save_to(data, filename) 
   file = File.new(filename, "w")
   file.write(data.to_s)
   file.close

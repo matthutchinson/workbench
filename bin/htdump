@@ -8,7 +8,8 @@
 #
 # Matthew Hutchinson 2012 - HouseTrip SA.
 
-DB_NAME=housetrip_development
+# DB_NAME=housetrip_development
+DB_NAME=housetrip_production_like
 REMOTE_SERVER=db1p
 REMOTE_DIR=/mnt/dumps
 LOCAL_DIR=/tmp/dumps
