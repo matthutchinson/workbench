@@ -33,6 +33,7 @@
   amend = commit --amend
   plre = pull --rebase
   unstage = reset HEAD
+  last = log -p -n1
   today = log --since='1 Day Ago'
   recent = log --stat --since='3 Hours Ago' --graph --pretty=oneline --abbrev-commit --date=relative
   me = log --author='Matthew Hutchinson'
