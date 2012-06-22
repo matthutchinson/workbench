@@ -9,8 +9,9 @@
 --ignore-dir=log
 --ignore-dir=tmp
 --ignore-dir=public/destinations
---ignore-dir=vendor/bundle
+--ignore-dir=vendor
 --ignore-dir=coverage
 --ignore-dir=rails
 --smart-case
 --follow
+--type-set=feature=.feature
