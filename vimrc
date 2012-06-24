@@ -108,7 +108,8 @@ map <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
 map <F7> :setlocal spell! spelllang=en<CR>
 
-set wildignore+=*.o,*.obj,**/vendor/apache-ant-1.8.2/**,**/vendor/rails/**,**/vendor/bundle/**,**/tmp/cache/**,**/public/destinations/**
+set wildignore+=*.o,*.obj,**/vendor/apache-ant-1.8.2/**
+set wildignore+=**/vendor/rails/**,**/vendor/bundle/**,**/tmp/cache/**,**/public/destinations/**
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,tags
 
 " fast saving
