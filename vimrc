@@ -181,6 +181,10 @@ endif
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
 nmap <C-V> :call setreg("\"",system("pbpaste"))<CR>p
 
+" highlight long lines
+highlight OverLength ctermbg=darkgrey ctermfg=lightgrey guibg=#FFD9D9
+match OverLength /\%>80v.\+/
+
 " focus mode
 function! ToggleFocusMode()
   if (&foldcolumn != 12)

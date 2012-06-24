@@ -1,4 +1,0 @@
-#!/bin/sh
-
-#/usr/local/bin/rbenv shell `cat .rbenv-version`
-~/bin/tmux-reattach-to-user-namespace -l bash
