@@ -92,6 +92,11 @@ set nofoldenable
 let g:turbux_command_prefix = 'bundle exec'
 let g:turbux_command_rspec = 'spec'
 
+" ctrlp config
+let g:ctrlp_max_height = 20      " window height
+let g:ctrlp_follow_symlinks = 1  " do follow symlinks
+let g:ctrlp_lazy_update = 1      " update after 250ms
+
 " custom mappings
 " Ctrl+t opens ctrlp.vim
 " Ctrl+c or ,c toggles commenting
