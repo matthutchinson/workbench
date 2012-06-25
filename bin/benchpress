@@ -28,6 +28,10 @@ Dir.chdir(workbench_path) do
   end
 end
 
+# regenerate vim help tags with pathogen :Helptags
+puts '  Updating vim help tags'
+`vi -c ':Helptags' -c ':q!'`
+
 # make sure vim backup dir exists
 puts `mkdir -p ~/.vim/tmp`
 
