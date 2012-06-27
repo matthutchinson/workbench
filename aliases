@@ -93,6 +93,9 @@ alias rdbm='bundle exec rake db:migrate'
 alias rdbp='bundle exec rake db:test:prepare'
 alias rsp='bundle exec rake spec'
 
+# Ruby
+alias rbenvit='rbenv shell `cat .rbenv-version`'
+
 # svn
 alias scm="svn commit --username matt "
 alias saa="svn status | grep "^\?" | sed -e 's/? *//' | sed -e 's/ /\ /g' | xargs svn add"
