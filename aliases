@@ -40,6 +40,7 @@ alias ssj='java -jar vendor/seleniumrc/selenium_server/selenium-server-standalon
 # HouseTrip
 alias htps='be rake parallel:prepare[4];be rake parallel:spec[4]'
 alias htpf='be rake parallel:prepare[4];be rake parallel:safe_features[4]'
+alias htclean='rm -rf /u/apps/housetrip/log/test* /u/apps/housetrip/log/cucumber* /u/apps/housetrip/log/development*'
 
 # Rails
 alias gofast='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = true\"" config/environments/development.rb'
