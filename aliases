@@ -47,6 +47,7 @@ alias gofast='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = true
 alias goslow='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = false\"" config/environments/development.rb'
 alias tdl='tail -f ./log/development.log'
 alias ttl='tail -f ./log/test.log'
+alias rst='touch ./tmp/restart.txt'
 
 sc () {
   if [ -f ./script/rails ]; then
