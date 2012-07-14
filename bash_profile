@@ -16,12 +16,6 @@ export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1.8
 export RUBY_GC_MALLOC_LIMIT=59000000
 export RUBY_HEAP_FREE_MIN=100000
 
-function create_puppet_mod {
-  mkdir "$1"
-  mkdir "$1/files" "$1/lib" "$1/manifests" "$1/templates" "$1/tests"
-  touch "$1/manifests/init.pp"
-}
-
 function git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
@@ -37,7 +31,7 @@ git_color() {
   # Count number of lines in git status (no changes, no lines)
   a="$(git status --short | wc -l)"
   b=0
-  
+
  # Set the terminal color to orange or green, depending on status (green: no
  # changes, orange: uncomitted changes)
  if (( "$a" > "$b" ))
@@ -54,8 +48,7 @@ _xterm_color() {
 }
 
 function proml {
-  local      ORANGE=$(_xterm_color 5 3 0)
-  local        GRAY=$(_xterm_color 1 1 1)
+  local        GRAY="\[\033[0;94m\]"
   local        BLUE="\[\033[0;34m\]"
   local         RED="\[\033[0;31m\]"
   local       GREEN="\[\033[0;32m\]"
@@ -71,7 +64,7 @@ function proml {
 
 # use \u@h: for user@host:
 PS1="${TITLEBAR}\
-\$(rbenv-prompt) $BLUE[$WHITE\u@\h:\w\$(git_color)\$(git_branch)$GRAY\$(git_commit_time)$BLUE]\
+\$(rbenv-prompt) $BLUE[$WHITE\u@\h:\w\$(git_color)\$(git_branch)$GRAY\$(git_commit_time)$BLUE] \
 $WHITE\$ "
 PS2='> '
 PS4='+ '
