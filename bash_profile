@@ -42,11 +42,6 @@ git_color() {
  fi
 }
 
-_xterm_color() {
-  color=$(( 16 + ($1 * 36) + ($2 * 6) + $3 ))
-  echo "\033[38;5;${color}m"
-}
-
 function proml {
   local        GRAY="\[\033[0;94m\]"
   local        BLUE="\[\033[0;34m\]"
@@ -64,7 +59,7 @@ function proml {
 
 # use \u@h: for user@host:
 PS1="${TITLEBAR}\
-\$(rbenv-prompt) $BLUE[$WHITE\u@\h:\w\$(git_color)\$(git_branch)$GRAY\$(git_commit_time)$BLUE] \
+\$(rbenv-prompt) $BLUE[$WHITE\u@\h:\w\[\$(git_color)\]\$(git_branch)$GRAY\[\$(git_commit_time)\]$BLUE] \
 $WHITE\$ "
 PS2='> '
 PS4='+ '
