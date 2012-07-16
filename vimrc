@@ -155,6 +155,9 @@ map <leader>ru :RVunittest<CR>
 map <leader>rt :RVfunctionaltest<CR>
 map <leader>rs :<C-U>!bundle exec spec <c-r>=expand("%:p") <CR> -c -l <c-r>=line(".") <CR> <CR>
 
+" in insert mode, tab does Ctrl-P (vims built in autocomplete)
+imap <tab> <C-P>
+
 " buffers
 nnoremap <tab> :bn<cr>
 nnoremap <S-tab> :bp<cr>
