@@ -1,0 +1,4 @@
+#!/bin/bash
+rm -rf /u/apps/housetrip/log/test* 
+rm -rf /u/apps/housetrip/log/cucumber* 
+rm -rf /u/apps/housetrip/log/development*

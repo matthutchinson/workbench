@@ -35,4 +35,7 @@ puts '  Updating vim help tags'
 # make sure vim backup dir exists
 puts `mkdir -p ~/.vim/tmp`
 
+# setting crontab
+`crontab #{workbench_path}/crontab`
+
 puts '  All done!'
