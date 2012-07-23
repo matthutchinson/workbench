@@ -57,6 +57,7 @@ function proml {
     ;;
   esac
 
+#\$(rbenv-prompt) $BLUE[$WHITE\u@\h:\w\$(git_color)\$(git_branch)$GRAY\$(git_commit_time)$BLUE] \
 # use \u@h: for user@host:
 PS1="${TITLEBAR}\
 \$(rbenv-prompt) $BLUE[$WHITE\u@\h:\w\$(git_color)\$(git_branch)$BLUE] \
