@@ -110,8 +110,9 @@ alias gaa="git add ."
 alias gb="git list-branches"
 alias gd="git diff | vi -"
 alias gl="git pull"
+alias glg="git lg"
 alias gp="git push"
-alias gst="git status"
+alias gst="git st"
 
 # mysql
 alias myrestart='mysql.server restart'

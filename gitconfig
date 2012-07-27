@@ -23,7 +23,7 @@
   br = branch
   df = diff
   lg = log -p
-  st = status
+  st = status -sb
   ci = commit
   co = checkout
   staged = diff --cached
@@ -37,13 +37,15 @@
   today = log --since='1 Day Ago'
   recent = log --stat --since='3 Hours Ago' --graph --pretty=oneline --abbrev-commit --date=relative
   me = log --author='Matthew Hutchinson'
-  # automatically commit change and pre-configure the rebase prompt to fold it into the last commit
-  fix = "!f() { git commit -a -m \"fixup! $(git log -1 --pretty=format:%s)\" && git rebase -i --autosquash HEAD~4; }; f"
 	ctags = !.git/hooks/ctags
+  prune-remotes = remote prune origin
+  lol = log --pretty=oneline --abbrev-commit --graph --decorate
 [format]
   # git log uses --pretty format by default, so this changes the default
   # e.g. 4436819 [23 hours ago] (Gabe Berke-Williams) One line prompt
   pretty = %C(yellow)%h%Creset %Cgreen[%cr]%Creset (%an) %s
+[help]
+  autocorrect = 1
 [merge]
   tool = opendiff
 [merge "pofile"]
@@ -70,3 +72,6 @@
 	keepBackup = false
 [init]
 	templatedir = ~/.git_template
+[url "git://github.com/"]
+  # Read-only
+  insteadOf = gh:
