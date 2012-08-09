@@ -12,6 +12,5 @@ tabs:
       layout: main-vertical
       panes:
         - tail -f log/development.log | egrep "Parameters|Completed"
-        - be rake jobs:work
+        - git lol
   - mysql: script/dbconsole
-  - misc: git st
