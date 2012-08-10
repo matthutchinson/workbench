@@ -137,6 +137,9 @@ map <leader>gl :Glog -250<cr><cr>:copen<cr><cr>
 map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
 map <leader>gc :Gcommit
 
+" Run file
+map <leader>rr :! %<CR>
+
 " ruby
 " save and run
 map <leader>rn :w ! ruby<CR>
@@ -145,7 +148,6 @@ map <leader>rh :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
 
 " rails
 map <leader>ra :A<CR>
-map <leader>rr :Rake<CR>  " Rake
 map <leader>fr :.Rake<CR> " focused Rake
 map <leader>rf :1R<Space>
 map <leader>rg :Rgenerate migration<Space>

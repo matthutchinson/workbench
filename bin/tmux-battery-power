@@ -4,7 +4,7 @@ percent=$(/usr/sbin/ioreg -l | awk 'BEGIN{a=0;b=0}
       END{ printf("%.0f%%", b/a * 100) }')
 
 if [ -n "$percent" ]; then
-  echo "Battery: $percent | "
+  echo "Battery: $percent"
 else
-  echo "(iMac) | "
+  echo "(iMac)"
 fi
