@@ -6,8 +6,7 @@ tabs:
       layout: main-vertical
       panes:
         - vi .
-        - git status
-        - open http://pmfaqtory-store.dev/
+        - sudo nginx && open http://pmfaqtory-store.dev
         - be rails c
   - postgresql: be rails dbconsole
   - logs:
