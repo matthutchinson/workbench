@@ -2,3 +2,6 @@
 rm -rf /u/apps/housetrip/log/test* 
 rm -rf /u/apps/housetrip/log/cucumber* 
 rm -rf /u/apps/housetrip/log/development*
+
+touch /u/apps/housetrip/log/development.log
+touch /u/apps/housetrip/log/test.log
