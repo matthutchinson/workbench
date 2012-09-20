@@ -157,6 +157,7 @@ map <leader>rc :Rcontroller<CR>
 map <leader>ru :RVunittest<CR>
 map <leader>rt :RVfunctionaltest<CR>
 map <leader>rs :<C-U>!bundle exec spec <c-r>=expand("%:p") <CR> -c -l <c-r>=line(".") <CR> <CR>
+map <leader>sr :<C-U>!bundle exec script/runner %<CR>
 
 " buffers
 nnoremap <tab> :bn<cr>

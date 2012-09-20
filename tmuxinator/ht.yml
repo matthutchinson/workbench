@@ -6,11 +6,12 @@ tabs:
       layout: main-vertical
       panes:
         - vi .
+        - git st
         - script/server
         - script/console
   - monitoring:
       layout: main-vertical
       panes:
         - tail -f log/development.log | egrep "Parameters|Completed"
-        - git lol
+        - logcleaner
   - mysql: script/dbconsole
