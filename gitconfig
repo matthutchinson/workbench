@@ -20,6 +20,7 @@
   changed = green
   untracked = cyan
 [alias]
+  pr = pull-request
   br = branch
   df = diff
   lg = log -p
