@@ -2,13 +2,13 @@ project_name: Store
 project_root: /u/apps/pmfaqtory-store
 rbenv: 1.9.3-p194
 tabs:
-  - pmFAQtory store:
+  - store:
       layout: main-vertical
       panes:
         - vi .
         - sudo nginx && open http://pmfaqtory-store.dev
         - be rails c
-  - postgresql: be rails dbconsole
+  - db: be rails dbconsole
   - logs:
       layout: main-vertical
       panes:
