@@ -60,9 +60,9 @@ function set_git_branch {
   remote_pattern="# Your branch is (.*) of"
   if [[ ${git_status} =~ ${remote_pattern} ]]; then
     if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
-      remote="↑"
+      remote="↑ "
     else
-      remote="↓"
+      remote="↓ "
     fi
   else
     remote=""
@@ -78,7 +78,7 @@ function set_git_branch {
     branch=${BASH_REMATCH[1]}
   fi
 
-  GIT="$BLUE(${state}${branch}${remote}$GRAY ${git_time}$BLUE)"
+  GIT="$BLUE(${state}${branch} $WHITE_BOLD${remote}$GRAY${git_time}$BLUE)"
 }
 
 function set_bash_prompt {
