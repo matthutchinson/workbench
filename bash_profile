@@ -78,7 +78,7 @@ function set_git_branch {
     branch=${BASH_REMATCH[1]}
   fi
 
-  GIT="$BLUE(${state}${branch} $WHITE_BOLD${remote}$GRAY${git_time}$BLUE)"
+  GIT="$LIGHT_CYAN(${state}${branch} $WHITE_BOLD${remote}$GRAY${git_time}$LIGHT_CYAN)"
 }
 
 function set_bash_prompt {
