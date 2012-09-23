@@ -53,7 +53,7 @@ function set_git_branch {
   elif [[ ${git_status} =~ "Changes to be committed" ]]; then
     state="${YELLOW}"
   else
-    state="${RED}"
+    state="${LIGHT_CYAN}"
   fi
 
   # set arrow icon based on status against remote
@@ -88,7 +88,7 @@ function set_bash_prompt {
     GIT=''
   fi
 
-  PS1="$BLUE[$WHITE\w$BLUE]$GIT$COLOR_NONE\$ "
+  PS1="$BLUE[$WHITE\h:\w$BLUE]$GIT$COLOR_NONE\$ "
   PS2='> '
   PS4='+ '
 }
