@@ -53,7 +53,7 @@ function set_git_branch {
   elif [[ ${git_status} =~ "Changes to be committed" ]]; then
     state="${YELLOW}"
   else
-    state="${LIGHT_CYAN}"
+    state="${RED}"
   fi
 
   # set arrow icon based on status against remote
