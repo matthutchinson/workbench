@@ -37,9 +37,11 @@ alias ett='mate stories themes app config lib db public script spec test vendor/
 alias sse='mongrel_rails start -e functional -p 3333'
 alias ssj='java -jar vendor/seleniumrc/selenium_server/selenium-server-standalone-2.0.0.jar -port 4444'
 
-# HouseTrip
+# HouseTrip Test Runs
 alias htps='be rake parallel:prepare[4];be rake parallel:spec[4]'
 alias htpf='be rake parallel:prepare[4];be rake parallel:safe_features[4]'
+alias https='TESTBR=`git st -b | sed "s/## //"`;cd /u/apps/housetrip-parallel-test;git co $TESTBR;git pull;bundle;be rake parallel:prepare[4];be rake parallel:spec[4]'
+alias httpf='TESTBR=`git st -b | sed "s/## //"`;cd /u/apps/housetrip-parallel-test;git co $TESTBR;git pull;bundle;be rake parallel:prepare[4];be rake parallel:safe_features[4]'
 
 # Rails
 alias gofast='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = true\"" config/environments/development.rb'
