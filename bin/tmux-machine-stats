@@ -24,4 +24,4 @@ done
 # free memory
 FREE=$(($(vm_stat | grep free | awk '{ print $3 }' | sed 's/\.//')*4096/1048576))
 
-echo "$FREE Mb [${LINES}] ${TOP} | HD: ${DISK_FREE}%"
+echo "$FREE Mb [${LINES}] ${TOP} | HD ${DISK_FREE}%"

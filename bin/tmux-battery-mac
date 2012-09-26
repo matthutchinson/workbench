@@ -23,9 +23,9 @@ case $(uname -s) in
                     exit
                 fi
                 if [[ "$extconnect" == "Yes" ]]; then
-                    echo $HEART_CONNECTED $(( 100 * $curcap / $maxcap ))"%"
+                    echo " |" $HEART_CONNECTED $(( 100 * $curcap / $maxcap ))"%"
                 else
-                    echo $HEART_DISCONNECTED $(( 100 * $curcap / $maxcap ))"%"
+                    echo " |" $HEART_DISCONNECTED $(( 100 * $curcap / $maxcap ))"%"
                 fi
                 break
             fi
