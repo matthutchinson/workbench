@@ -20,6 +20,8 @@ set t_Co=256
 if &t_Co >= 256 || has("gui_running")
   set background=dark
   colorscheme ir_black
+  " colorscheme Tomorrow-Night
+  " colorscheme Tomorrow-Night-Eighties
 endif
 
 syntax on                         " turn on syntax highlighting.
@@ -65,7 +67,7 @@ set smarttab                      " insert tabs on the start of a line according
 set shiftround                    " use multiple of shiftwidth when indenting with '<' and '>'
 set grepprg=ack                   " use Ack instead of grep
 
-"set synmaxcol=72                 " for speed, only syntax highlight the first 72 chars (ruby style guide)
+" set synmaxcol=80                " for speed, only syntax highlight the first 80 chars (ruby style guide)
 set ttyfast                       " for speed and better rendering
 
 " status line colors
@@ -192,8 +194,8 @@ vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
 nmap <C-V> :call setreg("\"",system("pbpaste"))<CR>p
 
 " highlight long lines
-highlight OverLength ctermbg=darkgrey ctermfg=lightgrey guibg=#FFD9D9
-match OverLength /\%>80v.\+/
+highlight ColorColumn ctermbg=darkgrey guibg=darkgrey
+set colorcolumn=80
 
 " focus mode
 function! ToggleFocusMode()
