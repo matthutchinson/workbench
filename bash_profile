@@ -3,7 +3,7 @@ if [ -f ~/.aliases ]; then . ~/.aliases ; fi
 if [ -f ~/.secret ]; then . ~/.secret ; fi
 
 # some exports
-export TERM="xterm-256color"
+export TERM="screen-256color" # use screen-256color to play nicer with tmux
 export AUTOFEATURE=true
 export RSPEC=true
 export PATH="/usr/local/Cellar/gettext/0.18.1.1/bin:/Applications/Firefox 3.app/Contents/MacOS:/usr/local/php/bin:/Users/matt/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"

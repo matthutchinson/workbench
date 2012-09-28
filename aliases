@@ -6,7 +6,7 @@ alias l='LC_ALL=en_US.UTF-8 LANG=en ls++'
 alias ll='LC_ALL=en_US.UTF-8 LANG=en ls++ -a'
 alias top='top -o cpu'
 alias a2rs='sudo apachectl restart'
-alias tmux='TERM=xterm-256color tmux'
+alias tmux='tmux -2' # force 256 color mode
 alias pw='pws'
 alias gpgme='gpg -e -u "matt@hiddenloop.com" -r "matt@hiddenloop.com"'
 # note how to escape single quotes in bash :)
