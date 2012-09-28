@@ -125,7 +125,7 @@ map <leader>v :sp ~/.vimrc<cr>       " opens ~/.vimrc in a split
 map <leader>u :source ~/.vimrc<cr>   " sources ~/.vimrc
 map <leader>e :Explore<cr>
 map <leader>m :! mate %<cr>
-map <leader>ev :vnew <C-R>=expand("%:p:h") . '/'<cr><cr>
+map <leader>ev :new <C-R>=expand("%:p:h") . '/'<cr><cr>
 
 " fugitive git bindings
 map <leader>gs :Gstatus<cr>
