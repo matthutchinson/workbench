@@ -67,9 +67,12 @@ set expandtab                     " use spaces instead of tabs
 set smarttab                      " insert tabs on the start of a line according to shiftwidth, not
 set shiftround                    " use multiple of shiftwidth when indenting with '<' and '>'
 set grepprg=ack                   " use Ack instead of grep
-
-" set synmaxcol=80                " for speed, only syntax highlight the first 80 chars (ruby style guide)
 set ttyfast                       " for speed and better rendering
+
+" deal with long lines
+" highlight ColorColumn ctermbg=black guibg=black
+" set colorcolumn=80
+" set synmaxcol=80                " for speed, only syntax highlight the first 80 chars (ruby style guide)
 
 " status line colors
 hi User1 ctermbg=black ctermfg=green guibg=black guifg=green
@@ -193,10 +196,6 @@ endif
 " copy and paste with pbcopy/pbpaste in visual mode
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
 nmap <C-V> :call setreg("\"",system("pbpaste"))<CR>p
-
-" highlight long lines
-highlight ColorColumn ctermbg=darkgrey guibg=darkgrey
-set colorcolumn=80
 
 " focus mode
 function! ToggleFocusMode()
