@@ -19,7 +19,8 @@ set fo-=t
 set t_Co=256
 if &t_Co >= 256 || has("gui_running")
   set background=dark
-  colorscheme ir_black
+  " colorscheme ir_black
+  colorscheme jellybeans
   " colorscheme Tomorrow-Night
   " colorscheme Tomorrow-Night-Eighties
 endif
