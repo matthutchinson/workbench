@@ -18,8 +18,8 @@ set fo-=t
 " 256 color scheme
 set t_Co=256
 if &t_Co >= 256 || has("gui_running")
-  colorscheme ir_black
-  " colorscheme jellybeans
+  " colorscheme ir_black
+  colorscheme jellybeans
   " colorscheme Tomorrow-Night
   " colorscheme Tomorrow-Night-Eighties
 endif
@@ -183,7 +183,7 @@ nnoremap <Right> <nop>
 " custom syntax highlighting
 au BufRead,BufNewFile *.as    set filetype=actionscript
 au BufRead,BufNewFile *.mxml  set filetype=mxml
-au BufRead,BufNewFile {Capfile,Gemfile,Rakefile,Thorfile,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
+au BufRead,BufNewFile {Capfile,Gemfile,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
 " auto strip whitespace when saving
 let machine = substitute(system('hostname'), "\n", "", "")
