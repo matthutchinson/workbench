@@ -28,6 +28,7 @@ alias cdhbb='cd /u/apps/bugle'
 alias cdcc='cd /u/code/catapult'
 alias cdht='cd /u/apps/housetrip'
 alias cdts='cd /u/apps/ticketsolve'
+alias cdwb='cd /u/code/workbench'
 
 # Textmate
 alias et='mate . &'
