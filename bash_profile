@@ -21,6 +21,7 @@ export RUBY_GC_MALLOC_LIMIT=59000000
 export RUBY_HEAP_FREE_MIN=100000
 
 # colour codes
+ORANGE="\[\033[0;35m\]"
 RED="\[\033[0;31m\]"
 YELLOW="\[\033[0;33m\]"
 GREEN="\[\033[0;32m\]"
@@ -53,7 +54,7 @@ function set_git_branch {
   elif [[ ${git_status} =~ "Changes to be committed" ]]; then
     state="${YELLOW}"
   else
-    state="${RED}"
+    state="${ORANGE}"
   fi
 
   # set arrow icon based on status against remote
@@ -78,7 +79,7 @@ function set_git_branch {
     branch=${BASH_REMATCH[1]}
   fi
 
-  GIT="$LIGHT_CYAN(${state}${branch} $WHITE_BOLD${remote}$GRAY${git_time}$LIGHT_CYAN)"
+  GIT="$BLUE(${state}${branch} $WHITE_BOLD${remote}$GRAY${git_time}$BLUE)"
 }
 
 function set_bash_prompt {
