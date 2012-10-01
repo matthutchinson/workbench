@@ -10,7 +10,7 @@ alias tmux='tmux -2' # force 256 color mode
 alias pw='pws'
 alias gpgme='gpg -e -u "matt@hiddenloop.com" -r "matt@hiddenloop.com"'
 # note how to escape single quotes in bash :)
-alias rerunfix='ruby -p -e '\''$_.gsub!(/ /, "\n")'\'' ./rerun.txt > ~/Desktop/rerun.txt'
+alias rerunfix='ruby -p -e '\''$_.gsub!(/ /, "\n")'\'' ./rerun.txt > ~/Desktop/rerun.txt;cp ~/Desktop/rerun.txt ./rerun.txt'
 alias mydropbox='HOME=$HOME/My\ Dropbox /Applications/Dropbox.app/Contents/MacOS/Dropbox'
 
 # https://github.com/trapd00r/ls--/issues/14
