@@ -45,7 +45,7 @@ function set_git_branch {
   git_status="$(git status 2> /dev/null)"
 
   # get the time of last commit
-  time=$(git log --format='%cr' -n1)
+  time=$(git log --format='%cr' -n1 2> /dev/null)
   git_time=$(sed "s/\([0-9]*\) \([ywdhms]\).*/\1\2/" <<< "$time")
 
   # set color based on clean/staged/unstaged
