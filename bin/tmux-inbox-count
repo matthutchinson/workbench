@@ -9,7 +9,7 @@ require 'net/imap'
 # config
 username     = 'matt@hiddenloop.com'
 server       = 'imap.gmail.com'
-interval     = 5 # minutes
+interval     = 3 # minutes
 tmp_filename = '/var/tmp/tmux-inbox-count'
 result       = File.read(tmp_filename) if File.exist?(tmp_filename)
 
@@ -34,15 +34,20 @@ def perform_check?(tmp_filename, interval)
 end
 
 def notify(count, username)
-  `terminal-notifier -message '#{count} new message#{count > 1 ? 's' : ''}' -title "You've got Mail" -subtitle '#{username}' -group tmux-inbox-count`
+  `terminal-notifier -message '#{count} new message#{count > 1 ? 's' : ''}' -title "You've got Mail" -subtitle '#{username}' -group tmux-inbox-count -open https://mail.google.com`
 end
 
 # check for new mail, or read from tmp file
 if perform_check?(tmp_filename, interval)
   count = check_inbox(username, server)
   if count > 0
-    result = "✉ #[fg=yellow]#{count}#[fg=colour235] | "
-    # notify(count, username)
+    new_result = "✉ #[fg=yellow]#{count}#[fg=colour235] | "
+    if new_result != result
+      notify(count, username)
+      result = new_result
+    end
+  else
+    result = ''
   end
   File.open(tmp_filename, 'w') {|f| f.write(result) }
 end
