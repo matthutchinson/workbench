@@ -28,9 +28,9 @@
 [submodule "vim/pathogen/vim-coffee-script"]
 	path = vim/pathogen/vim-coffee-script
 	url = https://github.com/kchmck/vim-coffee-script.git
-[submodule "vim/pathogen/supertab"]
-	path = vim/pathogen/supertab
-	url = https://github.com/ervandew/supertab.git
 [submodule "vim/pathogen/snipmate"]
 	path = vim/pathogen/snipmate
 	url = https://github.com/msanders/snipmate.vim.git
+[submodule "vim/pathogen/vimux"]
+	path = vim/pathogen/vimux
+	url = https://github.com/benmills/vimux.git
