@@ -10,7 +10,7 @@
 
 DB_NAME=housetrip_development
 # DB_NAME=housetrip_production_like
-REMOTE_SERVER=db1p
+REMOTE_SERVER=db1.p.housetrip.com
 REMOTE_DIR=/mnt/dumps
 LOCAL_DIR=~/Desktop/db
 FILE_PREFIX=development
