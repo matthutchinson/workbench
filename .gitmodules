@@ -31,6 +31,3 @@
 [submodule "vim/pathogen/snipmate"]
 	path = vim/pathogen/snipmate
 	url = https://github.com/msanders/snipmate.vim.git
-[submodule "vim/pathogen/vimux"]
-	path = vim/pathogen/vimux
-	url = https://github.com/benmills/vimux.git
