@@ -17,8 +17,11 @@ test -r /sw/bin/init.sh && . /sw/bin/init.sh
 export RUBY_HEAP_MIN_SLOTS=600000
 export RUBY_HEAP_SLOTS_INCREMENT=10000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1.8
-export RUBY_GC_MALLOC_LIMIT=59000000
 export RUBY_HEAP_FREE_MIN=100000
+
+# For 1.9.3-p327-perf - https://gist.github.com/1688857
+export RUBY_GC_MALLOC_LIMIT=1000000000
+export RUBY_FREE_MIN=500000
 
 # colour codes
 ORANGE="\[\033[0;35m\]"
