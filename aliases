@@ -27,6 +27,7 @@ alias cdbe='cd /u/apps/beyondendurance'
 alias cdhbb='cd /u/apps/bugle'
 alias cdcc='cd /u/code/catapult'
 alias cdht='cd /u/apps/housetrip'
+alias cdhtt='cd /u/apps/housetrip-parallel-test'
 alias cdts='cd /u/apps/ticketsolve'
 alias cdwb='cd /u/code/workbench'
 
