@@ -11,26 +11,24 @@ Dir.chdir(workbench_path) do
   puts '  Pulling latest ...'
   puts "  #{`git pull`}"
   puts '  Updating submodules ...'
-  puts "  #{`git submodule update --init --recursive`}"
-  puts "  #{`git submodule foreach git pull origin master`}"
+  puts "  #{`git submodule -q foreach git pull -q origin master`}"
   puts '  Creating symlinks ...'
 
    Dir.glob('*') do |item|
-    next if ['README.md', 'fonts', 'tags'].include?(item)
+    next if ['README.md', 'fonts', 'tags', '.bundle'].include?(item)
     if ['bin'].include?(item)
-      `rm -f ~/#{item}`
+      `rm -rf ~/#{item}`
       `ln -sfh #{workbench_path}/#{item} ~/`
     else
-      `rm -f ~/.#{item}`
+      `rm -rf ~/.#{item}`
       `ln -sfh #{workbench_path}/#{item} ~/.#{item}`
     end
-    puts "    linked #{item}"
   end
 end
 
 # regenerate vim help tags with pathogen :Helptags
 puts '  Updating vim help tags'
-`vi -c ':Helptags' -c ':q!'`
+`vim -c 'call pathogen#helptags()|qa' > /dev/null`
 
 # make sure vim backup dir exists
 puts `mkdir -p ~/.vim/tmp`
