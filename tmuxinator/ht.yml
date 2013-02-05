@@ -12,6 +12,6 @@ tabs:
   - monitoring:
       layout: main-vertical
       panes:
-        - tail -f log/development.log | egrep "Parameters|Completed"
-        - logcleaner
+        - tail -f log/development.log
+        - bundle
   - mysql: script/dbconsole

@@ -1,36 +1,48 @@
 [submodule "vim/pathogen/vim-fugitive"]
 	path = vim/pathogen/vim-fugitive
 	url = http://github.com/tpope/vim-fugitive.git
+  ignore = untracked
 [submodule "vim/pathogen/vim-cucumber"]
 	path = vim/pathogen/vim-cucumber
 	url = http://github.com/tpope/vim-cucumber.git
+  ignore = untracked
 [submodule "vim/pathogen/vim-commentary"]
 	path = vim/pathogen/vim-commentary
 	url = http://github.com/tpope/vim-commentary.git
+  ignore = untracked
 [submodule "vim/pathogen/vim-bundler"]
 	path = vim/pathogen/vim-bundler
 	url = http://github.com/tpope/vim-bundler.git
+  ignore = untracked
 [submodule "vim/pathogen/vim-haml"]
 	path = vim/pathogen/vim-haml
 	url = http://github.com/tpope/vim-haml.git
+  ignore = untracked
 [submodule "vim/pathogen/vim-rails"]
 	path = vim/pathogen/vim-rails
 	url = http://github.com/tpope/vim-rails.git
+  ignore = untracked
 [submodule "vim/pathogen/vim-markdown"]
 	path = vim/pathogen/vim-markdown
 	url = https://github.com/tpope/vim-markdown.git
+  ignore = untracked
 [submodule "vim/pathogen/ctrlp.vim"]
 	path = vim/pathogen/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim.git
+  ignore = untracked
 [submodule "vim/pathogen/vim-turbux"]
 	path = vim/pathogen/vim-turbux
 	url = https://github.com/jgdavey/vim-turbux.git
+  ignore = untracked
 [submodule "vim/pathogen/vim-coffee-script"]
 	path = vim/pathogen/vim-coffee-script
 	url = https://github.com/kchmck/vim-coffee-script.git
+  ignore = untracked
 [submodule "vim/pathogen/snipmate"]
 	path = vim/pathogen/snipmate
 	url = https://github.com/msanders/snipmate.vim.git
+  ignore = untracked
 [submodule "vim/pathogen/tslime.vim"]
 	path = vim/pathogen/tslime.vim
 	url = https://github.com/jgdavey/tslime.vim.git
+  ignore = untracked
