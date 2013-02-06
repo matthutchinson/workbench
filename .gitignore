@@ -1,4 +1,6 @@
 vim/.netrwhist
 vim/tmp
-pws
-.pws
+vim/pathogen/vim-*
+vim/pathogen/tslime.vim
+vim/pathogen/snipmate
+vim/pathogen/ctrlp.vim
