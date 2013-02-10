@@ -118,6 +118,16 @@ map <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
 map <F7> :setlocal spell! spelllang=en<CR>
 
+" tabularize
+if exists(":Tabularize")
+  nmap <leader>t> :Tabularize /=><CR>
+  vmap <leader>t> :Tabularize /=><CR>
+  nmap <leader>t= :Tabularize /=<CR>
+  vmap <leader>t= :Tabularize /=<CR>
+  nmap <leader>t: :Tabularize /:\zs<CR>
+  vmap <leader>t: :Tabularize /:\zs<CR>
+endif
+
 " vimux mappings for tmux
 map <Leader>vr :call VimuxRunCommand("clear; ll")<CR>
 
