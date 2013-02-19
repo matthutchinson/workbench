@@ -11,6 +11,7 @@ Dir.chdir(workbench_path) do
   puts '  Pulling latest ...'
   puts "  #{`git pull`}"
   puts '  Updating submodules ...'
+  puts "  #{`git submodule update --init --recursive`}"
   puts "  #{`git submodule -q foreach git pull -q origin master`}"
   puts '  Creating symlinks ...'
 

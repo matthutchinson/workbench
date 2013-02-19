@@ -120,12 +120,12 @@ map <F7> :setlocal spell! spelllang=en<CR>
 
 " tabularize
 if exists(":Tabularize")
-  nmap <leader>t> :Tabularize /=><CR>
-  vmap <leader>t> :Tabularize /=><CR>
-  nmap <leader>t= :Tabularize /=<CR>
-  vmap <leader>t= :Tabularize /=<CR>
-  nmap <leader>t: :Tabularize /:\zs<CR>
-  vmap <leader>t: :Tabularize /:\zs<CR>
+  nmap <leader>a> :Tabularize /=><CR>
+  vmap <leader>a> :Tabularize /=><CR>
+  nmap <leader>a= :Tabularize /=<CR>
+  vmap <leader>a= :Tabularize /=<CR>
+  nmap <leader>a: :Tabularize /:\zs<CR>
+  vmap <leader>a: :Tabularize /:\zs<CR>
 endif
 
 " vimux mappings for tmux
