@@ -6,7 +6,7 @@ if [ -f ~/.secret ]; then . ~/.secret ; fi
 export TERM="screen-256color" # use screen-256color to play nicer with tmux
 export AUTOFEATURE=true
 export RSPEC=true
-export PATH="/usr/local/Cellar/gettext/0.18.1.1/bin:/Applications/Firefox.app/Contents/MacOS:/usr/local/php/bin:/Users/matt/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
+export PATH="/Users/matt/bin:/usr/local/opt/gettext/bin:/Applications/Firefox.app/Contents/MacOS:/usr/local/php/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
 export EDITOR="/usr/bin/vi"
 export EVENT_NOKQUEUE=1
 export NODE_PATH="/usr/local/lib/node_modules"
