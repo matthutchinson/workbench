@@ -28,16 +28,11 @@ alias cdhbb='cd /u/apps/bugle'
 alias cdcc='cd /u/code/catapult'
 alias cdht='cd /u/apps/housetrip'
 alias cdhtt='cd /u/apps/housetrip-parallel-test'
-alias cdts='cd /u/apps/ticketsolve'
 alias cdwb='cd /u/code/workbench'
 
 # Textmate
 alias et='mate . &'
 alias ett='mate stories themes app config lib db public script spec test vendor/plugins features README.* Gemfile &'
-
-# Ticketsolve
-alias sse='mongrel_rails start -e functional -p 3333'
-alias ssj='java -jar vendor/seleniumrc/selenium_server/selenium-server-standalone-2.0.0.jar -port 4444'
 
 # HouseTrip Test Runs
 alias htps='be rake parallel:fast_prepare;be rake parallel:spec[4]'
@@ -51,6 +46,7 @@ alias goslow='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = fals
 alias tdl='tail -f ./log/development.log'
 alias ttl='tail -f ./log/test.log'
 alias rst='touch ./tmp/restart.txt'
+alias migrations?='git diff master db/migrate | grep +++'
 
 sc () {
   if [ -f ./script/rails ]; then
@@ -124,7 +120,6 @@ alias mysql='mysql -uroot'
 alias mybug='mysql bugle_development'
 alias mybe='mysql beyondendurance_development'
 alias mypmf='mysql faqtory_development'
-alias mytsd='mysql ticketsolve_development'
 alias myhtd='mysql housetrip_development'
 alias myhtp='mysql housetrip_production_like'
 alias myhtt='mysql housetrip_test'
