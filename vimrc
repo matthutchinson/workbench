@@ -65,7 +65,7 @@ set shiftwidth=2                  " and again, related.
 set expandtab                     " use spaces instead of tabs
 set smarttab                      " insert tabs on the start of a line according to shiftwidth, not
 set shiftround                    " use multiple of shiftwidth when indenting with '<' and '>'
-set grepprg=ack                   " use Ack instead of grep
+set grepprg=ag                    " use Ag instead of grep
 set ttyfast                       " for speed and better rendering
 
 " deal with long lines
@@ -112,7 +112,7 @@ let g:ctrlp_lazy_update = 1      " update after 250ms
 nmap <silent> <C-t> :CtrlP<CR>
 nmap <leader>c \\\
 vmap <leader>c \\\
-map <C-F> :grep<Space>
+map <C-F> :Ag<Space>
 nmap <F3> :g#\({\n\)\@<=#.,/}/sort<CR>
 map <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
