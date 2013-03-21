@@ -1,21 +1,21 @@
 [submodule "vim/pathogen/vim-fugitive"]
 	path = vim/pathogen/vim-fugitive
-	url = http://github.com/tpope/vim-fugitive.git
+	url = https://github.com/tpope/vim-fugitive.git
 [submodule "vim/pathogen/vim-cucumber"]
 	path = vim/pathogen/vim-cucumber
-	url = http://github.com/tpope/vim-cucumber.git
+	url = https://github.com/tpope/vim-cucumber.git
 [submodule "vim/pathogen/vim-commentary"]
 	path = vim/pathogen/vim-commentary
-	url = http://github.com/tpope/vim-commentary.git
+	url = https://github.com/tpope/vim-commentary.git
 [submodule "vim/pathogen/vim-bundler"]
 	path = vim/pathogen/vim-bundler
-	url = http://github.com/tpope/vim-bundler.git
+	url = https://github.com/tpope/vim-bundler.git
 [submodule "vim/pathogen/vim-haml"]
 	path = vim/pathogen/vim-haml
-	url = http://github.com/tpope/vim-haml.git
+	url = https://github.com/tpope/vim-haml.git
 [submodule "vim/pathogen/vim-rails"]
 	path = vim/pathogen/vim-rails
-	url = http://github.com/tpope/vim-rails.git
+	url = https://github.com/tpope/vim-rails.git
 [submodule "vim/pathogen/vim-markdown"]
 	path = vim/pathogen/vim-markdown
 	url = https://github.com/tpope/vim-markdown.git
@@ -36,4 +36,7 @@
 	url = https://github.com/jgdavey/tslime.vim.git
 [submodule "vim/pathogen/tabular"]
 	path = vim/pathogen/tabular
-	url = git://github.com/godlygeek/tabular.git
+	url = https://github.com/godlygeek/tabular.git
+[submodule "vim/pathogen/ag"]
+	path = vim/pathogen/ag.vim
+	url = https://github.com/rking/ag.vim.git
