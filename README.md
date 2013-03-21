@@ -13,8 +13,8 @@ $ ./bin/benchpress
 * Tmux
 * Tmuxinator
 * Bash aliases, bash_profile
-* Dot files for ctags, ack, rsync, synergy, rails console, irb, gems
-* Scripts for irssi, tsung, git, battery-power, jsc
+* Dot files for ctags, ack, ag, rsync, synergy, rails console, irb, gems
+* Bin scripts for irssi, tsung, git, tmux stats bar utils
 * Global git hooks and custom merges
 
 ### Disclaimer
