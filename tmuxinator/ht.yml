@@ -7,6 +7,7 @@ tabs:
       panes:
         - vi .
         - git st
+        - be rake jobs:work
         - script/server
         - script/console
   - monitoring:
