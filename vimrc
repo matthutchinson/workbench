@@ -144,6 +144,7 @@ map <leader>u :source ~/.vimrc<cr>   " sources ~/.vimrc
 map <leader>e :Explore<cr>
 map <leader>m :! mate %<cr>
 map <leader>ev :new <C-R>=expand("%:p:h") . '/'<cr><cr>
+map <leader>ef :bd!<cr>:Explore<cr>
 
 " fugitive git bindings
 map <leader>gs :Gstatus<cr>
@@ -199,11 +200,11 @@ au BufRead,BufNewFile *.mxml  set filetype=mxml
 au BufRead,BufNewFile {Capfile,Gemfile,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
 " auto strip whitespace when saving
-let machine = substitute(system('hostname'), "\n", "", "")
+" let machine = substitute(system('hostname'), "\n", "", "")
 " don't auto strip on these machines
-if machine !~ 'calcifer'
-  autocmd BufWritePre * :%s/\s\+$//e
-endif
+" if machine !~ 'calcifer'
+autocmd BufWritePre * :%s/\s\+$//e
+" endif
 
 " copy and paste with pbcopy/pbpaste in visual mode
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
