@@ -17,7 +17,7 @@ Dir.chdir(workbench_path) do
 
    Dir.glob('*') do |item|
     next if ['README.md', 'fonts', 'tags', '.bundle'].include?(item)
-    if ['bin'].include?(item)
+    if ['bin', 'tmux'].include?(item)
       `rm -rf ~/#{item}`
       `ln -sfh #{workbench_path}/#{item} ~/`
     else
