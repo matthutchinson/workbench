@@ -4,10 +4,10 @@ set nocompatible
 " use pathogen
 call pathogen#infect('pathogen')
 
-" load the matchit plugin.
+" load matchit (use % to jump)
 runtime macros/matchit.vim
 
-" user comma for map leader
+" comma for map leader
 let mapleader = ","
 let g:mapleader = ","
 
@@ -18,8 +18,8 @@ set fo-=t
 " 256 color scheme
 set t_Co=256
 if &t_Co >= 256 || has("gui_running")
-  " colorscheme ir_black
   colorscheme jellybeans
+  " colorscheme ir_black
   " colorscheme Tomorrow-Night
   " colorscheme Tomorrow-Night-Eighties
 endif
@@ -52,8 +52,8 @@ set nowrap                        " turn on line wrapping.
 set scrolloff=3                   " show 3 lines of context around the cursor.
 
 set title                         " set the terminal's title
-set visualbell                    " no beeping.
-set noerrorbells
+set visualbell                    " visual flash
+set noerrorbells                  " no beeping please
 
 set backup                        " save backups
 set backupdir=$HOME/.vim/tmp      " keep backup files in one location
@@ -65,13 +65,8 @@ set shiftwidth=2                  " and again, related.
 set expandtab                     " use spaces instead of tabs
 set smarttab                      " insert tabs on the start of a line according to shiftwidth, not
 set shiftround                    " use multiple of shiftwidth when indenting with '<' and '>'
-set grepprg=ag                    " use Ag instead of grep
+set grepprg=ag                    " use Ag instead of grep (the silver searcher)
 set ttyfast                       " for speed and better rendering
-
-" deal with long lines
-" highlight ColorColumn ctermbg=black guibg=black
-" set colorcolumn=80
-" set synmaxcol=80                " for speed, only syntax highlight the first 80 chars (ruby style guide)
 
 " status line colors
 hi User1 ctermbg=black ctermfg=green guibg=black guifg=green
@@ -93,30 +88,17 @@ set foldmethod=syntax
 set foldcolumn=4
 set nofoldenable
 
-" turbux config
+" turbux
 let g:turbux_command_prefix = 'bundle exec'
 let g:turbux_command_rspec = 'spec'
 
-" ctrlp config
+" ctrlp
 let g:ctrlp_max_height = 20      " window height
 let g:ctrlp_follow_symlinks = 1  " do follow symlinks
 let g:ctrlp_lazy_update = 1      " update after 250ms
 
-" custom mappings
-" Ctrl+t opens ctrlp.vim
-" Ctrl+c or ,c toggles commenting
-" Ctrl+f opens grep
-" F3 alphabetizes inner css
-" F5 formats/tidies
-" F7 spell checks
-nmap <silent> <C-t> :CtrlP<CR>
-nmap <leader>c \\\
-vmap <leader>c \\\
-map <C-F> :Ag<Space>
-nmap <F3> :g#\({\n\)\@<=#.,/}/sort<CR>
-map <silent> <F5> mmgg=G'm
-imap <silent> <F5> <Esc> mmgg=G'm
-map <F7> :setlocal spell! spelllang=en<CR>
+" zencoding (HTML) expand with <c-y>,
+let g:user_zen_settings = { 'erb' : { 'extends' : 'html' }}
 
 " tabularize
 if exists(":Tabularize")
@@ -128,44 +110,55 @@ if exists(":Tabularize")
   vmap <leader>a: :Tabularize /:\zs<CR>
 endif
 
-" vimux mappings for tmux
-map <Leader>vr :call VimuxRunCommand("clear; ll")<CR>
+" Ctrl+t opens ctrlp.vim
+nmap <silent> <C-t> :CtrlP<CR>
 
-set wildignore+=*.o,*.obj,**/vendor/apache-ant-1.8.2/**
-set wildignore+=**/vendor/rails/**,**/vendor/bundle/**,**/tmp/cache/**,**/public/destinations/**
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,tags
+" Ctrl+c or ,c toggles commenting
+nmap <leader>c \\\
+vmap <leader>c \\\
 
-" fast saving
+" Ctrl+f opens global search
+map <C-F> :Ag<Space>
+
+" F3 alphabetize sorts inner css
+nmap <F3> :g#\({\n\)\@<=#.,/}/sort<CR>
+
+" F5 formats and tidy up
+map <silent> <F5> mmgg=G'm
+imap <silent> <F5> <Esc> mmgg=G'm
+
+" F7 spell checks
+map <F7> :setlocal spell! spelllang=en<CR>
+
+" convert hashes to new style
+map <leader>ch :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
+
+" other shortcuts
 nmap <leader>w :w!<cr>
-
-" fast edit and source vimrc
-map <leader>v :sp ~/.vimrc<cr>       " opens ~/.vimrc in a split
-map <leader>u :source ~/.vimrc<cr>   " sources ~/.vimrc
+map <leader>v :sp ~/.vimrc<cr>
+map <leader>u :source ~/.vimrc<cr>
 map <leader>e :Explore<cr>
-map <leader>m :! mate %<cr>
 map <leader>ev :new <C-R>=expand("%:p:h") . '/'<cr><cr>
-map <leader>ef :bd!<cr>:Explore<cr>
+map <leader>m :! mate %<cr>
 
-" fugitive git bindings
-map <leader>gs :Gstatus<cr>
-map <leader>gb :Gblame<cr>
-map <leader>gd :Gdiff<cr>
-map <leader>gg :Ggrep<Space>
-map <leader>ge :Gedit<cr>
-map <leader>gl :Glog -250<cr><cr>:copen<cr><cr>
-map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
-map <leader>gc :Gcommit
+" buffers
+nnoremap <tab> :bn<cr>
+nnoremap <S-tab> :bp<cr>
+nmap <leader>d :bd<cr>
+nmap <leader>D :bufdo bd<cr>
 
-" Run file
-map <leader>rr :! %<CR>
+" browsing results
+nnoremap <C-k> :cn<cr>
+nnoremap <C-j> :cp<cr>
+nnoremap <C-o> :copen<cr>
 
-" ruby
-" save and run
-map <leader>rn :w ! ruby<CR>
-" convert hashes to 1.9 style
-map <leader>rh :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
+" save and run file
+map <leader>rn :w ! %<CR>
 
-" rails
+" save and run with ruby
+map <leader>rr :w ! ruby<CR>
+
+" rails plugin shortcuts
 map <leader>ra :A<CR>
 map <leader>fr :.Rake<CR> " focused Rake
 map <leader>rf :1R<Space>
@@ -178,17 +171,18 @@ map <leader>rt :RVfunctionaltest<CR>
 map <leader>rs :<C-U>!bundle exec spec <c-r>=expand("%:p") <CR> -c -l <c-r>=line(".") <CR> <CR>
 map <leader>sr :<C-U>!bundle exec script/runner %<CR>
 
-" buffers
-nnoremap <tab> :bn<cr>
-nnoremap <S-tab> :bp<cr>
-nmap <leader>d :bd<cr>
-nmap <leader>D :bufdo bd<cr>
+" fugitive plugin shortcuts
+map <leader>gs :Gstatus<cr>
+map <leader>gb :Gblame<cr>
+map <leader>gd :Gdiff<cr>
+map <leader>gg :Ggrep<Space>
+map <leader>ge :Gedit<cr>
+map <leader>gl :Glog -250<cr><cr>:copen<cr><cr>
+map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
+map <leader>gc :Gcommit
 
-" results
-nnoremap <C-k> :cn<cr>
-nnoremap <C-j> :cp<cr>
 
-" turn OFF arrow keys altogther
+" turn OFF arrow keys
 nnoremap <Up>    <nop>
 nnoremap <Down>  <nop>
 nnoremap <Left>  <nop>
@@ -200,32 +194,14 @@ au BufRead,BufNewFile *.mxml  set filetype=mxml
 au BufRead,BufNewFile {Capfile,Gemfile,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
 " auto strip whitespace when saving
-" let machine = substitute(system('hostname'), "\n", "", "")
-" don't auto strip on these machines
-" if machine !~ 'calcifer'
 autocmd BufWritePre * :%s/\s\+$//e
-" endif
 
 " copy and paste with pbcopy/pbpaste in visual mode
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
 nmap <C-V> :call setreg("\"",system("pbpaste"))<CR>p
 
-" focus mode
-function! ToggleFocusMode()
-  if (&foldcolumn != 12)
-    set laststatus=0
-    set numberwidth=10
-    set foldcolumn=12
-    set noruler
-    hi FoldColumn ctermbg=none
-    hi LineNr ctermfg=0 ctermbg=none
-    hi NonText ctermfg=0
-  else
-    set laststatus=2
-    set numberwidth=4
-    set foldcolumn=0
-    set ruler
-    execute 'colorscheme ' . g:colors_name
-  endif
-endfunc
-nnoremap <F1> :call ToggleFocusMode()<CR>
+" ignores
+set wildignore+=*.o,*.obj,**/vendor/apache-ant-1.8.2/**
+set wildignore+=**/vendor/rails/**,**/vendor/bundle/**,**/tmp/cache/**,**/public/destinations/**
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,tags
+

@@ -40,3 +40,6 @@
 [submodule "vim/pathogen/ag"]
 	path = vim/pathogen/ag.vim
 	url = https://github.com/rking/ag.vim.git
+[submodule "vim/pathogen/zencoding-vim"]
+	path = vim/pathogen/zencoding-vim
+	url = https://github.com/mattn/zencoding-vim.git
