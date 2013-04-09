@@ -73,7 +73,6 @@ hi User1 ctermbg=black ctermfg=green guibg=black guifg=green
 hi User2 ctermbg=black ctermfg=red guibg=black guifg=red
 hi User3 ctermbg=black ctermfg=yellow guibg=black  guifg=yellow
 
-" ctags file search order
 " ctags are maintained/refreshed using this technique with git
 " http://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
 set tags=./tags,tags
@@ -133,8 +132,11 @@ map <F7> :setlocal spell! spelllang=en<CR>
 " convert hashes to new style
 map <leader>ch :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
 
+" format paragraph including set textwidth
+nnoremap <leader>q gqip
+
 " other shortcuts
-nmap <leader>w :w!<cr>
+map <leader>w :w!<cr>
 map <leader>v :sp ~/.vimrc<cr>
 map <leader>u :source ~/.vimrc<cr>
 map <leader>e :Explore<cr>
@@ -147,12 +149,12 @@ nnoremap <S-tab> :bp<cr>
 nmap <leader>d :bd<cr>
 nmap <leader>D :bufdo bd<cr>
 
-" browsing results
+" search result browsing
 nnoremap <C-k> :cn<cr>
 nnoremap <C-j> :cp<cr>
 nnoremap <C-o> :copen<cr>
 
-" save and run file
+" save and run in shell
 map <leader>rn :w ! %<CR>
 
 " save and run with ruby
@@ -181,7 +183,6 @@ map <leader>gl :Glog -250<cr><cr>:copen<cr><cr>
 map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
 map <leader>gc :Gcommit
 
-
 " turn OFF arrow keys
 nnoremap <Up>    <nop>
 nnoremap <Down>  <nop>
@@ -204,4 +205,3 @@ nmap <C-V> :call setreg("\"",system("pbpaste"))<CR>p
 set wildignore+=*.o,*.obj,**/vendor/apache-ant-1.8.2/**
 set wildignore+=**/vendor/rails/**,**/vendor/bundle/**,**/tmp/cache/**,**/public/destinations/**
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,tags
-
