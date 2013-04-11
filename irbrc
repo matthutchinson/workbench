@@ -1,32 +1,24 @@
-# use gem install wirble hirb awesome_print pry pry-doc pry-nav
+#!/usr/bin/ruby
+
 require 'rubygems'
+require 'irb/completion'
+require 'irb/ext/save-history'
 
+IRB.conf[:AUTO_INDENT] = true
+IRB.conf[:SAVE_HISTORY] = 1000
+
+# use gem install wirble hirb awesome_print pry pry-doc pry-nav
 @loaded = []
-
-# awesome print
-begin
-  require 'awesome_print'
-  @loaded << 'ap'
-rescue
+%w(wirble hirb awesome_print pry pry-doc pry-nav).each do |gem|
+  begin
+    require gem
+    @loaded << gem
+  rescue LoadError
+  end
 end
 
-# handy methods
-def save_to(data, filename) 
-  file = File.new(filename, "w")
-  file.write(data.to_s)
-  file.close
-end
-
-# load pry
-begin
-  require 'pry'
-  @loaded << 'pry'
-rescue 
-end
-
-# load wirble
-begin
-  require 'wirble'
+# configure wirble
+if defined?(Wirble)
   Wirble.init
   Wirble.colorize
 
@@ -35,30 +27,57 @@ begin
     :symbol => :purple,
     :symbol_prefix => :purple
   })
+  
   Wirble::Colorize.colors = colors
-  @loaded << 'wirble'
-rescue
 end
 
-# load hirb
-begin 
-  require 'hirb'
+# configure hirb
+if defined?(Hirb)
   Hirb::View.enable
-  @loaded << 'hirb'
-rescue
 end
 
-IRB.conf[:AUTO_INDENT] = true
+# some helper methods
+def save_to(data, filename) 
+  file = File.new(filename, "w")
+  file.write(data.to_s)
+  file.close
+end
 
-# load railsrc if it exists
-railsrc_path = File.expand_path('~/.railsrc')
-if (ENV['RAILS_ENV'] || defined? Rails) && File.exist?(railsrc_path)
-  begin
-    load railsrc_path
-    @loaded += %w(railsrc sql routes)
-  rescue Exception
-    warn "Could not load: #{ railsrc_path }" # because of $!.message
+class Object
+  # return a list of methods defined locally for a particular object. Useful
+  # for seeing what it does whilst losing all the guff that's implemented
+  # by its parents (eg Object).
+  def local_methods(obj = self)
+    (obj.methods - obj.class.superclass.instance_methods).sort
+  end
+  
+  # print documentation
+  #
+  #   ri 'Array#pop'
+  #   Array.ri
+  #   Array.ri :pop
+  #   arr.ri :pop
+  def ri(method = nil)
+    unless method && method =~ /^[A-Z]/ # if class isn't specified
+      klass = self.kind_of?(Class) ? name : self.class.name
+      method = [klass, method].compact.join('#')
+    end
+    system 'ri', method.to_s
   end
 end
 
+# load railsrc if it exists
+railsrc_path = File.expand_path('~/.railsrc')
+
+if (ENV['RAILS_ENV'] || defined? Rails) && File.exist?(railsrc_path)
+  begin
+    load railsrc_path
+    @loaded << 'railsrc'
+  rescue Exception => e
+    puts "Could not load: #{ railsrc_path } - #{e.message}"
+  end
+end
+
+
+# explain what loaded OK
 puts "> all systems are go #{@loaded.join('/') if @loaded.length > 0} <"

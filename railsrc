@@ -1,42 +1,65 @@
+#!/usr/bin/ruby
+
+# load Rails (unless it has been already, needed for Rails 2 apps)
+unless defined?(Rails)
+  require File.join(Dir.getwd, 'config', 'environment.rb')
+end
+  
 # show queries
 ActiveRecord::Base.logger = Logger.new STDOUT
 ActiveRecord::Base.clear_reloadable_connections!
 
-# show requests 
+# show requests
 ActionController::Base.logger = Logger.new STDOUT
 
-# hirb view for a route
-class Hirb::Helpers::Route < Hirb::Helpers::AutoTable
-  def self.render(output, options = {})
-    super( output.requirements.map{ |k,v|
-      [k, v.inspect]
-      }, options.merge({
-        :headers     => [output.name || '', "#{ output.verb || 'ANY' } #{ output.path }"],
-        :unicode     => true,
-        :description => nil,
-        }) )
-  end
+# run a sql query
+def sql(query)
+  ActiveRecord::Base.connection.select_all(query)
 end
-Hirb.add_view ActionDispatch::Routing::RouteSet, :class => Hirb::Helpers::Route
+
+# allow path/route helper methods
+if defined?(Rails.application)
+  include Rails.application.routes.url_helpers
+end
+
+
+# hirb view for routes
+if defined?(ActionDispatch)
+  class Hirb::Helpers::Route < Hirb::Helpers::AutoTable
+    def self.render(output, options = {})
+      super( output.requirements.map{ |k,v|
+        [k, v.inspect]
+        }, options.merge({
+          :headers     => [output.name || '', "#{ output.verb || 'ANY' } #{ output.path }"],
+          :unicode     => true,
+          :description => nil,
+          }) )
+    end
+  end
+
+  Hirb.add_view ActionDispatch::Routing::RouteSet, :class => Hirb::Helpers::Route
+end
 
 # short and long route list
-def routes(long_output = false)
-  if long_output
-    Rails.application.routes.routes.each{ |e| puts Hirb::Helpers::Route.render(e)  }
-    true
-  else
-    Hirb::Console.render_output Rails.application.routes.routes.map{|e|
-      [e.name || '', e.verb || 'ANY', e.path]
-    },{
-      :class   => Hirb::Helpers::AutoTable,
-      :headers => %w<name verb path>,
-    }
+if defined?(Rails.application)
+  def routes(long_output = false)
+    if long_output
+      Rails.application.routes.routes.each{ |e| puts Hirb::Helpers::Route.render(e)  }
+      true
+    else
+      Hirb::Console.render_output Rails.application.routes.routes.map{|e|
+        [e.name || '', e.verb || 'ANY', e.path]
+      },{
+        :class   => Hirb::Helpers::AutoTable,
+        :headers => %w<name verb path>,
+      }
+    end
   end
 end
 
-# show app name and env in irb prompt
-app_name = Rails.application.class.parent_name.downcase
-app_env  = Rails.env[0...3]
+# show Rails App name and RAILS_ENV name in prompt
+app_env = Rails.env[0...3]
+app_name = (defined?(Rails.application) ? Rails.application.class.parent_name : Dir.pwd.split('/').last).downcase
 IRB.conf[:PROMPT] ||= {}
 IRB.conf[:PROMPT][:RAILS] = {
   :PROMPT_I => "#{ app_name }(#{ app_env })> ",
@@ -47,8 +70,3 @@ IRB.conf[:PROMPT][:RAILS] = {
   :AUTO_INDENT => true,
 }
 IRB.conf[:PROMPT_MODE] = :RAILS
-
-# run a sql query
-def sql(query)
-  ActiveRecord::Base.connection.select_all(query)
-end
