@@ -1,0 +1,2 @@
+# build ri docs for all global ruby gems
+gem list | tr -d '(,)' | awk '{print $1, "--version", $2}' | xargs -n3 gem rdoc --ri --no-rdoc

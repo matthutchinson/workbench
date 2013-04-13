@@ -68,11 +68,6 @@ set shiftround                    " use multiple of shiftwidth when indenting wi
 set grepprg=ag                    " use Ag instead of grep (the silver searcher)
 set ttyfast                       " for speed and better rendering
 
-" status line colors
-hi User1 ctermbg=black ctermfg=green guibg=black guifg=green
-hi User2 ctermbg=black ctermfg=red guibg=black guifg=red
-hi User3 ctermbg=black ctermfg=yellow guibg=black  guifg=yellow
-
 " ctags are maintained/refreshed using this technique with git
 " http://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
 set tags=./tags,tags

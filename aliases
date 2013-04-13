@@ -1,26 +1,20 @@
 #!/bin/bash
 
-# General
+# general
 alias mkdir='mkdir -p'
-alias l='LC_ALL=en_US.UTF-8 LANG=en ls++'
-alias ll='LC_ALL=en_US.UTF-8 LANG=en ls++ -a'
 alias top='top -o cpu'
-alias a2rs='sudo apachectl restart'
 alias tmux='tmux -2' # force 256 color mode
-alias pw='pws'
 alias gpgme='gpg -e -u "matt@hiddenloop.com" -r "matt@hiddenloop.com"'
-# note how to escape single quotes in bash :)
-alias rerunfix='ruby -p -e '\''$_.gsub!(/ /, "\n")'\'' ./rerun.txt > ~/Desktop/rerun.txt;cp ~/Desktop/rerun.txt ./rerun.txt'
-alias mydropbox='HOME=$HOME/My\ Dropbox /Applications/Dropbox.app/Contents/MacOS/Dropbox'
 
 # https://github.com/trapd00r/ls--/issues/14
+alias l='LC_ALL=en_US.UTF-8 LANG=en ls++'
 alias ll=' LC_ALL=en_US.UTF-8 LANG=en ls++ -a'
 
-# Synergy http://synergy-foss.org/
+# synergy http://synergy-foss.org/
 alias syns_start='synergys -f --config ~/.synergy'
 alias syns_connect='synergyc -f Hoth.local'
 
-# Quick project cds
+# quick project cds
 alias cdpmf='cd /u/apps/faqtory'
 alias cdpms='cd /u/apps/pmfaqtory-store'
 alias cdbe='cd /u/apps/beyondendurance'
@@ -30,17 +24,15 @@ alias cdht='cd /u/apps/housetrip'
 alias cdhtt='cd /u/apps/housetrip-parallel-test'
 alias cdwb='cd /u/code/workbench'
 
-# Textmate
-alias et='mate . &'
-alias ett='mate stories themes app config lib db public script spec test vendor/plugins features README.* Gemfile &'
-
-# HouseTrip Test Runs
+# HouseTrip
 alias htps='be rake parallel:fast_prepare;be rake parallel:spec[4]'
 alias htpf='be rake parallel:fast_prepare;be rake parallel:safe_features[4]'
 alias https='TESTBR=`git st -b | sed "s/## //"`;cd /u/apps/housetrip-parallel-test;git co $TESTBR;git pull;bundle;be rake parallel:prepare[4];be rake parallel:spec[4]'
 alias httpf='TESTBR=`git st -b | sed "s/## //"`;cd /u/apps/housetrip-parallel-test;git co $TESTBR;git pull;bundle;be rake parallel:prepare[4];be rake parallel:safe_features[4]'
+# note how to escape single quotes in bash :)
+alias rerunfix='ruby -p -e '\''$_.gsub!(/ /, "\n")'\'' ./rerun.txt > ~/Desktop/rerun.txt;cp ~/Desktop/rerun.txt ./rerun.txt'
 
-# Rails
+# rails
 alias gofast='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = true\"" config/environments/development.rb'
 alias goslow='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = false\"" config/environments/development.rb'
 alias tdl='tail -f ./log/development.log'
@@ -74,17 +66,7 @@ ss () {
   fi
 }
 
-sspe () {
-  if [ -f ./Procfile ]; then
-    sudo bundle exec rails server thin -p 80 $@
-  elif [ -f ./script/rails ]; then
-    sudo bundle exec rails s -p80 $@
-  else
-    sudo ./script/server -p80 $@
-  fi
-}
-
-# Bundler / Rake / Spec / Cucumber
+# bundler / rake / spec / cucumber
 alias be='bundle exec'
 alias ber='bundle exec rake'
 alias bes='bundle exec spec'
@@ -94,7 +76,7 @@ alias rdbm='bundle exec rake db:migrate'
 alias rdbp='bundle exec rake db:test:prepare'
 alias rsp='bundle exec rake spec'
 
-# Ruby
+# ruby
 alias rbenvit='rbenv shell `cat .rbenv-version`'
 
 # svn

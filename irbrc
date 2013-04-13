@@ -27,7 +27,7 @@ if defined?(Wirble)
     :symbol => :purple,
     :symbol_prefix => :purple
   })
-  
+
   Wirble::Colorize.colors = colors
 end
 
@@ -37,7 +37,7 @@ if defined?(Hirb)
 end
 
 # some helper methods
-def save_to(data, filename) 
+def save_to(data, filename)
   file = File.new(filename, "w")
   file.write(data.to_s)
   file.close
@@ -50,7 +50,7 @@ class Object
   def local_methods(obj = self)
     (obj.methods - obj.class.superclass.instance_methods).sort
   end
-  
+
   # print documentation
   #
   #   ri 'Array#pop'
@@ -80,4 +80,4 @@ end
 
 
 # explain what loaded OK
-puts "> all systems are go #{@loaded.join('/') if @loaded.length > 0} <"
+puts "> all systems are go #{@loaded.join('/') + " " if @loaded.length > 0}<"

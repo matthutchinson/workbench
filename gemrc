@@ -1,5 +1,5 @@
 ---
-gem: --no-rdoc --no-ri
+gem: --ri --no-rdoc
 :sources:
 - https://rubygems.org/
 :update_sources: true
