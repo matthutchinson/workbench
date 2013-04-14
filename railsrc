@@ -4,7 +4,7 @@
 unless defined?(Rails)
   require File.join(Dir.getwd, 'config', 'environment.rb')
 end
-  
+
 # show queries
 ActiveRecord::Base.logger = Logger.new STDOUT
 ActiveRecord::Base.clear_reloadable_connections!
@@ -12,7 +12,7 @@ ActiveRecord::Base.clear_reloadable_connections!
 # show requests
 ActionController::Base.logger = Logger.new STDOUT
 
-# run a sql query
+# run query
 def sql(query)
   ActiveRecord::Base.connection.select_all(query)
 end
@@ -40,8 +40,9 @@ if defined?(ActionDispatch)
   Hirb.add_view ActionDispatch::Routing::RouteSet, :class => Hirb::Helpers::Route
 end
 
-# short and long route list
 if defined?(Rails.application)
+
+  # print a short (and long) route list
   def routes(long_output = false)
     if long_output
       Rails.application.routes.routes.each{ |e| puts Hirb::Helpers::Route.render(e)  }
@@ -58,15 +59,16 @@ if defined?(Rails.application)
 end
 
 # show Rails App name and RAILS_ENV name in prompt
-app_env = Rails.env[0...3]
+app_env  = Rails.env[0...3]
 app_name = (defined?(Rails.application) ? Rails.application.class.parent_name : Dir.pwd.split('/').last).downcase
+prompt   = "#{ app_name }(#{ app_env })"
 IRB.conf[:PROMPT] ||= {}
 IRB.conf[:PROMPT][:RAILS] = {
-  :PROMPT_I => "#{ app_name }(#{ app_env })> ",
-  :PROMPT_N => "#{ app_name }(#{ app_env })| ",
-  :PROMPT_C => "#{ app_name }(#{ app_env })| ",
-  :PROMPT_S => "#{ app_name }(#{ app_env })%l ",
-  :RETURN => "=> %s\n",
+  :PROMPT_I    => "#{ prompt }> ",
+  :PROMPT_N    => "#{ prompt }| ",
+  :PROMPT_C    => "#{ prompt }| ",
+  :PROMPT_S    => "#{ prompt }%l ",
+  :RETURN      => "=> %s\n",
   :AUTO_INDENT => true,
 }
 IRB.conf[:PROMPT_MODE] = :RAILS

@@ -4,7 +4,7 @@ require 'rubygems'
 require 'irb/completion'
 require 'irb/ext/save-history'
 
-IRB.conf[:AUTO_INDENT] = true
+IRB.conf[:AUTO_INDENT]  = true
 IRB.conf[:SAVE_HISTORY] = 1000
 
 # use gem install wirble hirb awesome_print pry pry-doc pry-nav
