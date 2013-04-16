@@ -1,30 +1,24 @@
 #!/usr/bin/ruby
 
-# load Rails (unless it has been already, needed for Rails 2 apps)
-unless defined?(Rails)
-  require File.join(Dir.getwd, 'config', 'environment.rb')
-end
 
 # show queries
-ActiveRecord::Base.logger = Logger.new STDOUT
-ActiveRecord::Base.clear_reloadable_connections!
+if defined? ActiveRecord
+  ActiveRecord::Base.logger = Logger.new STDOUT
+  ActiveRecord::Base.clear_reloadable_connections!
+end
 
 # show requests
-ActionController::Base.logger = Logger.new STDOUT
+if defined? ActionController
+  ActionController::Base.logger = Logger.new STDOUT
+end
 
 # run query
 def sql(query)
   ActiveRecord::Base.connection.select_all(query)
 end
 
-# allow path/route helper methods
-if defined?(Rails.application)
-  include Rails.application.routes.url_helpers
-end
-
-
 # hirb view for routes
-if defined?(ActionDispatch)
+if defined? ActionDispatch
   class Hirb::Helpers::Route < Hirb::Helpers::AutoTable
     def self.render(output, options = {})
       super( output.requirements.map{ |k,v|
@@ -40,9 +34,10 @@ if defined?(ActionDispatch)
   Hirb.add_view ActionDispatch::Routing::RouteSet, :class => Hirb::Helpers::Route
 end
 
-if defined?(Rails.application)
-
+if defined? Rails
   # print a short (and long) route list
+  include Rails.application.routes.url_helpers
+
   def routes(long_output = false)
     if long_output
       Rails.application.routes.routes.each{ |e| puts Hirb::Helpers::Route.render(e)  }
@@ -59,8 +54,8 @@ if defined?(Rails.application)
 end
 
 # show Rails App name and RAILS_ENV name in prompt
-app_env  = Rails.env[0...3]
-app_name = (defined?(Rails.application) ? Rails.application.class.parent_name : Dir.pwd.split('/').last).downcase
+app_env  = (ENV['RAILS_ENV'] || Rails.env)[0...3]
+app_name = (defined?(Rails) ? Rails.application.class.parent_name : Dir.pwd.split('/').last).downcase
 prompt   = "#{ app_name }(#{ app_env })"
 IRB.conf[:PROMPT] ||= {}
 IRB.conf[:PROMPT][:RAILS] = {
