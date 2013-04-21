@@ -76,15 +76,10 @@ alias rdbm='bundle exec rake db:migrate'
 alias rdbp='bundle exec rake db:test:prepare'
 alias rsp='bundle exec rake spec'
 
-# ruby
-alias rbenvit='rbenv shell `cat .rbenv-version`'
-
 # svn
 alias scm="svn commit --username matt "
 alias saa="svn status | grep "^\?" | sed -e 's/? *//' | sed -e 's/ /\ /g' | xargs svn add"
-alias sdm="svn status | grep "^\!" | sed -e 's/! *//' | sed -e 's/ /\ /g' | xargs svn delete"
 alias srr="find . -name .svn -print0 | xargs -0 rm -rf"
-alias signore='svn propedit svn:ignore'
 
 # git
 alias grr="git ls-files --deleted | xargs git rm"
