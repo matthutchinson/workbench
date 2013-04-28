@@ -67,6 +67,8 @@ set smarttab                      " insert tabs on the start of a line according
 set shiftround                    " use multiple of shiftwidth when indenting with '<' and '>'
 set grepprg=ag                    " use Ag instead of grep (the silver searcher)
 set ttyfast                       " for speed and better rendering
+set splitbelow                    " open horizontal splits on the right
+set splitright                    " open vertical splits below
 
 " ctags are maintained/refreshed using this technique with git
 " http://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
@@ -191,6 +193,9 @@ au BufRead,BufNewFile {Capfile,Gemfile,Rakefile,Thorfile,bluepill.pill,config.ru
 
 " auto strip whitespace when saving
 autocmd BufWritePre * :%s/\s\+$//e
+
+" auto spell check & limit width of git commit messages
+autocmd Filetype gitcommit setlocal spell textwidth=72
 
 " copy and paste with pbcopy/pbpaste in visual mode
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>

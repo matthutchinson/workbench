@@ -2,3 +2,4 @@ metric_fu/*
 public/destinations/*.js
 vendor/*
 coverage/*
+tags
