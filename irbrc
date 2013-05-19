@@ -4,15 +4,15 @@ require 'rubygems'
 require 'irb/completion'
 require 'irb/ext/save-history'
 
+loaded                  = []
 IRB.conf[:AUTO_INDENT]  = true
 IRB.conf[:SAVE_HISTORY] = 1000
 
 # use gem install wirble hirb awesome_print pry pry-doc pry-nav
-@loaded = []
 %w(wirble hirb awesome_print pry pry-doc pry-nav).each do |gem|
   begin
     require gem
-    @loaded << gem
+    loaded << gem
   rescue LoadError
   end
 end
@@ -23,8 +23,8 @@ if defined?(Wirble)
   Wirble.colorize
 
   colors = Wirble::Colorize.colors.merge({
-    :object_class => :purple,
-    :symbol => :purple,
+    :object_class  => :purple,
+    :symbol        => :purple,
     :symbol_prefix => :purple
   })
 
@@ -37,10 +37,8 @@ if defined?(Hirb)
 end
 
 # some helper methods
-def save_to(data, filename)
-  file = File.new(filename, "w")
-  file.write(data.to_s)
-  file.close
+def save_file(data, filename)
+  File.open(filename, 'w') { |f| f.write(data) }
 end
 
 class Object
@@ -51,7 +49,7 @@ class Object
     (obj.methods - obj.class.superclass.instance_methods).sort
   end
 
-  # print documentation
+  # print documentation, use like this;
   #
   #   ri 'Array#pop'
   #   Array.ri
@@ -72,12 +70,11 @@ railsrc_path = File.expand_path('~/.railsrc')
 if (ENV['RAILS_ENV'] || defined? Rails) && File.exist?(railsrc_path)
   begin
     load railsrc_path
-    @loaded << 'railsrc'
+    loaded << 'railsrc'
   rescue Exception => e
     puts "Could not load: #{ railsrc_path } - #{e.message}"
   end
 end
 
-
 # explain what loaded OK
-puts "> all systems are go #{@loaded.join('/') + " " if @loaded.length > 0}<"
+puts "> all systems are go #{loaded.join('/') + " " if loaded.length > 0}<"

@@ -1,13 +1,12 @@
 #!/usr/bin/ruby
 
-
 # show queries
 if defined? ActiveRecord
   ActiveRecord::Base.logger = Logger.new STDOUT
   ActiveRecord::Base.clear_reloadable_connections!
 end
 
-# show requests
+# show requests, e.g. use app.get '/'
 if defined? ActionController
   ActionController::Base.logger = Logger.new STDOUT
 end
@@ -35,7 +34,7 @@ if defined? ActionDispatch
 end
 
 if defined? Rails
-  # print a short (and long) route list
+  # print a short (or long) route list
   include Rails.application.routes.url_helpers
 
   def routes(long_output = false)
@@ -51,12 +50,24 @@ if defined? Rails
       }
     end
   end
+
+  # get a specific route via index or name
+  def route(index_or_name)
+    route = case index_or_name
+    when Integer
+      Rails.application.routes.routes[ index_or_name ]
+    when Symbol # named route
+      Rails.application.routes.named_routes.get index_or_name
+    end
+  end
 end
 
-# show Rails App name and RAILS_ENV name in prompt
+# show Rails app name and RAILS_ENV name in prompt
 app_env  = (ENV['RAILS_ENV'] || Rails.env)[0...3]
 app_name = (defined?(Rails) ? Rails.application.class.parent_name : Dir.pwd.split('/').last).downcase
 prompt   = "#{ app_name }(#{ app_env })"
+
+# build irb prompt
 IRB.conf[:PROMPT] ||= {}
 IRB.conf[:PROMPT][:RAILS] = {
   :PROMPT_I    => "#{ prompt }> ",
