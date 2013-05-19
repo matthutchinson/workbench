@@ -96,6 +96,10 @@ let g:ctrlp_max_height = 20      " window height
 let g:ctrlp_follow_symlinks = 1  " do follow symlinks
 let g:ctrlp_lazy_update = 1      " update after 250ms
 
+" gist-vim
+let g:gist_open_browser_after_post = 1
+let g:gist_detect_filetype = 1
+
 " zencoding (HTML) expand with <c-y>,
 let g:user_zen_settings = { 'erb' : { 'extends' : 'html' }}
 

@@ -76,3 +76,5 @@
 [url "git://github.com/"]
   # Read-only
   insteadOf = gh:
+[github]
+	user = matthutchinson
