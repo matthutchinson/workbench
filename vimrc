@@ -24,32 +24,35 @@ if &t_Co >= 256 || has("gui_running")
   " colorscheme Tomorrow-Night-Eighties
 endif
 
-syntax on                         " turn on syntax highlighting.
-filetype plugin indent on         " turn on file type detection.
+syntax on                         " turn on syntax highlighting
+filetype plugin indent on         " turn on file type detection
+
 set encoding=utf-8                " encoding
+set showcmd                       " display incomplete commands
+set showmode                      " display the mode you're in
+set history=10000                 " remember more commands/searches
 
-set showcmd                       " display incomplete commands.
-set showmode                      " display the mode you're in.
+set backspace=indent,eol,start    " intuitive backspacing
 
-set backspace=indent,eol,start    " intuitive backspacing.
+set hidden                        " handle multiple buffers better
+set wildmode=list:longest         " complete files like a shell
 
-set hidden                        " handle multiple buffers better.
-set wildmode=list:longest         " complete files like a shell.
+set ignorecase                    " case-insensitive searching
+set smartcase                     " but case-sensitive if expression contains a capital letter
 
-set ignorecase                    " case-insensitive searching.
-set smartcase                     " but case-sensitive if expression contains a capital letter.
+set cursorline                    " highlight the current line
+set number                        " show line numbers
+set ruler                         " show cursor position
 
-set number                        " show line numbers.
-set ruler                         " show cursor position.
-
-set incsearch                     " highlight matches as you type.
-set hlsearch                      " highlight matches.
+set showmatch
+set incsearch                     " highlight matches as you type
+set hlsearch                      " highlight matches
 
 set autoindent                    " always set autoindenting on
 set copyindent                    " copy the previous indentation on autoindenting
 
-set nowrap                        " turn on line wrapping.
-set scrolloff=3                   " show 3 lines of context around the cursor.
+set nowrap                        " turn on line wrapping
+set scrolloff=3                   " show 3 lines of context around the cursor
 
 set title                         " set the terminal's title
 set visualbell                    " visual flash
@@ -60,8 +63,8 @@ set backupdir=$HOME/.vim/tmp      " keep backup files in one location
 set noswapfile                    " don't use swp files
 
 set softtabstop=2                 " soft tabs, ie. number of spaces for tab
-set tabstop=2                     " global tab width.
-set shiftwidth=2                  " and again, related.
+set tabstop=2                     " global tab width
+set shiftwidth=2                  " and again, related
 set expandtab                     " use spaces instead of tabs
 set smarttab                      " insert tabs on the start of a line according to shiftwidth, not
 set shiftround                    " use multiple of shiftwidth when indenting with '<' and '>'
@@ -200,6 +203,18 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 " copy and paste with pbcopy/pbpaste in visual mode
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
 nmap <C-V> :call setreg("\"",system("pbpaste"))<CR>p
+
+" rename a file
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+map <leader>n :call RenameFile()<cr>
 
 " ignores
 set wildignore+=*.o,*.obj,**/vendor/apache-ant-1.8.2/**
