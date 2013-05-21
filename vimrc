@@ -222,6 +222,15 @@ function! RenameFile()
 endfunction
 map <leader>n :call RenameFile()<cr>
 
+" search highlighted text (single line or word) with Google
+function! GoogleSearch()
+  let sel = getpos('.') == getpos("'<") ? getline("'<")[getpos("'<")[2] - 1:getpos("'>")[2] - 1] : ''
+  let keyword = substitute(sel, '[[:space:]]', '+', 'g')
+  silent! exe '!open "http://google.com/search?q=' . keyword . '" > /dev/null 2>&1' | redraw!
+endfunction
+
+vmap ?? :call GoogleSearch()<cr>
+
 " ignores
 set wildignore+=*.o,*.obj,**/vendor/apache-ant-1.8.2/**
 set wildignore+=**/vendor/rails/**,**/vendor/bundle/**,**/tmp/cache/**,**/public/destinations/**
