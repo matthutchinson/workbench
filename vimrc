@@ -114,7 +114,9 @@ if exists(":Tabularize")
 endif
 
 " Ctrl+t opens ctrlp.vim
+" ,b opens CtrlP buffer
 nmap <silent> <C-t> :CtrlP<CR>
+map <leader>b :CtrlPBuffer<CR>
 
 " Ctrl+c or ,c toggles commenting
 nmap <leader>c \\\
