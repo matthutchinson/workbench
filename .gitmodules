@@ -49,3 +49,6 @@
 [submodule "vim/pathogen/webapi-vim"]
 	path = vim/pathogen/webapi-vim
 	url = https://github.com/mattn/webapi-vim.git
+[submodule "vim/pathogen/vim-g"]
+	path = vim/pathogen/vim-g
+	url = https://github.com/szw/vim-g
