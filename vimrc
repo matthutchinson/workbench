@@ -152,7 +152,7 @@ map <leader>m :! mate %<cr>
 " buffers
 nnoremap <tab> :bn<cr>
 nnoremap <S-tab> :bp<cr>
-nmap <leader>d :bd<cr>
+nmap <leader>d ,bd<cr>
 nmap <leader>D :bufdo bd<cr>
 
 " search result browsing

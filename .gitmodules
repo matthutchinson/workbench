@@ -52,3 +52,6 @@
 [submodule "vim/pathogen/vim-g"]
 	path = vim/pathogen/vim-g
 	url = https://github.com/szw/vim-g
+[submodule "vim/pathogen/kwbdi.vim"]
+	path = vim/pathogen/kwbdi.vim
+	url = https://github.com/vim-scripts/kwbdi.vim.git
