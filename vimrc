@@ -225,6 +225,19 @@ function! RenameFile()
 endfunction
 map <leader>n :call RenameFile()<cr>
 
+" open a split for each dirty file in git - from garybernhardt
+function! OpenChangedFiles()
+  only " close windows, unless they're modified
+  let status = system('git status -s | grep "^ \?\(M\|A\|UU\)" | sed "s/^.\{3\}//"')
+  let filenames = split(status, "\n")
+  exec "edit " . filenames[0]
+  for filename in filenames[1:]
+    exec "sp " . filename
+  endfor
+endfunction
+command! OpenChangedFiles :call OpenChangedFiles()
+
+
 " ignores
 set wildignore+=*.o,*.obj,**/vendor/apache-ant-1.8.2/**
 set wildignore+=**/vendor/rails/**,**/vendor/bundle/**,**/tmp/cache/**,**/public/destinations/**
