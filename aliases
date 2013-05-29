@@ -39,6 +39,7 @@ alias tdl='tail -f ./log/development.log'
 alias ttl='tail -f ./log/test.log'
 alias rst='touch ./tmp/restart.txt'
 alias migrations?='git diff --cached origin/production db/migrate | grep +++'
+alias rbenvit='rbenv shell `cat .rbenv-version`'
 
 sc () {
   if [ -f ./script/rails ]; then
