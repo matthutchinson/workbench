@@ -31,7 +31,7 @@ if defined?(Wirble)
   Wirble::Colorize.colors = colors
 end
 
-# configure hirb
+# enable hirb
 if defined?(Hirb)
   Hirb::View.enable
 end

@@ -60,6 +60,11 @@ if defined? Rails
       Rails.application.routes.named_routes.get index_or_name
     end
   end
+
+  # turn off Hirb for Rails 2 apps
+  if Rails.version =~ /^2\./
+    Hirb.disable
+  end
 end
 
 # show Rails app name and RAILS_ENV name in prompt
