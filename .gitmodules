@@ -55,3 +55,6 @@
 [submodule "vim/pathogen/kwbdi.vim"]
 	path = vim/pathogen/kwbdi.vim
 	url = https://github.com/vim-scripts/kwbdi.vim.git
+[submodule "vim/pathogen/vim-tmux-navigator"]
+	path = vim/pathogen/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator.git

@@ -61,10 +61,6 @@ if defined? Rails
     end
   end
 
-  # turn off Hirb for Rails 2 apps
-  if Rails.version =~ /^2\./
-    Hirb.disable
-  end
 end
 
 # show Rails app name and RAILS_ENV name in prompt
@@ -83,3 +79,8 @@ IRB.conf[:PROMPT][:RAILS] = {
   :AUTO_INDENT => true,
 }
 IRB.conf[:PROMPT_MODE] = :RAILS
+
+# turn off Hirb for HouseTrip app
+if app_name == 'housetrip'
+  Hirb.disable
+end
