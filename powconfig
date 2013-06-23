@@ -1,3 +1,2 @@
-export POW_DST_PORT=80
 export POW_TIMEOUT=300
 export POW_WORKERS=3
