@@ -5,6 +5,7 @@ alias mkdir='mkdir -p'
 alias top='top -o cpu'
 alias tmux='tmux -2' # force 256 color mode
 alias gpgme='gpg -e -u "matt@hiddenloop.com" -r "matt@hiddenloop.com"'
+alias colors='for code in $(seq -w 0 255); do for attr in 0 1; do printf "%s-%03s %bTest%b\n" "${attr}" "${code}" "\e[${attr};38;05;${code}m" "\e[m"; done; done | column -c $((COLUMNS*2))'
 
 # https://github.com/trapd00r/ls--/issues/14
 alias l='LC_ALL=en_US.UTF-8 LANG=en ls++'

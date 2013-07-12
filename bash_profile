@@ -23,20 +23,20 @@ export RUBY_HEAP_FREE_MIN=100000
 export RUBY_GC_MALLOC_LIMIT=1000000000
 export RUBY_FREE_MIN=500000
 
+# enable global terminal colors
+# export CLICOLOR=1
+# export LSCOLORS=GxFxCxDxBxegedabagaced
+
 # colour codes
-ORANGE="\[\033[0;35m\]"
-RED="\[\033[0;31m\]"
-YELLOW="\[\033[0;33m\]"
-GREEN="\[\033[0;32m\]"
-BLUE="\[\033[0;34m\]"
-LIGHT_RED="\[\033[1;31m\]"
-LIGHT_GREEN="\[\033[1;32m\]"
-LIGHT_CYAN="\[\033[1;36m\]"
-LIGHT_PURPLE="\[\033[1;35m\]"
-WHITE="\[\033[0;37m\]"
-WHITE_BOLD="\[\033[1;37m\]"
-GRAY="\[\033[1;30m\]"
-COLOR_NONE="\[\e[0m\]"
+ORANGE="\[\033[0;38;05;136m\]"
+LIGHT_BLUE="\[\033[0;38;05;74m\]"
+YELLOW="\[\033[0;38;05;184m\]"
+GREEN="\[\033[0;38;05;40m\]"
+WHITE="\[\033[0;38;05;255m\]"
+WHITE_BOLD="\[\033[1;38;05;255m\]"
+GRAY="\[\033[0;38;05;244m\]"
+DARK_GRAY="\[\033[0;38;05;239m\]"
+COLOR_NONE="\[\033[00m\]"
 
 # prompt functions
 function is_git_repository {
@@ -85,7 +85,7 @@ function set_git_branch {
     branch=${BASH_REMATCH[1]}
   fi
 
-  GIT="$BLUE(${state}${branch}$WHITE_BOLD${remote}$BLUE)"
+  GIT="$LIGHT_BLUE(${state}${branch}$WHITE_BOLD${remote}$LIGHT_BLUE)"
 }
 
 function set_bash_prompt {
@@ -95,7 +95,7 @@ function set_bash_prompt {
     GIT=''
   fi
 
-  PS1="$BLUE[$WHITE\h:\w$BLUE]$GIT$COLOR_NONE\$ "
+  PS1="$GRAY\u$DARK_GRAY@$GRAY\h$LIGHT_BLUE[$WHITE\w$LIGHT_BLUE]$GIT$COLOR_NONE$ "
   PS2='> '
   PS4='+ '
 }
