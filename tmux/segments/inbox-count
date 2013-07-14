@@ -9,7 +9,7 @@ require 'net/imap'
 # config
 username     = 'matt@hiddenloop.com'
 server       = 'imap.gmail.com'
-interval     = 3 # minutes
+interval     = 0 # minutes
 tmp_filename = '/var/tmp/tmux-inbox-count'
 result       = File.read(tmp_filename) if File.exist?(tmp_filename)
 
@@ -22,7 +22,7 @@ end
 
 # imap gmail login via SSL
 def check_inbox(username, server)
-  imap = Net::IMAP.new('imap.gmail.com', 993, true)
+  imap = Net::IMAP.new('imap.gmail.com', 993, true, nil, false)
   imap.login(username, get_keychain_password(username, server))
   imap.examine('INBOX')
   imap.search(["NOT", "SEEN"]).length
@@ -41,7 +41,7 @@ end
 if perform_check?(tmp_filename, interval)
   count = check_inbox(username, server)
   if count > 0
-    new_result = "✉ #[fg=yellow]#{count}#[fg=colour235] | "
+    new_result = "#[bg=colour000,fg=colour235]⮂#[bg=colour235,fg=colour255] ✉ #[fg=colour190]#{count} #[fg=colour000,bg=colour235]⮂#[default] "
     if new_result != result
       notify(count, username)
       result = new_result
