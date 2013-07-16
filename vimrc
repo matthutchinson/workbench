@@ -19,19 +19,13 @@ set fo-=t
 set t_Co=256
 if &t_Co >= 256 || has("gui_running")
   colorscheme jellybeans
-  " colorscheme ir_black
-  " colorscheme Tomorrow-Night
-  " colorscheme Tomorrow-Night-Eighties
 endif
 
 syntax on                         " turn on syntax highlighting
 filetype plugin indent on         " turn on file type detection
 
 set encoding=utf-8                " encoding
-set showcmd                       " display incomplete commands
-set showmode                      " display the mode you're in
 set history=10000                 " remember more commands/searches
-
 set backspace=indent,eol,start    " intuitive backspacing
 
 set hidden                        " handle multiple buffers better
@@ -236,7 +230,6 @@ function! OpenChangedFiles()
   endfor
 endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
-
 
 " ignores
 set wildignore+=*.o,*.obj,**/vendor/apache-ant-1.8.2/**

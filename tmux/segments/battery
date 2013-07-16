@@ -1,33 +1,32 @@
 #!/usr/bin/env bash
-HEART_CONNECTED=♥
-HEART_DISCONNECTED=♡
 
 case $(uname -s) in
-    "Darwin")
-        ioreg -c AppleSmartBattery -w0 | \
-        grep -o '"[^"]*" = [^ ]*' | \
-        sed -e 's/= //g' -e 's/"//g' | \
-        sort | \
-        while read key value; do
-            case $key in
-                "MaxCapacity")
-                    export maxcap=$value;;
-                "CurrentCapacity")
-                    export curcap=$value;;
-                "ExternalConnected")
-                    export extconnect=$value;;
-            esac
-            if [[ -n $maxcap && -n $curcap && -n $extconnect ]]; then
-                if [[ "$curcap" == "$maxcap" ]]; then
-                    exit
-                fi
-                if [[ "$extconnect" == "Yes" ]]; then
-                    echo "#[bg=colour000,fg=colour235]⮂#[bg=colour235,fg=colour245]" $HEART_DISCONNECTED $(( 100 * $curcap / $maxcap ))"% #[bg=colour235]"
-                    # echo "#[bg=colour000,fg=colour78]⮂#[bg=colour78,fg=colour000]" $HEART_CONNECTED $(( 100 * $curcap / $maxcap ))"% #[bg=colour78]"
-                else
-                    echo "#[bg=colour000,fg=colour235]⮂#[bg=colour235,fg=colour245]" $HEART_DISCONNECTED $(( 100 * $curcap / $maxcap ))"% #[bg=colour235]"
-                fi
-                break
-            fi
-        done
-esac
+  "Darwin")
+    ioreg -c AppleSmartBattery -w0 | \
+      grep -o '"[^"]*" = [^ ]*' | \
+      sed -e 's/= //g' -e 's/"//g' | \
+      sort | \
+      while read key value; do
+        case $key in
+          "MaxCapacity")
+            export maxcap=$value;;
+          "CurrentCapacity")
+            export curcap=$value;;
+          "ExternalConnected")
+            export extconnect=$value;;
+        esac
+        if [[ -n $maxcap && -n $curcap && -n $extconnect ]]; then
+          if [[ "$curcap" == "$maxcap" ]]; then
+            exit
+          fi
+          export bg_color=178;
+          export heart='♡';
+          if [[ "$extconnect" == "Yes" ]]; then
+            export bg_color=42;
+            export heart='♥';
+          fi
+          echo "#[bg=colour000,fg=colour"$bg_color"]⮂#[bg=colour"$bg_color",fg=colour000]" $heart $(( 100 * $curcap / $maxcap ))"% #[bg=colour"$bg_color"]"
+          break
+        fi
+      done
+  esac
