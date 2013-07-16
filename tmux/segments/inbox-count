@@ -41,7 +41,7 @@ end
 if perform_check?(tmp_filename, interval)
   count = check_inbox(username, server)
   if count > 0
-    new_result = "#[bg=colour000,fg=colour235]⮂#[bg=colour235,fg=colour255] ✉ #[fg=colour190]#{count} #[fg=colour000,bg=colour235]⮂#[default] "
+    new_result = "#[bg=colour000,fg=colour237]⮂#[bg=colour237,fg=colour255] ✉ #[fg=colour190]#{count} #[fg=colour000,bg=colour237]⮂#[default]"
     if new_result != result
       notify(count, username)
       result = new_result

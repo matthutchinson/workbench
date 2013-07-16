@@ -25,7 +25,7 @@ case $(uname -s) in
             export bg_color=42;
             export heart='♥';
           fi
-          echo "#[bg=colour000,fg=colour"$bg_color"]⮂#[bg=colour"$bg_color",fg=colour000]" $heart $(( 100 * $curcap / $maxcap ))"% #[bg=colour"$bg_color"]"
+          echo "#[bg=colour000,fg=colour"$bg_color"]⮂#[bg=colour"$bg_color",fg=colour000]" $heart $(( 100 * $curcap / $maxcap ))"% #[fg=colour000,bg=colour"$bg_color"]⮂#[default]"
           break
         fi
       done

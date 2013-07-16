@@ -2,7 +2,7 @@
 
 INTERVAL=2
 NUM_LINES=8
-LINE_STYLE='>'
+LINE_STYLE='◎'
 BASE_LINE_COLOR=131
 
 # cpu
@@ -53,4 +53,4 @@ case "$DISK_FREE" in
 esac
 DISK_FREE='#[fg=colour'${DISK_FREE_COLOR}']'${DISK_FREE}
 
-echo "$FREE Mb ⮃ ${LINES}#[default] ⮃ HD ${DISK_FREE}%#[default] "
+echo "$FREE Mb ⮃ ${LINES}#[default] ⮁ HD ${DISK_FREE}%#[default] "
