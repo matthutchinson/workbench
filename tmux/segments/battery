@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-HEART_CONNECTED=☀
-HEART_DISCONNECTED=☼
+HEART_CONNECTED=♥
+HEART_DISCONNECTED=♡
 
 case $(uname -s) in
     "Darwin")
@@ -22,7 +22,8 @@ case $(uname -s) in
                     exit
                 fi
                 if [[ "$extconnect" == "Yes" ]]; then
-                    echo "#[bg=colour000,fg=colour071]⮂#[bg=colour071,fg=colour235]" $HEART_CONNECTED $(( 100 * $curcap / $maxcap ))"% #[bg=colour071]"
+                    echo "#[bg=colour000,fg=colour235]⮂#[bg=colour235,fg=colour245]" $HEART_DISCONNECTED $(( 100 * $curcap / $maxcap ))"% #[bg=colour235]"
+                    # echo "#[bg=colour000,fg=colour78]⮂#[bg=colour78,fg=colour000]" $HEART_CONNECTED $(( 100 * $curcap / $maxcap ))"% #[bg=colour78]"
                 else
                     echo "#[bg=colour000,fg=colour235]⮂#[bg=colour235,fg=colour245]" $HEART_DISCONNECTED $(( 100 * $curcap / $maxcap ))"% #[bg=colour235]"
                 fi

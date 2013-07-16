@@ -88,7 +88,7 @@ function set_bash_prompt {
     GIT_PROMPT=''
   fi
 
-  PS1="$GRAY\u$DARK_GRAY@$GRAY\h$LIGHT_BLUE[$WHITE\W$LIGHT_BLUE]$GIT_PROMPT$COLOR_NONE$ "
+  PS1="$LIGHT_BLUE[$WHITE\W$LIGHT_BLUE]$GIT_PROMPT$COLOR_NONE$ "
   PS2='> '
   PS4='+ '
 }
