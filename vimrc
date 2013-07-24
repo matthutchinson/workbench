@@ -107,17 +107,18 @@ if exists(":Tabularize")
   vmap <leader>a: :Tabularize /:\zs<CR>
 endif
 
-" Ctrl+t opens ctrlp.vim
 " ,b opens CtrlP buffer
-nmap <silent> <C-t> :CtrlP<CR>
 map <leader>b :CtrlPBuffer<CR>
 
 " Ctrl+c or ,c toggles commenting
 nmap <leader>c \\\
 vmap <leader>c \\\
 
-" Ctrl+f opens global search
+" Ctrl+f opens global search, and browsing
 map <C-F> :Ag<Space>
+nnoremap <C-n> :cn<cr>
+nnoremap <C-p> :cp<cr>
+nnoremap <C-o> :copen<cr>
 
 " F3 alphabetize sorts inner css
 nmap <F3> :g#\({\n\)\@<=#.,/}/sort<CR>
@@ -148,11 +149,6 @@ nnoremap <tab> :bn<cr>
 nnoremap <S-tab> :bp<cr>
 nmap <leader>d ,bd<cr>
 nmap <leader>D :bufdo bd<cr>
-
-" search result browsing
-nnoremap <C-k> :cn<cr>
-nnoremap <C-j> :cp<cr>
-nnoremap <C-o> :copen<cr>
 
 " save and run in shell
 map <leader>rn :w ! %<CR>
