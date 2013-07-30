@@ -136,6 +136,12 @@ map <leader>ch :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
 " format paragraph including set textwidth
 nnoremap <leader>q gqip
 
+" do an Ack search of the current word
+map <Leader>a :Ag <C-R>=expand("<cword>")<CR><CR>
+
+" git-stripspace the current buffer
+map <Leader>s :%!git stripspace<CR>
+
 " other shortcuts
 map <leader>w :w!<cr>
 map <leader>v :sp ~/.vimrc<cr>
