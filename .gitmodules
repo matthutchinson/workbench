@@ -58,3 +58,6 @@
 [submodule "vim/pathogen/vim-tmux-navigator"]
 	path = vim/pathogen/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
+[submodule "vim/pathogen/vim-dispatch"]
+	path = vim/pathogen/vim-dispatch
+	url = git://github.com/tpope/vim-dispatch.git
