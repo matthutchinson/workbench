@@ -197,6 +197,7 @@ nnoremap <Right> <nop>
 " custom syntax highlighting
 au BufRead,BufNewFile *.as    set filetype=actionscript
 au BufRead,BufNewFile *.mxml  set filetype=mxml
+au BufNewFile,BufRead *.json  set ft=javascript
 au BufRead,BufNewFile {Capfile,Gemfile,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
 " auto strip whitespace when saving
