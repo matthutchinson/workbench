@@ -1,0 +1,4 @@
+#!/bin/bash
+
+COMMAND="git br | grep '$1' | sed 's/\* //'"
+git co $(eval $COMMAND)
