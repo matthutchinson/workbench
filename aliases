@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # general
+alias g='git'
+alias v='vim'
 alias mkdir='mkdir -p'
 alias top='top -o cpu'
 alias gpgme='gpg -e -u "matt@hiddenloop.com" -r "matt@hiddenloop.com"'
