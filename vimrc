@@ -206,6 +206,12 @@ autocmd BufWritePre * :%s/\s\+$//e
 " auto spell check & limit width of git commit messages
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
+" always spellcheck on text like files
+autocmd BufRead,BufNewFile {*.md,*.txt,*.textile} setlocal spell
+
+" allow spell check auto complete C-N (insert mode)
+set complete+=kspell
+
 " copy and paste with pbcopy/pbpaste in visual mode
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
 nmap <C-V> :call setreg("\"",system("pbpaste"))<CR>p
