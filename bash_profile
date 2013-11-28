@@ -72,7 +72,7 @@ function set_git_prompt {
   fi
 
   # get the name of the branch
-  branch_pattern="^# On branch ([^${IFS}]*)"
+  branch_pattern="^On branch ([^${IFS}]*)"
   if [[ ${git_status} =~ ${branch_pattern} ]]; then
     branch=${BASH_REMATCH[1]}
   fi
