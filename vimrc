@@ -62,7 +62,6 @@ set shiftwidth=2                  " and again, related
 set expandtab                     " use spaces instead of tabs
 set smarttab                      " insert tabs on the start of a line according to shiftwidth, not
 set shiftround                    " use multiple of shiftwidth when indenting with '<' and '>'
-set grepprg=ag                    " use Ag instead of grep (the silver searcher)
 set ttyfast                       " for speed and better rendering
 set splitbelow                    " open horizontal splits on the right
 set splitright                    " open vertical splits below
@@ -90,6 +89,18 @@ let g:ctrlp_max_height = 20      " window height
 let g:ctrlp_follow_symlinks = 1  " do follow symlinks
 let g:ctrlp_lazy_update = 1      " update after 250ms
 
+" if we have Ag (the silver searcher)
+if executable('ag')
+  " use Ag instead of grep (the silver searcher)
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Ctrl+f opens global search, and browsing
+  map <C-F> :Ag<Space>
+endif
+
+" ,b opens CtrlP buffer
+map <leader>b :CtrlPBuffer<CR>
+
 " gist-vim
 let g:gist_open_browser_after_post = 1
 let g:gist_detect_filetype = 1
@@ -107,15 +118,14 @@ if exists(":Tabularize")
   vmap <leader>a: :Tabularize /:\zs<CR>
 endif
 
-" ,b opens CtrlP buffer
-map <leader>b :CtrlPBuffer<CR>
-
 " Ctrl+c or ,c toggles commenting
 nmap <leader>c \\\
 vmap <leader>c \\\
 
-" Ctrl+f opens global search, and browsing
-map <C-F> :Ag<Space>
+" do an grep search of the current word in the project
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+"  Opening quick buffers
 nnoremap <C-n> :cn<cr>
 nnoremap <C-p> :cp<cr>
 nnoremap <C-o> :copen<cr>
@@ -135,9 +145,6 @@ map <leader>ch :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
 
 " format paragraph including set textwidth
 nnoremap <leader>q gqip
-
-" do an Ack search of the current word
-map <Leader>a :Ag <C-R>=expand("<cword>")<CR><CR>
 
 " git-stripspace the current buffer
 map <Leader>s :%!git stripspace<CR>
