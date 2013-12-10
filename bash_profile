@@ -77,6 +77,9 @@ function set_git_prompt {
     branch=${BASH_REMATCH[1]}
   fi
 
+  # shortcut for current branch name
+  export br=${branch}
+
   GIT_PROMPT="$LIGHT_BLUE(${state}${branch}${git_time}$WHITE_BOLD${remote}$LIGHT_BLUE)"
 }
 
