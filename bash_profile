@@ -11,13 +11,13 @@ export NODE_PATH="/usr/local/lib/node_modules"
 export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home"
 
 # Ruby GC - https://gist.github.com/865706
-export RUBY_HEAP_MIN_SLOTS=600000
 export RUBY_HEAP_SLOTS_INCREMENT=10000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1.8
-export RUBY_HEAP_FREE_MIN=100000
+export RUBY_GC_HEAP_FREE_SLOTS=100000
+export RUBY_GC_HEAP_INIT_SLOTS=600000
 # https://gist.github.com/1688857
 export RUBY_GC_MALLOC_LIMIT=1000000000
-export RUBY_FREE_MIN=500000
+export RUBY_GC_HEAP_FREE_SLOTS=500000
 
 # colours
 ORANGE="\[\033[0;38;05;136m\]"
