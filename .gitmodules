@@ -52,3 +52,6 @@
 [submodule "vim/pathogen/emmet-vim"]
 	path = vim/pathogen/emmet-vim
 	url = https://github.com/mattn/emmet-vim.git
+[submodule "vim/pathogen/ag.vim"]
+	path = vim/pathogen/ag.vim
+	url = https://github.com/rking/ag.vim.git
