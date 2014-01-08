@@ -37,9 +37,6 @@
 [submodule "vim/pathogen/tabular"]
 	path = vim/pathogen/tabular
 	url = https://github.com/godlygeek/tabular.git
-[submodule "vim/pathogen/ag"]
-	path = vim/pathogen/ag.vim
-	url = https://github.com/rking/ag.vim.git
 [submodule "vim/pathogen/gist-vim"]
 	path = vim/pathogen/gist-vim
 	url = https://github.com/mattn/gist-vim.git
