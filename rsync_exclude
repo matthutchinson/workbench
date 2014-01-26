@@ -1,1 +1,10 @@
-/Users/matt/Documents/elisa/downloaded
+/Users/matt/Documents/Microsoft\ User\ Data
+Microsoft\ User\ Data
+vendor
+*.log
+.git
+.svn
+.DS_Store
+tmp
+.swp
+Steam\ Content

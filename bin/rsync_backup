@@ -4,6 +4,6 @@ HOSTNAME="$( hostname )"
 
 # backup folders to dreamhost via rsync
 rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/Documents hanjin:~/rsync/$HOSTNAME
+rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/Dropbox hanjin:~/rsync/$HOSTNAME
 rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/Sites hanjin:~/rsync/$HOSTNAME
 rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/work hanjin:~/rsync/$HOSTNAME
-rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /u hanjin:~/rsync/$HOSTNAME
