@@ -1,9 +1,9 @@
 #!/bin/sh
 
-HOSTNAME="$( hostname )"
+REMOTE_FOLDER=`hostname`-`date +%Y`
 
-# backup folders to dreamhost via rsync
-rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/Documents hanjin:~/rsync/$HOSTNAME
-rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/Dropbox hanjin:~/rsync/$HOSTNAME
-rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/Sites hanjin:~/rsync/$HOSTNAME
-rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/work hanjin:~/rsync/$HOSTNAME
+# backup these folders to hanjin via rsync
+rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/Documents hanjin:~/rsync/$REMOTE_FOLDER
+rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/Dropbox hanjin:~/rsync/$REMOTE_FOLDER
+rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/Sites hanjin:~/rsync/$REMOTE_FOLDER
+rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/work hanjin:~/rsync/$REMOTE_FOLDER
