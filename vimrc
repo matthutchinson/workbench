@@ -158,7 +158,9 @@ map <leader>u :source ~/.vimrc<cr>
 map <leader>e :Explore<cr>
 map <leader>ev :new <C-R>=expand("%:p:h") . '/'<cr><cr>
 map <leader>m :! mate %<cr>
-nnoremap <silent> <C-l> :nohl<CR><C-l>
+
+" ctrl-a clears highlighted searches
+nnoremap <silent> <C-a> :nohl<CR><C-a>
 
 " buffers
 nnoremap <tab> :bn<cr>
