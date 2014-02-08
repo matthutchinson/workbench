@@ -1,9 +1,9 @@
 #!/bin/sh
 
-REMOTE_FOLDER=`hostname`-`date +%Y`
+REMOTE_FOLDER=`hostname`
 
 # backup these folders to hanjin via rsync
-rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/Documents hanjin:~/rsync/$REMOTE_FOLDER
-rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/Dropbox hanjin:~/rsync/$REMOTE_FOLDER
-rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/Sites hanjin:~/rsync/$REMOTE_FOLDER
-rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/work hanjin:~/rsync/$REMOTE_FOLDER
+rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/Documents /Volumes/Kiki/rsync/$REMOTE_FOLDER
+rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/Dropbox /Volumes/Kiki/rsync/$REMOTE_FOLDER
+rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/Sites /Volumes/Kiki/rsync/$REMOTE_FOLDER
+rsync -azP --delete --delete-excluded --exclude /Users/matt/.rsync_exclude /Users/matt/work /Volumes/Kiki/rsync/$REMOTE_FOLDER
