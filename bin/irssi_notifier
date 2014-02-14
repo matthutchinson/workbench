@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Growl notifications for your Irssi sessions, needs terminal-notifier gem
+# http://matthewhutchinson.net/2010/8/21/irssi-screen-fnotify-and-growl-on-osx
+
+(ssh matt@redis.p.housetrip.com -o PermitLocalCommand=no           \
+  ": > .irssi/fnotify ; tail -f .irssi/fnotify " |                 \
+while read heading message; do                                     \
+  terminal-notifier -title "${heading}" -message "$(echo "${message}" | sed 's/[\<|\>]//g')" > /dev/null; \
+done)&

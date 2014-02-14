@@ -3,3 +3,4 @@ public/destinations/*.js
 vendor/*
 coverage/*
 tags
+tmp/sass-cache/*
