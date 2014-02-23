@@ -31,10 +31,6 @@ alias spush='be rake smartling:push'
 alias spull='be rake smartling:pull'
 alias htps='be rake parallel:fast_prepare;be rake parallel:spec[4]'
 alias htpf='be rake parallel:fast_prepare;be rake parallel:safe_features[4]'
-alias https='TESTBR=`git st -b | sed "s/## //"`;cd /u/apps/housetrip-parallel-test;git co $TESTBR;git pull;bundle;be rake parallel:prepare[4];be rake parallel:spec[4]'
-alias httpf='TESTBR=`git st -b | sed "s/## //"`;cd /u/apps/housetrip-parallel-test;git co $TESTBR;git pull;bundle;be rake parallel:prepare[4];be rake parallel:safe_features[4]'
-# note how to escape single quotes in bash :)
-alias rerunfix='ruby -p -e '\''$_.gsub!(/ /, "\n")'\'' ./rerun.txt > ~/Desktop/rerun.txt;cp ~/Desktop/rerun.txt ./rerun.txt'
 
 # rails
 alias gofast='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = true\"" config/environments/development.rb'
