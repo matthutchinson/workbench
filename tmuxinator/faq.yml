@@ -1,6 +1,6 @@
 project_name: Faqtory
 project_root: /u/apps/faqtory
-rbenv: 1.9.3-p194
+rbenv: 2.1.1
 tabs:
   - FAQtory:
       layout: main-vertical

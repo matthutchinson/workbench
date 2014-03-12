@@ -1,6 +1,6 @@
 project_name: Store
 project_root: /u/apps/pmfaqtory-store
-rbenv: 1.9.3-p327
+rbenv: 2.1.1
 tabs:
   - store:
       layout: main-vertical
