@@ -1,6 +1,6 @@
 project_name: HouseTrip
 project_root: /u/apps/housetrip
-rbenv: 1.9.3p385
+rbenv: 1.9.3-p385
 tabs:
   - housetrip:
       layout: main-vertical
