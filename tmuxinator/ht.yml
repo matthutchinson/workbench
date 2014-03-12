@@ -6,7 +6,7 @@ tabs:
       layout: main-vertical
       panes:
         - vi .
-        - sleep 20; open http://housetrip.dev
+        - sleep 20; open http://housetrip.com.dev
         - be rake jobs:work
         - script/console
   - monitoring:
