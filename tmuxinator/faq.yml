@@ -1,17 +1,16 @@
 project_name: Faqtory
 project_root: /u/apps/faqtory
-rbenv: 2.1.1
-tabs:
-  - FAQtory:
+pre_window: rbenv shell 2.1.1
+windows:
+  - faqtory:
       layout: main-vertical
       panes:
         - vi .
-        - be rails s
+        - sleep 10; open http://faqtoryapp.dev
         - be rails c
-  - postgresql: be rails dbconsole
-  - server:
+  - db: be rails dbconsole
+  - logs:
       layout: main-vertical
       panes:
         - tail -f log/development.log | egrep "Parameters|Completed"
         - git st
-  - remote: dago

@@ -1,12 +1,12 @@
 project_name: Store
 project_root: /u/apps/pmfaqtory-store
-rbenv: 2.1.1
-tabs:
+pre_window: rbenv shell 1.9.3-p385
+windows:
   - store:
       layout: main-vertical
       panes:
         - vi .
-        - sudo nginx && open http://pmfaqtory-store.dev
+        - sleep 10; open http://pmfaqtory-store.dev
         - be rails c
   - db: be rails dbconsole
   - logs:
@@ -14,4 +14,4 @@ tabs:
       panes:
         - tail -f log/development.log | egrep "Parameters|Completed"
         - git st
-        - be guard
+  - grantham: ssh grantham

@@ -1,17 +1,17 @@
 project_name: HouseTrip
 project_root: /u/apps/housetrip
-rbenv: 1.9.3-p385
-tabs:
+pre_window: rbenv shell 1.9.3-p385
+windows:
   - housetrip:
       layout: main-vertical
       panes:
         - vi .
-        - sleep 20; open http://housetrip.com.dev
-        - be rake jobs:work
+        - sleep 10; open http://housetrip.com.dev
         - script/console
   - monitoring:
       layout: main-vertical
       panes:
         - tail -f log/development.log
+        - be rake jobs:work
         - bundle
-  - mysql: script/dbconsole
+  - db: script/dbconsole
