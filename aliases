@@ -42,7 +42,9 @@ alias migrations?='git diff --cached origin/production db/migrate | grep +++'
 alias rbenvit='rbenv shell `cat .rbenv-version`'
 
 sc () {
-  if [ -f ./script/rails ]; then
+  if [ -f ./bin/rails ]; then
+    ./bin/rails console $@
+  elif [ -f ./script/rails ]; then
     bundle exec rails c $@
   else
     ./script/console $@
@@ -50,7 +52,9 @@ sc () {
 }
 
 sg () {
-  if [ -f ./script/rails ]; then
+  if [ -f ./bin/rails ]; then
+    ./bin/rails generate $@
+  elif [ -f ./script/rails ]; then
     bundle exec rails g $@
   else
     ./script/generate $@
@@ -58,7 +62,9 @@ sg () {
 }
 
 ss () {
-  if [ -f ./script/rails ]; then
+  if [ -f ./bin/rails ]; then
+    ./bin/rails server $@
+  elif [ -f ./script/rails ]; then
     bundle exec rails s $@
   elif [ -f ./Procfile ]; then
     bundle exec foreman start $@
