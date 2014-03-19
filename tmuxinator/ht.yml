@@ -1,6 +1,6 @@
 project_name: HouseTrip
 project_root: /u/apps/housetrip
-pre_window: rbenv shell 1.9.3-p385
+pre_window: rbenv shell 1.9.3-p545
 windows:
   - housetrip:
       layout: main-vertical
