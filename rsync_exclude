@@ -1,6 +1,5 @@
-/Users/matt/Documents/Microsoft\ User\ Data/*
-/Users/matt/Documents/Parallels/*
-Microsoft\ User\ Data
+Documents/Microsoft\ User\ Data/*
+Documents/Parallels/*
 vendor
 *.log
 .git
