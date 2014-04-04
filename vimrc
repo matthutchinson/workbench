@@ -207,9 +207,10 @@ nnoremap <Left>  <nop>
 nnoremap <Right> <nop>
 
 " custom syntax highlighting
-au BufRead,BufNewFile *.as    set filetype=actionscript
-au BufRead,BufNewFile *.mxml  set filetype=mxml
+au BufRead,BufNewFile *.as    set ft=actionscript
+au BufRead,BufNewFile *.mxml  set ft=mxml
 au BufNewFile,BufRead *.json  set ft=javascript
+au BufNewFile,BufRead /private/etc/apache2/*.conf* set ft=apache
 au BufRead,BufNewFile {Capfile,Gemfile,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
 " auto strip whitespace when saving
