@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+
+# Travis Status Check (requires travis gem and pro account)
+
+# gem install travis
+# travis login --pro
+# travis token --pro
+# (paste token below)
+
+require "travis/pro"
+
+unless ENV['TMUX_TRAVIS_TOKEN'] && ENV['TMUX_TRAVIS_REPO']
+  puts "Failed: TMUX_TRAVIS_TOKEN and TMUX_TRAVIS_REPO env vars required"
+  exit 1
+end
+
+Travis::Pro.access_token = ENV['TMUX_TRAVIS_TOKEN']
+repo = Travis::Pro::Repository.find(ENV['TMUX_TRAVIS_REPO'])
+
+build = repo.builds.detect { |b|
+  # get last finished master build (not a PR)
+  b.finished? && !b.pull_request? && b.branch_info =~ /master/
+}
+
+if build
+  label = '✔︎'
+  color = { :bg => "041", :fg => "016" }
+
+  if build.failed?
+    minutes_ago = ((Time.now.utc - build.finished_at) / 60.0).floor
+    color = { :bg => "160", :fg => "000" }
+    label = "✘ #{minutes_ago}m"
+  end
+
+  puts "#[bg=colour000,fg=colour#{color[:bg]}]⮂#[bg=colour#{color[:bg]},fg=colour#{color[:fg]}] #{label} #[fg=colour000,bg=colour#{color[:bg]}]⮂#[default]"
+end
