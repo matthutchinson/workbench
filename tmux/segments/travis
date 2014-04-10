@@ -50,13 +50,13 @@ if build
 
       bulb_color = LIFX::Color.white
       if build.failed?
-        bulb_color = LIFX::Color.red
+        bulb_color = LIFX::Color.red(brightness: 0.25)
       elsif build.passed?
-        bulb_color = LIFX::Color.green
+        bulb_color = LIFX::Color.green(saturation: 0.25)
       end
 
       light.turn_on
-      light.set_color(bulb_color, duration: 2)
+      light.set_color(bulb_color, duration: 5)
       client.flush
     end
   end
