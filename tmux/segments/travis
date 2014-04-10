@@ -52,7 +52,7 @@ if build
       if build.failed?
         bulb_color = LIFX::Color.red(brightness: 0.25)
       elsif build.passed?
-        bulb_color = LIFX::Color.green(saturation: 0.25)
+        bulb_color = LIFX::Color.green(brightness: 0.25)
       end
 
       light.turn_on
