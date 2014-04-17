@@ -1,18 +1,16 @@
 #!/usr/bin/env ruby
 # encoding: UTF-8
 
-# Travis Status Check (requires travis gem and pro account)
-
-# gem install travis
-# travis login --pro
-# travis token --pro
-# (paste token below)
+# Travis Status Check
+# (requires the `travis` gem and a Travis pro account)
 
 require "travis/pro"
-require "awesome_print"
 
 unless ENV['TRAVIS_TOKEN'] && ENV['TRAVIS_REPO']
-  puts "Failed: TRAVIS_TOKEN and TRAVIS_REPO env vars required"
+  puts "Failed: please ensure TRAVIS_TOKEN and TRAVIS_REPO env vars are set, e.g."
+  puts "  gem install travis"
+  puts "  travis login --pro"
+  puts "  travis token --pro"
   exit 1
 end
 
@@ -60,7 +58,6 @@ end
 # listen for finished build events on the stream
 Travis::Pro.listen(repo) do |stream|
   stream.on('build:finished') do |event|
-    # ap event
     if valid_build?(event.build)
       update_status(event.build, config)
     end

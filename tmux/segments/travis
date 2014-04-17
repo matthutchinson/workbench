@@ -9,7 +9,7 @@
 # (paste token below)
 
 require "travis/pro"
-require 'lifx' rescue LoadError
+require 'hue'
 
 unless ENV['TMUX_TRAVIS_TOKEN'] && ENV['TMUX_TRAVIS_REPO']
   puts "Failed: TMUX_TRAVIS_TOKEN and TMUX_TRAVIS_REPO env vars required"
@@ -39,25 +39,27 @@ if build
 
   puts "#[bg=colour000,fg=colour#{color[:bg]}]⮂#[bg=colour#{color[:bg]},fg=colour#{color[:fg]}] #{label} #[fg=colour000,bg=colour#{color[:bg]}]⮂#[default]"
 
-  if bulb_name = ENV['TMUX_TRAVIS_LIFX_BULB']
-    client = LIFX::Client.lan
-    # blocks until light discovered with this name
-    client.discover! do |c|
-      c.lights.with_label(bulb_name)
-    end
+  if bulb_name = ENV['TMUX_TRAVIS_BULB']
+    client = Hue::Client.new
+    light = client.lights.select { |l| l.name == bulb_name }.first
 
-    if light = client.lights.with_label(bulb_name)
-
-      bulb_color = LIFX::Color.white
+    if light
+      hue = 31500
+      brightness = 175
       if build.failed?
-        bulb_color = LIFX::Color.red(brightness: 0.25)
+        hue = 0
+        brightness = 240
       elsif build.passed?
-        bulb_color = LIFX::Color.green(brightness: 0.25)
+        hue = 25500
+        brightness = 175
       end
 
-      light.turn_on
-      light.set_color(bulb_color, duration: 5)
-      client.flush
+      light.on = true
+      light.saturation = 255
+
+      light.hue = hue
+      light.brightness = brightness
+      light.refresh
     end
   end
 end
