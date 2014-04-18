@@ -5,11 +5,12 @@
 # via terminal notifier (gem install terminal-notifier)
 
 require 'net/imap'
+require 'terminal-notifier'
 
 # config
 username     = 'matt@hiddenloop.com'
 server       = 'imap.gmail.com'
-interval     = 0 # minutes
+interval     = 3 # minutes
 tmp_filename = '/var/tmp/tmux-inbox-count'
 result       = File.read(tmp_filename) if File.exist?(tmp_filename)
 
@@ -34,7 +35,13 @@ def perform_check?(tmp_filename, interval)
 end
 
 def notify(count, username)
-  `terminal-notifier -message '#{count} new message#{count > 1 ? 's' : ''}' -title "You've got Mail" -subtitle '#{username}' -group tmux-inbox-count -open https://mail.google.com`
+  TerminalNotifier.notify("#{count} new message#{count > 1 ? 's' : ''}",
+       title: "📬 You've got Mail",
+    subtitle: username,
+       group: "tmux-inbox-count",
+        open: "https://mail.google.com",
+       sound: "Tink"
+  )
 end
 
 # check for new mail, or read from tmp file
