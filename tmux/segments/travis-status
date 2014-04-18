@@ -3,8 +3,10 @@
 
 # Travis Status Check
 # (requires the `travis` gem and a Travis pro account)
+# shows notifications via the `terminal-notifier` gem
 
 require "travis/pro"
+require 'terminal-notifier'
 
 unless ENV['TRAVIS_TOKEN'] && ENV['TRAVIS_REPO'] && ENV['TRAVIS_BRANCH']
   puts "Failed: please ensure TRAVIS_TOKEN, TRAVIS_REPO and TRAVIS_BRANCH are set, e.g."
@@ -34,23 +36,34 @@ end
 def parse_build(build)
   if build.failed?
     minutes_ago = ((Time.now.utc - build.finished_at) / 60.0).floor
-    { :bg => "160", :fg => "000", :label => "✘ #{minutes_ago}m" }
+    {
+        tmux: { bg: "160", fg: "000", label: "✘ #{minutes_ago}m" },
+      notify: { title: "💔 Travis Build Failed!", sound: "Basso" }
+    }
   elsif build.passed?
-    { :bg => "041", :fg => "016", :label => "✔︎" }
-  else
-    { :bg => "255", :fg => "000", :label => "?" }
+    {
+        tmux: { bg: "041", fg: "016", label: "✔︎" },
+      notify: { title: "💚 Travis Build Passed!", sound: "Tink" }
+    }
   end
 end
 
 def update_status(build, config)
-  build_state = parse_build(build)
+  if build_state = parse_build(build)
 
-  # write tmux segment to tmp file
-  output = "#[bg=colour000,fg=colour#{build_state[:bg]}]⮂#[bg=colour#{build_state[:bg]},fg=colour#{build_state[:fg]}] #{build_state[:label]} #[fg=colour000,bg=colour#{build_state[:bg]}]⮂#[default]"
-  File.open(config[:tmp_file], 'w') { |f| f.write(output) }
+    # write tmux segment to tmp file
+    output = "#[bg=colour000,fg=colour#{build_state[:tmux][:bg]}]⮂#[bg=colour#{build_state[:tmux][:bg]},fg=colour#{build_state[:tmux][:fg]}] #{build_state[:tmux][:label]} #[fg=colour000,bg=colour#{build_state[:tmux][:bg]}]⮂#[default]"
+    File.open(config[:tmp_file], 'w') { |f| f.write(output) }
 
-  # return tmux output
-  output
+    # show terminal notification
+    TerminalNotifier.notify(build.commit.message, build_state[:notify].merge({
+      subtitle: "#{build.commit.committer_name} (#{(build.duration/60.0).floor} mins)",
+          group: "travis-#{build.commit.branch}-build",
+          open: build.commit.compare_url
+    }))
+
+    output
+  end
 end
 
 def clean_exit(config)
