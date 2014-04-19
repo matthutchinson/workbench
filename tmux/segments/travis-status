@@ -51,11 +51,11 @@ end
 def update_status(build, config)
   if build_state = parse_build(build)
 
-    # write tmux segment to tmp file
+    # write tmux segment to file
     output = "#[bg=colour000,fg=colour#{build_state[:tmux][:bg]}]⮂#[bg=colour#{build_state[:tmux][:bg]},fg=colour#{build_state[:tmux][:fg]}] #{build_state[:tmux][:label]} #[fg=colour000,bg=colour#{build_state[:tmux][:bg]}]⮂#[default]"
     File.open(config[:tmp_file], 'w') { |f| f.write(output) }
 
-    # show terminal notification
+    # show notification
     TerminalNotifier.notify(build.commit.message, build_state[:notify].merge({
       subtitle: "#{build.commit.committer_name} (#{(build.duration/60.0).floor} mins)",
           group: "travis-#{build.commit.branch}-build",
