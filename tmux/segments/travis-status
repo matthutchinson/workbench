@@ -1,18 +1,19 @@
 #!/usr/bin/env ruby
 # encoding: UTF-8
 
-# Travis Status Check
-# (requires the `travis` gem and a Travis pro account)
-# shows notifications via the `terminal-notifier` gem
+# Travis (Pro) Status Check
+# Requires `travis` and `terminal-notifier` gems
+#
+# Get a Travis Pro token with;
+#  gem install travis
+#  travis login --pro
+#  travis token --pro"
 
 require "travis/pro"
 require 'terminal-notifier'
 
 unless ENV['TRAVIS_TOKEN'] && ENV['TRAVIS_REPO'] && ENV['TRAVIS_BRANCH']
-  puts "Failed: please ensure TRAVIS_TOKEN, TRAVIS_REPO and TRAVIS_BRANCH are set, e.g."
-  puts "  gem install travis"
-  puts "  travis login --pro"
-  puts "  travis token --pro"
+  puts "Failed: please ensure TRAVIS_TOKEN, TRAVIS_REPO & TRAVIS_BRANCH are set"
   exit 1
 end
 
@@ -37,17 +38,18 @@ def parse_build(build)
   if build.failed?
     minutes_ago = ((Time.now.utc - build.finished_at) / 60.0).floor
     {
-        tmux: { bg: "160", fg: "000", label: "✘ #{minutes_ago}m" },
+      tmux: { bg: "160", fg: "000", label: "✘ #{minutes_ago}m" },
       notify: { title: "💔 Travis Build Failed!", sound: "Basso" }
     }
   elsif build.passed?
     {
-        tmux: { bg: "041", fg: "016", label: "✔︎" },
+      tmux: { bg: "041", fg: "016", label: "✔︎" },
       notify: { title: "💚 Travis Build Passed!", sound: "Tink" }
     }
   end
 end
 
+# update the travis status segment
 def update_status(build, config)
   if build_state = parse_build(build)
 
@@ -58,14 +60,15 @@ def update_status(build, config)
     # show notification
     TerminalNotifier.notify(build.commit.message, build_state[:notify].merge({
       subtitle: "#{build.commit.committer_name} (#{(build.duration/60.0).floor} mins)",
-          group: "travis-#{build.commit.branch}-build",
-          open: build.commit.compare_url
+      group: "travis-#{build.commit.branch}-build",
+      open: build.commit.compare_url
     }))
 
     output
   end
 end
 
+# cleanly exit the forked process
 def clean_exit(config)
   if File.exists?(config[:pid_file])
     File.delete(config[:pid_file])
@@ -76,34 +79,34 @@ end
 # read output from tmp file if present
 if File.exists?(config[:tmp_file])
   puts File.read(config[:tmp_file])
-else
-  # otherwise (if no pid exists) find repo and listen for finished build events
-  unless File.exists?(config[:pid_file])
-    pid = fork do
-      # clean pid file on quiting
-      trap(:HUP)  { clean_exit(config) }
-      trap(:TERM) { clean_exit(config) }
-      trap(:KILL) { clean_exit(config) }
+end
 
-      # find repo
-      repo = find_repo(ENV['TRAVIS_REPO'])
+# otherwise (if no pid exists) find repo and listen for finished build events
+unless File.exists?(config[:pid_file])
+  pid = fork do
+    # clean pid file on quiting
+    trap(:HUP)  { clean_exit(config) }
+    trap(:TERM) { clean_exit(config) }
+    trap(:KILL) { clean_exit(config) }
 
-      # store (and show) initial build status if present
-      if build = repo.builds.detect { |build| valid_build?(build) }
-        puts update_status(build, config)
-      end
+    # find repo
+    repo = find_repo(ENV['TRAVIS_REPO'])
 
-      # listen and act on events
-      Travis::Pro.listen(repo) do |stream|
-        stream.on('build:finished') do |event|
-          if valid_build?(event.build)
-            update_status(event.build, config)
-          end
+    # store (and show) initial build status if present
+    if build = repo.builds.detect { |build| valid_build?(build) }
+      puts update_status(build, config)
+    end
+
+    # listen and act on events
+    Travis::Pro.listen(repo) do |stream|
+      stream.on('build:finished') do |event|
+        if valid_build?(event.build)
+          update_status(event.build, config)
         end
       end
     end
-
-    # write pid to file
-    File.open(config[:pid_file], 'w') { |f| f.write(pid) }
   end
+
+  # write pid to file
+  File.open(config[:pid_file], 'w') { |f| f.write(pid) }
 end

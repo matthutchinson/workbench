@@ -1,62 +1,111 @@
 #!/usr/bin/env ruby
 # encoding: UTF-8
 
-# OSX command line email notification via imap, keychain and notifications
-# via terminal notifier (gem install terminal-notifier)
+# IMAP Inbox Check
+# Requires `terminal-notifier` gem and keychain entry for imap password
 
 require 'net/imap'
 require 'terminal-notifier'
 
-# config
-username     = 'matt@hiddenloop.com'
-server       = 'imap.gmail.com'
-interval     = 3 # minutes
-tmp_filename = '/var/tmp/tmux-inbox-count'
-result       = File.read(tmp_filename) if File.exist?(tmp_filename)
+config = {
+  username: 'matt@hiddenloop.com',
+  server: 'imap.gmail.com',
+  mailbox: 'INBOX',
+  idle: 3, # minutes
+  tmp_file: '/var/tmp/tmux-inbox-status',
+  pid_file: '/var/tmp/tmux-inbox.pid',
+}
 
-# get password from mac OSX keychain
+# get password from the OSX keychain
 def get_keychain_password(username, server)
   if result = `security 2>&1 > /dev/null find-internet-password -ga #{username} -s #{server}`
     result.match(/\"(\w+)\"/).to_a.last
   end
 end
 
-# imap gmail login via SSL
-def check_inbox(username, server)
-  imap = Net::IMAP.new('imap.gmail.com', 993, true, nil, false)
-  imap.login(username, get_keychain_password(username, server))
-  imap.examine('INBOX')
-  imap.search(["NOT", "SEEN"]).length
+# imap connect and select mailbox
+def connect_imap_mailbox(config)
+  imap = Net::IMAP.new('imap.gmail.com', 993, true)
+  imap.login(config[:username],
+    get_keychain_password(config[:username], config[:server]))
+  imap.select(config[:mailbox])
+  imap
 end
 
-# check if interval time has passed
-def perform_check?(tmp_filename, interval)
-  !File.exist?(tmp_filename) || (Time.now >= (File.mtime(tmp_filename) + (interval * 60)))
-end
-
-def notify(count, username)
-  TerminalNotifier.notify("#{count} new message#{count > 1 ? 's' : ''}",
-       title: "📬 You've got Mail",
-    subtitle: username,
-       group: "tmux-inbox-count",
-        open: "https://mail.google.com",
-       sound: "Tink"
-  )
-end
-
-# check for new mail, or read from tmp file
-if perform_check?(tmp_filename, interval)
-  count = check_inbox(username, server)
+# update unread message count segment
+def update_count(count, config)
   if count > 0
-    new_result = "#[bg=colour000,fg=colour237]⮂#[bg=colour237,fg=colour255] ✉ #[fg=colour190]#{count} #[fg=colour000,bg=colour237]⮂#[default]"
-    if new_result != result
-      notify(count, username)
-      result = new_result
-    end
-  else
-    result = ''
+    # write tmux segment to file
+    output = "#[bg=colour000,fg=colour237]⮂#[bg=colour237,fg=colour255] ✉ #[fg=colour190]#{count} #[fg=colour000,bg=colour237]⮂#[default]"
+    File.open(config[:tmp_file], 'w') { |f| f.write(output) }
+
+    # show notification
+    TerminalNotifier.notify("#{count} new message#{count > 1 ? 's' : ''}",
+      title: "📬 You've got Mail",
+      subtitle: "(#{config[:mailbox]}) #{config[:username]}".downcase,
+      group: "tmux-inbox-status",
+      open: "https://mail.google.com",
+      sound: "Tink"
+    )
   end
-  File.open(tmp_filename, 'w') {|f| f.write(result) }
 end
 
-puts result
+# cleanly exit the forked process
+def clean_exit(config)
+  if File.exists?(config[:pid_file])
+    File.delete(config[:pid_file])
+  end
+  exit
+end
+
+# read output from tmp file if present
+if File.exists?(config[:tmp_file])
+  puts File.read(config[:tmp_file])
+end
+
+# if no pid exists, fork a process to listen during imap idles
+unless File.exists?(config[:pid_file])
+  pid = fork do
+    # clean pid file on quiting
+    trap(:HUP)  { clean_exit(config) }
+    trap(:TERM) { clean_exit(config) }
+    trap(:KILL) { clean_exit(config) }
+
+    # initial mailbox check
+    imap = connect_imap_mailbox(config)
+    imap.examine(config[:mailbox])
+    update_count(imap.search(["NOT", "SEEN"]).length, config)
+
+    # setup a response handler
+    imap.add_response_handler do |resp|
+      if resp.kind_of?(Net::IMAP::UntaggedResponse) && resp.name == 'EXISTS'
+        update_count(resp.data.to_i, config)
+      end
+    end
+
+    begin
+      # start idle loop
+      loop do
+        imap.idle do
+          # wait before renewing idle
+          sleep config[:idle] * 60
+          imap.idle_done
+        end
+      end
+    rescue Errno::ECONNRESET
+      puts "Connection reset by peer"
+    rescue Net::IMAP::Error => e
+      puts "Imap error : #{e.inspect}"
+    ensure
+      # exit all threads
+      Thread.list.each {|thr| thr.exit }
+      # end imap idling and logout
+      imap.idle_done
+      imap.logout
+      clean_exit(config)
+    end
+  end
+
+  # write pid to file
+  File.open(config[:pid_file], 'w') { |f| f.write(pid) }
+end
