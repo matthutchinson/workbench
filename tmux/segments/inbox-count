@@ -7,7 +7,7 @@
 require 'net/imap'
 require 'terminal-notifier'
 
-config = {
+@config = {
   username: 'matt@hiddenloop.com',
   server: 'imap.gmail.com',
   mailbox: 'INBOX',
@@ -24,25 +24,25 @@ def get_keychain_password(username, server)
 end
 
 # imap connect and select mailbox
-def connect_imap_mailbox(config)
+def connect_imap_mailbox
   imap = Net::IMAP.new('imap.gmail.com', 993, true)
-  imap.login(config[:username],
-    get_keychain_password(config[:username], config[:server]))
-  imap.select(config[:mailbox])
+  imap.login(@config[:username],
+    get_keychain_password(@config[:username], @config[:server]))
+  imap.select(@config[:mailbox])
   imap
 end
 
 # update unread message count segment
-def update_count(count, config)
+def update_count(count)
   if count > 0
     # write tmux segment to file
     output = "#[bg=colour000,fg=colour237]⮂#[bg=colour237,fg=colour255] ✉ #[fg=colour190]#{count} #[fg=colour000,bg=colour237]⮂#[default]"
-    File.open(config[:tmp_file], 'w') { |f| f.write(output) }
+    File.open(@config[:tmp_file], 'w') { |f| f.write(output) }
 
     # show notification
     TerminalNotifier.notify("#{count} new message#{count > 1 ? 's' : ''}",
       title: "📬 You've got Mail",
-      subtitle: "(#{config[:mailbox]}) #{config[:username]}".downcase,
+      subtitle: "#{@config[:username]}".downcase,
       group: "tmux-inbox-status",
       open: "https://mail.google.com",
       sound: "Tink"
@@ -51,35 +51,35 @@ def update_count(count, config)
 end
 
 # cleanly exit the forked process
-def clean_exit(config)
-  if File.exists?(config[:pid_file])
-    File.delete(config[:pid_file])
+def clean_exit
+  if File.exists?(@config[:pid_file])
+    File.delete(@config[:pid_file])
   end
   exit
 end
 
 # read output from tmp file if present
-if File.exists?(config[:tmp_file])
-  puts File.read(config[:tmp_file])
+if File.exists?(@config[:tmp_file])
+  puts File.read(@config[:tmp_file])
 end
 
 # if no pid exists, fork a process to listen during imap idles
-unless File.exists?(config[:pid_file])
+unless File.exists?(@config[:pid_file])
   pid = fork do
     # clean pid file on quiting
-    trap(:HUP)  { clean_exit(config) }
-    trap(:TERM) { clean_exit(config) }
-    trap(:KILL) { clean_exit(config) }
+    trap(:HUP)  { clean_exit }
+    trap(:TERM) { clean_exit }
+    trap(:KILL) { clean_exit }
 
     # initial mailbox check
-    imap = connect_imap_mailbox(config)
-    imap.examine(config[:mailbox])
-    update_count(imap.search(["NOT", "SEEN"]).length, config)
+    imap = connect_imap_mailbox
+    imap.examine(@config[:mailbox])
+    update_count(imap.search(["NOT", "SEEN"]).length)
 
     # setup a response handler
     imap.add_response_handler do |resp|
       if resp.kind_of?(Net::IMAP::UntaggedResponse) && resp.name == 'EXISTS'
-        update_count(resp.data.to_i, config)
+        update_count(resp.data.to_i)
       end
     end
 
@@ -88,7 +88,7 @@ unless File.exists?(config[:pid_file])
       loop do
         imap.idle do
           # wait before renewing idle
-          sleep config[:idle] * 60
+          sleep @config[:idle] * 60
           imap.idle_done
         end
       end
@@ -102,10 +102,10 @@ unless File.exists?(config[:pid_file])
       # end imap idling and logout
       imap.idle_done
       imap.logout
-      clean_exit(config)
+      clean_exit
     end
   end
 
   # write pid to file
-  File.open(config[:pid_file], 'w') { |f| f.write(pid) }
+  File.open(@config[:pid_file], 'w') { |f| f.write(pid) }
 end
