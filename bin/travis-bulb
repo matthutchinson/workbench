@@ -1,0 +1,128 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+
+# Travis (Pro) status check with bulb indication
+# Requires `travis`, `hue` and `lifx` gems
+#
+# Get a Travis Pro token with;
+#  gem install travis
+#  travis login --pro
+#  travis token --pro"
+
+require "travis/pro"
+require 'hue'
+require 'lifx'
+
+unless ENV['TRAVIS_TOKEN'] && ENV['TRAVIS_REPO'] && ENV['TRAVIS_BRANCH'] &&
+    (ENV['TRAVIS_LIFX_BULB'] || ENV['TRAVIS_HUE_BULB'])
+  puts "Failed: please ensure TRAVIS_TOKEN, TRAVIS_REPO, TRAVIS_BRANCH & TRAVIS_(HUE/LIFX)_BULB are set"
+  exit 1
+end
+
+@config = {
+  pid_file: '/var/tmp/travis-bulb.pid',
+  lifx: ENV['TRAVIS_LIFX_BULB'],
+  hue: ENV['TRAVIS_HUE_BULB']
+}
+
+
+def find_repo(repo_name)
+  Travis::Pro.access_token = ENV['TRAVIS_TOKEN']
+  Travis::Pro::Repository.find(ENV['TRAVIS_REPO'])
+end
+
+def valid_build?(build)
+  build.finished? &&
+    (build.branch_info =~ /#{ENV['TRAVIS_BRANCH']}/) &&
+    !build.errored? &&
+    !build.pull_request?
+end
+
+def update_hue(hue)
+  light = Hue::Client.new.lights.select { |l|
+    light.name == @config[:hue]
+  }.first
+
+  if light
+    # turn light on and set color
+    hue_light.on = true
+    hue_light.saturation = 255
+    hue_light.brightness = 230
+    hue_light.hue = hue
+    hue_light.refresh
+  end
+end
+
+def update_lifx(color)
+  client = LIFX::Client.lan
+  light  = nil
+  client.discover! do |c|
+    light = c.lights.with_label(@config[:lifx])
+  end
+
+  if light
+    # turn light on and set color
+    if light.off?
+      light.turn_on
+    end
+    if light.color != color
+      light.set_color(color, duration: 5)
+      client.flush
+    end
+  end
+end
+
+# update the bulb to show status
+def update_bulb(build)
+  if build.failed?
+    if @config[:lifx]
+      update_lifx(LIFX::Color.red)
+    elsif @config[:hue]
+      update_hue(0)
+    end
+  elsif build.passed?
+    if @config[:lifx]
+      update_lifx(LIFX::Color.green)
+    elsif @config[:hue]
+      update_hue(25500)
+    end
+  end
+end
+
+# cleanly exit the forked process
+def clean_exit
+  if File.exists?(@config[:pid_file])
+    File.delete(@config[:pid_file])
+  end
+  exit
+end
+
+# if no pid exists, find repo and listen for finished build events
+unless File.exists?(@config[:pid_file])
+  pid = fork do
+    # clean pid file on quiting
+    trap(:HUP)  { clean_exit }
+    trap(:TERM) { clean_exit }
+    trap(:KILL) { clean_exit }
+
+    # find repo
+    repo = find_repo(ENV['TRAVIS_REPO'])
+
+    # get initial build status if present
+    if build = repo.builds.detect { |build| valid_build?(build) }
+      update_bulb(build)
+    end
+
+    # listen and act on events
+    Travis::Pro.listen(repo) do |stream|
+      stream.on('build:finished') do |event|
+        if valid_build?(event.build)
+          update_bulb(event.build)
+        end
+      end
+    end
+  end
+
+  # write pid to file
+  File.open(@config[:pid_file], 'w') { |f| f.write(pid) }
+end

@@ -81,7 +81,7 @@ if File.exists?(config[:tmp_file])
   puts File.read(config[:tmp_file])
 end
 
-# otherwise (if no pid exists) find repo and listen for finished build events
+# if no pid exists, find repo and listen for finished build events
 unless File.exists?(config[:pid_file])
   pid = fork do
     # clean pid file on quiting
