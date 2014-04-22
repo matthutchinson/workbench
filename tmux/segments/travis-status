@@ -29,10 +29,9 @@ end
 
 def valid_build?(build)
   build.finished? &&
-    build.commit &&
-    (build.branch_info =~ /#{ENV['TRAVIS_BRANCH']}/) &&
     !build.errored? &&
-    !build.pull_request?
+    !build.pull_request? &&
+    (build.branch_info =~ /#{ENV['TRAVIS_BRANCH']}/)
 end
 
 def parse_build(build)
