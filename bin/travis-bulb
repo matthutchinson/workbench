@@ -33,23 +33,22 @@ end
 
 def valid_build?(build)
   build.finished? &&
+    build.commit &&
     (build.branch_info =~ /#{ENV['TRAVIS_BRANCH']}/) &&
     !build.errored? &&
     !build.pull_request?
 end
 
 def update_hue(hue)
-  light = Hue::Client.new.lights.select { |l|
-    light.name == @config[:hue]
-  }.first
+  light = Hue::Client.new.lights.select { |l| l.name == @config[:hue] }.first
 
   if light
     # turn light on and set color
-    hue_light.on = true
-    hue_light.saturation = 255
-    hue_light.brightness = 230
-    hue_light.hue = hue
-    hue_light.refresh
+    light.on = true
+    light.saturation = 255
+    light.brightness = 230
+    light.hue = hue
+    light.refresh
   end
 end
 
