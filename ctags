@@ -2,4 +2,7 @@
 --exclude=.git
 --exclude=tmp
 --exclude=log *
+--exclude=vendor/bundle
+--exclude=db/migrate/*
+--exclude=*.sass
 --languages=-javascript,sql
