@@ -5,4 +5,5 @@
 --exclude=vendor/bundle
 --exclude=db/migrate/*
 --exclude=*.sass
+--exclude=*.gz
 --languages=-javascript,sql
