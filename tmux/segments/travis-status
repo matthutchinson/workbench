@@ -73,6 +73,9 @@ def clean_exit
   if File.exists?(@config[:pid_file])
     File.delete(@config[:pid_file])
   end
+  if File.exists?(@config[:tmp_file])
+    File.delete(@config[:tmp_file])
+  end
   exit
 end
 
