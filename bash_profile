@@ -58,19 +58,14 @@ function set_git_prompt {
   fi
 
   # set arrow icon based on status against remote
-  remote_pattern="Your branch is (.*) of"
-  if [[ ${git_status} =~ ${remote_pattern} ]]; then
-    if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
-      remote="↑"
-    else
-      remote="↓"
-    fi
+  if [[ ${git_status} =~ "Your branch is ahead" ]]; then
+    remote="↑"
+  elif [[ ${git_status} =~ "Your branch is behind" ]]; then
+    remote="↓"
+  elif [[ ${git_status} =~ "Your branch and (.*) have diverged" ]]; then
+    remote="↕"
   else
     remote=""
-  fi
-  diverge_pattern="Your branch and (.*) have diverged"
-  if [[ ${git_status} =~ ${diverge_pattern} ]]; then
-    remote="↕"
   fi
 
   # get the name of the branch
