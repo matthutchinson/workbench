@@ -1,4 +1,4 @@
 #!/bin/sh
 
 # install local tool gems
-gem install lolcommits hue lifx travis terminal-notifier wirble hirb awesome_print pry pry-doc pry-nav --no-ri --no-rdoc
+gem install lolcommits hue lifx travis terminal-notifier wirble hirb awesome_print pry pry-doc pry-nav jekyll --no-ri --no-rdoc
