@@ -1,9 +1,6 @@
 -R
 --exclude=.git
 --exclude=tmp
---exclude=log *
---exclude=vendor/bundle
---exclude=db/migrate/*
---exclude=*.sass
---exclude=*.gz
---languages=-javascript,sql
+--exclude=log
+--exclude=vendor/bundle/gems
+--languages=-javascript,-sql
