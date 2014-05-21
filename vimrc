@@ -68,9 +68,9 @@ set ttyfast                       " for speed and better rendering
 set splitbelow                    " open horizontal splits on the right
 set splitright                    " open vertical splits below
 
-" ctags are maintained/refreshed using this technique with git
+" ctags are maintained/refreshed using this technique with git and the fugitive
+" and rails plugins from tpope
 " http://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
-set tags=./tags,tags
 
 " status line
 set laststatus=2
@@ -255,6 +255,5 @@ endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
 
 " ignores
-set wildignore+=*.o,*.obj,**/vendor/apache-ant-1.8.2/**
+set wildignore+=*.o,*.obj,*/.hg/*,*/.svn/*,*.so
 set wildignore+=**/vendor/rails/**,**/vendor/bundle/**,**/tmp/cache/**,**/public/destinations/**
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,tags
