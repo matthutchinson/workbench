@@ -32,6 +32,7 @@ alias spush='be rake smartling:push'
 alias spull='be rake smartling:pull'
 alias htps='be rake parallel:fast_prepare;be rake parallel:spec[4]'
 alias htpf='be rake parallel:fast_prepare;be rake parallel:safe_features[4]'
+alias boost='script/plugin install git://github.com/thedarkone/rails-dev-boost -r rails-2-3'
 
 # rails
 alias gofast='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = true\"" config/environments/development.rb'
