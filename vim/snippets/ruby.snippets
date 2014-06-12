@@ -1,22 +1,17 @@
-# debugger
 snippet rbug
 	require 'ruby-debug'
 	debugger
 
-# pry debugger
 snippet pryme
 	require 'pry'
 	binding.pry
 
-# remote pry debugger
 snippet rpry
 	require 'pry'
 	binding.remote_pry
 
-# rails log
 snippet logr
-	Rails.logger.info("===========> ${1:message} ${2}")
+	Rails.logger.info("===========> #{${1:message}} ${2}")
 
-# rails log
 snippet rlog
 	Rails.logger.info("===== in here ======")

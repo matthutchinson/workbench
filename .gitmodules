@@ -28,9 +28,6 @@
 [submodule "vim/pathogen/vim-coffee-script"]
 	path = vim/pathogen/vim-coffee-script
 	url = https://github.com/kchmck/vim-coffee-script.git
-[submodule "vim/pathogen/snipmate"]
-	path = vim/pathogen/snipmate
-	url = https://github.com/msanders/snipmate.vim.git
 [submodule "vim/pathogen/tslime.vim"]
 	path = vim/pathogen/tslime.vim
 	url = https://github.com/jgdavey/tslime.vim.git
@@ -55,3 +52,9 @@
 [submodule "vim/pathogen/ag.vim"]
 	path = vim/pathogen/ag.vim
 	url = https://github.com/rking/ag.vim.git
+[submodule "vim/pathogen/ultisnips"]
+	path = vim/pathogen/ultisnips
+	url = git@github.com:SirVer/ultisnips.git
+[submodule "vim/pathogen/vim-snippets"]
+	path = vim/pathogen/vim-snippets
+	url = git@github.com:honza/vim-snippets.git

@@ -11,6 +11,11 @@ runtime macros/matchit.vim
 let mapleader = ","
 let g:mapleader = ","
 
+" snippets trigger configuration
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 " textwidth and format options
 set textwidth=80
 set fo-=t
@@ -163,8 +168,8 @@ map <leader>m :! mate %<cr>
 nnoremap <silent> <C-a> :nohl<CR><C-a>
 
 " buffers
-nnoremap <tab> :bn<cr>
-nnoremap <S-tab> :bp<cr>
+nmap <Tab> :bp<cr>
+nmap <S-Tab> :bn<cr>
 nmap <leader>d :bd<cr>
 nmap <leader>D :bufdo bd<cr>
 
@@ -203,8 +208,8 @@ map <leader>gc :Gcommit
 " turn OFF arrow keys
 nnoremap <Up>    <nop>
 nnoremap <Down>  <nop>
-nnoremap <Left>  <nop>
-nnoremap <Right> <nop>
+" nnoremap <Left>  <nop>
+" nnoremap <Right> <nop>
 
 " custom syntax highlighting
 au BufRead,BufNewFile *.as   set ft=actionscript
