@@ -28,6 +28,7 @@ alias cdhtt='cd /u/apps/housetrip-parallel-test'
 alias cdwb='cd /u/code/workbench'
 
 # HouseTrip
+alias sdance='be rake smartling:push smartling:pull'
 alias spush='be rake smartling:push'
 alias spull='be rake smartling:pull'
 alias htps='be rake parallel:fast_prepare;be rake parallel:spec[4]'
