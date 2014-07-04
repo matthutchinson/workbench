@@ -179,6 +179,9 @@ map <leader>rn :w ! %<CR>
 " save and run with ruby
 map <leader>rr :w ! ruby<CR>
 
+" convert to new ruby hash syntax
+map <leader>ch :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
+
 " perform Google search for word(s)
 map <leader>? :G<cr>
 
