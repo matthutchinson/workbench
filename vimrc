@@ -176,8 +176,8 @@ nmap <leader>D :bufdo bd<cr>
 " save and run in shell
 map <leader>rn :w ! %<CR>
 
-" save and run with ruby
-map <leader>rr :w ! ruby<CR>
+" save and run with script/runner
+map <leader>rr :w ! script/runner %<CR>
 
 " convert to new ruby hash syntax
 map <leader>ch :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
