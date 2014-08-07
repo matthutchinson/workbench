@@ -8,7 +8,7 @@ export PATH="/Users/matt/bin:/Applications/Firefox.app/Contents/MacOS:/usr/local
 export EDITOR="/usr/local/bin/vim"
 export EVENT_NOKQUEUE=1
 export NODE_PATH="/usr/local/lib/node_modules"
-export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home"
+export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
 
 # Ruby GC - https://gist.github.com/865706
 export RUBY_HEAP_SLOTS_INCREMENT=10000
