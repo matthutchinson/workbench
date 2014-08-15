@@ -93,7 +93,8 @@ alias srr="find . -name .svn -print0 | xargs -0 rm -rf"
 
 # git
 alias grr="git ls-files --deleted | xargs git rm"
-alias gaa="git add ."
+alias gaa="git add --all --intent-to-add"
+alias gap="git add --patch"
 alias gb="git list-branches"
 alias gd="git diff | vi -"
 alias gl="git pull"
