@@ -9,6 +9,9 @@
 #  travis login --pro
 #  travis token --pro"
 
+# TODO, needs refactoring, loggin and better error handling (e.g. gem not
+# working in fork)
+
 require "travis/pro"
 require 'terminal-notifier'
 
