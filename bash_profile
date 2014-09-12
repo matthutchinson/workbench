@@ -9,6 +9,7 @@ export EDITOR="/usr/local/bin/vim"
 export EVENT_NOKQUEUE=1
 export NODE_PATH="/usr/local/lib/node_modules"
 export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
+export CLICOLOR=1 # ls coloring
 
 # Ruby GC - https://gist.github.com/865706
 export RUBY_HEAP_SLOTS_INCREMENT=10000
@@ -93,6 +94,9 @@ function set_bash_prompt {
 
 # set the prompt
 PROMPT_COMMAND=set_bash_prompt
+
+bind '"\e[A":history-search-backward'
+bind '"\e[B":history-search-forward'
 
 # tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
