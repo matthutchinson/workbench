@@ -10,9 +10,6 @@ Dir.chdir(workbench_path) do
   puts "  Working in #{Dir.pwd}"
   puts '  Pulling latest ...'
   puts "  #{`git pull`}"
-  puts '  Updating submodules ...'
-  puts "  #{`git submodule update --init --recursive`}"
-  puts "  #{`git submodule -q foreach git pull -q origin master`}"
   puts '  Creating symlinks ...'
 
    Dir.glob('*') do |item|
@@ -26,10 +23,6 @@ Dir.chdir(workbench_path) do
     end
   end
 end
-
-# regenerate vim help tags with pathogen :Helptags
-puts '  Updating vim help tags'
-`vim -c 'call pathogen#helptags()|qa' > /dev/null`
 
 # make sure vim backup dir exists
 puts `mkdir -p ~/.vim/tmp`

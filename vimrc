@@ -1,8 +1,30 @@
 " set this first (avoid use of -N for vi compatibility)
 set nocompatible
 
-" use pathogen
-call pathogen#infect('pathogen')
+" plugins via Plug - https://github.com/junegunn/vim-plug
+call plug#begin('~/.vim/plugged')
+
+Plug 'https://github.com/tpope/vim-fugitive.git'
+Plug 'https://github.com/tpope/vim-commentary.git'
+Plug 'https://github.com/tpope/vim-cucumber.git'
+Plug 'https://github.com/tpope/vim-bundler.git'
+Plug 'https://github.com/tpope/vim-haml.git'
+Plug 'https://github.com/tpope/vim-rails.git'
+Plug 'https://github.com/tpope/vim-markdown.git'
+Plug 'https://github.com/kien/ctrlp.vim.git'
+Plug 'https://github.com/jgdavey/vim-turbux.git'
+Plug 'https://github.com/jgdavey/tslime.vim.git'
+Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
+Plug 'https://github.com/kchmck/vim-coffee-script.git'
+Plug 'https://github.com/godlygeek/tabular.git'
+Plug 'https://github.com/mattn/gist-vim.git'
+Plug 'https://github.com/mattn/webapi-vim.git'
+Plug 'https://github.com/szw/vim-g'
+Plug 'https://github.com/rking/ag.vim.git'
+Plug 'https://github.com/SirVer/ultisnips.git'
+Plug 'https://github.com/honza/vim-snippets.git'
+
+call plug#end()
 
 " load matchit (use % to jump)
 runtime macros/matchit.vim
