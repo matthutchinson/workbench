@@ -4,3 +4,4 @@ vendor/*
 coverage/*
 tags
 tmp/sass-cache/*
+.git/*
