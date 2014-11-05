@@ -5,3 +5,4 @@ coverage/*
 tags
 tmp/sass-cache/*
 .git/*
+log/*

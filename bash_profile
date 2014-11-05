@@ -10,6 +10,8 @@ export EVENT_NOKQUEUE=1
 export NODE_PATH="/usr/local/lib/node_modules"
 export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
 export CLICOLOR=1 # ls coloring
+export SERVER_SOFTWARE='pow'
+
 
 # Ruby GC - https://gist.github.com/865706
 export RUBY_HEAP_SLOTS_INCREMENT=10000
