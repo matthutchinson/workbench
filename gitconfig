@@ -1,6 +1,7 @@
 [user]
 	name = Matthew Hutchinson
 	email = matt@hiddenloop.com
+	signingkey = D778C2B8
 [color]
   status = auto
   diff = auto
