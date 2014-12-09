@@ -24,10 +24,14 @@ Dir.chdir(workbench_path) do
   end
 end
 
+# setting crontab
+puts '  Setting local crontab ...'
+`crontab #{workbench_path}/crontab`
+
+# upgrade vim-plug plugin, then all upgrade all plugin
+puts '  Updating vim plugins ...'
 # make sure vim backup dir exists
 puts `mkdir -p ~/.vim/tmp`
-
-# setting crontab
-`crontab #{workbench_path}/crontab`
+`vi +PlugUpgrade +PlugUpdate +PlugClean +qall`
 
 puts '  All done!'
