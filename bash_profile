@@ -4,7 +4,7 @@ if [ -f ~/.secret ]; then . ~/.secret ; fi
 
 # exports
 export TERM="screen-256color" # use screen-256color to play nicer with tmux
-export PATH="/Users/matt/bin:/Applications/Firefox.app/Contents/MacOS:/usr/local/php/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
+export PATH="./bin:/Users/matt/bin:/Applications/Firefox.app/Contents/MacOS:/usr/local/php/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
 export EDITOR="/usr/local/bin/vim"
 export EVENT_NOKQUEUE=1
 export NODE_PATH="/usr/local/lib/node_modules"
