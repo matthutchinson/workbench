@@ -1,0 +1,37 @@
+server {
+  listen  443 ssl;
+  server_name ~^(?<domain>).dev$;
+
+  root /u/apps/$domain/public;
+  index index.html index.htm;
+
+  # logging
+  access_log      /usr/local/var/log/nginx/ssl-access.log debugging;
+  error_log       /usr/local/var/log/nginx/ssl-error.log;
+
+  # certs
+  ssl_certificate      ssl/pow.dev.crt;
+  ssl_certificate_key  ssl/pow.dev.key;
+
+  location / {
+
+    # proxy
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_redirect off;
+
+    # vcap.me to apache (8080)
+    if ($host ~* ^(.*)\.vcap\.me) {
+      proxy_pass http://localhost:8080;
+    }
+
+    # .dev, .xip.io to pow (80)
+    if ($host ~* ^(.*)\.[dev|xip.io]) {
+      proxy_pass http://localhost:80;
+    }
+
+    proxy_next_upstream error timeout invalid_header http_500 http_502 http_503;
+    proxy_set_header X-Forwarded-Proto https;
+  }
+}

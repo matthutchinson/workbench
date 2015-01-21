@@ -13,7 +13,7 @@ Dir.chdir(workbench_path) do
   puts '  Creating symlinks ...'
 
    Dir.glob('*') do |item|
-    next if ['README.md', 'fonts', 'tags', '.bundle'].include?(item)
+    next if ['README.md', 'fonts', 'tags', '.bundle', 'nginx'].include?(item)
     if ['bin', 'tmux'].include?(item)
       `rm -rf ~/#{item}`
       `ln -sfh #{workbench_path}/#{item} ~/`
@@ -31,7 +31,16 @@ puts '  Setting local crontab ...'
 # upgrade vim-plug plugin, then all upgrade all plugin
 puts '  Updating vim plugins ...'
 # make sure vim backup dir exists
-puts `mkdir -p ~/.vim/tmp`
+`mkdir -p ~/.vim/tmp`
 `vi +PlugUpgrade +PlugUpdate +PlugClean +qall`
 
-puts '  All done!'
+# set nginx config
+puts '  Setting nginx config'
+`mkdir -p /usr/local/var/log`
+`mkdir -p /usr/local/var/log/nginx`
+`mkdir -p /usr/local/etc/nginx`
+`ln -sfh #{workbench_path}/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf`
+`ln -sfh #{workbench_path}/nginx/sites-available /usr/local/etc/nginx/sites-available`
+`ln -sfh #{workbench_path}/nginx/sites-enabled /usr/local/etc/nginx/sites-enabled`
+
+puts "\n  All done!"
