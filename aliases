@@ -10,6 +10,7 @@ alias colors='for code in $(seq -w 0 255); do for attr in 0 1; do printf "%s-%03
 alias irc='ssh grantham -t "screen -x"'
 alias con='tail -40 -f /var/log/system.log'
 alias gpg='gpg2'
+alias con="tail -40 -f /var/log/system.log"
 
 # https://github.com/trapd00r/ls--/issues/14
 alias l='LC_ALL=en_US.UTF-8 LANG=en ls++'
