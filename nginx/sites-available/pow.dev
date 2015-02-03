@@ -21,6 +21,8 @@ server {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_redirect off;
 
+    client_body_temp_path /usr/local/etc/nginx/client_body_temp;
+
     # vcap.me to apache (8080)
     if ($host ~* ^(.*)\.vcap\.me) {
       proxy_pass http://localhost:8080;
