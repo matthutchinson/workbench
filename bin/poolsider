@@ -1,0 +1,4 @@
+# brew install python3
+# pip3 install scdl
+
+curl -s http://poolsideapi2.herokuapp.com/tracks?p=2 | egrep -oEi '"scUrl": ".*",$' | sed 's/"scUrl": "//' | sed 's/",//' | xargs -I '{}' scdl -l {}
