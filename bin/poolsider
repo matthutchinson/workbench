@@ -1,4 +1,11 @@
-# brew install python3
+#!/bin/sh -x
+
+# no python3 (pip3) or curl? use this
+# brew install python3 curl
+
+# https://github.com/flyingrub/scdl
 # pip3 install scdl
 
-curl -s http://poolsideapi2.herokuapp.com/tracks?p=2 | egrep -oEi '"scUrl": ".*",$' | sed 's/"scUrl": "//' | sed 's/",//' | xargs -I '{}' scdl -l {}
+curl -s http://poolsideapi2.herokuapp.com/tracks?p=2 | grep -o '"scUrl": ".*",$' | sed -E 's/("scUrl": "|",.*$)//g' | xargs -I 'url' scdl -l url --hidewarnings
+
+# visit http://poolside.fm for general awesome-ness
