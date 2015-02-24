@@ -60,8 +60,8 @@ puts '  Setting nginx config'
 `mkdir -p /usr/local/var/log`
 `mkdir -p /usr/local/var/log/nginx`
 `mkdir -p /usr/local/etc/nginx`
-`rm -rf /usr/local/etc/nginx/client_body_temp`
-`mkdir /usr/local/etc/nginx/client_body_temp`
+`mkdir -p /usr/local/etc/nginx/client_body_temp`
+`chmod -R 777 /usr/local/etc/nginx/client_body_temp`
 `ln -sfh #{workbench_path}/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf`
 `ln -sfh #{workbench_path}/nginx/sites-available /usr/local/etc/nginx/sites-available`
 `ln -sfh #{workbench_path}/nginx/sites-enabled /usr/local/etc/nginx/sites-enabled`
