@@ -121,7 +121,7 @@ let g:ctrlp_lazy_update = 1      " update after 250ms
 " if we have Ag (the silver searcher)
 if executable('ag')
   " use Ag instead of grep (the silver searcher)
-  set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=ag\ --nogroup\ --nocolor\ --hidden
 
   " Ctrl+f opens global search, and browsing
   map <C-F> :Ag --hidden<Space>
