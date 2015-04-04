@@ -15,6 +15,12 @@ server {
 
   location / {
 
+    # gzip
+    gzip on;
+    gzip_disable "msie6";
+    gzip_comp_level 7;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
     # proxy
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
