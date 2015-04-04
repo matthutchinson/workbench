@@ -48,33 +48,35 @@ alias rst='touch ./tmp/restart.txt'
 alias migrations?='git diff --cached origin/production db/migrate | grep +++'
 alias rbenvit='rbenv shell `cat .ruby-version`'
 
-sc () {
-  if [ -f ./bin/rails ]; then
-    ./bin/rails console $@
-  elif [ -f ./script/rails ]; then
+rc() {
+  if [ -f ./script/rails ]; then
     bundle exec rails c $@
-  else
+  fi
+}
+
+rg() {
+  if [ -f ./script/rails ]; then
+    bundle exec rails g $@
+  fi
+}
+
+sc () {
+  if [ -f ./script/console ]; then
     ./script/console $@
   fi
 }
 
 sg () {
-  if [ -f ./bin/rails ]; then
-    ./bin/rails generate $@
-  elif [ -f ./script/rails ]; then
-    bundle exec rails g $@
-  else
+  if [ -f ./script/generate ]; then
     ./script/generate $@
   fi
 }
 
 ss () {
-  if [ -f ./bin/rails ]; then
-    ./bin/rails server $@
+  if [ -f ./Procfile ]; then
+    bundle exec foreman start $@
   elif [ -f ./script/rails ]; then
     bundle exec rails s $@
-  elif [ -f ./Procfile ]; then
-    bundle exec foreman start $@
   else
     ./script/server $@
   fi
