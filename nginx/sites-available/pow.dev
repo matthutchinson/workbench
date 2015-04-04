@@ -16,9 +16,11 @@ server {
   location / {
 
     # gzip
+    # http://nginx.org/en/docs/http/ngx_http_gzip_module.html
     gzip on;
     gzip_disable "msie6";
     gzip_comp_level 7;
+    gzip_proxied any;
     gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
 
     # proxy
