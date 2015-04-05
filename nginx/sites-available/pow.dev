@@ -1,4 +1,9 @@
+upstream pmfaqtory-store {
+  server unix:/u/apps/pmfaqtory-store/tmp/puma/puma.sock fail_timeout=0;
+}
+
 server {
+
   listen  443 ssl;
   server_name ~^(?<domain>).dev$;
 
@@ -23,6 +28,8 @@ server {
     proxy_set_header Host $http_host;
     proxy_redirect off;
     proxy_max_temp_file_size 0;
+    proxy_next_upstream error timeout invalid_header http_500 http_502 http_503;
+    proxy_set_header X-Forwarded-Proto https;
 
     # gzip
     # http://nginx.org/en/docs/http/ngx_http_gzip_module.html
@@ -39,12 +46,11 @@ server {
       proxy_pass http://localhost:8080;
     }
 
-    # .dev, .xip.io to pow (80)
-    if ($host ~* ^(.*)\.[dev|xip.io]) {
-      proxy_pass http://localhost:20559;
+    if ($host ~* ^pmfaqtory-store.dev) {
+      proxy_pass http://pmfaqtory-store;
     }
 
-    proxy_next_upstream error timeout invalid_header http_500 http_502 http_503;
-    proxy_set_header X-Forwarded-Proto https;
+    # proxy to pow
+    proxy_pass http://localhost:20559;
   }
 }
