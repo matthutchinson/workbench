@@ -41,7 +41,7 @@ server {
 
     # .dev, .xip.io to pow (80)
     if ($host ~* ^(.*)\.[dev|xip.io]) {
-      proxy_pass http://localhost:80;
+      proxy_pass http://localhost:20559;
     }
 
     proxy_next_upstream error timeout invalid_header http_500 http_502 http_503;
