@@ -2,7 +2,7 @@
 set nocompatible
 
 " tip, write file and fire command into a Tmux window
-" :map ,t :w\|:Tmux /u/code/videosnap/build/products/Debug/videosnap -v<cr>
+" :map ,t :w\|:Tmux xcodebuild -scheme videosnap build && /u/code/videosnap/build/products/Debug/videosnap -v<cr>
 
 " plugins via Plug - https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
