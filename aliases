@@ -97,15 +97,9 @@ alias saa="svn status | grep "^\?" | sed -e 's/? *//' | sed -e 's/ /\ /g' | xarg
 alias srr="find . -name .svn -print0 | xargs -0 rm -rf"
 
 # git
-alias grr="git ls-files --deleted | xargs git rm"
-alias gaa="git add --all --intent-to-add"
-alias gap="git add --patch"
-alias gb="git list-branches"
-alias gd="git diff | vi -"
+alias gb="git branch"
 alias gl="git pull"
-alias glg="git lg"
 alias gp="git push"
-alias gst="git st"
 
 # mysql
 alias myrestart='mysql.server restart'

@@ -24,14 +24,12 @@
   ctags = !.git/hooks/ctags
   pr = pull-request
   br = branch
-  df = diff
-  lg = log -p
-  st = status -sb
   ci = commit
   co = checkout
+  fp = push -u
+  firstpush = push -u
   staged = diff --cached
   unstaged = diff
-  both = diff HEAD
   logline = log --pretty=oneline
   amend = commit --amend
   plre = pull --rebase
@@ -40,10 +38,8 @@
   today = log --since='1 Day Ago'
   recent = log --stat --since='3 Hours Ago' --graph --pretty=oneline --abbrev-commit --date=relative
   me = log --author='Matthew Hutchinson'
-	ctags = !.git/hooks/ctags
   prune-remotes = remote prune origin
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
-  firstpush = push -u
 [format]
   # git log uses --pretty format by default, so this changes the default
   # e.g. 4436819 [23 hours ago] (Gabe Berke-Williams) One line prompt
