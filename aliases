@@ -98,7 +98,7 @@ alias srr="find . -name .svn -print0 | xargs -0 rm -rf"
 
 # git
 alias gb="git branch"
-alias gl="git pull"
+alias gg="git pull"
 alias gp="git push"
 
 # mysql
