@@ -3,6 +3,7 @@ set nocompatible
 
 " tip, write file and fire command into a Tmux window
 " :map ,t :w\|:Tmux xcodebuild -scheme videosnap build && /u/code/videosnap/build/products/Debug/videosnap -v<cr>
+" :map ,t :w\|:call SendToTmux("ruby ".expand('%')."\n")<cr>
 
 " plugins via Plug - https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
@@ -201,8 +202,8 @@ nmap <leader>D :bufdo bd<cr>
 " save and run in shell
 map <leader>rn :w ! %<CR>
 
-" save and run with script/runner
-map <leader>rr :w ! script/runner %<CR>
+" save and run in Tmux window
+map <leader>rr :w\|:call SendToTmux(expand('%:p%h')."\n")<cr>
 
 " convert to new ruby hash syntax
 map <leader>ch :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
