@@ -51,21 +51,21 @@ puts '  Setting local crontab ...'
 
 # upgrade vim-plug plugin, then all upgrade all plugin
 puts '  Updating vim plugins ...'
+`vi +PlugUpgrade +PlugUpdate +PlugClean +qa!`
 # make sure vim backup dir exists
 `mkdir -p ~/.vim/tmp`
-`vi +PlugUpgrade +PlugUpdate +PlugClean +qall`
 
 # set nginx config
-puts '  Setting nginx config'
-`mkdir -p /usr/local/var/log`
-`mkdir -p /usr/local/var/log/nginx`
-`mkdir -p /usr/local/etc/nginx`
-`sudo mkdir -p /usr/local/etc/nginx/client_body_temp`
-`sudo chmod -R 777 /usr/local/etc/nginx/client_body_temp`
-`ln -sfh #{workbench_path}/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf`
-`ln -sfh #{workbench_path}/nginx/sites-available /usr/local/etc/nginx/sites-available`
-`ln -sfh #{workbench_path}/nginx/sites-enabled /usr/local/etc/nginx/sites-enabled`
-# ensure nginx ssl certs
-ensure_ssl_cert('pow.dev')
+# puts '  Setting nginx config'
+# `mkdir -p /usr/local/var/log`
+# `mkdir -p /usr/local/var/log/nginx`
+# `mkdir -p /usr/local/etc/nginx`
+# `sudo mkdir -p /usr/local/etc/nginx/client_body_temp`
+# `sudo chmod -R 777 /usr/local/etc/nginx/client_body_temp`
+# `ln -sfh #{workbench_path}/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf`
+# `ln -sfh #{workbench_path}/nginx/sites-available /usr/local/etc/nginx/sites-available`
+# `ln -sfh #{workbench_path}/nginx/sites-enabled /usr/local/etc/nginx/sites-enabled`
+# # ensure nginx ssl certs
+# ensure_ssl_cert('pow.dev')
 
 puts "\n  All done!"
