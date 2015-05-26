@@ -11,7 +11,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-cucumber.git'
-"Plug 'https://github.com/tpope/vim-bundler.git'
+Plug 'https://github.com/tpope/vim-bundler.git'
 Plug 'https://github.com/tpope/vim-haml.git'
 Plug 'https://github.com/tpope/vim-rails.git'
 Plug 'https://github.com/tpope/vim-markdown.git'

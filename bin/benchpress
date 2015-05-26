@@ -49,9 +49,9 @@ end
 puts '  Setting local crontab ...'
 `crontab #{workbench_path}/crontab`
 
-# upgrade vim-plug plugin, then all upgrade all plugin
+# upgrade vim-plug plugin, then all upgrade all plugins
 puts '  Updating vim plugins ...'
-`vi +PlugUpgrade +PlugUpdate +PlugClean +qa!`
+`vi +PlugUpgrade +PlugUpdate +qa!`
 # make sure vim backup dir exists
 `mkdir -p ~/.vim/tmp`
 
