@@ -38,9 +38,13 @@ alias htps='be rake parallel:fast_prepare;be rake parallel:spec[4]'
 alias htpf='be rake parallel:fast_prepare;be rake parallel:safe_features[4]'
 alias boost='script/plugin install git://github.com/thedarkone/rails-dev-boost -r rails-2-3'
 alias unboost='rm -r /u/apps/housetrip/vendor/plugins/rails-dev-boost'
-alias s9d='ht staging-deploy $1 --channel staging9 --user matt --staging staging9'
 
-# rails
+# deploy to a staging
+sd () {
+  ht staging-deploy "$2" --channel staging"$1" --user matt --staging staging"$1";
+}
+
+# Rails
 alias gofast='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = true\"" config/environments/development.rb'
 alias goslow='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = false\"" config/environments/development.rb'
 alias tdl='tail -f ./log/development.log'
