@@ -41,7 +41,7 @@ alias unboost='rm -r /u/apps/housetrip/vendor/plugins/rails-dev-boost'
 
 # deploy to a staging
 sd () {
-  ht staging-deploy "$2" --channel staging"$1" --user matt --staging staging"$1";
+  ht staging-deploy "$2" --channel staging"$1" --staging staging"$1";
 }
 
 # Rails
