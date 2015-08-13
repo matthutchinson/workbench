@@ -33,6 +33,9 @@ call plug#end()
 " load matchit (use % to jump)
 runtime macros/matchit.vim
 
+" use this dictionary for completions (ctrl-x ctrl-k)
+:set dictionary=/usr/share/dict/words
+
 " comma for map leader
 let mapleader = ","
 let g:mapleader = ","
@@ -161,7 +164,6 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 "  Opening quick buffers
 nnoremap <C-n> :cn<cr>
 nnoremap <C-p> :cp<cr>
-nnoremap <C-o> :copen<cr>
 
 " F3 alphabetize sorts inner css
 nmap <F3> :g#\({\n\)\@<=#.,/}/sort<CR>
