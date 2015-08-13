@@ -44,6 +44,11 @@ sd () {
   ht staging-deploy "$2" --channel staging"$1" --staging staging"$1";
 }
 
+# migrate a staging
+sm () {
+  ht migrate staging"$1" --channel staging"$1";
+}
+
 # Rails
 alias gofast='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = true\"" config/environments/development.rb'
 alias goslow='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = false\"" config/environments/development.rb'
