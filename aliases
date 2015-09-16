@@ -59,27 +59,15 @@ alias migrations?='git diff --cached origin/production db/migrate | grep +++'
 alias rbenvit='rbenv shell `cat .ruby-version`'
 
 sc () {
-  if [ -f ./script/console ]; then
-    ./script/console $@
-  else
-    bundle exec ./bin/rails console $@
-  fi
+  bundle exec ./bin/rails console $@
 }
 
 sg () {
-  if [ -f ./script/generate ]; then
-    ./script/generate $@
-  else
-    bundle exec ./bin/rails generate $@
-  fi
+  bundle exec ./bin/rails generate $@
 }
 
 ss () {
-  if [ -f ./script/server ]; then
-    ./script/server $@
-  else
-    bundle exec ./bin/rails server $@
-  fi
+  bundle exec ./bin/rails server $@
 }
 
 # bundler / rake / spec / cucumber
