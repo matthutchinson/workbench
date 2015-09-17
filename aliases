@@ -58,26 +58,15 @@ alias rst='touch ./tmp/restart.txt'
 alias migrations?='git diff --cached origin/production db/migrate | grep +++'
 alias rbenvit='rbenv shell `cat .ruby-version`'
 
-sc () {
-  bundle exec ./bin/rails console $@
-}
-
-sg () {
-  bundle exec ./bin/rails generate $@
-}
-
-ss () {
-  bundle exec ./bin/rails server $@
-}
-
 # bundler / rake / spec / cucumber
 alias be='bundle exec'
-alias ber='bundle exec rake'
-alias bes='bundle exec spec'
+alias ss='bundle exec rails server'
+alias sc='bundle exec rails console'
+alias sg='bundle exec rails generate'
+alias bes='bundle exec rspec'
 alias bec='bundle exec cucumber'
 alias rdbm='bundle exec rake db:migrate'
 alias rdbp='bundle exec rake db:test:prepare'
-alias rsp='bundle exec rake spec'
 
 # svn
 alias scm="svn commit --username matt "
