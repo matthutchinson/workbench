@@ -1,8 +1,7 @@
 metric_fu/*
-public/destinations/*.js
 vendor/*
 coverage/*
 tags
-tmp/sass-cache/*
+sass-cache/*
 .git/*
 log/*
