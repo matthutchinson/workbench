@@ -2,3 +2,4 @@
 BUNDLE_DISABLE_SHARED_GEMS: '1'
 BUNDLE_PATH: vendor/bundle
 BUNDLE_BUILD__PUMA: "--with-opt-include=/usr/local/opt/openssl/include"
+BUNDLE_BUILD__LIBV8: "--with-system-v8"
