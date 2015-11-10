@@ -205,7 +205,7 @@ nmap <leader>D :bufdo bd<cr>
 map <leader>rn :w ! %<CR>
 
 " save and run in Tmux window
-map <leader>rr :w\|:call SendToTmux(expand('%:p%h')."\n")<cr>
+map <leader>rr :w\|:call SendToTmux("\"".expand('%:p%h')."\"\n")<cr>
 
 " convert to new ruby hash syntax
 map <leader>ch :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
