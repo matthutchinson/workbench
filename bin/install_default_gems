@@ -1,4 +1,4 @@
 #!/bin/sh
 
 # install local tool gems
-gem install renv elba git-whistles guignol lolcommits hue lifx travis terminal-notifier wirble awesome_print pry pry-doc pry-nav jekyll donjon cocoapods --no-ri --no-rdoc
+gem install foreman renv elba git-whistles guignol lolcommits hue lifx travis terminal-notifier wirble awesome_print pry pry-doc pry-nav jekyll donjon cocoapods --no-ri --no-rdoc
