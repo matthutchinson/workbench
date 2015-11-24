@@ -8,7 +8,6 @@ export PATH="/Users/matt/bin:/Applications/Firefox.app/Contents/MacOS:/usr/local
 export EDITOR="/usr/local/bin/vim"
 export EVENT_NOKQUEUE=1
 export NODE_PATH="/usr/local/lib/node_modules"
-export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
 export CLICOLOR=1 # ls coloring
 export SERVER_SOFTWARE='pow'
 export XCODE="`xcode-select --print-path`"
