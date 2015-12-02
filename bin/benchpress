@@ -56,7 +56,7 @@ puts '  Updating vim plugins ...'
 `mkdir -p ~/.vim/tmp`
 
 # set/link mysql config
-#`sudo ln -sfh #{workbench_path}/my.cnf /etc/my.cnf"
+#`sudo ln -sfh #{workbench_path}/my.cnf /etc/my.cnf`
 
 # set nginx config
 # puts '  Setting nginx config'
