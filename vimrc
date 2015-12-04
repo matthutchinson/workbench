@@ -118,7 +118,7 @@ set nofoldenable
 
 " turbux
 let g:turbux_command_prefix = 'bundle exec'
-let g:turbux_command_rspec = 'rspec'
+let g:turbux_command_rspec = 'zeus rspec'
 
 " ctrlp
 let g:ctrlp_max_height = 20      " window height
