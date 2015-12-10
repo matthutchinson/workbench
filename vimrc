@@ -247,6 +247,7 @@ au BufRead,BufNewFile *.as   set ft=actionscript
 au BufRead,BufNewFile *.mxml set ft=mxml
 au BufNewFile,BufRead *.json set ft=javascript
 au BufNewFile,BufRead *.god  set ft=ruby
+au BufNewFile,BufRead {*.md,*.markdown} set ft=markdown
 au BufNewFile,BufRead /private/etc/apache2/*.conf* set ft=apache
 au BufRead,BufNewFile {Capfile,Gemfile,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
@@ -257,7 +258,8 @@ autocmd BufWritePre * :%s/\s\+$//e
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
 " always spellcheck on text like files
-autocmd BufRead,BufNewFile {*.md,*.txt,*.textile} setlocal spell
+autocmd BufRead,BufNewFile {*.md,*.txt,*.textile,*.markdown,*.rdoc} setlocal spell
+
 
 " allow spell check auto complete C-N (insert mode)
 set complete+=kspell
