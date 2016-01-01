@@ -78,6 +78,7 @@ set showmatch
 set incsearch                     " highlight matches as you type
 set hlsearch                      " highlight matches
 
+set autochdir                     " change directories upon opening a file
 set autoindent                    " always set autoindenting on
 set copyindent                    " copy the previous indentation on autoindenting
 
