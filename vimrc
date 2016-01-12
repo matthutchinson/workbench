@@ -4,6 +4,8 @@ set nocompatible
 " tip, write file and fire command into a Tmux window
 " :map ,t :w\|:Tmux xcodebuild -scheme videosnap build && /u/code/videosnap/build/products/Debug/videosnap -v<cr>
 " :map ,t :w\|:call SendToTmux("ruby ".expand('%')."\n")<cr>
+" or just write file, compile and run it (no Tmux)
+" :map ,t :w\|:!gcc % -o ./string_reverser; ./string_reverser<CR>
 
 " plugins via Plug - https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
