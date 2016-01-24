@@ -51,7 +51,7 @@ puts '  Setting local crontab ...'
 
 # upgrade vim-plug plugin, then all upgrade all plugins
 puts '  Updating vim plugins ...'
-`vi +PlugUpgrade +PlugUpdate +qa!`
+`vim +PlugUpgrade +PlugUpdate +qa!`
 # make sure vim backup dir exists
 `mkdir -p ~/.vim/tmp`
 
