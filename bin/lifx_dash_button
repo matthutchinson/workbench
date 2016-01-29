@@ -3,7 +3,7 @@
 require 'packetfu'
 require 'lifx'
 
-MIN_LIFX_LIGHT_COUNT = 3
+MIN_LIFX_LIGHT_COUNT = 4
 LIFX_DASH_BUTTON_MAC = '90:72:40:0b:f2:f4'
 
 # init client
@@ -21,11 +21,11 @@ end
 def toggle_all_lifx_lights(client)
   # toggle all lights on or off
   if client.lights.first.on?
-    puts "#{Time.now} - turning lights OFF"
     client.lights.turn_off
+    puts "#{Time.now} - turning lights OFF"
   else
-    puts "#{Time.now} - turning lights ON"
     client.lights.turn_on
+    puts "#{Time.now} - turning lights ON"
   end
 
   # ensure all packets are flushed
@@ -33,9 +33,10 @@ def toggle_all_lifx_lights(client)
 end
 
 
-# # sniff and filter for ARP probe packets
+# sniff and filter for ARP probe packets
 cap = PacketFu::Capture.new(:iface => 'en0', :start => true, :filter => 'arp')
 
+pkt_count = 0
 cap.stream.each do |pkt|
   # parse packet and examime src mac address
   arpreq  = PacketFu::ARPPacket.parse(pkt)
@@ -43,12 +44,12 @@ cap.stream.each do |pkt|
   src_ip  = arpreq.arp_src_ip_readable
   if src_mac == LIFX_DASH_BUTTON_MAC
     if arpreq.arp_opcode == 1
-      # toggle_all_lifx_lights(client)
-      # require 'pry'
-      # binding.pry
-
-      puts arpreq.peek_format
-      # puts "#{src_mac},#{src_ip}"
+      # since we usually get 2 ARP packets, only operate on one of them
+      if pkt_count % 2 == 0
+        toggle_all_lifx_lights(client)
+        # puts "pktcount -> #{pkt_count.to_s} -- #{arpreq.peek_format}"
+      end
+      pkt_count += 1
     end
   end
 end
