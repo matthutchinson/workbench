@@ -34,7 +34,7 @@ end
 
 
 # sniff and filter for ARP probe packets
-cap = PacketFu::Capture.new(:iface => 'en0', :start => true, :filter => 'arp')
+cap = PacketFu::Capture.new(:iface => (ARGV[0] || 'en1'), :start => true, :filter => 'arp')
 
 pkt_count = 0
 cap.stream.each do |pkt|
