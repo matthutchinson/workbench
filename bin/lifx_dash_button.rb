@@ -24,38 +24,30 @@ class LifxDashButton
     @iface  = iface
   end
 
-  def monitor
-    find_lights
-    sniff_arp
-  end
-
   def find_lights
     puts "looking for lights ..."
-    # # wait to find all lights
     @client.discover! { |c| c.lights.count >= MIN_LIFX_LIGHT_COUNT }
     puts "found lights"
   rescue LIFX::Client::DiscoveryTimeout
     puts "sorry, I couldn't find any lights"
-    exit 1
   end
 
   def toggle_lights
-    # toggle all lights on or off, always send OFF if any are ON
+    find_lights
+
+    # always send OFF packets if any are ON
     if @client.lights.any? { |light| light.on? }
-      puts "#{Time.now} - turning lights OFF"
+      puts "#{Time.now} - turning all lights OFF"
       @client.lights.turn_off
-    elsif @client.lights.all? { |light| light.off? }
-      puts "#{Time.now} - turning lights ON"
-      @client.lights.turn_on
     else
-      puts "be paitent, i'm still sending packets to your lights"
+      puts "#{Time.now} - turning all lights ON"
+      @client.lights.turn_on
     end
 
-    # ensure all packets are flushed
     @client.flush
   end
 
-  def sniff_arp
+  def monitor
     # sniff and filter for ARP packets on the interface
     cap = PacketFu::Capture.new(:iface => @iface, :start => true, :filter => "arp")
     first_arp_at = 0
