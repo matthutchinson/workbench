@@ -188,6 +188,8 @@ map <Leader>s :%!git stripspace<CR>
 
 " other shortcuts
 map <leader>w :w!<cr>
+map <leader>j :sp ~/Dropbox/system/notes<cr>
+map <leader>k :sp ~/Dropbox/system/secrets<cr>
 map <leader>v :sp ~/.vimrc<cr>
 map <leader>u :source ~/.vimrc<cr>
 map <leader>e :Explore<cr>
@@ -262,6 +264,8 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 " always spellcheck on text like files
 autocmd BufRead,BufNewFile {*.md,*.txt,*.textile,*.markdown,*.rdoc} setlocal spell
 
+" set encryption mode (http://tuxdiary.com/2015/01/13/encrypt-files-with-vim/)
+set cm=blowfish2
 
 " allow spell check auto complete C-N (insert mode)
 set complete+=kspell
