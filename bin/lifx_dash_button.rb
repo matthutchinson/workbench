@@ -41,8 +41,8 @@ class LifxDashButton
     debug "response HTTP Response Body: #{res.body}"
   end
 
-  def valid_packets?
-    @arp_packets == [BROADCAST_ARP_DST_IP]*2
+  def enough_packets?
+    @arp_packets.length > 1
   end
 
   def flush_packets
@@ -63,14 +63,15 @@ class LifxDashButton
     cap.stream.each do |packet|
       pkt     = PacketFu::ARPPacket.parse(packet)
       src_mac = PacketFu::EthHeader.str2mac(pkt.eth_src)
+      dst_ip  = pkt.arp_dst_ip_readable
 
       # pressing the button, we usually get 2 good ARP packets within 5-10
       # seconds of each other, so we flush out others and look for these
-      if src_mac == LIFX_DASH_BUTTON_MAC &&
+      if src_mac == LIFX_DASH_BUTTON_MAC && (dst_ip == BROADCAST_ARP_DST_IP)
         if pkt.arp_opcode == 1
-          @arp_packets << pkt.arp_dst_ip_readable
+          @arp_packets << dst_ip
           debug pkt.peek
-          if valid_packets?
+          if enough_packets?
             toggle_lights
             flush_packets
           elsif should_flush_packets?
