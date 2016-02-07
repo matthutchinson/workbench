@@ -30,7 +30,6 @@ class LifxDashButton
 
   def toggle_lights
     log 'toggling lights'
-    return
 
     uri = URI("https://api.lifx.com/v1/lights/all/toggle")
     http = Net::HTTP.new(uri.host, uri.port)
