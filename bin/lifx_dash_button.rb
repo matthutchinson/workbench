@@ -61,6 +61,8 @@ class LifxDashButton
 
     # parse packet stream and examime src mac address
     cap.stream.each do |packet|
+      flush_packets if should_flush_packets?
+
       pkt     = PacketFu::ARPPacket.parse(packet)
       src_mac = PacketFu::EthHeader.str2mac(pkt.eth_src)
       dst_ip  = pkt.arp_dst_ip_readable
@@ -73,8 +75,6 @@ class LifxDashButton
           debug pkt.peek
           if enough_packets?
             toggle_lights
-            flush_packets
-          elsif should_flush_packets?
             flush_packets
           end
         end
