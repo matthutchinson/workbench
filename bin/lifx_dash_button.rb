@@ -46,8 +46,10 @@ class LifxDashButton
   end
 
   def flush_packets
-    debug "flushing #{@arp_packets.length} packets"
-    @arp_packets = []
+    if @arp_packets.any?
+      debug "flushing #{@arp_packets.length} packets"
+      @arp_packets = []
+    end
     @last_flush_at = Time.now.to_i
   end
 
