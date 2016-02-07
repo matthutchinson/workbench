@@ -1,17 +1,14 @@
 #!/usr/bin/env ruby
 
 # install gem dependencies with:
-# gem install packetfu fallen --no-ri --no-rdoc
+# gem install packetfu --no-ri --no-rdoc
 # get/set ENV var LIFX_DASH_API_TOKEN at https://cloud.lifx.com/settings
 
 require "packetfu"
-require "fallen"
 require "net/http"
 require "net/https"
 
 class LifxDashButton
-
-  extend Fallen
 
   def self.run
     debug = ARGV.any? { |arg| arg.include?('debug') }
@@ -20,11 +17,13 @@ class LifxDashButton
 
   BROADCAST_ARP_DST_IP = "10.0.1.18"
   LIFX_DASH_BUTTON_MAC = "90:72:40:0b:f2:f4"
+  FLUSH_PACKET_SECONDS = 30
 
   def initialize(iface: "en1", debug: false)
-    @iface       = iface
-    @debug       = debug
-    @arp_packets = []
+    @iface         = iface
+    @debug         = debug
+    @arp_packets   = []
+    @last_flush_at = Time.now.to_i
   end
 
   def toggle_lights
@@ -42,8 +41,18 @@ class LifxDashButton
     debug "response HTTP Response Body: #{res.body}"
   end
 
-  def enough_packets?
-    @arp_packets.select { |p| p == BROADCAST_ARP_DST_IP }.length > 1
+  def valid_packets?
+    @arp_packets == [BROADCAST_ARP_DST_IP]*2
+  end
+
+  def flush_packets
+    debug "flushing #{@arp_packets.length} packets"
+    @arp_packets = []
+    @last_flush_at = Time.now.to_i
+  end
+
+  def should_flush_packets?
+    Time.now.to_i > (@last_flush_at + FLUSH_PACKET_SECONDS)
   end
 
   def monitor
@@ -55,14 +64,17 @@ class LifxDashButton
       pkt     = PacketFu::ARPPacket.parse(packet)
       src_mac = PacketFu::EthHeader.str2mac(pkt.eth_src)
 
-      # since we usually get 2 ARP packets at the same time
+      # pressing the button, we usually get 2 good ARP packets within 5-10
+      # seconds of each other, so we flush out others and look for these
       if src_mac == LIFX_DASH_BUTTON_MAC &&
         if pkt.arp_opcode == 1
           @arp_packets << pkt.arp_dst_ip_readable
           debug pkt.peek
-          if enough_packets?
+          if valid_packets?
             toggle_lights
-            @arp_packets = []
+            flush_packets
+          elsif should_flush_packets?
+            flush_packets
           end
         end
       end
@@ -77,8 +89,3 @@ class LifxDashButton
 end
 
 LifxDashButton.run
-
-# LifxDashButton.pid_file "/usr/local/var/run/lifx_dash_button.pid"
-# LifxDashButton.stdout "/usr/local/var/log/lifx_dash_button.log"
-# LifxDashButton.daemonize!
-# LifxDashButton.start!
