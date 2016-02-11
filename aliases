@@ -13,6 +13,7 @@ alias con='tail -40 -f /var/log/system.log'
 alias gpg='gpg2'
 alias con="tail -40 -f /var/log/system.log"
 alias notes="vi ~/Dropbox/system/notes"
+alias todos="vi ~/Dropbox/system/todos"
 alias secrets="vi ~/Dropbox/system/secrets"
 
 # https://github.com/trapd00r/ls--/issues/14
@@ -43,13 +44,22 @@ alias boost='script/plugin install git://github.com/thedarkone/rails-dev-boost -
 alias unboost='rm -r /u/apps/housetrip/vendor/plugins/rails-dev-boost'
 
 # deploy to a staging
+# e.g. sd 1 'some deploy message'
 sd () {
   ht staging-deploy "$2" --channel staging"$1" --staging staging"$1";
 }
 
 # migrate a staging
+# e.g. sm 1
 sm () {
   ht migrate staging"$1" --channel staging"$1";
+}
+
+# e.g. git-heroku-remote kigo-production production
+git-heroku-remote () {
+  heroku git:remote -a $1 -r $2
+  git fetch $2
+  git checkout -b $2 $2/master
 }
 
 # Rails

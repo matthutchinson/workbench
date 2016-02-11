@@ -190,6 +190,7 @@ map <Leader>s :%!git stripspace<CR>
 map <leader>w :w!<cr>
 map <leader>j :sp ~/Dropbox/system/notes<cr>
 map <leader>k :sp ~/Dropbox/system/secrets<cr>
+map <leader>l :sp ~/Dropbox/system/todos<cr>
 map <leader>v :sp ~/.vimrc<cr>
 map <leader>u :source ~/.vimrc<cr>
 map <leader>e :Explore<cr>
