@@ -46,20 +46,35 @@ alias unboost='rm -r /u/apps/housetrip/vendor/plugins/rails-dev-boost'
 # deploy to a staging
 # e.g. sd 1 'some deploy message'
 sd () {
-  ht staging-deploy "$2" --channel staging"$1" --staging staging"$1";
+  if [ -n "$1" ] && [ -n "$2" ]
+  then
+    ht staging-deploy "$2" --channel staging"$1" --staging staging"$1";
+  else
+    echo "usage: sd staging-server-number 'deploy message' e.g. sd 1 'awesome deploy'"
+  fi
 }
 
 # migrate a staging
 # e.g. sm 1
 sm () {
-  ht migrate staging"$1" --channel staging"$1";
+  if [ -n "$1" ]
+  then
+    ht migrate staging"$1" --channel staging"$1";
+  else
+    echo "usage: sm staging-server-number e.g. sm 2"
+  fi
 }
 
 # e.g. git-heroku-remote kigo-production production
 git-heroku-remote () {
-  heroku git:remote -a $1 -r $2
-  git fetch $2
-  git checkout -b $2 $2/master
+  if [ -n "$1" ] && [ -n "$2" ]
+  then
+    heroku git:remote -a $1 -r $2
+    git fetch $2
+    git checkout -b $2 $2/master
+  else
+    echo "usage: git-heroku-remote heroku-app-name branch-name"
+  fi
 }
 
 # Rails
