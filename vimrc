@@ -157,8 +157,10 @@ if exists(":Tabularize")
 endif
 
 " Ctrl+c or ,c toggles commenting
-nmap <leader>c \\\
-vmap <leader>c \\\
+" to comment next 6 lines use 6gcc or 6<leader>c
+" see :help commentary for more
+nmap <leader>c gcc
+vmap <leader>c gc
 
 " do an grep search of the current word in the project
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
