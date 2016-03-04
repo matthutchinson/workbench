@@ -63,7 +63,7 @@ syntax on                         " turn on syntax highlighting
 filetype plugin indent on         " turn on file type detection
 
 set encoding=utf-8                " encoding
-set history=10000                 " remember more commands/searches
+set history=1000                  " remember more commands/searches
 set backspace=indent,eol,start    " intuitive backspacing
 
 set hidden                        " handle multiple buffers better
@@ -82,6 +82,7 @@ set hlsearch                      " highlight matches
 
 set autoindent                    " always set autoindenting on
 set copyindent                    " copy the previous indentation on autoindenting
+set smartindent
 
 set nowrap                        " turn on line wrapping
 set scrolloff=3                   " show 3 lines of context around the cursor
@@ -172,6 +173,9 @@ nnoremap <C-p> :cp<cr>
 " F3 alphabetize sorts inner css
 nmap <F3> :g#\({\n\)\@<=#.,/}/sort<CR>
 
+" re-open previous file
+nnoremap <leader><leader> :e#<CR>
+
 " F5 formats and tidy up
 map <silent> <F5> mmgg=G'm
 imap <silent> <F5> <Esc> mmgg=G'm
@@ -199,8 +203,8 @@ map <leader>e :Explore<cr>
 map <leader>ev :new <C-R>=expand("%:p:h") . '/'<cr><cr>
 map <leader>m :! mate %<cr>
 
-" ctrl-a clears highlighted searches
-nnoremap <silent> <C-a> :nohl<CR><C-a>
+" Esc clears highlighted searches
+nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 
 " buffers
 nmap <Tab> :bp<cr>
