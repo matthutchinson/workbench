@@ -10,25 +10,31 @@ set nocompatible
 " plugins via Plug - https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
 
+" core
+Plug 'https://github.com/kien/ctrlp.vim.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
-Plug 'https://github.com/tpope/vim-cucumber.git'
 Plug 'https://github.com/tpope/vim-bundler.git'
-Plug 'https://github.com/tpope/vim-haml.git'
 Plug 'https://github.com/tpope/vim-rails.git'
-Plug 'https://github.com/tpope/vim-markdown.git'
-Plug 'https://github.com/kien/ctrlp.vim.git'
+Plug 'https://github.com/godlygeek/tabular.git'
+Plug 'https://github.com/rking/ag.vim.git'
+
+" extra tools
+Plug 'https://github.com/mattn/gist-vim.git'
+Plug 'https://github.com/mattn/webapi-vim.git'
+Plug 'https://github.com/szw/vim-g.git'
+Plug 'https://github.com/SirVer/ultisnips.git'
+Plug 'https://github.com/airblade/vim-gitgutter.git'
+
+" tmux
 Plug 'https://github.com/jgdavey/vim-turbux.git'
 Plug 'https://github.com/jgdavey/tslime.vim.git'
 Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
+
+" syntax
+Plug 'https://github.com/tpope/vim-markdown.git'
+Plug 'https://github.com/tpope/vim-cucumber.git'
 Plug 'https://github.com/kchmck/vim-coffee-script.git'
-Plug 'https://github.com/godlygeek/tabular.git'
-Plug 'https://github.com/mattn/gist-vim.git'
-Plug 'https://github.com/mattn/webapi-vim.git'
-Plug 'https://github.com/szw/vim-g'
-Plug 'https://github.com/rking/ag.vim.git'
-Plug 'https://github.com/SirVer/ultisnips.git'
-Plug 'https://github.com/honza/vim-snippets.git'
 
 call plug#end()
 
@@ -46,6 +52,16 @@ let g:mapleader = ","
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" use DuckDuckGo for searching words with <leader>?
+let g:vim_g_query_url="http://duckduckgo.com/?q="
+let g:vim_g_command = "DuckDuck"
+
+" git gutter update time and change supression
+set updatetime=1000 " 4000 is default
+let g:gitgutter_map_keys = 0
+let g:gitgutter_max_signs = 300 " 500 is default
+let g:gitgutter_diff_args = '-w' " ignore whitespace in gutter changes
 
 " textwidth and format options
 set textwidth=80
@@ -221,8 +237,8 @@ map <leader>rr :w\|:call SendToTmux("\"".expand('%:p%h')."\"\n")<cr>
 " convert to new ruby hash syntax
 map <leader>ch :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
 
-" perform Google search for word(s)
-map <leader>? :G<cr>
+" perform DuckDuckGo search for word(s)
+map <leader>? :DuckDuck<cr>
 
 " rails plugin shortcuts
 map <leader>ra :A<CR>
