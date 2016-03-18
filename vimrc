@@ -36,6 +36,9 @@ Plug 'https://github.com/tpope/vim-markdown.git'
 Plug 'https://github.com/tpope/vim-cucumber.git'
 Plug 'https://github.com/kchmck/vim-coffee-script.git'
 
+" status bar and theming
+Plug 'https://github.com/itchyny/lightline.vim.git'
+
 call plug#end()
 
 " load matchit (use % to jump)
@@ -69,11 +72,64 @@ set fo-=t
 " show line at 80 chars
 set colorcolumn=+1
 
-" 256 color scheme
+" color scheme
 set t_Co=256
 if &t_Co >= 256 || has("gui_running")
   colorscheme jellybeans
 endif
+
+" configure lightline statusbar and components
+let g:lightline = {
+  \ 'colorscheme': 'wombat',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'fugitive', 'filename' ] ]
+  \ },
+  \ 'component_function': {
+  \   'fugitive': 'LightLineFugitive',
+  \   'readonly': 'LightLineReadonly',
+  \   'modified': 'LightLineModified',
+  \   'filename': 'LightLineFilename'
+  \ },
+  \ 'separator': { 'left': '⮀', 'right': '⮂' },
+  \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+  \ }
+
+function! LightLineModified()
+  if &filetype == "help"
+    return ""
+  elseif &modified
+    return "+"
+  elseif &modifiable
+    return ""
+  else
+    return ""
+  endif
+endfunction
+
+function! LightLineReadonly()
+  if &filetype == "help"
+    return ""
+  elseif &readonly
+    return "⭤"
+  else
+    return ""
+  endif
+endfunction
+
+function! LightLineFugitive()
+  if exists("*fugitive#head")
+    let _ = fugitive#head()
+    return strlen(_) ? '⭠ '._ : ''
+  endif
+  return ''
+endfunction
+
+function! LightLineFilename()
+  return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+       \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+       \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
 
 syntax on                         " turn on syntax highlighting
 filetype plugin indent on         " turn on file type detection
