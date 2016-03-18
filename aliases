@@ -77,6 +77,25 @@ git-heroku-remote () {
   fi
 }
 
+function gc {
+  if [ -n "$1" ]
+  then
+    PIVOTAL_STORY=$(echo $br | perl -ne 'print /-(\d+)$/')
+    if [[ $1 =~ "[#$PIVOTAL_STORY]" ]]; then
+      GIT_COMMIT_PT=$1
+    else
+      GIT_COMMIT_PT="[#$PIVOTAL_STORY] $1"
+    fi;
+    if [ -z $PIVOTAL_STORY ]; then
+      GIT_COMMIT_PT=$1
+    fi;
+
+    git commit -am "$GIT_COMMIT_PT"
+  else
+    echo "usage: gc 'your commit message'"
+  fi
+}
+
 # Rails
 alias gofast='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = true\"" config/environments/development.rb'
 alias goslow='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = false\"" config/environments/development.rb'
@@ -95,11 +114,6 @@ alias bes='bundle exec rspec'
 alias bec='bundle exec cucumber'
 alias rdbm='bundle exec rake db:migrate'
 alias rdbp='bundle exec rake db:test:prepare'
-
-# svn
-alias scm="svn commit --username matt "
-alias saa="svn status | grep "^\?" | sed -e 's/? *//' | sed -e 's/ /\ /g' | xargs svn add"
-alias srr="find . -name .svn -print0 | xargs -0 rm -rf"
 
 # git
 alias gb="git branch"
