@@ -351,7 +351,7 @@ set complete+=kspell
 
 " copy and paste with pbcopy/pbpaste in visual mode
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
-nmap <C-V> :call setreg("\"",system("pbpaste"))<CR>p
+nmap <C-x> :call setreg("\"",system("pbpaste"))<CR>p
 
 " rename a file
 function! RenameFile()
