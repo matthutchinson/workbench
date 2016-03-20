@@ -242,18 +242,19 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nnoremap <C-n> :cn<cr>
 nnoremap <C-p> :cp<cr>
 
-" F3 alphabetize sorts inner css
-nmap <F3> :g#\({\n\)\@<=#.,/}/sort<CR>
-
 " re-open previous file
 nnoremap <leader><leader> :e#<CR>
 
+" == function keys begin ==
+" F3 alphabetize sorts inner css
+nmap <F3> :g#\({\n\)\@<=#.,/}/sort<CR>
 " F5 formats and tidy up
-map <silent> <F5> mmgg=G'm
-imap <silent> <F5> <Esc> mmgg=G'm
-
+noremap <F5> mmgg=G'm
+inoremap <silent> <F5> <Esc> mmgg=G'mi
 " F7 spell checks
 map <F7> :setlocal spell! spelllang=en<CR>
+map <F2> :echo 'Current time is ' . strftime('%c')<CR>
+" == function keys end ==
 
 " convert hashes to new style
 map <leader>ch :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
@@ -322,8 +323,8 @@ map <leader>gc :Gcommit
 " turn OFF arrow keys
 nnoremap <Up>    <nop>
 nnoremap <Down>  <nop>
-" nnoremap <Left>  <nop>
-" nnoremap <Right> <nop>
+nnoremap <Left>  <nop>
+nnoremap <Right> <nop>
 
 " custom syntax highlighting
 au BufRead,BufNewFile *.as   set ft=actionscript
