@@ -16,28 +16,26 @@ Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/tpope/vim-commentary.git'
 Plug 'https://github.com/tpope/vim-bundler.git'
 Plug 'https://github.com/tpope/vim-rails.git'
-Plug 'https://github.com/godlygeek/tabular.git'
 Plug 'https://github.com/rking/ag.vim.git'
 
-" extra tools
-Plug 'https://github.com/mattn/gist-vim.git'
-Plug 'https://github.com/mattn/webapi-vim.git'
+" status bar
+Plug 'https://github.com/itchyny/lightline.vim.git'
+
+" extras
+Plug 'https://github.com/godlygeek/tabular.git'
+Plug 'https://github.com/SirVer/ultisnips.git' | Plug 'https://github.com/honza/vim-snippets'
 Plug 'https://github.com/szw/vim-g.git'
-Plug 'https://github.com/SirVer/ultisnips.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
+Plug 'https://github.com/mattn/webapi-vim.git' | Plug 'https://github.com/mattn/gist-vim.git'
 
 " tmux
-Plug 'https://github.com/jgdavey/vim-turbux.git'
-Plug 'https://github.com/jgdavey/tslime.vim.git'
+Plug 'https://github.com/jgdavey/tslime.vim.git' | Plug 'https://github.com/jgdavey/vim-turbux.git'
 Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
 
 " syntax
-Plug 'https://github.com/tpope/vim-markdown.git'
-Plug 'https://github.com/tpope/vim-cucumber.git'
-Plug 'https://github.com/kchmck/vim-coffee-script.git'
-
-" status bar and theming
-Plug 'https://github.com/itchyny/lightline.vim.git'
+Plug 'https://github.com/tpope/vim-markdown.git', { 'for': 'markdown' }
+Plug 'https://github.com/tpope/vim-cucumber.git', { 'for': 'cucumber' }
+Plug 'https://github.com/kchmck/vim-coffee-script.git', { 'for': 'coffee' }
 
 call plug#end()
 
@@ -48,8 +46,8 @@ runtime macros/matchit.vim
 :set dictionary=/usr/share/dict/words
 
 " comma for map leader
-let mapleader = ","
-let g:mapleader = ","
+let mapleader=","
+let g:mapleader=","
 
 " snippets trigger configuration
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -61,7 +59,7 @@ let g:vim_g_query_url="http://duckduckgo.com/?q="
 let g:vim_g_command = "DuckDuck"
 
 " git gutter update time and change supression
-set updatetime=1000 " 4000 is default
+set updatetime=250 " 4000 is default
 let g:gitgutter_map_keys = 0
 let g:gitgutter_max_signs = 300 " 500 is default
 let g:gitgutter_diff_args = '-w' " ignore whitespace in gutter changes
