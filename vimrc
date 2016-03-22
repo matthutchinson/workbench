@@ -11,31 +11,31 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 
 " core
-Plug 'https://github.com/kien/ctrlp.vim.git'
-Plug 'https://github.com/tpope/vim-fugitive.git'
-Plug 'https://github.com/tpope/vim-commentary.git'
-Plug 'https://github.com/tpope/vim-bundler.git'
-Plug 'https://github.com/tpope/vim-rails.git'
-Plug 'https://github.com/rking/ag.vim.git'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rails'
+Plug 'rking/ag.vim'
 
 " status bar
-Plug 'https://github.com/itchyny/lightline.vim.git'
+Plug 'itchyny/lightline.vim'
 
 " extras
-Plug 'https://github.com/godlygeek/tabular.git'
-Plug 'https://github.com/SirVer/ultisnips.git' | Plug 'https://github.com/honza/vim-snippets'
-Plug 'https://github.com/szw/vim-g.git'
-Plug 'https://github.com/airblade/vim-gitgutter.git'
-Plug 'https://github.com/mattn/webapi-vim.git' | Plug 'https://github.com/mattn/gist-vim.git'
+Plug 'godlygeek/tabular'
+Plug 'honza/vim-snippets'
+Plug 'szw/vim-g'
+Plug 'airblade/vim-gitgutter'
+Plug 'mattn/gist-vim'
 
 " tmux
-Plug 'https://github.com/jgdavey/tslime.vim.git' | Plug 'https://github.com/jgdavey/vim-turbux.git'
-Plug 'https://github.com/christoomey/vim-tmux-navigator.git'
+Plug 'jgdavey/vim-turbux'
+Plug 'christoomey/vim-tmux-navigator'
 
 " syntax
-Plug 'https://github.com/tpope/vim-markdown.git', { 'for': 'markdown' }
-Plug 'https://github.com/tpope/vim-cucumber.git', { 'for': 'cucumber' }
-Plug 'https://github.com/kchmck/vim-coffee-script.git', { 'for': 'coffee' }
+Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+Plug 'tpope/vim-cucumber', { 'for': 'cucumber' }
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 
 call plug#end()
 
