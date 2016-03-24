@@ -79,7 +79,7 @@ module LifxDash
 
   # set up monitor and toggle, then listen for packets
   def self.run(options = {})
-    monitor = LifxDash::Monitor.new(options[:mac_address], options.fetch(:iface, "en0"))
+    monitor = LifxDash::Monitor.new(options[:dash_mac_address], options.fetch(:iface, "en0"))
     lifx = LifxDash::Toggle.new(options[:lifx_token], options.fetch(:lifx_selector, "all"))
 
     monitor.listen { |pkt| lifx.toggle }
@@ -89,7 +89,7 @@ end
 
 LifxDash.run(
   iface: "en0",
-  mac_address: "f0:4f:7c:99:8a:73",
+  dash_mac_address: "f0:4f:7c:99:8a:73",
   lifx_token: "c2533f027a1d073ff5cb34cb77ea1e0ae6256c5a290ae7fe2d9bba3698af769d",
   lifx_selector: "d073d501ffd4"
 )
