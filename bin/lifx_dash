@@ -1,7 +1,11 @@
 #!/usr/bin/env ruby
 
 # install gem dependencies with:
-# gem install packetfu --no-ri --no-rdoc
+#   gem install packetfu --no-ri --no-rdoc
+# find dash mac address with:
+#   lifx_dash snoop
+# grab a lifx token from:
+#   https://cloud.lifx.com/settings
 
 require "packetfu"
 require "net/https"
@@ -9,13 +13,14 @@ require "net/https"
 module LifxDash
   class Toggle
 
-    def initialize(token, selector)
+    def initialize(token, selector = "all")
       @token    = token
       @selector = selector
     end
 
     def toggle
       log "[POST] #{uri}"
+      log @token
 
       Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
         req = Net::HTTP::Post.new(uri)
@@ -40,7 +45,7 @@ module LifxDash
 
   class Monitor
 
-    def initialize(mac_address, iface)
+    def initialize(mac_address = nil, iface = "en0")
       @mac_address = mac_address
       @iface = iface
     end
@@ -52,14 +57,15 @@ module LifxDash
         mac = PacketFu::EthHeader.str2mac(pkt.eth_src)
 
         # check mac address matches and arp opcode is 1
-        if mac == @mac_address
+        if (mac == @mac_address) || @mac_address.nil?
           if pkt.arp_opcode == 1
             log pkt.peek
-            block.call(pkt)
+            block.call(pkt, mac) if block
           end
         end
       end
     end
+
 
     private
 
@@ -78,18 +84,39 @@ module LifxDash
   end
 
   # set up monitor and toggle, then listen for packets
-  def self.run(options = {})
-    monitor = LifxDash::Monitor.new(options[:dash_mac_address], options.fetch(:iface, "en0"))
-    lifx = LifxDash::Toggle.new(options[:lifx_token], options.fetch(:lifx_selector, "all"))
-
+  def self.run(opts = {})
+    monitor = LifxDash::Monitor.new(opts[:dash_mac_address], opts[:iface])
+    lifx = LifxDash::Toggle.new(opts[:lifx_token], opts[:lifx_selector])
     monitor.listen { |pkt| lifx.toggle }
+  end
+
+  # just listen for any dash like arp packets, from any device
+  def self.snoop(iface)
+    puts "NOTE: listening for dash packets, you may get more than 1 from a press"
+    puts "if so, look for the mac address that occurs only once"
+    puts "wait for the network to quiet down, before pressing the button"
+    puts "now snooping on network interface: #{iface} ...\n\n"
+    LifxDash::Monitor.new(nil, iface).listen
+  end
+
+  def self.help
+    puts "usage: "
+    puts "  lifx_dash mac_address lifx_token {lifx_selector:all} {network_iface:en0}"
+    puts "  lifx_dash snoop {network_iface:en0}"
+    exit 1
   end
 end
 
-
-LifxDash.run(
-  iface: "en0",
-  dash_mac_address: "f0:4f:7c:99:8a:73",
-  lifx_token: "c2533f027a1d073ff5cb34cb77ea1e0ae6256c5a290ae7fe2d9bba3698af769d",
-  lifx_selector: "d073d501ffd4"
-)
+# check args
+if ARGV[0] == 'snoop'
+  LifxDash.snoop(ARGV[1] || "en0")
+elsif ARGV.length > 1
+  LifxDash.run(
+    dash_mac_address: ARGV[0],
+          lifx_token: ARGV[1],
+       lifx_selector: ARGV[2] || "all",
+               iface: ARGV[3] || "en0"
+  )
+else
+  LifxDash.help
+end
