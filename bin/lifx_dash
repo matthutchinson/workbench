@@ -1,5 +1,19 @@
 #!/usr/bin/env ruby
 
+# Thanks to @edwardbenson for the idea:
+#   http://tinyurl.com/zujfkjs
+#
+# TODO:
+#   * gem?
+#   * tests
+#   * better argument handling
+#   * better at_exit handling
+#   * better HTTP API error handling
+#   * helpful error messages
+#   * configure command / file
+#   * construct packets for Lifx LAN API
+#   * more lifx options than toggling
+
 # install gem dependencies with:
 #   gem install packetfu --no-ri --no-rdoc
 # find dash mac address with:
