@@ -23,6 +23,7 @@ Plug 'itchyny/lightline.vim'
 
 " extras
 Plug 'godlygeek/tabular'
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'szw/vim-g'
 Plug 'airblade/vim-gitgutter'
