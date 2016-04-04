@@ -1,0 +1,38 @@
+snippet todo "This is a TODO reminder" b
+# TODO: ${1:desc} (added by `echo $USER` on `!v strftime("%c")`)
+endsnippet
+
+snippet rpry "Remote pry debugging"
+require 'pry'; binding.remote_pry
+endsnippet
+
+snippet logr "Rails log info message"
+Rails.logger.info("===========> #{${1:message}} ${2}")
+endsnippet
+
+snippet simp "simple python snippet" !b
+`!p snip.rv = "Hello"`
+endsnippet
+
+snippet uuid "UUID" !b
+`!p import uuid
+if not snip.c:
+  snip.rv = uuid.uuid4().hex`
+endsnippet
+
+snippet 'rep (\d+) (\w+)' "repeat with python" r
+`!p snip.rv = int(match.group(1))*match.group(2)`
+endsnippet
+
+global !p
+def complete(t, opts):
+  if t:
+    opts = [ m[len(t):] for m in opts if m.startswith(t) ]
+  if len(opts) == 1:
+    return opts[0]
+  return "(" + '|'.join(opts) + ')'
+endglobal
+
+snippet '^ st' "status autocomplete" r
+status $1`!p snip.rv=complete(t[1], ['new', 'incomplete', 'invalid'])`
+endsnippet
