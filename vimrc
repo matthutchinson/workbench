@@ -54,6 +54,8 @@ let g:mapleader=","
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsListSnippets="<c-l>"
+let g:UltiSnipsEditSplit="vertical"
 
 " use DuckDuckGo for searching words with <leader>?
 let g:vim_g_query_url="http://duckduckgo.com/?q="
