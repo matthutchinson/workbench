@@ -278,6 +278,20 @@ nnoremap <leader>q gqip
 " git-stripspace the current buffer
 map <Leader>s :%!git stripspace<CR>
 
+" macro tips - http://tinyurl.com/ztlrz39
+"   apply 'q' macro globally: :g[lobal]/{reqex to match on lines}/normal @q
+"   paste the 'q' macro (e.g. in vimrc and then use to map to something):
+"     "qp
+"     let @i = '{"qp}' quote whatever was pasted from the macro
+"     noremap <leader>ri :g[lobal]/{regex to match}/normal @i<cr>:w</cr>
+"
+" helper to exec a macro on multiple (visually sel) lines
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+
 " other shortcuts
 map <leader>w :w!<cr>
 map <leader>j :sp ~/Dropbox/system/notes<cr>
