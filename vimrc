@@ -279,12 +279,14 @@ nnoremap <leader>q gqip
 map <Leader>s :%!git stripspace<CR>
 
 " macro tips - http://tinyurl.com/ztlrz39
-"   apply 'q' macro globally: :g[lobal]/{reqex to match on lines}/normal @q
-"   paste the 'q' macro (e.g. in vimrc and then use to map to something):
+"   * apply 'q' macro globally: :g[lobal]/{reqex to match on lines}/normal @q
+"   * paste the 'q' macro (e.g. in vimrc and then use to map to something):
 "     "qp
 "     let @i = '{"qp}' quote whatever was pasted from the macro
 "     noremap <leader>ri :g[lobal]/{regex to match}/normal @i<cr>:w</cr>
-"
+"   * edit existing 'q' macro visually
+"     :let @q='<Cntl-r><Cntl-r>q'
+
 " helper to exec a macro on multiple (visually sel) lines
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 function! ExecuteMacroOverVisualRange()
