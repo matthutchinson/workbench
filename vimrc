@@ -286,6 +286,9 @@ map <Leader>s :%!git stripspace<CR>
 "     noremap <leader>ri :g[lobal]/{regex to match}/normal @i<cr>:w</cr>
 "   * edit existing 'q' macro visually
 "     :let @q='<Cntl-r><Cntl-r>q'
+"   * apply to all 100 open files:  100@q
+"   * apply to all open files, writing and moving to next:  (end macro with :wn)
+"   * apply to all recursively:  (end 'q' macro with @q)
 
 " helper to exec a macro on multiple (visually sel) lines
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
