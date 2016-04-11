@@ -72,10 +72,15 @@ function set_git_prompt {
   branch_pattern="^On branch ([^${IFS}]*)"
   if [[ ${git_status} =~ ${branch_pattern} ]]; then
     branch=${BASH_REMATCH[1]}
+    # shortcut for current branch name
+    export br=${branch}
+    # truncate longish branch names
+    if [ ${#branch} -gt 30 ]
+    then
+      branch=$(echo $branch | cut -c1-28)..
+    fi
   fi
 
-  # shortcut for current branch name
-  export br=${branch}
 
   GIT_PROMPT="$LIGHT_BLUE(${state}${branch}${git_time}$WHITE_BOLD${remote}$LIGHT_BLUE)"
 }
