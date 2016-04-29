@@ -50,6 +50,10 @@ runtime macros/matchit.vim
 let mapleader=","
 let g:mapleader=","
 
+" switch ex command key
+nnoremap ; :
+nnoremap : ;
+
 " snippets trigger configuration
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
