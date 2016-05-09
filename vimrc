@@ -50,10 +50,6 @@ runtime macros/matchit.vim
 let mapleader=","
 let g:mapleader=","
 
-" switch ex command key
-nnoremap ; :
-nnoremap : ;
-
 " snippets trigger configuration
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -163,6 +159,7 @@ set smartindent
 
 set nowrap                        " turn on line wrapping
 set scrolloff=3                   " show 3 lines of context around the cursor
+set sidescroll=1                  " scroll horizontally without jumping http://tinyurl.com/zs3ntow
 
 set title                         " set the terminal's title
 set visualbell                    " visual flash
