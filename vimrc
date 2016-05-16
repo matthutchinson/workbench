@@ -208,7 +208,7 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor\ --hidden
 
   " Ctrl+f opens global search, and browsing
-  map <C-F> :Ag --hidden<Space>
+  map <C-F> :Ag --hidden --all-types<Space>
 endif
 
 " ,b opens CtrlP buffer
