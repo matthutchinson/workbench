@@ -28,6 +28,7 @@ Plug 'honza/vim-snippets'
 Plug 'szw/vim-g'
 Plug 'airblade/vim-gitgutter'
 Plug 'mattn/gist-vim'
+Plug 'mattn/webapi-vim'
 
 " tmux
 Plug 'jgdavey/vim-turbux'
@@ -49,6 +50,9 @@ runtime macros/matchit.vim
 " comma for map leader
 let mapleader=","
 let g:mapleader=","
+
+" all c&p operations work with the OS clipboard
+set clipboard=unnamed
 
 " snippets trigger configuration
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -382,10 +386,6 @@ set cm=blowfish2
 
 " allow spell check auto complete C-N (insert mode)
 set complete+=kspell
-
-" copy and paste with pbcopy/pbpaste in visual mode
-vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
-nmap <C-x> :call setreg("\"",system("pbpaste"))<CR>p
 
 " rename a file
 function! RenameFile()
