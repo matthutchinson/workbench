@@ -329,7 +329,10 @@ map <leader>rn :w ! %<CR>
 map <leader>rr :w\|:call SendToTmux("\"".expand('%:p%h')."\"\n")<cr>
 
 " convert to new ruby hash syntax
-map <leader>ch :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<CR>
+map <leader>ch :%s/:\([^ ]*\)\(\s*\)=
+
+" puts the caller
+nnoremap <leader>wtf oputs "#" * 90<c-m>puts caller<c-m>puts "#" * 90<esc><CR>
 
 " perform DuckDuckGo search for word(s)
 map <leader>? :DuckDuck<cr>
