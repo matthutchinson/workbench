@@ -2,12 +2,26 @@ snippet todo "This is a TODO reminder" b
 # TODO: ${1:desc} (added by `echo $USER` on `!v strftime("%c")`)
 endsnippet
 
+snippet wtf "puts the caller"
+puts "#" * 80
+puts caller
+puts "#" * 80
+endsnippet
+
 snippet rpry "Remote pry debugging"
-require 'pry'; binding.remote_pry
+require 'pry-remote'; binding.remote_pry
 endsnippet
 
 snippet logr "Rails log info message"
-Rails.logger.info("===========> #{${1:message}} ${2}")
+Rails.logger.info "#" * 80
+Rails.logger.info("var: #{${1:nil}} ${2}")
+Rails.logger.info "#" * 80
+endsnippet
+
+snippet ttag "simple test tag"
+<${1:div}>
+  Hello World
+</$1>
 endsnippet
 
 snippet simp "simple python snippet" !b
@@ -33,6 +47,6 @@ def complete(t, opts):
   return "(" + '|'.join(opts) + ')'
 endglobal
 
-snippet '^ st' "status autocomplete" r
+snippet '^ st(atus)?' "status autocomplete" r
 status $1`!p snip.rv=complete(t[1], ['new', 'incomplete', 'invalid'])`
 endsnippet
