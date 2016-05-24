@@ -6,6 +6,8 @@ let mapleader=","
 let g:mapleader=","
 
 
+" #### Requirements
+" ensure to brew install ctags-exuberant (http://tinyurl.com/3lcrsrh)
 
 
 " #### Plugins (https://github.com/junegunn/vim-plug)
