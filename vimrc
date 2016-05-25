@@ -53,6 +53,9 @@ map <leader>e :new <C-R>=expand("%:p:h")<cr><cr>
 map <leader>m :! mate %<cr>
 map <leader>rn :w ! %<cr>
 
+" use :w!! to save with sudo
+cmap w!! w !sudo tee % >/dev/null
+
 " grep project folder for word
 nnoremap K :grep! "\b<C-R><C-W>\b"<cr>:cw<cr>
 " move through results
