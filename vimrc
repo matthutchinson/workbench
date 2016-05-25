@@ -47,9 +47,6 @@ map <Esc>[Z <S-Tab>
 map <Esc>[24~ <F12>
 
 map <leader>w :w!<cr>
-map <leader>j :sp ~/Dropbox/system/notes<cr>
-map <leader>k :sp ~/Dropbox/system/secrets<cr>
-map <leader>l :sp ~/Dropbox/system/todos<cr>
 map <leader>v :sp ~/.vimrc<cr>
 map <leader>u :source ~/.vimrc<cr>
 map <leader>e :new <C-R>=expand("%:p:h")<cr><cr>
@@ -73,11 +70,16 @@ nmap <S-Tab> :bn<cr>
 nmap <leader>d :bd<cr>
 nmap <leader>D :bufdo bd<cr>
 
-" F3 alphabetize sorts inner css
-nmap <F3> :g#\({\n\)\@<=#.,/}/sort<cr>
+" function keys
+map <F1> :sp ~/Dropbox/system/vim_notes<cr>
+map <F2> :sp ~/Dropbox/system/todos<cr>
+map <F3> :sp ~/Dropbox/system/secrets<cr>
+map <F4> :sp ~/Dropbox/system/notes<cr>
 " F5 formats and tidy up
 noremap <F5> mmgg=G'm
 inoremap <silent> <F5> <Esc> mmgg=G'mi
+" alphabetize sorts inner css
+nmap <F6> :g#\({\n\)\@<=#.,/}/sort<cr>
 " F7 spell checks
 map <F7> :setlocal spell! spelllang=en<cr>
 
@@ -223,7 +225,7 @@ let g:gist_detect_filetype = 1
 
 " turbux
 let g:turbux_command_prefix = 'bundle exec'
-let g:turbux_command_rspec = 'rspec'
+let g:turbux_command_rspec = 'zeus rspec'
 
 " ctrlp
 let g:ctrlp_max_height = 10      " window height
