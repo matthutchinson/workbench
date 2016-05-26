@@ -182,7 +182,7 @@ set nofoldenable
 " #### Plugin Shortcuts
 
 " start a global search
-map <C-F> :Ag --hidden --all-types<space>
+map <C-F> :Ag --hidden<space>
 
 " opens CtrlP buffer
 map <leader>b :CtrlPBuffer<cr>
@@ -221,6 +221,9 @@ map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
 
 
 " #### Plugin Settings
+
+" ag
+let g:ag_working_path_mode="r"
 
 " gist-vim
 let g:gist_open_browser_after_post = 1
