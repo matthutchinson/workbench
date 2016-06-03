@@ -1,4 +1,4 @@
 #!/bin/sh
 
 # install local tool gems
-gem install foreman packetfu renv elba git-whistles guignol lolcommits travis terminal-notifier wirble awesome_print pry pry-doc pry-nav donjon cocoapods --no-ri --no-rdoc
+gem install foreman renv elba guignol travis wirble awesome_print pry pry-doc pry-nav donjon cocoapods --no-ri --no-rdoc
