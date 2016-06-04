@@ -1,2 +1,0 @@
-# build ri docs for all bundle installed gems
-bundle list | tr -d '*(,)' | awk '{print $1, "--version", $2}' | xargs -n3 bundle exec gem rdoc --ri --no-rdoc
