@@ -1,26 +1,5 @@
 #!/usr/bin/env ruby
 
-# helpers
-
-def ensure_ssl_cert(domain_name, cert_dir = '/usr/local/etc/nginx/ssl')
-  unless File.exists?("#{cert_dir}/#{domain_name}.crt") &&
-    File.exists?("#{cert_dir}/#{domain_name}.key")
-    puts "  Generating nginx SSL cert for #{domain_name} domain"
-    `mkdir -p #{cert_dir}`
-    `rm #{cert_dir}/pow.dev.*`
-    `openssl genrsa -out #{domain_name}.key 1024`
-    `openssl req -new -key #{domain_name}.key -out #{domain_name}.csr -subj '/C=US/ST=NJ/L=Monroe/O=MyCompany/OU=IT/CN=#{domain_name}'`
-    `cp #{domain_name}.key #{domain_name}.key.bak`
-    `openssl rsa -in #{domain_name}.key.bak -out #{domain_name}.key`
-    `openssl x509 -req -days 365 -in #{domain_name}.csr -signkey #{domain_name}.key -out #{domain_name}.crt`
-    `rm #{domain_name}.key.bak`
-    `mv #{domain_name}.* /usr/local/etc/nginx/ssl`
-  end
-end
-
-
-# begin install/update
-
 puts 'Installing the workbench'
 
 path = File.expand_path('./', File.dirname(__FILE__))
@@ -45,30 +24,27 @@ Dir.chdir(workbench_path) do
   end
 end
 
-# setting crontab
-puts '  Setting local crontab ...'
-`crontab #{workbench_path}/crontab`
-
 # upgrade vim-plug plugin, then all upgrade all plugins
 puts '  Updating vim plugins ...'
 `vim +PlugUpgrade +PlugUpdate +PlugClean! +qa!`
 # make sure vim backup dir exists
 `mkdir -p ~/.vim/tmp`
 
-# set/link mysql config
-#`sudo ln -sfh #{workbench_path}/my.cnf /etc/my.cnf`
+# setup local nginx config
+puts '  Applying nginx config ...'
+`mkdir -p /usr/local/var/log/nginx`
+`mkdir -p /usr/local/etc/nginx`
+`mkdir -p /usr/local/etc/nginx/client_body_temp`
+`ln -sfh #{workbench_path}/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf`
+`ln -sfh #{workbench_path}/nginx/sites-available /usr/local/etc/nginx/sites-available`
+`ln -sfh #{workbench_path}/nginx/sites-enabled /usr/local/etc/nginx/sites-enabled`
 
-# set nginx config
-# puts '  Setting nginx config'
-# `mkdir -p /usr/local/var/log`
-# `mkdir -p /usr/local/var/log/nginx`
-# `mkdir -p /usr/local/etc/nginx`
-# `sudo mkdir -p /usr/local/etc/nginx/client_body_temp`
-# `sudo chmod -R 777 /usr/local/etc/nginx/client_body_temp`
-# `ln -sfh #{workbench_path}/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf`
-# `ln -sfh #{workbench_path}/nginx/sites-available /usr/local/etc/nginx/sites-available`
-# `ln -sfh #{workbench_path}/nginx/sites-enabled /usr/local/etc/nginx/sites-enabled`
-# # ensure nginx ssl certs
-# ensure_ssl_cert('pow.dev')
+# ensure local ssl certs exist for dev domains
+nginx_dir = "/usr/local/etc/nginx"
+domains   = %w(pow.dev)
+domains.each do |domain|
+  next if File.exists?("#{nginx_dir}/ssl/#{domain}.crt")
+  `nginx_ssl_cert_builder #{domain}`
+end
 
 puts "\n  All done!"
