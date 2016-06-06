@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# requirements; python3, curl, scdl (https://github.com/flyingrub/scdl)
+#   brew install python3 curl
+#   pip3 install scdl
+
+# prep folders for downloads
+cd ~/Downloads
+
+# #
+# NEW_NUM_FILES=$(ls -1 ~/Downloads/Poolside.FM\ \(best\ of\)/ | wc -l)
+
+function download_and_import_tracks () {
+
+  LS_COMMAND="ls -1 $4 | wc -l"
+  echo $LS_COMMAND
+  # NUM_FILES=eval("ls -1 $4 | wc -l")
+  # echo $NUM_FILES
+  scdl -l $1 -c --hidewarnings --hide-progress
+  # NEW_NUM_FILES=eval("ls -1 $4 | wc -l")
+
+  # if [ "$NEW_NUM_FILES" -gt "$NUM_FILES" ]; then
+    echo "importing new tracks to iTunes"
+    # osascript /Users/matt/Dropbox/add_to_playlist.scpt "$2" "$3" > /dev/null
+  # fi
+}
+
+download_and_import_tracks "https://soundcloud.com/matt_hutchinson/sets/poolside-fm" "Poolside.FM" "Downloads:Poolside.FM (best of):" "~/Downloads/Poolside.FM\ \(best\ of\)/"
+
+
+
+# download all tracks (or new tracks added to these playlists)
+
+#scdl -l https://soundcloud.com/matt_hutchinson/sets/fffffounnd-tracks -c --hidewarnings --hide-progress
+#osascript /Users/matt/Dropbox/add_to_playlist.scpt "FFFFFOUNND Tracks" "Downloads:FFFFFOUNND Tracks:" > /dev/null
+
+#mkdir -p soundcloud_likes
+#scdl -l https://soundcloud.com/matt_hutchinson -fc --hidewarnings --hide-progress --path ./soundcloud_likes
+#osascript /Users/matt/Dropbox/add_to_playlist.scpt "SoundCloud Likes" "Downloads:soundcloud_likes" > /dev/null
+
+# all poolside
+# curl -s http://poolsideapi2.herokuapp.com/tracks?p=2 | grep -o '"scUrl": ".*",$' | sed -E 's/("scUrl": "|",.*$)//g' | xargs -I 'url' scdl -l url --hidewarnings --path ./poolside.fm-feed
