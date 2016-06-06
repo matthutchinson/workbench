@@ -5,38 +5,37 @@
 #   pip3 install scdl
 
 # prep folders for downloads
-cd ~/Downloads
-
-# #
-# NEW_NUM_FILES=$(ls -1 ~/Downloads/Poolside.FM\ \(best\ of\)/ | wc -l)
+download_folder="/Volumes/Media/SoundCloud"
+apple_script="/u/code/workbench/apple_scripts/add_folder_tracks_to_playlist.scpt"
+mkdir -p $download_folder
+cd $download_folder
 
 function download_and_import_tracks () {
+  # ensure target folder exists
+  mkdir -p "$download_folder/$5"
 
-  LS_COMMAND="ls -1 $4 | wc -l"
-  echo $LS_COMMAND
-  # NUM_FILES=eval("ls -1 $4 | wc -l")
-  # echo $NUM_FILES
-  scdl -l $1 -c --hidewarnings --hide-progress
-  # NEW_NUM_FILES=eval("ls -1 $4 | wc -l")
+  # count tracks in folder
+  num_tracks=`ls -1 "$download_folder/$5" | wc -l`
+  # download playlist to folder
+  scdl -l $1 $2 --hidewarnings --hide-progress $6
+  # check if we have any new files
+  new_tracks=$(( `ls -1 "$download_folder/$5" | wc -l` - num_tracks)) # force by adding 1 here
 
-  # if [ "$NEW_NUM_FILES" -gt "$NUM_FILES" ]; then
-    echo "importing new tracks to iTunes"
-    # osascript /Users/matt/Dropbox/add_to_playlist.scpt "$2" "$3" > /dev/null
-  # fi
+  if [ "$new_tracks" -gt 0 ]; then
+    # import new files to iTunes
+    echo "Importing" $new_tracks "new tracks to iTunes playlist" $3
+    osascript $apple_script "$3" "$4" > /dev/null
+  else
+    echo "No new tracks for playlist" $3
+  fi
 }
 
-download_and_import_tracks "https://soundcloud.com/matt_hutchinson/sets/poolside-fm" "Poolside.FM" "Downloads:Poolside.FM (best of):" "~/Downloads/Poolside.FM\ \(best\ of\)/"
+download_and_import_tracks "https://soundcloud.com/matt_hutchinson/sets/poolside-fm" "-c" "Poolside.FM" "Media:SoundCloud:Poolside.FM (best of):" "Poolside.FM (best of)/"
+download_and_import_tracks "https://soundcloud.com/matt_hutchinson/sets/fffffounnd-tracks" "-c" "FFFFFOUNND Tracks" "Media:SoundCloud:FFFFFOUNND Tracks:" "FFFFFOUNND Tracks"
+
+mkdir -p soundcloud_likes
+download_and_import_tracks "https://soundcloud.com/matt_hutchinson" "-fc" "SoundCloud Likes" "Media:SoundCloud:soundcloud_likes" "soundcloud_likes" "--path ./soundcloud_likes"
 
 
-
-# download all tracks (or new tracks added to these playlists)
-
-#scdl -l https://soundcloud.com/matt_hutchinson/sets/fffffounnd-tracks -c --hidewarnings --hide-progress
-#osascript /Users/matt/Dropbox/add_to_playlist.scpt "FFFFFOUNND Tracks" "Downloads:FFFFFOUNND Tracks:" > /dev/null
-
-#mkdir -p soundcloud_likes
-#scdl -l https://soundcloud.com/matt_hutchinson -fc --hidewarnings --hide-progress --path ./soundcloud_likes
-#osascript /Users/matt/Dropbox/add_to_playlist.scpt "SoundCloud Likes" "Downloads:soundcloud_likes" > /dev/null
-
-# all poolside
-# curl -s http://poolsideapi2.herokuapp.com/tracks?p=2 | grep -o '"scUrl": ".*",$' | sed -E 's/("scUrl": "|",.*$)//g' | xargs -I 'url' scdl -l url --hidewarnings --path ./poolside.fm-feed
+# TODO: grab all poolside.fm tracks from feeds, download and add to a new iTunes playlist
+#   curl -s http://poolsideapi2.herokuapp.com/tracks?p=2 | grep -o '"scUrl": ".*",$' | sed -E 's/("scUrl": "|",.*$)//g' | xargs -I 'url' scdl -l url --hidewarnings --path ./poolside.fm-feed

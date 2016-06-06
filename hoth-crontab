@@ -1,0 +1,2 @@
+# update soundcloud playlists to iTunes every 12 hours
+0 */12 * * * /Users/matt/bin/update_soundcloud_playlists > /dev/null

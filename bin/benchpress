@@ -13,7 +13,7 @@ Dir.chdir(workbench_path) do
   puts '  Creating symlinks ...'
 
    Dir.glob('*') do |item|
-    next if ['README.md', 'fonts', 'tags', '.bundle', 'nginx', 'my.cnf'].include?(item)
+    next if ['README.md', 'apple_scripts', 'fonts', 'tags', '.bundle', 'nginx', 'hoth-crontab'].include?(item)
     if ['bin', 'tmux'].include?(item)
       `rm -rf ~/#{item}`
       `ln -sfh #{workbench_path}/#{item} ~/`
@@ -22,6 +22,11 @@ Dir.chdir(workbench_path) do
       `ln -sfh #{workbench_path}/#{item} ~/.#{item}`
     end
   end
+end
+
+# install/update the crontab on this host
+if `hostname` =~ /hoth/
+  `crontab hoth-crontab`
 end
 
 # upgrade vim-plug plugin, then all upgrade all plugins
