@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # checkout a local branch (sorted a-z) picking first match from grep
-# usuage:  gbr keyword
+# usage:  gbr keyword
 
 if [[ !  -z  $1  ]]; then
   BRANCH=$(eval "git br | sed 's/[\* ]//' | sort -b | grep '$1' | head -n 1")
