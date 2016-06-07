@@ -1,6 +1,13 @@
-#!/bin/bash
+#!/bin/sh
 
-# requirements; python3, curl, scdl (https://github.com/flyingrub/scdl)
+# Use scdl to download tracks from soundcloud playlists to `download_folder`
+# after downloading, if # of files in `download_folder/playlist` increased an
+# apple script is invoked to re-create a playlist in iTunes.
+#
+# This is not a sync, but is enough for what I want right now :)
+# NOTE: non mp3 tracks or tracks that are not downloadable will be skipped
+#
+# Required: OSX, python3, curl, scdl (https://github.com/flyingrub/scdl)
 #   brew install python3 curl
 #   pip3 install scdl
 
@@ -16,15 +23,16 @@ function download_and_import_tracks () {
 
   # count tracks in folder
   num_tracks=`ls -1 "$download_folder/$5" | wc -l`
-  # download playlist to folder
-  scdl -l $1 $2 --hidewarnings --hide-progress $6
-  # check if we have any new files
-  new_tracks=$(( `ls -1 "$download_folder/$5" | wc -l` - num_tracks)) # force by adding 1 here
+  # download playlist tracks to folder
+  scdl -l $1 $2 --hidewarnings --hide-progress --onlymp3 $6
+  # count tracks in folder again
+  new_tracks=$(( `ls -1 "$download_folder/$5" | wc -l` - num_tracks))
 
+  # check if we have any new files
   if [ "$new_tracks" -gt 0 ]; then
     # import new files to iTunes
     echo "Importing" $new_tracks "new tracks to iTunes playlist" $3
-    osascript $apple_script "$3" "$4" > /dev/null
+    # osascript $apple_script "$3" "$4" > /dev/null
   else
     echo "No new tracks for playlist" $3
   fi
@@ -36,6 +44,4 @@ download_and_import_tracks "https://soundcloud.com/matt_hutchinson/sets/fffffoun
 mkdir -p soundcloud_likes
 download_and_import_tracks "https://soundcloud.com/matt_hutchinson" "-fc" "SoundCloud Likes" "Media:SoundCloud:soundcloud_likes" "soundcloud_likes" "--path ./soundcloud_likes"
 
-
-# TODO: grab all poolside.fm tracks from feeds, download and add to a new iTunes playlist
-#   curl -s http://poolsideapi2.herokuapp.com/tracks?p=2 | grep -o '"scUrl": ".*",$' | sed -E 's/("scUrl": "|",.*$)//g' | xargs -I 'url' scdl -l url --hidewarnings --path ./poolside.fm-feed
+echo "Done!"

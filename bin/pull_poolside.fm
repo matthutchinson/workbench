@@ -1,0 +1,59 @@
+#!/bin/sh
+
+# Use scdl to download all tracks from poolside.fm's playlist endpoint
+# This is not a sync, but is enough for what I want right now :)
+
+# JSON endpoint returns something like this;
+# [
+#   {
+#     "title": "Voices",
+#     "artist": "ALAN BRAXE",
+#     "scId": "82410257",
+#     "scUrl": "https://soundcloud.com/braxe1/3-voices",
+#     "twitter": "",
+#     "_id": "5311002119ff880200000004"
+#   },
+#   ... etc ...
+# ]
+#
+# NOTE: non mp3 tracks or tracks that are not downloadable will be skipped
+# various tracks may not be downloadble and will timeout, e.g. not available in
+# the country, track missing or moved etc.
+#
+# Required: OSX, python3, curl, scdl (https://github.com/flyingrub/scdl)
+#   brew install python3 curl
+#   pip3 install scdl
+
+poolside_fm_tracks_endpoint="http://poolsideapi2.herokuapp.com/tracks"
+# prep folders for downloads
+download_folder="/Users/$USER/Downloads/poolside.fm"
+download_timeout=10
+mkdir -p $download_folder
+cd $download_folder
+
+# Executes command with a timeout
+#   $1 timeout in seconds
+#   $2 command
+# Returns 1 if timed out 0 otherwise
+timeout() {
+  time=$1
+  # start the command in a subshell to avoid problem with pipes
+  # (spawn accepts one command)
+  command="/bin/sh -c \"$2\""
+
+  expect -c "set echo \"-noecho\"; set timeout $time; spawn -noecho $command; expect timeout { exit 1 } eof { exit 0 }"
+
+  if [ $? = 1 ] ; then
+    echo "Timeout after ${time} seconds"
+  fi
+}
+
+echo "Grabbing JSON, parsing ..."
+curl -s $poolside_fm_tracks_endpoint | grep -o '"scUrl": "https\:\/\/soundcloud.*",$' | sed -E 's/("scUrl": "|",.*$)//g' | while read -r url; do
+  echo "Downloading ..." $url
+  timeout $download_timeout "scdl -l $url --hidewarnings --error --onlymp3";
+done
+
+# count tracks in folder
+num_tracks=`ls -1 "$download_folder" | wc -l`
+echo "Done - downloaded" $num_tracks "new tracks from" $poolside_fm_tracks_endpoint

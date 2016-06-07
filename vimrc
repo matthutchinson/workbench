@@ -29,6 +29,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim'
   Plug 'jgdavey/vim-turbux'
+  Plug 'jgdavey/tslime.vim'
   Plug 'christoomey/vim-tmux-navigator'
 
   " syntax
