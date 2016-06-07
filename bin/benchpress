@@ -1,10 +1,12 @@
 #!/usr/bin/env ruby
 
-puts 'Installing the workbench'
 
 path = File.expand_path('./', File.dirname(__FILE__))
 bin_path = File.symlink?(path) ? File.readlink(path) : path
 workbench_path = File.expand_path('.././', bin_path)
+host = `hostname`.split(".").first
+
+puts "Installing the workbench (on #{host})"
 
 Dir.chdir(workbench_path) do
   puts "  Working in #{Dir.pwd}"
@@ -13,7 +15,7 @@ Dir.chdir(workbench_path) do
   puts '  Creating symlinks ...'
 
    Dir.glob('*') do |item|
-    next if ['README.md', 'apple_scripts', 'fonts', 'tags', '.bundle', 'nginx', 'hoth-crontab'].include?(item)
+    next if ['README.md', 'apple_scripts', 'fonts', 'tags', '.bundle', 'nginx', 'crontabs'].include?(item)
     if ['bin', 'tmux'].include?(item)
       `rm -rf ~/#{item}`
       `ln -sfh #{workbench_path}/#{item} ~/`
@@ -24,9 +26,12 @@ Dir.chdir(workbench_path) do
   end
 end
 
-# install/update the crontab on this host
-if `hostname` =~ /hoth/
-  `crontab hoth-crontab`
+# install/update the crontab for this host (if we have one)
+if File.exists?("crontabs/#{host}")
+  puts "  Setting crontab for #{host} ..."
+  `crontab #{crontab}`
+else
+  puts "  No crontab to apply for #{host} ..."
 end
 
 # upgrade vim-plug plugin, then all upgrade all plugins
