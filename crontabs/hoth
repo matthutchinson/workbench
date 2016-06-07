@@ -1,2 +1,2 @@
 # update soundcloud playlists to iTunes every 8 hours
-0 */8 * * * /Users/matt/bin/update_soundcloud_playlists > /dev/null
+0 */3 * * * /Users/matt/bin/update_soundcloud_playlists > /usr/local/var/log/cron.log

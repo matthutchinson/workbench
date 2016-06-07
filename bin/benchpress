@@ -29,7 +29,7 @@ end
 # install/update the crontab for this host (if we have one)
 if File.exists?("crontabs/#{host}")
   puts "  Setting crontab for #{host} ..."
-  `crontab #{crontab}`
+  `crontab crontabs/#{host}`
 else
   puts "  No crontab to apply for #{host} ..."
 end

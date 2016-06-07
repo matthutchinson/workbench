@@ -44,4 +44,4 @@ download_and_import_tracks "https://soundcloud.com/matt_hutchinson/sets/fffffoun
 mkdir -p soundcloud_likes
 download_and_import_tracks "https://soundcloud.com/matt_hutchinson" "-fc" "SoundCloud Likes" "Media:SoundCloud:soundcloud_likes" "soundcloud_likes" "--path ./soundcloud_likes"
 
-echo "Done!"
+echo "Done! -" `date`
