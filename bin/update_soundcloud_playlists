@@ -24,7 +24,7 @@ function download_and_import_tracks () {
   # count tracks in folder
   num_tracks=`ls -1 "$download_folder/$5" | wc -l`
   # download playlist tracks to folder
-  scdl -l $1 $2 --hidewarnings --hide-progress --onlymp3 $6
+  /usr/local/bin/scdl -l $1 $2 --hidewarnings --hide-progress --onlymp3 $6
   # count tracks in folder again
   new_tracks=$(( `ls -1 "$download_folder/$5" | wc -l` - num_tracks))
 
@@ -32,7 +32,7 @@ function download_and_import_tracks () {
   if [ "$new_tracks" -gt 0 ]; then
     # import new files to iTunes
     echo "Importing" $new_tracks "new tracks to iTunes playlist" $3
-    # osascript $apple_script "$3" "$4" > /dev/null
+    osascript $apple_script "$3" "$4" > /dev/null
   else
     echo "No new tracks for playlist" $3
   fi
