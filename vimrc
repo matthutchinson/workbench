@@ -28,9 +28,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'honza/vim-snippets'
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim'
-  Plug 'jgdavey/vim-turbux'
-  Plug 'jgdavey/tslime.vim'
-  Plug 'christoomey/vim-tmux-navigator'
+
+  " tmux
+  Plug 'jgdavey/vim-turbux'             " shortcuts for tslime testing
+  Plug 'jgdavey/tslime.vim'             " launch commands in tmux windows
+  Plug 'christoomey/vim-tmux-navigator' " navigation across splits & panes
 
   " syntax
   Plug 'tpope/vim-markdown', { 'for': 'markdown' }
@@ -63,8 +65,8 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<cr>:cw<cr>
 nnoremap <C-n> :cn<cr>
 nnoremap <C-p> :cp<cr>
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<cr>
-" re-open previous edited file
-nnoremap <leader><leader> :e#<cr>
+" re-open results
+nnoremap <leader><leader> :copen<cr>
 " format paragraphs to textwidth
 nnoremap <leader>q gqip
 
@@ -201,7 +203,7 @@ nmap <leader>c gcc
 vmap <leader>c gc
 
 " save and run in Tmux
-map <leader>rr :w\|:call SendToTmux("\"".expand('%:p%h')."\"\n")<cr>
+map <leader>r :w\|:call SendToTmux("\"".expand('%:p%h')."\"\n")<cr>
 
 " ulti-snips
 map <leader>U :UltiSnipsEdit<cr>
@@ -358,8 +360,20 @@ autocmd BufWritePre * :%s/\s\+$//e
 " auto spell check & limit width of git commit messages
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
-
-
+" auto chmod +x any shebang file, inspired from tpope/vim-eunuch
+autocmd BufNewFile  * let b:brand_new_file = 1
+autocmd BufWritePre *
+  \ if exists('b:brand_new_file') |
+  \   if getline(1) =~ '^#!' |
+  \     let b:chmod_post = '+x' |
+  \   endif |
+  \ endif
+autocmd BufWritePost,FileWritePost * nested
+  \ if exists('b:chmod_post') && executable('chmod') |
+  \   silent! execute '!chmod '.b:chmod_post.' "<afile>"' |
+  \   edit |
+  \   unlet b:chmod_post |
+  \ endif
 
 " #### Ignores
 
