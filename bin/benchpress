@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-
 path = File.expand_path('./', File.dirname(__FILE__))
 bin_path = File.symlink?(path) ? File.readlink(path) : path
 workbench_path = File.expand_path('.././', bin_path)
@@ -15,7 +14,7 @@ Dir.chdir(workbench_path) do
   puts '  Creating symlinks ...'
 
    Dir.glob('*') do |item|
-    next if ['README.md', 'apple_scripts', 'fonts', 'tags', '.bundle', 'nginx', 'crontabs'].include?(item)
+    next if ['README.md', 'apple_scripts', 'fonts', 'tags', '.bundle', 'nginx', 'launchd'].include?(item)
     if ['bin', 'tmux'].include?(item)
       `rm -rf ~/#{item}`
       `ln -sfh #{workbench_path}/#{item} ~/`
@@ -26,12 +25,19 @@ Dir.chdir(workbench_path) do
   end
 end
 
-# install/update the crontab for this host (if we have one)
-if File.exists?("crontabs/#{host}")
-  puts "  Setting crontab for #{host} ..."
-  `crontab crontabs/#{host}`
+# install/update launchd for this host (if we have any)
+launchd_scripts = Dir.glob("launchd/#{host}/*")
+if launchd_scripts.empty?
+  puts "  No launchd scripts to apply for #{host} ..."
 else
-  puts "  No crontab to apply for #{host} ..."
+  puts "  Installing launchd scripts for #{host} ..."
+  launchd_scripts.each do |launchd_script|
+    script_name = launchd_script.split('/').last
+    next if File.exists?("/Library/LaunchDaemons/#{script_name}")
+    puts "    - #{script_name} applying ..."
+    `sudo ln -sfh #{workbench_path}/#{launchd_script} /Library/LaunchDaemons`
+    `launchctl load -w /Library/LaunchDaemons/#{script_name}`
+  end
 end
 
 # upgrade vim-plug plugin, then all upgrade all plugins

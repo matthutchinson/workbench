@@ -1,3 +1,0 @@
-MAILTO=""
-# update soundcloud playlists to iTunes every few hours
-0 */3 * * * /Users/matt/bin/update_soundcloud_playlists > /usr/local/var/log/cron.log
