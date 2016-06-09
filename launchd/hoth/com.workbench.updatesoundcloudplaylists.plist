@@ -7,14 +7,14 @@
     <string>com.workbench.updatesoundcloudplaylists</string>
     <key>ProgramArguments</key>
     <array>
-      <string>/u/apps/workbench/bin/update_soundcloud_playlists</string>
+      <string>/u/code/workbench/bin/update_soundcloud_playlists</string>
     </array>
     <key>StartCalendarInterval</key>
     <dict>
         <key>Hour</key>
-        <integer>17</integer>
+        <integer>0</integer>
         <key>Minute</key>
-        <integer>22</integer>
+        <integer>5</integer>
     </dict>
 </dict>
 </plist>
