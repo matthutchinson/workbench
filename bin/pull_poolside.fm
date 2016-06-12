@@ -24,6 +24,9 @@
 #   brew install python3 curl
 #   pip3 install scdl
 
+# set encoding
+LANG="en_GB.UTF-8"
+
 poolside_fm_tracks_endpoint="http://poolsideapi2.herokuapp.com/tracks"
 # prep folders for downloads
 download_folder="/Users/$USER/Downloads/poolside.fm"

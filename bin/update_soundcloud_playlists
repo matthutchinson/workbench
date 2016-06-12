@@ -11,6 +11,9 @@
 #   brew install python3 curl
 #   pip3 install scdl
 
+# set encoding
+LANG="en_GB.UTF-8"
+
 # prep folders for downloads
 download_folder="/Volumes/Media/SoundCloud"
 apple_script="/u/code/workbench/apple_scripts/add_folder_tracks_to_playlist.scpt"
