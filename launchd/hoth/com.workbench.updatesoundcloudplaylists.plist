@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Label</key>
-    <string>com.workbench.updatesoundcloudplaylists</string>
-    <key>ProgramArguments</key>
-    <array>
-      <string>/u/code/workbench/bin/update_soundcloud_playlists</string>
-    </array>
-    <key>StartCalendarInterval</key>
-    <dict>
-        <key>Hour</key>
-        <integer>0</integer>
-        <key>Minute</key>
-        <integer>5</integer>
-    </dict>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>LANG</key>
+		<string>en_GB.UTF-8</string>
+	</dict>
+	<key>Label</key>
+	<string>com.workbench.updatesoundcloudplaylists</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/sh</string>
+		<string>/u/code/workbench/bin/update_soundcloud_playlists</string>
+	</array>
+	<key>StandardErrorPath</key>
+	<string>/Users/matt/Library/Logs/update_soundcloud_playlists.error.log</string>
+	<key>StandardOutPath</key>
+	<string>/Users/matt/Library/Logs/update_soundcloud_playlists.log</string>
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Hour</key>
+		<integer>00</integer>
+		<key>Minute</key>
+		<integer>30</integer>
+	</dict>
 </dict>
 </plist>

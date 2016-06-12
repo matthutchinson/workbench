@@ -26,7 +26,7 @@ Dir.chdir(workbench_path) do
 end
 
 # install/update launchd for this host (if we have any)
-launchd_scripts = Dir.glob("launchd/#{host}/*")
+launchd_scripts = Dir.glob("#{workbench_path}/launchd/#{host}/*")
 if launchd_scripts.empty?
   puts "  No launchd scripts to apply for #{host} ..."
 else
@@ -35,11 +35,11 @@ else
     script_name = launchd_script.split('/').last
     if File.exists?("/Library/LaunchDaemons/#{script_name}")
       puts "    - #{script_name} (relaunching) ..."
-      `launchctl unload -w /Library/LaunchDaemons/#{script_name}`
+      `launchctl unload -w /Library/LaunchDaemons/#{script_name} > /dev/null`
       `launchctl load -w /Library/LaunchDaemons/#{script_name}`
     else
       puts "    - #{script_name} (adding) ..."
-      `sudo ln -sfh #{workbench_path}/#{launchd_script} /Library/LaunchDaemons`
+      `sudo ln -sfh #{launchd_script} /Library/LaunchDaemons`
       `launchctl load -w /Library/LaunchDaemons/#{script_name}`
     end
   end
