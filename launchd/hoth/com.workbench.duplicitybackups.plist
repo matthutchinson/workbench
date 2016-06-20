@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>LANG</key>
+		<string>en_GB.UTF-8</string>
+	</dict>
+	<key>Label</key>
+	<string>com.workbench.duplicitybackups</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/sh</string>
+		<string>/u/code/workbench/bin/duplicity_backups</string>
+	</array>
+	<key>StandardErrorPath</key>
+	<string>/Users/matt/Library/Logs/duplicity_backups.error.log</string>
+	<key>StandardOutPath</key>
+	<string>/Users/matt/Library/Logs/duplicity_backups.log</string>
+	<key>StartCalendarInterval</key>
+	<dict>
+		<key>Hour</key>
+		<integer>00</integer>
+		<key>Minute</key>
+		<integer>32</integer>
+	</dict>
+</dict>
+</plist>

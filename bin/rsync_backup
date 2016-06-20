@@ -1,9 +1,0 @@
-#!/bin/sh
-
-REMOTE_FOLDER=`hostname`
-
-# backup these folders via rsync
-rsync -azP --delete --delete-excluded --exclude-from /Users/$USER/.rsync_exclude /Users/$USER/Documents /Volumes/Kiki/rsync/$REMOTE_FOLDER
-rsync -azP --delete --delete-excluded --exclude-from /Users/$USER/.rsync_exclude /Users/$USER/Dropbox /Volumes/Kiki/rsync/$REMOTE_FOLDER
-rsync -azP --delete --delete-excluded --exclude-from /Users/$USER/.rsync_exclude /Users/$USER/Sites /Volumes/Kiki/rsync/$REMOTE_FOLDER
-rsync -azP --delete --delete-excluded --exclude-from /Users/$USER/.rsync_exclude /Users/$USER/work /Volumes/Kiki/rsync/$REMOTE_FOLDER
