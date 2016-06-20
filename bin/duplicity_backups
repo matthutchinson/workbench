@@ -3,14 +3,15 @@
 # Duplicity backups for local folders (under ~/) to both a local NFS and S3
 # GPG signed, encrypted and compressed differential backups
 #
-# Sensitive ENV vars are extracted from the OSX keychain
+# Sensitive ENV vars are extracted from the OSX keychain (man security)
 #  - http://duplicity.nongnu.org
 #  - http://ss64.com/osx/security.html
 #
 # Requirements
-#   brew install duplicity
-#   ensure you have a OSX keychain passwords saved for your GPG passphrase and
-#   S3 credentials e.g. account: $USER service: GPG
+#   brew install duplicity gpg2
+#   and ensure you have a OSX keychain entries for your GPG passphrase and S3
+#   credentials e.g. account: $USER service: GPG
+
 
 ulimit -n 1024
 
