@@ -30,9 +30,13 @@ export_osx_keychain_password "AWS_ACCESS_KEY_ID" "AWS_ACCESS_KEY_ID" $USER
 NFS_BACKUP_URL="file:///Volumes/Kiki/backups/$HOSTNAME"
 S3_BACKUP_URL="s3://s3-eu-west-1.amazonaws.com/hiddenloop-backups/duplicity/$HOSTNAME"
 
+# various duplicity options
+exclude_options="--exclude-filelist /Users/$USER/.duplicity_exclude"
+gpg_options="--gpg-binary /usr/local/bin/gpg2"
+s3_options="--s3-use-new-style --s3-european-buckets --s3-use-ia --s3-use-server-side-encryption"
+
 # folders to backup under /Users/$USER/
 backup_folders=( "Sites" "Documents" "Dropbox" "work" )
-options="--gpg-binary /usr/local/bin/gpg2"
 
 echo "Starting Backups"
 for folder in "${backup_folders[@]}"
@@ -42,18 +46,18 @@ do
     echo
 
     echo "#######  $folder Backup Started (NFS)  ########"
-    /usr/local/bin/duplicity $options /Users/$USER/$folder $NFS_BACKUP_URL/$folder
+    /usr/local/bin/duplicity $gpg_options $exclude_options /Users/$USER/$folder $NFS_BACKUP_URL/$folder
     echo "#######  $folder Removing Old Backups (NFS) ########"
-    /usr/local/bin/duplicity $options remove-older-than 1M --force $NFS_BACKUP_URL/$folder
-    /usr/local/bin/duplicity $options cleanup --extra-clean --force $NFS_BACKUP_URL/$folder
+    /usr/local/bin/duplicity $gpg_options remove-older-than 1M --force $NFS_BACKUP_URL/$folder
+    /usr/local/bin/duplicity $gpg_options cleanup --extra-clean --force $NFS_BACKUP_URL/$folder
 
     echo
 
     echo "#######  $folder Backup Started (S3)  ########"
-    /usr/local/bin/duplicity $options --s3-use-new-style --s3-european-buckets --s3-use-ia --s3-use-server-side-encryption /Users/$USER/$folder $S3_BACKUP_URL/$folder
+    /usr/local/bin/duplicity $gpg_options $exclude_options $s3_options /Users/$USER/$folder $S3_BACKUP_URL/$folder
     echo "#######  $folder Removing Old Backups (S3) ########"
-    /usr/local/bin/duplicity $options remove-older-than 1M --force $S3_BACKUP_URL/$folder
-    /usr/local/bin/duplicity $options cleanup --extra-clean --force $S3_BACKUP_URL/$folder
+    /usr/local/bin/duplicity $gpg_options remove-older-than 1M --force $S3_BACKUP_URL/$folder
+    /usr/local/bin/duplicity $gpg_options cleanup --extra-clean --force $S3_BACKUP_URL/$folder
 
     echo
   fi
