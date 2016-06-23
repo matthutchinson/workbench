@@ -4,15 +4,14 @@
 #   http://tinyurl.com/zujfkjs
 #
 # TODO:
-#   * gem?
-#   * tests
 #   * better argument handling
 #   * better at_exit handling
 #   * better HTTP API error handling
 #   * helpful error messages
 #   * configure command / file
+#   * gem
+#   * tests
 #   * construct packets for Lifx LAN API
-#   * more lifx options than toggling
 
 # install gem dependencies with:
 #   gem install packetfu --no-ri --no-rdoc
@@ -45,6 +44,8 @@ module LifxDash
         res = http.request(req)
         logger.info"API reply (#{res.code}): #{res.body}"
       end
+    rescue URI::InvalidURIError => e
+      raise e
     end
 
     private
@@ -101,6 +102,7 @@ module LifxDash
     monitor = LifxDash::Monitor.new(opts[:dash_mac_address], opts[:iface])
     lifx    = LifxDash::Toggle.new(opts[:lifx_token], opts[:lifx_selector], logger)
 
+    puts "[#{Process.pid}] starting lifx dash button monitor ... (logging to #{LifxDash::LOG_PATH})"
     logger.info "Started listening for ARP packets on #{monitor.iface}"
     monitor.listen do |pkt, mac|
       logger.debug pkt.peek
@@ -110,10 +112,9 @@ module LifxDash
 
   # just listen for any dash like arp packets, from any device
   def self.snoop(iface)
-    puts "NOTE: listening for dash packets, you may get more than 1 from a press"
-    puts "if so, look for the mac address that occurs only once"
+    puts "listening for dash button packets on #{iface} ... [CTRL-c] to stop"
     puts "wait for the network to quiet down, before pressing the button"
-    puts "now snooping on network interface: #{iface} ... [CTRL-c] to stop\n\n"
+    puts "you may get more than 1 from a press, so look for the mac address that occurs only once."
 
     LifxDash::Monitor.new(nil, iface).listen do |pkt, mac|
       puts "packet from (#{mac}) - #{pkt.peek}"
@@ -123,26 +124,34 @@ module LifxDash
   # show command help information
   def self.help
     puts "usage: "
-    puts "  lifx_dash mac_address lifx_token {lifx_selector} {network_iface}"
+    puts "  lifx_dash monitor mac_address lifx_token {lifx_selector} {network_iface}"
     puts "  lifx_dash snoop {network_iface}"
     exit
   end
 end
 
+
+## commands are;
+# help
+# version
+# snoop {iface}
+# monitor {mac} {lifx_token} {selector (name or id)} {iface} -d[aemonise]
+# list lights
+# config?
+
 # check args and launch commands
 if ARGV[0] == 'snoop'
   LifxDash.snoop(ARGV[1] || "en0")
-elsif ARGV.length > 1
+elsif ARGV[0] == 'monitor' && ARGV.length > 2
   # daemonize
-  puts "starting lifx dash button monitor ... (logging to #{LifxDash::LOG_PATH})"
   Process.daemon
 
   LifxDash.run(
-    dash_mac_address: ARGV[0],
-          lifx_token: ARGV[1],
-       lifx_selector: ARGV[2] || "all",
-               iface: ARGV[3] || "en0"
-  )
+    dash_mac_address: ARGV[1],
+          lifx_token: ARGV[2],
+       lifx_selector: ARGV[3] || "all",
+               iface: ARGV[4] || "en0"
+ )
 else
   LifxDash.help
 end
