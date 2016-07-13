@@ -28,6 +28,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'honza/vim-snippets'
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim'
+  Plug 'hwartig/vim-seeing-is-believing'
 
   " tmux
   Plug 'jgdavey/vim-turbux'             " shortcuts for tslime testing
@@ -219,6 +220,20 @@ map <leader>ge :Gedit<cr>
 map <leader>gl :Glog -250<cr><cr>:copen<cr><cr>
 map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
 
+" seeing is believing
+augroup seeingIsBelievingSettings
+  autocmd!
+
+  autocmd FileType ruby nmap <buffer> <Enter> <Plug>(seeing-is-believing-mark-and-run)
+  autocmd FileType ruby xmap <buffer> <Enter> <Plug>(seeing-is-believing-mark-and-run)
+
+  autocmd FileType ruby nmap <buffer> <F8> <Plug>(seeing-is-believing-mark)
+  autocmd FileType ruby xmap <buffer> <F8> <Plug>(seeing-is-believing-mark)
+  autocmd FileType ruby imap <buffer> <F8> <Plug>(seeing-is-believing-mark)
+
+  autocmd FileType ruby nmap <buffer> <F9> <Plug>(seeing-is-believing-run)
+  autocmd FileType ruby imap <buffer> <F9> <Plug>(seeing-is-believing-run)
+augroup END
 
 
 
