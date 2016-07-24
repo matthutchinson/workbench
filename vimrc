@@ -180,8 +180,9 @@ set foldmethod=syntax
 set foldcolumn=4
 set nofoldenable
 
-
-
+" copy and paste with pbcopy/pbpaste
+vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
+nmap <C-x> :call setreg("\"",system("pbpaste"))<CR>p
 
 " #### Plugin Shortcuts
 

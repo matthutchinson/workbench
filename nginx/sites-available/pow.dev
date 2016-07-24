@@ -2,6 +2,10 @@ upstream pmfaqtory-store {
   server unix:/u/apps/pmfaqtory-store/tmp/puma/puma.sock fail_timeout=0;
 }
 
+upstream faqtory {
+  server unix:/u/apps/faqtory/tmp/puma/puma.sock fail_timeout=0;
+}
+
 server {
 
   listen  443 ssl;
@@ -44,6 +48,10 @@ server {
     # vcap.me to apache (8080)
     if ($host ~* ^(.*)\.vcap\.me) {
       proxy_pass http://localhost:8080;
+    }
+
+    if ($host ~* faqtory.dev) {
+      proxy_pass http://faqtory;
     }
 
     if ($host ~* ^pmfaqtory-store.dev) {
