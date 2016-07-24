@@ -49,7 +49,7 @@ function set_git_prompt {
   fi
 
   # set color based on clean/staged/unstaged
-  if [[ ${git_status} =~ "working tree clean" ]]; then
+  if [[ ${git_status} =~ "working directory clean" ]]; then
     state="${GREEN}"
   elif [[ ${git_status} =~ "Changes to be committed" ]]; then
     state="${YELLOW}"
