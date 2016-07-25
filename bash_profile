@@ -1,5 +1,8 @@
-# aliases and secrets
+#!/bin/bash
+
+# aliases, helpers and secrets
 if [ -f ~/.aliases ]; then . ~/.aliases ; fi
+if [ -f ~/.pick ]; then . ~/.pick ; fi
 if [ -f ~/.secret ]; then . ~/.secret ; fi
 
 # exports

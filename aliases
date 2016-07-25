@@ -4,44 +4,50 @@
 alias g='git'
 alias v='vim'
 alias vi='vim'
-alias mkdir='mkdir -p'
-alias top='top -o cpu'
 alias gpgme='gpg -e -u "matt@hiddenloop.com" -r "matt@hiddenloop.com"'
-alias colors='for code in $(seq -w 0 255); do for attr in 0 1; do printf "%s-%03s %bTest%b\n" "${attr}" "${code}" "\e[${attr};38;05;${code}m" "\e[m"; done; done | column -c $((COLUMNS*2))'
 alias irc='ssh raspberry -t "screen -x"'
 alias con='tail -40 -f /var/log/system.log'
 alias gpg='gpg2'
-alias con="tail -40 -f /var/log/system.log"
 alias notes="vi ~/Dropbox/system/notes"
 alias todos="vi ~/Dropbox/system/todos"
 alias secrets="vi ~/Dropbox/system/secrets"
 
 # https://github.com/trapd00r/ls--/issues/14
-alias l='LC_ALL=en_US.UTF-8 LANG=en ls++'
 alias ll=' LC_ALL=en_US.UTF-8 LANG=en ls++ -a'
-
-# synergy http://synergy-foss.org/
-alias syns_start='synergys -f --config ~/.synergy'
-alias syns_connect='synergyc -f Hoth.local'
 
 # quick project cds
 alias cdpmf='cd /u/apps/faqtory'
 alias cdpms='cd /u/apps/pmfaqtory-store'
 alias cdbe='cd /u/apps/beyondendurance'
 alias cdhbb='cd /u/apps/bugle'
-alias cdcc='cd /u/code/catapult'
-alias cdht='cd /u/apps/housetrip'
-alias cdhtt='cd /u/apps/housetrip-parallel-test'
 alias cdwb='cd /u/code/workbench'
 
 # HouseTrip
+alias cdht='cd /u/apps/housetrip'
 alias sdance='be rake smartling:push smartling:pull'
 alias spush='be rake smartling:push'
 alias spull='be rake smartling:pull'
-alias htps='be rake parallel:fast_prepare;be rake parallel:spec[4]'
-alias htpf='be rake parallel:fast_prepare;be rake parallel:safe_features[4]'
-alias boost='script/plugin install git://github.com/thedarkone/rails-dev-boost -r rails-2-3'
-alias unboost='rm -r /u/apps/housetrip/vendor/plugins/rails-dev-boost'
+alias myhtd='mysql housetrip_development'
+
+# git commit extract PT story ID from branch name
+function gc {
+  if [ -n "$1" ]
+  then
+    PIVOTAL_STORY=$(echo $br | perl -ne 'print /-(\d+)$/')
+    if [[ $1 =~ "[#$PIVOTAL_STORY]" ]]; then
+      GIT_COMMIT_PT=$1
+    else
+      GIT_COMMIT_PT="[#$PIVOTAL_STORY] $1"
+    fi;
+    if [ -z $PIVOTAL_STORY ]; then
+      GIT_COMMIT_PT=$1
+    fi;
+
+    git commit -am "$GIT_COMMIT_PT"
+  else
+    echo "usage: gc 'your commit message'"
+  fi
+}
 
 # deploy to a staging
 # e.g. sd 1 'some deploy message'
@@ -65,44 +71,12 @@ sm () {
   fi
 }
 
-# e.g. git-heroku-remote kigo-production production
-git-heroku-remote () {
-  if [ -n "$1" ] && [ -n "$2" ]
-  then
-    heroku git:remote -a $1 -r $2
-    git fetch $2
-    git checkout -b $2 $2/master
-  else
-    echo "usage: git-heroku-remote heroku-app-name branch-name"
-  fi
-}
-
-function gc {
-  if [ -n "$1" ]
-  then
-    PIVOTAL_STORY=$(echo $br | perl -ne 'print /-(\d+)$/')
-    if [[ $1 =~ "[#$PIVOTAL_STORY]" ]]; then
-      GIT_COMMIT_PT=$1
-    else
-      GIT_COMMIT_PT="[#$PIVOTAL_STORY] $1"
-    fi;
-    if [ -z $PIVOTAL_STORY ]; then
-      GIT_COMMIT_PT=$1
-    fi;
-
-    git commit -am "$GIT_COMMIT_PT"
-  else
-    echo "usage: gc 'your commit message'"
-  fi
-}
-
-# Rails
+# rails / ruby
 alias gofast='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = true\"" config/environments/development.rb'
 alias goslow='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = false\"" config/environments/development.rb'
 alias tdl='tail -f ./log/development.log'
 alias ttl='tail -f ./log/test.log'
 alias rst='touch ./tmp/restart.txt'
-alias migrations?='git diff --cached origin/production db/migrate | grep +++'
 alias rbenvit='rbenv shell `cat .ruby-version`'
 
 # bundler / rake / spec / cucumber
@@ -121,11 +95,5 @@ alias gg="git pull"
 alias gp="git push"
 
 # mysql
-alias myrestart='mysql.server restart'
 alias mysql='mysql -uroot'
-alias mybug='mysql bugle_development'
-alias mybe='mysql beyondendurance_development'
 alias mypmf='mysql faqtory_development'
-alias myhtd='mysql housetrip_development'
-alias myhtp='mysql housetrip_production_like'
-alias myhtt='mysql housetrip_test'
