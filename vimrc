@@ -371,6 +371,9 @@ au BufNewFile,BufRead {*.md,*.markdown} set ft=markdown
 au BufNewFile,BufRead /private/etc/apache2/*.conf* set ft=apache
 au BufRead,BufNewFile {Capfile,Gemfile,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
+" source vimrc after saving
+au BufWritePost .vimrc so ~/.vimrc
+
 " always spellcheck on text like files
 autocmd BufRead,BufNewFile {*.md,*.txt,*.textile,*.markdown,*.rdoc} setlocal spell
 " auto strip whitespace when saving
