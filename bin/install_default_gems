@@ -1,5 +1,5 @@
 #!/bin/sh
 
 # install useful gems we want on all rubies
-gem install terminal-notifier foreman renv lolcommits awesome_print pry pry-doc pry-nav donjon cocoapods --no-ri --no-rdoc
+gem install bundler terminal-notifier foreman renv lolcommits awesome_print pry pry-doc pry-nav donjon cocoapods --no-ri --no-rdoc
 gem install seeing_is_believing --version 3.0.0.beta.7
