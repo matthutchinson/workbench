@@ -122,3 +122,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 # scmpuff
 eval "$(scmpuff init -s)"
+
+# add only trusted projects' bin directory to $PATH
+# enable with `mkdir .git/safe` in the root of repositories you trust
+ export PATH=".git/safe/../../bin:$PATH"
