@@ -51,6 +51,41 @@ function set_git_prompt {
     git_time="$DARK_GRAY|$GRAY${git_time}"
   fi
 
+  # get git repo info
+  # tips from here: https://gist.github.com/jkakar/4845875288eef72cc2c6
+  local repo_info rev_parse_exit_code
+	repo_info="$(git rev-parse --git-dir --short HEAD 2>/dev/null)"
+	rev_parse_exit_code="$?"
+
+  local short_sha inside_gitdir g git_wtf
+  if [ "$rev_parse_exit_code" = "0" ]; then
+    g="${repo_info%$'\n'*}"
+    short_sha="${repo_info##*$'\n'}"
+  fi
+
+  # wtf, are we rebasing, bisecting, merging, cherry-picking or reverting?
+  local git_wtf=""
+  if [ -d "$g/rebase-merge" ]; then
+    if [ -f "$g/rebase-merge/interactive" ]; then
+      git_wtf="REBASE-i"
+    else
+      git_wtf="REBASE-m"
+    fi
+  else
+    if [ -f "$g/MERGE_HEAD" ]; then
+      git_wtf="🎯 "
+    elif [ -f "$g/CHERRY_PICK_HEAD" ]; then
+      git_wtf="🍒 "
+    elif [ -f "$g/REVERT_HEAD" ]; then
+      git_wtf="🔧 "
+    elif [ -f "$g/BISECT_LOG" ]; then
+      git_wtf="🔍 "
+    fi
+  fi
+  if [ -n "$git_wtf" ]; then
+    git_wtf="$DARK_GRAY|$GRAY${git_wtf}"
+  fi
+
   # set color based on clean/staged/unstaged
   if [[ ${git_status} =~ "nothing to commit" ]]; then
     state="${GREEN}"
@@ -85,7 +120,7 @@ function set_git_prompt {
   fi
 
 
-  GIT_PROMPT="$LIGHT_BLUE(${state}${branch}${git_time}$WHITE_BOLD${remote}$LIGHT_BLUE)"
+  GIT_PROMPT="$LIGHT_BLUE(${state}${branch}${git_time}${git_wtf}$WHITE_BOLD${remote}$LIGHT_BLUE)"
 }
 
 # set the prompts

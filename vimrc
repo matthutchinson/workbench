@@ -57,6 +57,9 @@ map <leader>e :new <C-R>=expand("%:p:h")<cr><cr>
 map <leader>m :! mate %<cr>
 map <leader>rn :w ! %<cr>
 
+" re-tag project with ctags
+map <leader>rt :!echo 'retagging ctags...'; ctags --tag-relative -Rf.git/tags.$$ --exclude=.git --languages=-javascript,sql<cr><cr>
+
 " use :w!! to save with sudo
 cmap w!! w !sudo tee % >/dev/null
 
@@ -151,6 +154,7 @@ set ignorecase                    " case-insensitive searching
 set smartcase                     " but case-sensitive if expression contains a capital letter
 set showmatch
 set incsearch                     " highlight matches as you type
+set tags+=.git/tags               " include tags from here
 set hlsearch                      " highlight matches
 
 " use Ag instead of grep (the silver searcher)
