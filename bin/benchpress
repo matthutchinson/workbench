@@ -62,7 +62,7 @@ puts '  Applying nginx config ...'
 
 # ensure local ssl certs exist for dev domains
 nginx_dir = "/usr/local/etc/nginx"
-domains   = %w(pow.dev)
+domains   = %w(nginx.dev)
 domains.each do |domain|
   next if File.exists?("#{nginx_dir}/ssl/#{domain}.crt")
   `nginx_ssl_cert_builder #{domain}`

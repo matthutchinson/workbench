@@ -19,8 +19,8 @@ server {
   error_log       /usr/local/var/log/nginx/ssl-error.log;
 
   # certs
-  ssl_certificate      ssl/pow.dev.crt;
-  ssl_certificate_key  ssl/pow.dev.key;
+  ssl_certificate      ssl/nginx.dev.crt;
+  ssl_certificate_key  ssl/nginx.dev.key;
 
   location / {
 
@@ -45,11 +45,6 @@ server {
 
     client_body_temp_path /usr/local/etc/nginx/client_body_temp;
 
-    # vcap.me to apache (8080)
-    if ($host ~* ^(.*)\.vcap\.me) {
-      proxy_pass http://localhost:8080;
-    }
-
     if ($host ~* faqtory.dev) {
       proxy_pass http://faqtory;
     }
@@ -58,7 +53,7 @@ server {
       proxy_pass http://pmfaqtory-store;
     }
 
-    # proxy to pow
-    proxy_pass http://localhost:20559;
+    # proxy to puma-dev http port
+    proxy_pass http://localhost:9280;
   }
 }
