@@ -1,3 +1,0 @@
-export POW_TIMEOUT=3600
-export POW_WORKERS=2
-#export RAILS3=false
