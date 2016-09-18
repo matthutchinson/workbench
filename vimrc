@@ -254,7 +254,7 @@ let g:gist_detect_filetype = 1
 
 " turbux
 let g:turbux_command_prefix = 'bundle exec'
-let g:turbux_command_rspec = 'zeus rspec'
+let g:turbux_command_rspec = 'rspec'
 let g:turbux_test_type = 'minitest'
 let g:turbux_command_test_unit = 'bin/rails test'
 
