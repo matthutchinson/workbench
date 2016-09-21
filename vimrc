@@ -256,7 +256,7 @@ let g:gist_detect_filetype = 1
 let g:turbux_command_prefix = 'bundle exec'
 let g:turbux_command_rspec = 'rspec'
 let g:turbux_test_type = 'minitest'
-let g:turbux_command_test_unit = 'bin/rails test'
+let g:turbux_command_test_unit = 'rake test'
 
 " ctrlp
 let g:ctrlp_max_height = 10      " window height
