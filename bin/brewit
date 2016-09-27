@@ -1,6 +1,9 @@
 #!/bin/bash
 
 brew update
+sleep 0.5
 brew upgrade
+sleep 0.5
 brew doctor
+sleep 0.5
 brew cleanup
