@@ -3,7 +3,7 @@
 path = File.expand_path('./', File.dirname(__FILE__))
 bin_path = File.symlink?(path) ? File.readlink(path) : path
 workbench_path = File.expand_path('.././', bin_path)
-host = `hostname`.split(".").first
+host = `hostname`.chomp
 
 puts "Installing the workbench (on #{host})"
 
