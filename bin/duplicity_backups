@@ -33,7 +33,7 @@ S3_BACKUP_URL="s3://s3-eu-west-1.amazonaws.com/hiddenloop-backups/duplicity/$HOS
 # various duplicity options
 exclude_options="--exclude-filelist /Users/$USER/.duplicity_exclude"
 gpg_options="--gpg-binary /usr/local/bin/gpg2"
-s3_options="--s3-use-new-style --s3-european-buckets --s3-use-ia --s3-use-server-side-encryption"
+s3_options="--s3-use-new-style --s3-european-buckets --s3-use-ia --s3-use-server-side-encryption --allow-source-mismatch"
 
 # folders to backup under /Users/$USER/
 backup_folders=( "Sites" "Documents" "Dropbox" "work" )
