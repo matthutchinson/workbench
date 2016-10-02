@@ -22,13 +22,6 @@ alias cdbe='cd /u/apps/beyondendurance'
 alias cdhbb='cd /u/apps/bugle'
 alias cdwb='cd /u/code/workbench'
 
-# HouseTrip
-alias cdht='cd /u/apps/housetrip'
-alias sdance='be rake smartling:push smartling:pull'
-alias spush='be rake smartling:push'
-alias spull='be rake smartling:pull'
-alias myhtd='mysql housetrip_development'
-
 # git commit extract PT story ID from branch name
 function gc {
   if [ -n "$1" ]
