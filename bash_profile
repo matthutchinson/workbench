@@ -145,9 +145,6 @@ bind '"\e[B":history-search-forward'
 # tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
-# ht
-eval "$($HOME/.ht/bin/ht init -)"
-
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
