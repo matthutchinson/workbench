@@ -81,10 +81,10 @@ nmap <leader>d :bd<cr>
 nmap <leader>D :bufdo bd<cr>
 
 " function keys
-map <F1> :sp ~/Dropbox/system/vim_notes<cr>
-map <F2> :sp ~/Dropbox/system/todos<cr>
-map <F3> :sp ~/Dropbox/system/secrets<cr>
-map <F4> :sp ~/Dropbox/system/notes<cr>
+map <F1> :sp ~/Documents/system/vim_notes<cr>
+map <F2> :sp ~/Documents/system/todos<cr>
+map <F3> :sp ~/Documents/system/secrets<cr>
+map <F4> :sp ~/Documents/system/notes<cr>
 " F5 formats and tidy up
 noremap <F5> mmgg=G'm
 inoremap <silent> <F5> <Esc> mmgg=G'mi
