@@ -86,6 +86,7 @@ alias rdbp='bundle exec rake db:test:prepare'
 alias gb="git branch"
 alias gg="git pull"
 alias gp="git push"
+alias grm="git rebase master -i"
 
 # mysql
 alias mysql='mysql -uroot'
