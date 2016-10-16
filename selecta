@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# https://github.com/garybernhardt/selecta
+# brew install selecta
+
+# helper to print and execute command string
+function _selecta_echo_and_execute() {
+  echo $1
+  eval $1
+}
+
+# helper to selecta process ID
+function _selecta_pid() {
+  echo -n $(ps axww -o pid,user,%cpu,%mem,start,time,command | selecta | sed 's/^ *//' | cut -f1 -d' ')
+}
+
+# copy PID to the clipboard
+function psc() {
+  pid=$(_selecta_pid)
+  echo -n "$pid" | pbcopy
+}
+
+# kill PIDs (with an optional signal)
+function pskill() {
+  pid=$(_selecta_pid)
+  kill $* $pid
+}
+
+# search history and copy, filtering first with grep, then with selecta; e.g
+# USAGE: hist [keyword for grep]
+function hist(){
+  $(history | tail -r | grep -iE "$*" | selecta | xargs | cut -d ' ' -f 2- | xargs | tr -d '\n' | pbcopy)
+}
+
+# git related
+
+# helper to select a branch, local or remote. trims leading whitespace, and "*"
+function _selecta_git_branch(){
+  echo $(git branch -a | sed 's/^\*//' | selecta | xargs echo)
+}
+
+# selecta branch and pass it to `command`, or copy the branch name if no args
+# USAGE: gbs [command]
+function gbs() {
+  branch=$(_selecta_git_branch)
+  if [ $# -eq 0 ]; then
+    echo -n $branch | pbcopy; return;
+  fi
+  _selecta_echo_and_execute "$* $branch"
+}
+
+# selecta branch and check it out
+function gbr() {
+  branch=$(_selecta_git_branch)
+  git co $branch
+}
