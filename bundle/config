@@ -1,9 +1,9 @@
 ---
-BUNDLE_DISABLE_SHARED_GEMS: '1'
-BUNDLE_PATH: vendor/bundle
+BUNDLE_DISABLE_SHARED_GEMS: "1"
+BUNDLE_PATH: "vendor/bundle"
 BUNDLE_BUILD__PUMA: "--with-opt-include=/usr/local/opt/openssl/include"
-BUNDLE_BUILD__LIBV8: "--with-system-v8"
 BUNDLE_BUILD__EVENTMACHINE: "--with-cppflags=-I/usr/local/opt/openssl/include"
-BUNDLE_GEM__MIT: 'true'
-BUNDLE_GEM__TEST: minitest
-BUNDLE_GEM__COC: true
+BUNDLE_GEM__MIT: "true"
+BUNDLE_GEM__TEST: "minitest"
+BUNDLE_GEM__COC: "true"
+BUNDLE_BUILD__LIBV8: "--with-system-v8"

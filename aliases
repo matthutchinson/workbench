@@ -22,6 +22,9 @@ alias cdbe='cd /u/apps/beyondendurance'
 alias cdhbb='cd /u/apps/bugle'
 alias cdwb='cd /u/code/workbench'
 
+# roo
+alias cdr='cd /u/apps/orderweb'
+
 # git commit extract PT story ID from branch name
 function gc {
   if [ -n "$1" ]

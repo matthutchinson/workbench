@@ -7,7 +7,7 @@ if [ -f ~/.secret ]; then . ~/.secret ; fi
 
 # exports
 export TERM="screen-256color" # use screen-256color to play nicer with tmux
-export PATH="/Users/matt/bin:/Applications/Firefox.app/Contents/MacOS:/usr/local/php/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
+export PATH="/Users/matt/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:/Applications/Firefox.app/Contents/MacOS:/usr/local/php/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
 export EDITOR="/usr/local/bin/vim"
 export EVENT_NOKQUEUE=1
 export NODE_PATH="/usr/local/lib/node_modules"
@@ -158,3 +158,6 @@ eval "$(scmpuff init -s)"
 # add only trusted projects' bin directory to $PATH
 # enable with `mkdir .git/safe` in the root of repositories you trust
  export PATH=".git/safe/../../bin:$PATH"
+
+export NVM_DIR="/Users/matt/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
