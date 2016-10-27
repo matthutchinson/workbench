@@ -14,6 +14,7 @@ export NODE_PATH="/usr/local/lib/node_modules"
 export CLICOLOR=1 # ls coloring
 export SERVER_SOFTWARE='pow'
 export XCODE="`xcode-select --print-path`"
+export ORDERWEB_HOME="/u/apps/orderweb"
 
 # Ruby GC - https://gist.github.com/865706
 export RUBY_HEAP_SLOTS_INCREMENT=10000
