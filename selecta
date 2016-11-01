@@ -49,6 +49,8 @@ function gbs() {
   _selecta_echo_and_execute "$* $branch"
 }
 
+alias gbp='gbs'
+
 # selecta branch and check it out
 function gbr() {
   branch=$(_selecta_git_branch)
