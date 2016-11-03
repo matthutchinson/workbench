@@ -27,7 +27,6 @@ export_osx_keychain_password "AWS_SECRET_ACCESS_KEY" "AWS_SECRET_ACCESS_KEY" $US
 export_osx_keychain_password "AWS_ACCESS_KEY_ID" "AWS_ACCESS_KEY_ID" $USER
 
 # backup target destinations (a network file share and S3 EU bucket)
-NFS_BACKUP_URL="file:///Volumes/Kiki/backups/$HOSTNAME"
 S3_BACKUP_URL="s3://s3-eu-west-1.amazonaws.com/hiddenloop-backups/duplicity/$HOSTNAME"
 
 # various duplicity options
@@ -43,14 +42,6 @@ for folder in "${backup_folders[@]}"
 do
   # skip folder if it does not exist
   if [ -d "/Users/$USER/$folder" ]; then
-    echo
-
-    echo "#######  $folder Backup Started (NFS)  ########"
-    /usr/local/bin/duplicity $gpg_options $exclude_options /Users/$USER/$folder $NFS_BACKUP_URL/$folder
-    echo "#######  $folder Removing Old Backups (NFS) ########"
-    /usr/local/bin/duplicity $gpg_options remove-older-than 1M --force $NFS_BACKUP_URL/$folder
-    /usr/local/bin/duplicity $gpg_options cleanup --extra-clean --force $NFS_BACKUP_URL/$folder
-
     echo
 
     echo "#######  $folder Backup Started (S3)  ########"
