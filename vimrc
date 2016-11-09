@@ -23,6 +23,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
 
   " extras
+  Plug 'maxboisvert/vim-simple-complete'
   Plug 'godlygeek/tabular'
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
