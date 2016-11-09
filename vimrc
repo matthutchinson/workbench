@@ -230,8 +230,8 @@ map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
 augroup seeingIsBelievingSettings
   autocmd!
 
-  autocmd FileType ruby nmap <buffer> <Enter> <Plug>(seeing-is-believing-mark-and-run)
-  autocmd FileType ruby xmap <buffer> <Enter> <Plug>(seeing-is-believing-mark-and-run)
+  autocmd FileType ruby nmap <buffer> <F10> <Plug>(seeing-is-believing-mark-and-run)
+  autocmd FileType ruby xmap <buffer> <F10> <Plug>(seeing-is-believing-mark-and-run)
 
   autocmd FileType ruby nmap <buffer> <F8> <Plug>(seeing-is-believing-mark)
   autocmd FileType ruby xmap <buffer> <F8> <Plug>(seeing-is-believing-mark)
