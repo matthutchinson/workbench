@@ -24,6 +24,7 @@ alias cdwb='cd /u/code/workbench'
 
 # roo
 alias cdr='cd /u/apps/orderweb'
+alias test_refresh='rm tmp/db/test*;RAILS_ENV=test bundle exec rake db:refresh'
 
 # git commit extract PT story ID from branch name
 function gc {
