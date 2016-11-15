@@ -59,6 +59,7 @@
   legacyheaders = false
   excludesfile = /Users/matt/.gitignore
   editor = vim
+	attributesfile = /Users/matt/.gitattributes
 [repack]
   usedeltabaseoffset = true
 [apply]
@@ -87,3 +88,5 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
+[diff "exif"]
+	textconv = exiftool
