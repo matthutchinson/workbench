@@ -23,6 +23,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
 
   " extras
+  Plug 'airblade/vim-gitgutter'
   Plug 'maxboisvert/vim-simple-complete'
   Plug 'godlygeek/tabular'
   Plug 'SirVer/ultisnips'
@@ -248,6 +249,13 @@ augroup END
 
 " ag
 let g:ag_working_path_mode="r"
+
+" git gutter
+set updatetime=500
+" working with hunks (blocks of changes)
+nmap <Leader>ha <Plug>GitGutterStageHunk
+nmap <Leader>hr <Plug>GitGutterUndoHunk
+nmap <Leader>hv <Plug>GitGutterPreviewHunk
 
 " gist-vim
 let g:gist_open_browser_after_post = 1
