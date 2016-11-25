@@ -148,7 +148,7 @@ set splitbelow                        " open vertical splits below
 set splitright                        " open horizontal splits on the right
 set cm=blowfish2                      " encryption mode (http://tuxdiary.com/2015/01/13/encrypt-files-with-vim/)
 set complete+=kspell                  " spell check auto complete (C-N in i-mode)
-set dictionary=/usr/share/dict/words  " use this for completions (ctrl-x ctrl-k)
+" set dictionary+=/usr/share/dict/words  " use this for completions (ctrl-x ctrl-k)
 "set clipboard=unnamed                 " all c&p operations on OS clipboard
 
 " searching
