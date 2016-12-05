@@ -27,7 +27,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'airblade/vim-gitgutter'
   Plug 'maxboisvert/vim-simple-complete'
   Plug 'godlygeek/tabular'
-  Plug 'SirVer/ultisnips'
+  "Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim'
@@ -215,7 +215,7 @@ vmap <leader>c gc
 map <leader>r :w\|:call SendToTmux("\"".expand('%:p%h')."\"\n")<cr>
 
 " ulti-snips
-map <leader>U :UltiSnipsEdit<cr>
+"map <leader>U :UltiSnipsEdit<cr>
 
 " fugitive
 map <leader>gg :Gpull<cr>
@@ -292,12 +292,12 @@ let g:lightline = {
 
 
 " snippets trigger configuration
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-u>"
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
-let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-u>"
+" let g:UltiSnipsEditSplit="vertical"
+" let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
+" let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
 
 
