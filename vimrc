@@ -12,6 +12,15 @@ let g:mapleader=","
 "   brew install --HEAD universal-ctags
 
 " #### Plugins (https://github.com/junegunn/vim-plug)
+let g:ascii = [
+      \ '        __',
+      \ '.--.--.|__|.--------.',
+      \ '|  |  ||  ||        |',
+      \ ' \___/ |__||__|__|__|',
+      \ ''
+      \]
+let g:startify_custom_header =
+      \ 'map(g:ascii + startify#fortune#quote(), "\"   \".v:val")'
 
 call plug#begin('~/.vim/plugged')
   " core
@@ -32,6 +41,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim'
   Plug 'sjl/gundo.vim'
+  Plug 'mhinz/vim-startify'
 
   " tmux
   Plug 'jgdavey/vim-turbux'             " shortcuts for tslime testing
