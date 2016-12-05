@@ -5,10 +5,11 @@ set nocompatible
 let mapleader=","
 let g:mapleader=","
 
-
 " #### Requirements
-" ensure to brew install ctags-exuberant (http://tinyurl.com/3lcrsrh)
-
+" for ctags setup see http://tinyurl.com/3lcrsrh
+" now using http://docs.ctags.io (install with)
+"   brew tap universal-ctags/universal-ctags
+"   brew install --HEAD universal-ctags
 
 " #### Plugins (https://github.com/junegunn/vim-plug)
 
@@ -60,7 +61,7 @@ map <leader>m :! mate %<cr>
 map <leader>rn :w ! %<cr>
 
 " re-tag project with ctags
-map <leader>rt :!echo 'retagging ctags...'; ctags --tag-relative -Rf.git/tags.$$ --exclude=.git --languages=-javascript,sql<cr><cr>
+map <leader>ct :!echo 'retagging ctags...'; ctags --tag-relative -Rf.git/tags.$$ --exclude=.git --languages=-javascript,sql; mv .git/tags.$$ .git/tags<cr><cr>
 
 " use :w!! to save with sudo
 cmap w!! w !sudo tee % >/dev/null
