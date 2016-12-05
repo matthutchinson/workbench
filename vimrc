@@ -31,7 +31,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'honza/vim-snippets'
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim'
-  Plug 'hwartig/vim-seeing-is-believing'
+  Plug 'sjl/gundo.vim'
 
   " tmux
   Plug 'jgdavey/vim-turbux'             " shortcuts for tslime testing
@@ -95,6 +95,7 @@ inoremap <silent> <F5> <Esc> mmgg=G'mi
 nmap <F6> :g#\({\n\)\@<=#.,/}/sort<cr>
 " F7 spell checks
 map <F7> :setlocal spell! spelllang=en<cr>
+map <F8> :GundoToggle<CR>
 
 " ruby/rails shortcuts
 map <leader>ch :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<cr>
@@ -228,25 +229,13 @@ map <leader>ge :Gedit<cr>
 map <leader>gl :Glog -250<cr><cr>:copen<cr><cr>
 map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
 
-" seeing is believing
-augroup seeingIsBelievingSettings
-  autocmd!
-
-  autocmd FileType ruby nmap <buffer> <F10> <Plug>(seeing-is-believing-mark-and-run)
-  autocmd FileType ruby xmap <buffer> <F10> <Plug>(seeing-is-believing-mark-and-run)
-
-  autocmd FileType ruby nmap <buffer> <F8> <Plug>(seeing-is-believing-mark)
-  autocmd FileType ruby xmap <buffer> <F8> <Plug>(seeing-is-believing-mark)
-  autocmd FileType ruby imap <buffer> <F8> <Plug>(seeing-is-believing-mark)
-
-  autocmd FileType ruby nmap <buffer> <F9> <Plug>(seeing-is-believing-run)
-  autocmd FileType ruby imap <buffer> <F9> <Plug>(seeing-is-believing-run)
-augroup END
-
-
 
 
 " #### Plugin Settings
+
+" GUndo
+let g:gundo_width = 85
+let g:gundo_playback_delay = 100
 
 " ag
 let g:ag_working_path_mode="r"
