@@ -53,7 +53,7 @@ server {
       proxy_pass http://pmfaqtory-store;
     }
 
-    # proxy to puma-dev http port
-    proxy_pass http://localhost:9280;
+    # proxy to puma-dev https port
+    proxy_pass https://localhost:9283;
   }
 }
