@@ -26,6 +26,7 @@ call plug#begin('~/.vim/plugged')
   " core
   Plug 'rking/ag.vim'
   Plug 'kien/ctrlp.vim'
+  Plug 'FelikZ/ctrlp-py-matcher'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-bundler'
@@ -82,14 +83,13 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<cr>:cw<cr>
 nnoremap <C-n> :cn<cr>
 nnoremap <C-p> :cp<cr>
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<cr>
-" re-open results
-nnoremap <leader><leader> :copen<cr>
 " format paragraphs to textwidth
 nnoremap <leader>q gqip
 
 " buffers
 nmap <Tab> :bp<cr>
 nmap <S-Tab> :bn<cr>
+nnoremap <leader><leader> :b#<CR>
 nmap <leader>d :bd<cr>
 nmap <leader>D :bufdo bd<cr>
 
@@ -116,6 +116,9 @@ nnoremap <Up>    <nop>
 nnoremap <Down>  <nop>
 nnoremap <Left>  <nop>
 nnoremap <Right> <nop>
+
+" ctrlp open/search MRU list
+nnoremap <leader>b :CtrlPBuffer<CR>
 
 
 
@@ -209,9 +212,6 @@ nmap <C-x> :call setreg("\"",system("pbpaste"))<CR>p
 " start a global search
 map <C-F> :Ag --hidden<space>
 
-" opens CtrlP buffer
-map <leader>b :CtrlPBuffer<cr>
-
 " tabularize
 nmap <leader>a> :Tabularize /=><cr>
 vmap <leader>a> :Tabularize /=><cr>
@@ -270,9 +270,11 @@ let g:turbux_test_type = 'minitest'
 let g:turbux_command_test_unit = 'rake test'
 
 " ctrlp
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' } " super fast py ext
 let g:ctrlp_max_height = 10      " window height
 let g:ctrlp_follow_symlinks = 1  " do follow symlinks
-let g:ctrlp_lazy_update = 1      " update after 250ms
+let g:ctrlp_use_caching = 0      " so fast we dont need to cache
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f'] " respects git ignore
 
 " lightline
 let g:lightline = {
