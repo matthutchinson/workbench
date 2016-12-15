@@ -26,45 +26,22 @@ alias cdwb='cd /u/code/workbench'
 alias cdr='cd /u/apps/orderweb'
 alias test_refresh='rm tmp/db/test*;RAILS_ENV=test bundle exec rake db:refresh'
 
-# git commit extract PT story ID from branch name
+# git commit extracting story ID from branch name
 function gc {
   if [ -n "$1" ]
   then
-    PIVOTAL_STORY=$(echo $br | perl -ne 'print /-(\d+)$/')
-    if [[ $1 =~ "[#$PIVOTAL_STORY]" ]]; then
-      GIT_COMMIT_PT=$1
+    STORY_ID=$story_id_from_git_branch
+    # does story id already exist in arg?
+    if [[ $1 =~ "[$STORY_ID]" ]]; then
+      GIT_COMMIT_MSG=$1
     else
-      GIT_COMMIT_PT="[#$PIVOTAL_STORY] $1"
-    fi;
-    if [ -z $PIVOTAL_STORY ]; then
-      GIT_COMMIT_PT=$1
+      # prefix message with [story-id]
+      GIT_COMMIT_MSG="[$STORY_ID] $1"
     fi;
 
-    git commit -am "$GIT_COMMIT_PT"
+    git commit -am "$GIT_COMMIT_MSG"
   else
     echo "usage: gc 'your commit message'"
-  fi
-}
-
-# deploy to a staging
-# e.g. sd 1 'some deploy message'
-sd () {
-  if [ -n "$1" ] && [ -n "$2" ]
-  then
-    ht staging-deploy "$2" --channel staging"$1" --staging staging"$1";
-  else
-    echo "usage: sd staging-server-number 'deploy message' e.g. sd 1 'awesome deploy'"
-  fi
-}
-
-# migrate a staging
-# e.g. sm 1
-sm () {
-  if [ -n "$1" ]
-  then
-    ht migrate staging"$1" --channel staging"$1";
-  else
-    echo "usage: sm staging-server-number e.g. sm 2"
   fi
 }
 

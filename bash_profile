@@ -111,8 +111,10 @@ function set_git_prompt {
   branch_pattern="^On branch ([^${IFS}]*)"
   if [[ ${git_status} =~ ${branch_pattern} ]]; then
     branch=${BASH_REMATCH[1]}
-    # shortcut for current branch name
+    # shortcut for current branch name and story id
     export br=${branch}
+    export story_id_from_git_branch="$(echo $branch | perl -ne 'print /(.*)\//')"
+
     # truncate longish branch names
     if [ ${#branch} -gt 30 ]
     then
