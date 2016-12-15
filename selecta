@@ -56,3 +56,6 @@ function gbr() {
   branch=$(_selecta_git_branch)
   git co $branch
 }
+
+# delete a branch
+alias gbd="gbs git br -D"
