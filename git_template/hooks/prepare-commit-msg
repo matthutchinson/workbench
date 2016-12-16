@@ -5,17 +5,16 @@
 # description of the commit message's source. The hook's purpose is to edit the
 # commit message file. If the hook fails with a non-zero status, the commit is
 # aborted.
+#
+# see here for details:  https://git-scm.com/docs/githooks#_prepare_commit_msg
 
-# prevent this happening during rebases or when in a headless state
-NAME=$(git rev-parse --abbrev-ref HEAD);
-if [ "$NAME" != 'HEAD' ] ; then
+prepareTemplateMessage() {
   # grab template file contents (if it exists)
   template_file="$HOME/.git_commit_message_template"
   if [ -f "$template_file" ]
   then
     template_content="\n$(cat $template_file)\n"
   fi
-
 
   # prefix with story id from the current git branch if present
   if [ -n "$story_id_from_git_branch" ]
@@ -24,4 +23,31 @@ if [ "$NAME" != 'HEAD' ] ; then
   fi
 
   echo $prefix "short message\n$template_content$(cat $1)" > $1
-fi
+}
+
+# handle various args this script can be invoked with
+case "$2,$3" in
+  # Commits that already have a message
+  commit,?*)
+  ;;
+
+  # Messages are one line messages e.g. from -m
+  message,)
+  ;;
+
+  # when squashing commits
+  squash,)
+  ;;
+
+  # Merge commits
+  merge,)
+    # Comments out the "Conflicts:" part of a merge commit.
+    # perl -i.bak -ne 's/^/# /, s/^# #/#/ if /^Conflicts/ .. /#/; print' "$1"
+  ;;
+
+  # Non-merges with no prior messages
+  *)
+    prepareTemplateMessage $1
+  ;;
+esac
+
