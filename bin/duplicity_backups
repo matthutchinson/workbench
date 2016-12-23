@@ -1,7 +1,6 @@
 #!/bin/sh
 
-# Duplicity backups for local folders (under ~/) to both a local NFS and S3
-# GPG signed, encrypted and compressed differential backups
+# Duplicity - GPG signed, encrypted and compressed differential backups
 #
 # Sensitive ENV vars are extracted from the OSX keychain (man security)
 #  - http://duplicity.nongnu.org
@@ -11,7 +10,6 @@
 #   brew install duplicity gpg2
 #   and ensure you have a OSX keychain entries for your GPG passphrase and S3
 #   credentials e.g. account: $USER service: GPG
-
 
 ulimit -n 1024
 
@@ -34,19 +32,19 @@ exclude_options="--exclude-filelist /Users/$USER/.duplicity_exclude"
 gpg_options="--gpg-binary /usr/local/bin/gpg2"
 s3_options="--s3-use-new-style --s3-european-buckets --s3-use-ia --s3-use-server-side-encryption --allow-source-mismatch"
 
-# folders to backup under /Users/$USER/
-backup_folders=( "Sites" "Documents" "Dropbox" "work" )
+# folders to backup
+backup_folders=( "/Users/$USER/Sites" "/Users/$USER/Documents" "/Users/$USER/Dropbox" "/Users/$USER/Sites" "/Users/$USER/vagrant" "/u")
 
 echo "Starting Backups"
 for folder in "${backup_folders[@]}"
 do
   # skip folder if it does not exist
-  if [ -d "/Users/$USER/$folder" ]; then
+  if [ -d "$folder" ]; then
     echo
 
-    echo "#######  $folder Backup Started (S3)  ########"
-    /usr/local/bin/duplicity $gpg_options $exclude_options $s3_options /Users/$USER/$folder $S3_BACKUP_URL/$folder
-    echo "#######  $folder Removing Old Backups (S3) ########"
+    echo "####### $folder Backup Started (S3)  ########"
+    /usr/local/bin/duplicity $gpg_options $exclude_options $s3_options $folder $S3_BACKUP_URL/$folder
+    echo "####### $folder Removing Old Backups (S3) ########"
     /usr/local/bin/duplicity $gpg_options remove-older-than 1M --force $S3_BACKUP_URL/$folder
     /usr/local/bin/duplicity $gpg_options cleanup --extra-clean --force $S3_BACKUP_URL/$folder
 
