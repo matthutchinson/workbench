@@ -25,6 +25,10 @@ Dir.chdir(workbench_path) do
   end
 end
 
+if File.exists?("/keybase/private/matthutchinson/secret_env")
+  `ln -sfh /keybase/private/matthutchinson/secret_env ~/.secret`
+end
+
 # install/update launchd for this host (if we have any)
 launchd_scripts = Dir.glob("#{workbench_path}/launchd/#{host}/*")
 if launchd_scripts.empty?
