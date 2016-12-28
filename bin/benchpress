@@ -25,6 +25,8 @@ Dir.chdir(workbench_path) do
   end
 end
 
+# link keybase fs secret env vars into place
+# https://keybase.io/docs/kbfs
 if File.exists?("/keybase/private/matthutchinson/secret_env")
   `ln -sfh /keybase/private/matthutchinson/secret_env ~/.secret`
 end
