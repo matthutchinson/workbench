@@ -46,11 +46,6 @@
   pretty = %C(yellow)%h%Creset %Cgreen[%cr]%Creset (%an) %s
 [help]
   autocorrect = 1
-[merge]
-  tool = opendiff
-[merge "pofile"]
-  name = Gettext merge driver
-  driver = git merge-po %O %A %B
 [sendemail]
   smtpserver = smtp.example.com
   aliasesfile = /Users/matt/.gitaliases
@@ -69,8 +64,6 @@
   default = current
 [heroku]
 	account = personal
-[mergetool]
-	keepBackup = false
 [init]
 	templatedir = ~/.git_template
 [url "git://github.com/"]
@@ -88,3 +81,14 @@
 	required = true
 [diff "exif"]
 	textconv = exiftool
+[merge]
+  tool = myvimdiff
+  conflictStyle = diff3
+[mergetool]
+  keepBackup = false
+  prompt = false
+[mergetool "myvimdiff"]
+  cmd = vim -f -d $LOCAL $MERGED $REMOTE -c "MergeMode"
+[merge "pofile"]
+  name = Gettext merge driver
+  driver = git merge-po %O %A %B

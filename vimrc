@@ -136,13 +136,16 @@ colorscheme jellybeans
 set textwidth=80                  " set textwidth
 set fo-=t
 set colorcolumn=+1                " show vertical break at textwidth
-set cursorline                    " highlight the current line
 set number                        " show line numbers
 set ruler                         " show cursor position
 set title                         " set the terminal's title
 set visualbell                    " visual flash
 set noerrorbells                  " no beeping please
 set laststatus=2                  " always show a status bar
+set cursorline                    " only use cursorline for current window
+
+autocmd WinEnter,FocusGained * setlocal cursorline
+autocmd WinLeave,FocusLost   * setlocal nocursorline
 
 " speedy scrolling
 syntax sync minlines=100
@@ -372,6 +375,49 @@ function! OpenChangedFiles()
   endfor
 endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
+
+" solve merge conflicts in vim
+function! s:setup_merge_mode()
+  if !&diff | return | endif
+
+  " Create straightforward mappings
+  nmap     ]] ]n
+  nmap     [[ [n
+  nnoremap do <nop>
+  nnoremap <silent> dp        :diffput 2<cr>
+  nnoremap <silent> dol       :diffget 1<cr>
+  nnoremap <silent> dor       :diffget 3<cr>
+  nnoremap <silent> do1       :diffget 1<cr>
+  nnoremap <silent> do3       :diffget 3<cr>
+  nnoremap <silent> <leader>q :xa!<cr>
+
+  " Add some more complex mapppings
+  let l:sid = matchstr(expand('<sfile>'), '\zs<SNR>\d\+_\ze.*$')
+  execute 'nnoremap <silent> u :call ' . l:sid . 'undo()<cr>'
+
+  " Set buffer options
+  1wincmd w
+  setlocal noswapfile
+  setlocal nomodifiable
+  3wincmd w
+  setlocal noswapfile
+  setlocal nomodifiable
+
+  " Move to local window and to first conflict
+  2wincmd w
+  normal gg]]
+endfunction
+
+function! s:undo()
+  if winnr() ==# 2
+    normal! u
+  else
+    2wincmd w
+    normal! u
+    wincmd p
+  endif
+endfunction
+command! MergeMode :call s:setup_merge_mode()
 
 
 
