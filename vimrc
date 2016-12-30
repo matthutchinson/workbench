@@ -376,7 +376,7 @@ function! OpenChangedFiles()
 endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
 
-" solve merge conflicts in vim
+" solve merge conflicts in vim - http://howivim.com/2016/karl-yngve-lervag
 function! s:setup_merge_mode()
   if !&diff | return | endif
 
