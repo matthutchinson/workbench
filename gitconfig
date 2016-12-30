@@ -82,11 +82,12 @@
 [diff "exif"]
 	textconv = exiftool
 [merge]
-  tool = myvimdiff
-  conflictStyle = diff3
+  tool = opendiff
+  ; tool = myvimdiff
+  ; conflictStyle = diff3
 [mergetool]
   keepBackup = false
-  prompt = false
+  ; prompt = false
 [mergetool "myvimdiff"]
   cmd = vim -f -d $LOCAL $MERGED $REMOTE -c "MergeMode"
 [merge "pofile"]
