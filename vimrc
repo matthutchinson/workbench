@@ -420,8 +420,6 @@ endfunction
 command! MergeMode :call s:setup_merge_mode()
 
 
-
-
 " #### FileType settings
 
 au BufRead,BufNewFile *.as   set ft=actionscript
