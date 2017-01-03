@@ -1,4 +1,4 @@
 #!/bin/sh
 
 # install useful gems we want on all rubies
-gem install git-whistles bundler terminal-notifier foreman lolcommits awesome_print pry pry-doc pry-nav cocoapods --no-ri --no-rdoc
+gem install git-whistles bundler terminal-notifier foreman awesome_print pry pry-doc pry-nav cocoapods --no-ri --no-rdoc
