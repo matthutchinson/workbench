@@ -15,7 +15,7 @@
 LANG="en_GB.UTF-8"
 
 # prep folders for downloads
-download_folder="/Users/$USER/Downloads/SoundCloud"
+download_folder="/Users/$USER/SoundCloud"
 apple_script="/u/code/workbench/apple_scripts/add_folder_tracks_to_playlist.scpt"
 mkdir -p $download_folder
 mkdir -p Likes
@@ -42,8 +42,8 @@ function download_and_import_tracks () {
   fi
 }
 
-download_and_import_tracks "https://soundcloud.com/matt_hutchinson/sets/poolside-fm" "-c" "Poolside.FM" "Users:$USER:Downloads:SoundCloud:Poolside.FM (best of):" "Poolside.FM (best of)/"
-download_and_import_tracks "https://soundcloud.com/matt_hutchinson/sets/fffffounnd-tracks" "-c" "FFFFFOUNND Tracks" "Users:$USER:Downloads:SoundCloud:FFFFFOUNND Tracks:" "FFFFFOUNND Tracks"
-download_and_import_tracks "https://soundcloud.com/matt_hutchinson" "-fc" "SoundCloud Likes" "Users:$USER:Downloads:SoundCloud:Likes" "Likes" "--path ./Likes"
+download_and_import_tracks "https://soundcloud.com/matt_hutchinson/sets/poolside-fm" "-c" "Poolside.FM" "Users:$USER:SoundCloud:Poolside.FM (best of):" "Poolside.FM (best of)/"
+download_and_import_tracks "https://soundcloud.com/matt_hutchinson/sets/fffffounnd-tracks" "-c" "FFFFFOUNND Tracks" "Users:$USER:SoundCloud:FFFFFOUNND Tracks:" "FFFFFOUNND Tracks"
+download_and_import_tracks "https://soundcloud.com/matt_hutchinson" "-fc" "SoundCloud Likes" "Users:$USER:SoundCloud:Likes" "Likes" "--path ./Likes"
 
 echo "Done! -" `date`
