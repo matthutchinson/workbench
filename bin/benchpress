@@ -65,6 +65,7 @@ puts '  Applying nginx config ...'
 `ln -sfh #{workbench_path}/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf`
 `ln -sfh #{workbench_path}/nginx/sites-available /usr/local/etc/nginx/sites-available`
 `ln -sfh #{workbench_path}/nginx/sites-enabled /usr/local/etc/nginx/sites-enabled`
+`ln -sfh #{workbench_path}/nginx/includes /usr/local/etc/nginx/includes`
 
 # ensure local ssl certs exist for dev domains
 nginx_dir = "/usr/local/etc/nginx"
