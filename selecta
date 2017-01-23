@@ -62,5 +62,8 @@ alias gbp='gbs'
 # `git branch checkout`
 alias gbc="gbs git co"
 
+# `git branch merge`
+alias gbm="gbs git merge"
+
 # `git branch delete
 alias gbd="gbs git br -D"
