@@ -9,21 +9,9 @@ function _selecta_echo_and_execute() {
   eval $1
 }
 
-# helper to selecta process ID
+# helper to selecta PID
 function _selecta_pid() {
   echo -n $(ps axww -o pid,user,%cpu,%mem,start,time,command | selecta | sed 's/^ *//' | cut -f1 -d' ')
-}
-
-# copy PID to the clipboard
-function psc() {
-  pid=$(_selecta_pid)
-  echo -n "$pid" | pbcopy
-}
-
-# kill PIDs (with an optional signal)
-function pskill() {
-  pid=$(_selecta_pid)
-  kill $* $pid
 }
 
 # search history and copy, filtering first with grep, then with selecta; e.g
@@ -32,13 +20,32 @@ function hist(){
   $(history | tail -r | grep -iE "$*" | selecta | xargs | cut -d ' ' -f 2- | xargs | tr -d '\n' | pbcopy)
 }
 
-# git related
 
-# helper to select a branch, local or remote. trims leading whitespace, and "*"
-function _selecta_git_branch(){
-  echo $(git branch -a | sed 's/^\*//' | selecta | xargs echo)
+
+# PID related
+
+# copy PID
+function psc() {
+  pid=$(_selecta_pid)
+  echo -n "$pid" | pbcopy
 }
 
+# kill PID (with an optional signal)
+function psk() {
+  pid=$(_selecta_pid)
+  kill $* $pid
+}
+
+
+
+# git related
+
+# helper to select a local branch, trims leading whitespace, and "*"
+function _selecta_git_branch(){
+  echo $(git branch | sed 's/^\*//' | selecta | xargs echo)
+}
+
+# `git branch select``
 # selecta branch and pass it to `command`, or copy the branch name if no args
 # USAGE: gbs [command]
 function gbs() {
@@ -49,13 +56,11 @@ function gbs() {
   _selecta_echo_and_execute "$* $branch"
 }
 
+# alias to `git branch pick` acronym
 alias gbp='gbs'
 
-# selecta branch and check it out
-function gbr() {
-  branch=$(_selecta_git_branch)
-  git co $branch
-}
+# `git branch checkout`
+alias gbc="gbs git co"
 
-# delete a branch
+# `git branch delete
 alias gbd="gbs git br -D"
