@@ -39,14 +39,14 @@ else
   puts "  Installing launchd scripts for #{host} ..."
   launchd_scripts.each do |launchd_script|
     script_name = launchd_script.split('/').last
-    if File.exists?("/Library/LaunchDaemons/#{script_name}")
+    if File.exists?("/Library/LaunchAgents/#{script_name}")
       puts "    - #{script_name} (relaunching) ..."
-      `launchctl unload -w /Library/LaunchDaemons/#{script_name} > /dev/null`
-      `launchctl load -w /Library/LaunchDaemons/#{script_name}`
+      `launchctl unload -w /Library/LaunchAgents/#{script_name} > /dev/null`
+      `launchctl load -w /Library/LaunchAgents/#{script_name}`
     else
       puts "    - #{script_name} (adding) ..."
-      `sudo ln -sfh #{launchd_script} /Library/LaunchDaemons`
-      `launchctl load -w /Library/LaunchDaemons/#{script_name}`
+      `sudo ln -sfh #{launchd_script} /Library/LaunchAgents`
+      `launchctl load -w /Library/LaunchAgents/#{script_name}`
     end
   end
 end
