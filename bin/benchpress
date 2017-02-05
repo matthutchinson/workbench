@@ -32,7 +32,9 @@ if File.exists?("/keybase/private/matthutchinson/secret_env")
 end
 
 # install/update launchd for this host (if we have any)
-launchd_scripts = Dir.glob("#{workbench_path}/launchd/#{host}/*")
+# disable for now, duplicity 0.7.11 has issues on OSX
+# launchd_scripts = Dir.glob("#{workbench_path}/launchd/#{host}/*")
+launchd_scripts = []
 if launchd_scripts.empty?
   puts "  No launchd scripts to apply for #{host} ..."
 else
