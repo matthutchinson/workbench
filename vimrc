@@ -161,6 +161,7 @@ set encoding=utf-8
 set history=200                       " remember all the things
 set backspace=indent,eol,start        " intuitive backspacing
 set hidden                            " handle multiple buffers better
+set wildmenu                          " enhanced auto completing
 set wildmode=list:longest             " complete files like a shell
 set splitbelow                        " open vertical splits below
 set splitright                        " open horizontal splits on the right
