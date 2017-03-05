@@ -33,7 +33,7 @@ gpg_options="--gpg-binary /usr/local/bin/gpg2"
 s3_options="--s3-use-new-style --s3-european-buckets --s3-use-ia --s3-use-server-side-encryption --allow-source-mismatch"
 
 # folders to backup
-backup_folders=( "/Users/$USER/Sites" "/Users/$USER/Documents" "/Users/$USER/Dropbox" "/Users/$USER/vagrant" )
+backup_folders=( "/Users/$USER/Sites" "/Users/$USER/Documents" "/Users/$USER/vagrant" )
 
 echo "Starting Backups"
 for folder in "${backup_folders[@]}"
