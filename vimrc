@@ -143,6 +143,7 @@ set visualbell                    " visual flash
 set noerrorbells                  " no beeping please
 set laststatus=2                  " always show a status bar
 set cursorline                    " only use cursorline for current window
+set cpoptions+=$                  " show $ to indicate editing range
 
 autocmd WinEnter,FocusGained * setlocal cursorline
 autocmd WinLeave,FocusLost   * setlocal nocursorline
