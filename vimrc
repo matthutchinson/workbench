@@ -79,9 +79,9 @@ cmap w!! w !sudo tee % >/dev/null
 
 " grep project folder for word
 nnoremap K :grep! "\b<C-R><C-W>\b"<cr>:cw<cr>
-" move through results
+" move through results (next, m(back), cant use Ctrl+p)
 nnoremap <C-n> :cn<cr>
-nnoremap <C-p> :cp<cr>
+nnoremap <C-m> :cp<cr>
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<cr>
 " format paragraphs to textwidth
 nnoremap <leader>q gqip
