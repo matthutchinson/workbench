@@ -65,11 +65,11 @@ map <Esc>[Z <S-Tab>
 map <Esc>[24~ <F12>
 
 map <leader>w :w!<cr>
-map <leader>v :sp ~/.vimrc<cr>
-map <leader>u :source ~/.vimrc<cr>
 map <leader>e :new <C-R>=expand("%:p:h")<cr><cr>
 map <leader>m :! mate %<cr>
 map <leader>rn :w ! %<cr>
+map <leader>ev :sp ~/.vimrc<cr>
+map <leader>sv :so ~/.vimrc<cr>
 
 " re-tag project with ctags
 map <leader>ct :!echo 'retagging ctags...'; ctags --tag-relative -Rf.git/tags.$$ --exclude=.git --languages=-javascript,sql; mv .git/tags.$$ .git/tags<cr><cr>
