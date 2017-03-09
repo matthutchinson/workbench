@@ -89,7 +89,7 @@ nnoremap <leader>q gqip
 " buffers
 nmap <Tab> :bp<cr>
 nmap <S-Tab> :bn<cr>
-nnoremap <leader><leader> :b#<CR>
+nnoremap <leader><leader> :b#<cr>
 nmap <leader>d :bd<cr>
 nmap <leader>D :bufdo bd<cr>
 
@@ -105,7 +105,7 @@ inoremap <silent> <F5> <Esc> mmgg=G'mi
 nmap <F6> :g#\({\n\)\@<=#.,/}/sort<cr>
 " F7 spell checks
 map <F7> :setlocal spell! spelllang=en<cr>
-map <F8> :GundoToggle<CR>
+map <F8> :GundoToggle<cr>
 
 " ruby/rails shortcuts
 map <leader>ch :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<cr>
@@ -118,7 +118,7 @@ nnoremap <Left>  <nop>
 nnoremap <Right> <nop>
 
 " ctrlp open/search MRU list
-nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>b :CtrlPBuffer<cr>
 
 
 
@@ -208,8 +208,8 @@ set foldcolumn=4
 set nofoldenable
 
 " copy and paste with pbcopy/pbpaste
-vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
-nmap <C-x> :call setreg("\"",system("pbpaste"))<CR>p
+vmap <C-c> y:call system("pbcopy", getreg("\""))<cr>
+nmap <C-x> :call setreg("\"",system("pbpaste"))<cr>p
 
 " #### Plugin Shortcuts
 
