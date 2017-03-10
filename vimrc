@@ -79,12 +79,13 @@ cmap w!! w !sudo tee % >/dev/null
 
 " grep project folder for word
 nnoremap K :grep! "\b<C-R><C-W>\b"<cr>:cw<cr>
-" move through results (next, m(back), cant use Ctrl+p)
-nnoremap <C-n> :cn<cr>
-nnoremap <C-m> :cp<cr>
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<cr>
 " format paragraphs to textwidth
 nnoremap <leader>q gqip
+
+" quick fix window nav
+nmap <C-n> :cn<cr>
+nmap <C-p> :cp<cr>
 
 " buffers
 nmap <Tab> :bp<cr>
@@ -215,6 +216,9 @@ nmap <C-x> :call setreg("\"",system("pbpaste"))<cr>p
 
 " start a global search
 map <C-F> :Ag --hidden<space>
+
+" change CtrlP shortcut
+let g:ctrlp_map = '<space>'
 
 " tabularize
 nmap <leader>a> :Tabularize /=><cr>
