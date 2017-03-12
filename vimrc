@@ -35,13 +35,11 @@ call plug#begin('~/.vim/plugged')
 
   " extras
   Plug 'airblade/vim-gitgutter'
-  Plug 'maxboisvert/vim-simple-complete'
   Plug 'godlygeek/tabular'
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
   Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim'
-  Plug 'sjl/gundo.vim'
   Plug 'mhinz/vim-startify'
 
   " tmux
@@ -70,6 +68,7 @@ map <leader>m :! mate %<cr>
 map <leader>rn :w ! %<cr>
 map <leader>ev :sp ~/.vimrc<cr>
 map <leader>sv :so ~/.vimrc<cr>
+map <leader>cd :lcd %:h<cr>
 
 " re-tag project with ctags
 map <leader>ct :!echo 'retagging ctags...'; ctags --tag-relative -Rf.git/tags.$$ --exclude=.git --languages=-javascript,sql; mv .git/tags.$$ .git/tags<cr><cr>
@@ -106,7 +105,6 @@ inoremap <silent> <F5> <Esc> mmgg=G'mi
 nmap <F6> :g#\({\n\)\@<=#.,/}/sort<cr>
 " F7 spell checks
 map <F7> :setlocal spell! spelllang=en<cr>
-map <F8> :GundoToggle<cr>
 
 " ruby/rails shortcuts
 map <leader>ch :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<cr>
@@ -167,11 +165,11 @@ set wildmode=list:longest             " complete files like a shell
 set splitbelow                        " open vertical splits below
 set splitright                        " open horizontal splits on the right
 set cm=blowfish2                      " encryption mode (http://tuxdiary.com/2015/01/13/encrypt-files-with-vim/)
-set complete+=kspell                  " add spell check to autocompletes (invoke with C-N in i-mode)
-set complete-=t                       " dont use tag and includes for autocompletes
-set complete-=i                       " (gives better performance)
+set complete=.,w,b,t,kspell           " complete on current, windows, buffers, tags and dictionary
+" set complete+=kspell                  " add spell check to autocompletes (invoke with C-N in i-mode)
+" set complete-=t                       " dont use tag and includes for autocompletes
+" set complete-=i                       " (gives better performance)
 " set dictionary+=/usr/share/dict/words  " use this for completions (ctrl-x ctrl-k)
-"set clipboard=unnamed                 " all c&p operations on OS clipboard
 
 " searching
 set ignorecase                    " case-insensitive searching
@@ -252,10 +250,6 @@ map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
 
 
 " #### Plugin Settings
-
-" GUndo
-let g:gundo_width = 85
-let g:gundo_playback_delay = 100
 
 " ag
 let g:ag_working_path_mode="r"
@@ -396,7 +390,7 @@ function! s:setup_merge_mode()
   nnoremap <silent> do3       :diffget 3<cr>
   nnoremap <silent> <leader>q :xa!<cr>
 
-  " Add some more complex mapppings
+  " Add some more complex mappings
   let l:sid = matchstr(expand('<sfile>'), '\zs<SNR>\d\+_\ze.*$')
   execute 'nnoremap <silent> u :call ' . l:sid . 'undo()<cr>'
 
