@@ -165,10 +165,7 @@ set wildmode=list:longest             " complete files like a shell
 set splitbelow                        " open vertical splits below
 set splitright                        " open horizontal splits on the right
 set cm=blowfish2                      " encryption mode (http://tuxdiary.com/2015/01/13/encrypt-files-with-vim/)
-set complete=.,w,b,t,kspell           " complete on current, windows, buffers, tags and dictionary
-" set complete+=kspell                  " add spell check to autocompletes (invoke with C-N in i-mode)
-" set complete-=t                       " dont use tag and includes for autocompletes
-" set complete-=i                       " (gives better performance)
+set complete=.,w,b,kspell             " complete on current, windows, buffers and dictionary
 " set dictionary+=/usr/share/dict/words  " use this for completions (ctrl-x ctrl-k)
 
 " searching
