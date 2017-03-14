@@ -25,12 +25,6 @@ Dir.chdir(workbench_path) do
   end
 end
 
-# link keybase fs secret env vars into place
-# https://keybase.io/docs/kbfs
-if File.exists?("/keybase/private/matthutchinson/secret_env")
-  `ln -sfh /keybase/private/matthutchinson/secret_env ~/.secret`
-end
-
 # install/update launchd for this host (if we have any)
 # disable for now, duplicity 0.7.11 has issues on OSX
 # launchd_scripts = Dir.glob("#{workbench_path}/launchd/#{host}/*")
