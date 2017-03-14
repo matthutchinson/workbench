@@ -144,9 +144,6 @@ set laststatus=2                  " always show a status bar
 set cursorline                    " only use cursorline for current window
 set cpoptions+=$                  " show $ to indicate editing range
 
-autocmd WinEnter,FocusGained * setlocal cursorline
-autocmd WinLeave,FocusLost   * setlocal nocursorline
-
 " speedy scrolling
 syntax sync minlines=100
 set nocursorcolumn
@@ -415,41 +412,44 @@ function! s:undo()
 endfunction
 command! MergeMode :call s:setup_merge_mode()
 
+" #### Autocommands
 
-" #### FileType settings
+if !exists("autocommands_loaded")
+  let autocommands_loaded = 1
 
-au BufRead,BufNewFile *.as   set ft=actionscript
-au BufRead,BufNewFile *.mxml set ft=mxml
-au BufNewFile,BufRead *.json set ft=javascript
-au BufNewFile,BufRead *.god  set ft=ruby
-au BufNewFile,BufRead {*.md,*.markdown} set ft=markdown
-au BufNewFile,BufRead /private/etc/apache2/*.conf* set ft=apache
-au BufRead,BufNewFile {Capfile,Gemfile,Appraisals,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
+  au WinEnter,FocusGained * setlocal cursorline
+  au WinLeave,FocusLost   * setlocal nocursorline
 
-" source vimrc after saving
-au BufWritePost .vimrc so ~/.vimrc
+  au BufRead,BufNewFile *.as   set ft=actionscript
+  au BufRead,BufNewFile *.mxml set ft=mxml
+  au BufNewFile,BufRead *.json set ft=javascript
+  au BufNewFile,BufRead *.god  set ft=ruby
+  au BufNewFile,BufRead {*.md,*.markdown} set ft=markdown
+  au BufNewFile,BufRead /private/etc/apache2/*.conf* set ft=apache
+  au BufRead,BufNewFile {Capfile,Gemfile,Appraisals,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
-" always spellcheck on text like files
-autocmd BufRead,BufNewFile {*.md,*.txt,*.textile,*.markdown,*.rdoc} setlocal spell
-" auto strip whitespace when saving
-autocmd BufWritePre * :%s/\s\+$//e
-" auto spell check & limit width of git commit messages
-autocmd Filetype gitcommit setlocal spell textwidth=72
+  " always spellcheck on text like files
+  au BufRead,BufNewFile {*.md,*.txt,*.textile,*.markdown,*.rdoc} setlocal spell
+  " auto strip whitespace when saving
+  au BufWritePre * :%s/\s\+$//e
+  " auto spell check & limit width of git commit messages
+  au Filetype gitcommit setlocal spell textwidth=72
 
-" auto chmod +x any shebang file, inspired from tpope/vim-eunuch
-autocmd BufNewFile  * let b:brand_new_file = 1
-autocmd BufWritePre *
-  \ if exists('b:brand_new_file') |
-  \   if getline(1) =~ '^#!' |
-  \     let b:chmod_post = '+x' |
-  \   endif |
-  \ endif
-autocmd BufWritePost,FileWritePost * nested
-  \ if exists('b:chmod_post') && executable('chmod') |
-  \   silent! execute '!chmod '.b:chmod_post.' "<afile>"' |
-  \   edit |
-  \   unlet b:chmod_post |
-  \ endif
+  " auto chmod +x any shebang file, inspired from tpope/vim-eunuch
+  au BufNewFile  * let b:brand_new_file = 1
+  au BufWritePre *
+    \ if exists('b:brand_new_file') |
+    \   if getline(1) =~ '^#!' |
+    \     let b:chmod_post = '+x' |
+    \   endif |
+    \ endif
+  au BufWritePost,FileWritePost * nested
+    \ if exists('b:chmod_post') && executable('chmod') |
+    \   silent! execute '!chmod '.b:chmod_post.' "<afile>"' |
+    \   edit |
+    \   unlet b:chmod_post |
+    \ endif
+endif
 
 " #### Ignores
 
