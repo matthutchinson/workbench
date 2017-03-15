@@ -11,7 +11,7 @@ alias con='tail -40 -f /var/log/system.log'
 alias gpg='gpg2'
 alias notes="vi ~/Documents/system/notes.md"
 alias todos="vi ~/Documents/system/todos.md"
-# alias secrets="vi /keybase/private/matthutchinson/secrets.md"
+alias secrets="vi ~/Documents/system/secrets.enc.md"
 
 # https://github.com/trapd00r/ls--/issues/14
 alias ll=' LC_ALL=en_US.UTF-8 LANG=en ls++ -a'

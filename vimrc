@@ -96,7 +96,7 @@ nmap <leader>D :bufdo bd<cr>
 " function keys
 map <F1> :sp ~/Documents/system/vim_help.md<cr>
 map <F2> :sp ~/Documents/system/todos.md<cr>
-map <F3> :sp /keybase/private/matthutchinson/secrets.md<cr>
+map <F3> :sp ~/Documents/system/secrets.enc.md<cr>
 map <F4> :sp ~/Documents/system/notes.md<cr>
 " F5 formats and tidy up
 noremap <F5> mmgg=G'm
@@ -434,6 +434,8 @@ if !exists("autocommands_loaded")
   au BufWritePre * :%s/\s\+$//e
   " auto spell check & limit width of git commit messages
   au Filetype gitcommit setlocal spell textwidth=72
+  " turn off backups and swap on encrypted files
+  au BufRead *.enc.* setlocal nobackup noswapfile nowritebackup
 
   " auto chmod +x any shebang file, inspired from tpope/vim-eunuch
   au BufNewFile  * let b:brand_new_file = 1
