@@ -31,6 +31,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-bundler'
   Plug 'tpope/vim-rails'
+  Plug 'tpope/vim-unimpaired'
   Plug 'itchyny/lightline.vim'
 
   " extras
@@ -38,8 +39,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'godlygeek/tabular'
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
-  Plug 'mattn/gist-vim'
   Plug 'mattn/webapi-vim'
+  Plug 'mattn/gist-vim'
   Plug 'mhinz/vim-startify'
 
   " tmux
