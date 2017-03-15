@@ -13,7 +13,7 @@ Dir.chdir(workbench_path) do
   puts "  #{`git pull`}"
   puts '  Creating symlinks ...'
 
-   Dir.glob('*') do |item|
+  Dir.glob('*') do |item|
     next if ['README.md', 'apple_scripts', 'fonts', 'tags', '.bundle', 'nginx', 'launchd'].include?(item)
     if ['bin', 'tmux'].include?(item)
       `rm -rf ~/#{item}`
