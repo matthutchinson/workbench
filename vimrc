@@ -51,6 +51,7 @@ call plug#begin('~/.vim/plugged')
   " syntax
   Plug 'tpope/vim-markdown', { 'for': 'markdown' }
   Plug 'tpope/vim-cucumber', { 'for': 'cucumber' }
+  Plug 'toyamarinyon/vim-swift', { 'for': 'swift' }
   Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 call plug#end()
 
