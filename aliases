@@ -13,6 +13,10 @@ alias notes="vi ~/Documents/system/notes.md"
 alias todos="vi ~/Documents/system/todos.md"
 alias secrets="vi ~/Documents/system/secrets.enc.md"
 
+# tmux, list or attach to a session
+alias tm="tmux ls"
+alias tma="tmux a -t "
+
 # https://github.com/trapd00r/ls--/issues/14
 alias ll=' LC_ALL=en_US.UTF-8 LANG=en ls++ -a'
 
