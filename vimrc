@@ -25,8 +25,10 @@ let g:startify_custom_header =
 call plug#begin('~/.vim/plugged')
   " core
   Plug 'rking/ag.vim'
-  Plug 'kien/ctrlp.vim'
-  Plug 'FelikZ/ctrlp-py-matcher'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+  " Plug 'kien/ctrlp.vim'
+  " Plug 'FelikZ/ctrlp-py-matcher'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-bundler'
@@ -119,7 +121,7 @@ nnoremap <Left>  <nop>
 nnoremap <Right> <nop>
 
 " ctrlp open/search MRU list
-nnoremap <leader>b :CtrlPBuffer<cr>
+" nnoremap <leader>b :CtrlPBuffer<cr>
 
 
 
@@ -213,7 +215,8 @@ nmap <C-x> :call setreg("\"",system("pbpaste"))<cr>p
 map <C-F> :Ag --hidden<space>
 
 " change CtrlP shortcut
-let g:ctrlp_map = '<space>'
+" let g:ctrlp_map = '<space>'
+map <space> :FZF<cr>
 
 " tabularize
 nmap <leader>a> :Tabularize /=><cr>
