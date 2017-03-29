@@ -415,6 +415,16 @@ function! s:undo()
 endfunction
 command! MergeMode :call s:setup_merge_mode()
 
+" insert tab if line is all whitespace, or fire autocomplete
+function! CleverTab()
+    if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+      return "\<Tab>"
+    else
+      return "\<C-N>"
+    endif
+endfunction
+inoremap <Tab> <C-R>=CleverTab()<CR>
+
 " #### Autocommands
 
 if !exists("autocommands_loaded")
