@@ -3,7 +3,7 @@
 # aliases, helpers and secrets
 if [ -f ~/.aliases ]; then . ~/.aliases ; fi
 if [ -f ~/.secret ]; then . ~/.secret ; fi
-if [ -f ~/.fzf ]; then . ~/.fzf ; fi
+if [ -f ~/.fuzzy_finder ]; then . ~/.fuzzy_finder ; fi
 
 # exports
 export TERM="screen-256color" # use screen-256color to play nicer with tmux
