@@ -2,8 +2,8 @@
 
 # aliases, helpers and secrets
 if [ -f ~/.aliases ]; then . ~/.aliases ; fi
-if [ -f ~/.selecta ]; then . ~/.selecta ; fi
 if [ -f ~/.secret ]; then . ~/.secret ; fi
+if [ -f ~/.fzf ]; then . ~/.fzf ; fi
 
 # exports
 export TERM="screen-256color" # use screen-256color to play nicer with tmux
@@ -164,3 +164,6 @@ eval "$(scmpuff init -s)"
 
 export NVM_DIR="/Users/matt/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
