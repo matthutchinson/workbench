@@ -41,7 +41,7 @@ function psp() {
 
 # helper to fzf a local branch, trims leading whitespace, and "*"
 function _fzf_git_branch(){
-  echo $(git branch | sed 's/^\*//' | fzf | xargs echo)
+  echo $(git branch | sed 's/^. //' | fzf | xargs echo)
 }
 
 # choose branch and pass it to `command`, or copy the branch name if no args
