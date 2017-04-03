@@ -27,8 +27,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'rking/ag.vim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-  " Plug 'kien/ctrlp.vim'
-  " Plug 'FelikZ/ctrlp-py-matcher'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-bundler'
@@ -68,11 +66,11 @@ map <Esc>[24~ <F12>
 
 map <leader>w :w!<cr>
 map <leader>e :new <C-R>=expand("%:p:h")<cr><cr>
-map <leader>m :! mate %<cr>
 map <leader>rn :w ! %<cr>
 map <leader>ev :sp ~/.vimrc<cr>
 map <leader>sv :so ~/.vimrc<cr>
 map <leader>cd :lcd %:h<cr>
+map <leader>M :! mate %<cr>
 
 " re-tag project with ctags
 map <leader>ct :!echo 'retagging ctags...'; ctags --tag-relative -Rf.git/tags.$$ --exclude=.git --languages=-javascript,sql; mv .git/tags.$$ .git/tags<cr><cr>
@@ -96,6 +94,10 @@ nmap <S-Tab> :bn<cr>
 nnoremap <leader><leader> :b#<cr>
 nmap <leader>d :bd<cr>
 nmap <leader>D :bufdo bd<cr>
+nnoremap <leader>b :Buffer<cr>
+
+" marks
+nnoremap <leader>m :Marks<cr>
 
 " function keys
 map <F1> :sp ~/Documents/system/vim_help.md<cr>
@@ -119,9 +121,6 @@ nnoremap <Up>    <nop>
 nnoremap <Down>  <nop>
 nnoremap <Left>  <nop>
 nnoremap <Right> <nop>
-
-" ctrlp open/search MRU list
-" nnoremap <leader>b :CtrlPBuffer<cr>
 
 
 
