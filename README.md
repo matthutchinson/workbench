@@ -18,14 +18,16 @@ $ ./bin/benchpress
 
 ### Tmux
 
-The `tmux/` directory contains various segments for my tmux status bar, and a custom theme. It all comes together to look something like this;
+The `tmux/` directory contains various segments for my tmux status bar, and a
+custom theme. It all comes together to look something like this;
 
 ![tmux theme status bar screenshot](https://raw.githubusercontent.com/matthutchinson/workbench/master/tmux/themeshot.png)
 
 ### Disclaimer
 
-I change and commit to this toolbox regularly.  In some rare occasions it might be in a broken state.
-If you intend to use this repository yourself, its probably better if you fork it.
+I change and commit to this toolbox regularly.  In some rare occasions it might
+be in a broken state.  If you intend to use this repository yourself, its
+probably better if you fork it.
 
 ### Related Links
 

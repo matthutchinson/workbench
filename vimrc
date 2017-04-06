@@ -27,6 +27,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'rking/ag.vim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/goyo.vim'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-bundler'
@@ -427,10 +428,16 @@ function! CleverTab()
 endfunction
 inoremap <Tab> <C-R>=CleverTab()<CR>
 
-" #### Autocommands
 
+" Goyo (distraction free editing in text files (txt, markdown etc.)
+function! s:auto_goyo()
+  Goyo 84
+endfunction
+
+" #### Autocommands
 if !exists("autocommands_loaded")
   let autocommands_loaded = 1
+  let g:markdown_fenced_languages = ['javascript', 'go', 'php', 'ruby']
 
   au WinEnter,FocusGained * setlocal cursorline
   au WinLeave,FocusLost   * setlocal nocursorline
@@ -443,8 +450,13 @@ if !exists("autocommands_loaded")
   au BufNewFile,BufRead /private/etc/apache2/*.conf* set ft=apache
   au BufRead,BufNewFile {Capfile,Gemfile,Appraisals,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
+  autocmd BufNewFile,BufRead {*.md,*.txt,*.markdown} call s:auto_goyo()
+
   " always spellcheck on text like files
-  au BufRead,BufNewFile {*.md,*.txt,*.textile,*.markdown,*.rdoc} setlocal spell
+  au BufRead,BufNewFile {*.md,*.txt,*.markdown,*.rdoc} setlocal spell
+  highlight clear SpellBad
+  highlight SpellBad term=standout ctermfg=5 term=underline cterm=underline
+
   " auto strip whitespace when saving
   au BufWritePre * :%s/\s\+$//e
   " auto spell check & limit width of git commit messages
