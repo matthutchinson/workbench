@@ -1,0 +1,20 @@
+#!/bin/sh
+
+git clone git@github.com:lolcommits/lolcommits-loltext.git /u/code/lolcommits-$1
+
+cd /u/code/lolcommits-$1
+rm -rf .git
+git init
+
+# rename files
+mv lolcommits-loltext.gemspec lolcommits-$1.gemspec
+mv lib/lolcommits/loltext.rb lib/lolcommits/$1.rb
+mv lib/lolcommits/plugin/loltext.rb lib/lolcommits/plugin/$1.rb
+mv lib/lolcommits/loltext lib/lolcommits/$1
+mv test/lolcommits/plugin/loltext_test.rb test/lolcommits/plugin/$1_test.rb
+
+# gsub
+ruby -pi -e "gsub(/loltext/, 'twitter')" *.*
+
+
+echo $1
