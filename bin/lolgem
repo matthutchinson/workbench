@@ -1,8 +1,16 @@
 #!/bin/sh
 
-git clone git@github.com:lolcommits/lolcommits-loltext.git /u/code/lolcommits-$1
+# check args
+if [ $# -eq 0 ]; then
+  echo 'aborting, you must specify a gem name postfix'
+  exit 1
+fi
 
-cd /u/code/lolcommits-$1
+# clone sample repo
+git clone git@github.com:lolcommits/lolcommits-loltext.git ./lolcommits-$1
+
+# init empty git repo
+cd ./lolcommits-$1
 rm -rf .git
 git init
 
@@ -13,8 +21,10 @@ mv lib/lolcommits/plugin/loltext.rb lib/lolcommits/plugin/$1.rb
 mv lib/lolcommits/loltext lib/lolcommits/$1
 mv test/lolcommits/plugin/loltext_test.rb test/lolcommits/plugin/$1_test.rb
 
-# gsub
-ruby -pi -e "gsub(/loltext/, 'twitter')" *.*
+# search and replace gem name
+capitalized=`ruby -e "print '$1'.capitalize"`
+grep -rl loltext . | xargs sed -i '' s/loltext/$1/g
+grep -rl Loltext . | xargs sed -i '' s/Loltext/$capitalized/g
 
-
-echo $1
+# we're done!
+echo $1 'done!'
