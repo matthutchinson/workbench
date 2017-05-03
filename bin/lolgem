@@ -27,4 +27,4 @@ grep -rl loltext . | xargs sed -i '' s/loltext/$1/g
 grep -rl Loltext . | xargs sed -i '' s/Loltext/$capitalized/g
 
 # we're done!
-echo $1 'done!'
+echo 'lolcommits-'$1 'gem created!'
