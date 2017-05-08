@@ -463,6 +463,9 @@ if !exists("autocommands_loaded")
 
   autocmd BufNewFile,BufRead {*.md,*.txt,*.markdown} call s:auto_goyo()
 
+  " insert Markdown URLS (from sys clipboard) on highlighted text (ctrl-a)
+  autocmd FileType markdown vnoremap <c-a> <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
+
   " always spellcheck on text like files
   au BufRead,BufNewFile {*.md,*.txt,*.markdown,*.rdoc} setlocal spell
   highlight clear SpellBad
