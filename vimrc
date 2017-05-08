@@ -45,7 +45,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mhinz/vim-startify'
 
   " tmux
-  Plug 'jgdavey/vim-turbux'             " shortcuts for tslime testing
+  Plug 'sagotsky/vim-turbux'            " shortcuts for tslime testing (fork with minitest support)
   Plug 'jgdavey/tslime.vim'             " launch commands in tmux windows
   Plug 'christoomey/vim-tmux-navigator' " navigation across splits & panes
 
