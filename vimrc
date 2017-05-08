@@ -97,6 +97,23 @@ nmap <leader>d :bd<cr>
 nmap <leader>D :bufdo bd<cr>
 nnoremap <leader>b :Buffer<cr>
 
+" delete to the black hole with X, XX or x (in normal mode)
+nmap X "_d
+nmap XX "_dd
+vmap X "_d
+vmap x "_d
+nnoremap x "_x
+
+" use leader to interact with the system clipboard on y(ank), c(opy), d(elete)
+nnoremap <Leader>p "*]p
+nnoremap <Leader>P "*]P
+nnoremap <Leader>y :y*<cr>
+nnoremap <Leader>c ^"*c$
+nnoremap <Leader>d ^"*d$
+vnoremap <Leader>y "*y
+vnoremap <Leader>c "*c
+vnoremap <Leader>d "*d
+
 " marks
 nnoremap <leader>m :Marks<cr>
 
@@ -206,10 +223,6 @@ set shiftround                    " use multiple of shiftwidth when indenting wi
 set foldmethod=syntax
 set foldcolumn=4
 set nofoldenable
-
-" copy and paste with pbcopy/pbpaste
-vmap <C-c> y:call system("pbcopy", getreg("\""))<cr>
-nmap <C-x> :call setreg("\"",system("pbpaste"))<cr>p
 
 " #### Plugin Shortcuts
 
@@ -430,9 +443,6 @@ function! CleverTab()
     endif
 endfunction
 inoremap <Tab> <C-R>=CleverTab()<CR>
-
-
-
 
 " Goyo (distraction free editing in text files (txt, markdown etc.)
 function! s:auto_goyo()
