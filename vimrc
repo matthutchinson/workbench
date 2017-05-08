@@ -280,11 +280,9 @@ nmap <Leader>hv <Plug>GitGutterPreviewHunk
 let g:gist_open_browser_after_post = 1
 let g:gist_detect_filetype = 1
 
-" turbux
+" turbux (minitest for unit tests)
 let g:turbux_command_prefix = 'bundle exec'
-let g:turbux_command_rspec = 'rspec'
 let g:turbux_test_type = 'minitest'
-let g:turbux_command_test_unit = 'rake test'
 
 " ctrlp
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' } " super fast py ext
