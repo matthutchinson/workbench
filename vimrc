@@ -104,15 +104,15 @@ vmap X "_d
 vmap x "_d
 nnoremap x "_x
 
-" use leader to interact with the system clipboard on y(ank), c(opy), d(elete)
+" use leader to interact with the system clipboard on y(ank), c(opy), x(elete)
 nnoremap <Leader>p "*]p
 nnoremap <Leader>P "*]P
 nnoremap <Leader>y :y*<cr>
 nnoremap <Leader>c ^"*c$
-nnoremap <Leader>d ^"*d$
+nnoremap <Leader>x ^"*d$
 vnoremap <Leader>y "*y
 vnoremap <Leader>c "*c
-vnoremap <Leader>d "*d
+vnoremap <Leader>x "*d
 
 " marks
 nnoremap <leader>m :Marks<cr>
