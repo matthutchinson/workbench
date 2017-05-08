@@ -448,7 +448,7 @@ endfunction
 " #### Autocommands
 if !exists("autocommands_loaded")
   let autocommands_loaded = 1
-  let g:markdown_fenced_languages = ['javascript', 'go', 'php', 'ruby']
+  let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json', 'go', 'php']
 
   au WinEnter,FocusGained * setlocal cursorline
   au WinLeave,FocusLost   * setlocal nocursorline
