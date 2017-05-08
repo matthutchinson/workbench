@@ -156,7 +156,8 @@ colorscheme jellybeans
 set textwidth=80                  " set textwidth
 set fo-=t
 set colorcolumn=+1                " show vertical break at textwidth
-set number                        " show line numbers
+set number                        " show absolute line number
+set relativenumber                " relative line numbers
 set ruler                         " show cursor position
 set title                         " set the terminal's title
 set visualbell                    " visual flash
@@ -168,7 +169,6 @@ set cpoptions+=$                  " show $ to indicate editing range
 " speedy scrolling
 syntax sync minlines=100
 set nocursorcolumn
-set norelativenumber
 set ttyfast
 set ttyscroll=3
 set lazyredraw
