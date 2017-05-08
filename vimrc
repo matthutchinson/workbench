@@ -300,8 +300,6 @@ let g:lightline = {
   \ },
   \ 'component_function': {
   \   'fugitive': 'LightLineFugitive',
-  \   'readonly': 'LightLineReadonly',
-  \   'modified': 'LightLineModified',
   \   'filename': 'LightLineFilename'
   \ },
   \ 'separator': { 'left': '⮀', 'right': '⮂' },
