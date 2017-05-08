@@ -359,7 +359,7 @@ endfunction
 
 function! LightLineFilename()
   return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-       \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+       \ ('' != expand('%:t') ? expand('%:p') : '[No Name]') .
        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
