@@ -166,9 +166,11 @@ set wildmode=list:longest             " complete files like a shell
 set splitbelow                        " open vertical splits below
 set splitright                        " open horizontal splits on the right
 set cm=blowfish2                      " encryption mode (http://tuxdiary.com/2015/01/13/encrypt-files-with-vim/)
-set complete=.,w,b,kspell             " complete on current, windows, buffers and dictionary
-" set clipboard=unnamed                  " use system clipboard
-" set dictionary+=/usr/share/dict/words  " use this for completions (ctrl-x ctrl-k)
+set complete=.,w,b,kspell,k           " complete on current, windows, buffers and dictionary
+
+" dictionary locations
+set dictionary+=~/.vim/spell/en.utf-8.add
+set dictionary+=/usr/share/dict/words
 
 " searching
 set ignorecase                    " case-insensitive searching
@@ -297,12 +299,13 @@ let g:lightline = {
 
 
 " snippets trigger configuration
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<S-tab>"
+let g:UltiSnipsJumpForwardTrigger="<S-tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-u>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+
 
 
 " #### Vim Functions
@@ -427,6 +430,8 @@ function! CleverTab()
     endif
 endfunction
 inoremap <Tab> <C-R>=CleverTab()<CR>
+
+
 
 
 " Goyo (distraction free editing in text files (txt, markdown etc.)
