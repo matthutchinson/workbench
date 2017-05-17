@@ -13,6 +13,10 @@ alias notes="vi ~/Documents/system/notes.md"
 alias todos="vi ~/Documents/system/todos.md"
 alias secrets="vi ~/Documents/system/secrets.enc.md"
 
+# VNC (needs ssh config set)
+alias vnc-hoth="ssh -f hoth.vnc.tunnel -N; open vnc://localhost:5999"
+alias vnc-dagobah="ssh -f dagobah.vnc.tunnel -N; open vnc://localhost:5998"
+
 # tmux, list or attach to a session
 alias tm="tmux ls"
 alias tma="tmux a -t "
