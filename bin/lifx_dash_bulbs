@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# make sure the env vars are set for the root user
+# e.g. in /etc/bashrc
+
+lifx_dash monitor -m $DASH_LIVING_MAC_ADDR -t $LIFX_HTTP_API_KEY -i en0 -s 'group:Living%20Room' -l /tmp/lifx_dash_living_room.log -d
+lifx_dash monitor -m $DASH_BEDROOM_MAC_ADDR -t $LIFX_HTTP_API_KEY -i en0 -s 'group:Bedroom' -l /tmp/lifx_dash_bedroom.log -d

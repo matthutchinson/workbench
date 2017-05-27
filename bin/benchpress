@@ -26,9 +26,7 @@ Dir.chdir(workbench_path) do
 end
 
 # install/update launchd for this host (if we have any)
-# disable for now, duplicity 0.7.11 has issues on OSX
-# launchd_scripts = Dir.glob("#{workbench_path}/launchd/#{host}/*")
-launchd_scripts = []
+launchd_scripts = Dir.glob("#{workbench_path}/launchd/#{host}/*")
 if launchd_scripts.empty?
   puts "  No launchd scripts to apply for #{host} ..."
 else
