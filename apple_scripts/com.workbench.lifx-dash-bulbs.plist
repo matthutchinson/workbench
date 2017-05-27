@@ -9,5 +9,9 @@
       <string>/bin/sh</string>
       <string>/u/code/workbench/bin/lifx_dash_bulbs</string>
     </array>
+    <key>KeepAlive</key>
+    <true/>
+    <key>RunAtLoad</key>
+    <true/>
   </dict>
 </plist>
