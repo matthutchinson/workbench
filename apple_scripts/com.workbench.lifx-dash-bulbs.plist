@@ -9,6 +9,10 @@
       <string>/bin/sh</string>
       <string>/u/code/workbench/bin/lifx_dash_bulbs</string>
     </array>
+    <key>StandardErrorPath</key>
+    <string>/Library/Logs/lifx-dash_bulbs.error.log</string>
+    <key>StandardOutPath</key>
+    <string>/Library/Logs/lifx-dash-bulbs.log</string>
     <key>KeepAlive</key>
     <true/>
     <key>RunAtLoad</key>
