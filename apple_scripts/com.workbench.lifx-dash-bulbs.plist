@@ -4,6 +4,15 @@
   <dict>
     <key>Label</key>
     <string>com.workbench.lifx-dash-bulbs</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+      <key>DASH_LIVING_MAC_ADDR</key>
+      <string></string>
+      <key>DASH_BEDROOM_MAC_ADDR</key>
+      <string></string>
+      <key>LIFX_HTTP_API_KEY</key>
+      <string></string>
+    </dict>
     <key>ProgramArguments</key>
     <array>
       <string>/bin/sh</string>
@@ -14,7 +23,7 @@
     <key>StandardOutPath</key>
     <string>/Library/Logs/lifx-dash-bulbs.log</string>
     <key>KeepAlive</key>
-    <true/>
+    <false/>
     <key>RunAtLoad</key>
     <true/>
   </dict>

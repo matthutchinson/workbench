@@ -1,7 +1,11 @@
 #!/bin/sh
 
-# make sure the env vars are set for the root user
-# e.g. in /etc/bashrc
+# make sure the env vars are set for this script
+# set PATH, HOME (for lifx_dash config) and invoke rbenv
+
+export PATH="/usr/local/bin:/Users/matt/.rbenv/bin:$PATH"
+export HOME="/Users/matt"
+eval "$(rbenv init -)"
 
 lifx_dash monitor -m $DASH_LIVING_MAC_ADDR -t $LIFX_HTTP_API_KEY -i en0 -s 'group:Living%20Room' -l /tmp/lifx_dash_living_room.log -d
 lifx_dash monitor -m $DASH_BEDROOM_MAC_ADDR -t $LIFX_HTTP_API_KEY -i en0 -s 'group:Bedroom' -l /tmp/lifx_dash_bedroom.log -d
