@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Start irssi in a detached screen session (named irc)
+
+screen -dm -S irc /usr/local/bin/irssi --config=/Users/matt/.irssi/config
