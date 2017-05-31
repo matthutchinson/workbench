@@ -4,7 +4,7 @@
 if [ -f ~/.aliases ]; then . ~/.aliases ; fi
 if [ -f ~/.secret ]; then . ~/.secret ; fi
 if [ -f ~/.fuzzy_finder ]; then . ~/.fuzzy_finder ; fi
-if [ -f ~/.freeagent_env ]; then . ~/.freeagent_env ; fi
+if [ -f ~/.freeagent ]; then . ~/.freeagent ; fi
 
 # exports
 export TERM="screen-256color" # use screen-256color to play nicer with tmux
