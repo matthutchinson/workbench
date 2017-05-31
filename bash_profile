@@ -8,23 +8,12 @@ if [ -f ~/.freeagent_env ]; then . ~/.freeagent_env ; fi
 
 # exports
 export TERM="screen-256color" # use screen-256color to play nicer with tmux
-export PATH="/Users/matt/bin:/Applications/Postgres.app/Contents/Versions/latest/bin:/Applications/Firefox.app/Contents/MacOS:/usr/local/php/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
+export PATH="/Users/matt/bin:usr/local/php/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
 export EDITOR="/usr/local/bin/vim"
 export EVENT_NOKQUEUE=1
 export NODE_PATH="/usr/local/lib/node_modules"
 export CLICOLOR=1 # ls coloring
-export SERVER_SOFTWARE='pow'
 export XCODE="`xcode-select --print-path`"
-export ORDERWEB_HOME="/u/apps/orderweb"
-
-# Ruby GC - https://gist.github.com/865706
-export RUBY_HEAP_SLOTS_INCREMENT=10000
-export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1.8
-export RUBY_GC_HEAP_FREE_SLOTS=100000
-export RUBY_GC_HEAP_INIT_SLOTS=600000
-# https://gist.github.com/1688857
-export RUBY_GC_MALLOC_LIMIT=1000000000
-export RUBY_GC_HEAP_FREE_SLOTS=500000
 
 # colours
 ORANGE="\[\033[0;38;05;136m\]"
@@ -162,9 +151,6 @@ eval "$(scmpuff init -s)"
 # add only trusted projects' bin directory to $PATH
 # enable with `mkdir .git/safe` in the root of repositories you trust
  export PATH=".git/safe/../../bin:$PATH"
-
-export NVM_DIR="/Users/matt/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # fzf
 export FZF_DEFAULT_COMMAND='ag -g ""'     # use ag to help with git ignore filtering
