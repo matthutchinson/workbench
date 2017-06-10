@@ -9,7 +9,7 @@
 # Requirements
 #   brew install duplicity gpg2
 #   and ensure you have a OSX keychain entries for your GPG passphrase and S3
-#   credentials e.g. account: $USER service: GPG
+#   credentials e.g. account: $USER service: DUPLICITY_GPG_PASSPHRASE
 
 ulimit -n 1024
 
@@ -20,39 +20,53 @@ function export_osx_keychain_password() {
 }
 
 # export ENV vars from keychain for duplicity commands
-export_osx_keychain_password "PASSPHRASE" "GPG" $USER
-export_osx_keychain_password "AWS_SECRET_ACCESS_KEY" "AWS_SECRET_ACCESS_KEY" $USER
-export_osx_keychain_password "AWS_ACCESS_KEY_ID" "AWS_ACCESS_KEY_ID" $USER
+export_osx_keychain_password "PASSPHRASE" "DUPLICITY_GPG_PASSPHRASE" $USER
+export_osx_keychain_password "AWS_SECRET_ACCESS_KEY" "DUPLICITY_AWS_SECRET_ACCESS_KEY" $USER
+export_osx_keychain_password "AWS_ACCESS_KEY_ID" "DUPLICITY_AWS_ACCESS_KEY_ID" $USER
+export_osx_keychain_password "GPG_KEY_ID" "DUPLICITY_GPG_KEY_ID" $USER
 
 # backup target destinations (a network file share and S3 EU bucket)
 S3_BACKUP_URL="s3://s3-eu-west-1.amazonaws.com/hiddenloop-backups/duplicity/$HOSTNAME"
+export SIGN_PASSPHRASE=$PASSPHRASE
 
-# various duplicity options
+# duplicity options
 exclude_options="--exclude-filelist /Users/$USER/.duplicity_exclude"
+# gpg_options="--gpg-binary /usr/local/bin/gpg2 --sign-key $GPG_KEY_ID"
 gpg_options="--gpg-binary /usr/local/bin/gpg2"
 s3_options="--s3-use-new-style --s3-european-buckets --s3-use-ia --s3-use-server-side-encryption --allow-source-mismatch"
 
-# folders to backup
-backup_folders=( "/Users/$USER/Sites" "/Users/$USER/Documents" "/Users/$USER/vagrant" )
+# folder to backup
+folder="/Volumes/Monolith/archive/"
 
-echo "Starting Backups"
-for folder in "${backup_folders[@]}"
-do
+# restore
+if [ "$1" == "restore" ]; then
+  echo "Starting Restore"
+
+  echo "####### $folder Restore Started ########"
+  /usr/local/bin/duplicity $gpg_options $s3_options $S3_BACKUP_URL$folder $folder
+  echo
+else
+  echo "Starting Backup"
+
   # skip folder if it does not exist
   if [ -d "$folder" ]; then
     echo
 
-    echo "####### $folder Backup Started (S3)  ########"
+    echo "####### $folder Backup Started ########"
     /usr/local/bin/duplicity $gpg_options $exclude_options $s3_options $folder $S3_BACKUP_URL$folder
-    echo "####### $folder Removing Old Backups (S3) ########"
+    echo
+
+    echo "####### $folder Removing Old Backups ########"
     /usr/local/bin/duplicity $gpg_options remove-older-than 1M --force $S3_BACKUP_URL$folder
     /usr/local/bin/duplicity $gpg_options cleanup --extra-clean --force $S3_BACKUP_URL$folder
-
     echo
+  else
+    echo "Ooops $folder does not exist :("
   fi
-done
+fi
 
 # clear out any sensitive ENV vars
 export PASSPHRASE=
+export SIGN_PASSPHRASE=
 export AWS_ACCESS_KEY_ID=
 export AWS_SECRET_ACCESS_KEY=
