@@ -23,29 +23,30 @@ function export_osx_keychain_password() {
 export_osx_keychain_password "PASSPHRASE" "DUPLICITY_GPG_PASSPHRASE" $USER
 export_osx_keychain_password "AWS_SECRET_ACCESS_KEY" "DUPLICITY_AWS_SECRET_ACCESS_KEY" $USER
 export_osx_keychain_password "AWS_ACCESS_KEY_ID" "DUPLICITY_AWS_ACCESS_KEY_ID" $USER
-export_osx_keychain_password "GPG_KEY_ID" "DUPLICITY_GPG_KEY_ID" $USER
 
-# backup target destinations (a network file share and S3 EU bucket)
+# backup target destination
 S3_BACKUP_URL="s3://s3-eu-west-1.amazonaws.com/hiddenloop-backups/duplicity/$HOSTNAME"
+# use same passphrase for signing
 export SIGN_PASSPHRASE=$PASSPHRASE
+
+# folder to backup (or restore)
+folder="/Volumes/Monolith/archive/"
 
 # duplicity options
 exclude_options="--exclude-filelist /Users/$USER/.duplicity_exclude"
-# gpg_options="--gpg-binary /usr/local/bin/gpg2 --sign-key $GPG_KEY_ID"
 gpg_options="--gpg-binary /usr/local/bin/gpg2"
 s3_options="--s3-use-new-style --s3-european-buckets --s3-use-ia --s3-use-server-side-encryption --allow-source-mismatch"
 
-# folder to backup
-folder="/Volumes/Monolith/archive/"
 
-# restore
 if [ "$1" == "restore" ]; then
+  # restore
   echo "Starting Restore"
 
   echo "####### $folder Restore Started ########"
   /usr/local/bin/duplicity $gpg_options $s3_options $S3_BACKUP_URL$folder $folder
   echo
 else
+  # backup
   echo "Starting Backup"
 
   # skip folder if it does not exist
@@ -61,11 +62,11 @@ else
     /usr/local/bin/duplicity $gpg_options cleanup --extra-clean --force $S3_BACKUP_URL$folder
     echo
   else
-    echo "Ooops $folder does not exist :("
+    echo "Ooops $folder does not exist, skipping backup :("
   fi
 fi
 
-# clear out any sensitive ENV vars
+# clear out sensitive ENV vars
 export PASSPHRASE=
 export SIGN_PASSPHRASE=
 export AWS_ACCESS_KEY_ID=
