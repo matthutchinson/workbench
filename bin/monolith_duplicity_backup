@@ -10,6 +10,7 @@
 #   brew install duplicity gpg2
 #   and ensure you have a OSX keychain entries for your GPG passphrase and S3
 #   credentials e.g. account: $USER service: DUPLICITY_GPG_PASSPHRASE
+#   also install MacGPG2 https://gpgtools.org
 
 ulimit -n 1024
 
@@ -34,20 +35,20 @@ folder="/Volumes/Monolith/archive/"
 
 # duplicity options
 exclude_options="--exclude-filelist /Users/$USER/.duplicity_exclude"
-gpg_options="--gpg-binary /usr/local/bin/gpg2"
+gpg_options="--gpg-binary /usr/local/MacGPG2/bin/gpg2"
 s3_options="--s3-use-new-style --s3-european-buckets --s3-use-ia --s3-use-server-side-encryption --allow-source-mismatch"
-
+current_date=`date`
 
 if [ "$1" == "restore" ]; then
   # restore
-  echo "Starting Restore"
+  echo "Starting Restore - $current_date"
 
   echo "####### $folder Restore Started ########"
   /usr/local/bin/duplicity $gpg_options $s3_options $S3_BACKUP_URL$folder $folder
   echo
 else
   # backup
-  echo "Starting Backup"
+  echo "Starting Backup - $current_date"
 
   # skip folder if it does not exist
   if [ -d "$folder" ]; then

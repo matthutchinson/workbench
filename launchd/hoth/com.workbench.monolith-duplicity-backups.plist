@@ -6,6 +6,8 @@
     <dict>
       <key>LANG</key>
       <string>en_GB.UTF-8</string>
+      <key>PATH</key>
+      <string>/usr/local/bin:/usr/local/sbin:/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin</string>
     </dict>
     <key>Label</key>
     <string>com.workbench.monolith-duplicity-backups</string>
@@ -25,7 +27,7 @@
       <key>Hour</key>
       <integer>0</integer>
       <key>Minute</key>
-      <integer>32</integer>
+      <integer>30</integer>
     </dict>
   </dict>
 </plist>
