@@ -22,8 +22,6 @@
     <string>/Users/matt/Library/Logs/monolith_duplicity_backup.log</string>
     <key>StartCalendarInterval</key>
     <dict>
-      <key>Weekday</key>
-      <integer>0</integer>
       <key>Hour</key>
       <integer>0</integer>
       <key>Minute</key>
