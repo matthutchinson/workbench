@@ -98,12 +98,10 @@ nmap <leader>d :bd<cr>
 nmap <leader>D :bufdo bd<cr>
 nnoremap <leader>b :Buffer<cr>
 
-" delete to the black hole with X, XX or x (in normal mode)
+" delete to the black hole with X or XX
 nmap X "_d
 nmap XX "_dd
 vmap X "_d
-vmap x "_d
-nnoremap x "_x
 
 " use leader to interact with the system clipboard on y(ank), c(opy), x(elete)
 nnoremap <Leader>p "*]p
@@ -443,7 +441,7 @@ inoremap <Tab> <C-R>=CleverTab()<CR>
 
 " Goyo (distraction free editing in text files (txt, markdown etc.)
 function! s:auto_goyo()
-  Goyo 84
+  Goyo 90
 endfunction
 
 " #### Autocommands
