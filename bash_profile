@@ -8,7 +8,7 @@ if [ -f ~/.freeagent ]; then . ~/.freeagent ; fi
 
 # exports
 export TERM="screen-256color" # use screen-256color to play nicer with tmux
-export PATH="~/go/bin/:~/bin:usr/local/php/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
+export PATH="~/go/bin:~/bin:usr/local/php/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
 export EDITOR="/usr/local/bin/vim"
 export EVENT_NOKQUEUE=1
 export NODE_PATH="/usr/local/lib/node_modules"
