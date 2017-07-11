@@ -33,7 +33,6 @@ alias cdwb='cd /u/code/workbench'
 
 # roo
 alias cdf='cd /u/apps/freeagent'
-alias test_refresh='rm tmp/db/test*;RAILS_ENV=test bundle exec rake db:refresh'
 
 # git commit extracting story ID from branch name
 function gc {
