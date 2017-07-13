@@ -156,7 +156,6 @@ channels = (
   { name = "#oftc"; chatnet = "OFTC"; autojoin = "No"; },
   { name = "silc"; chatnet = "SILC"; autojoin = "No"; },
   { name = "#cabal"; chatnet = "Perl"; autojoin = "yes"; },
-  { name = "#henshall"; chatnet = "Perl"; autojoin = "yes"; }
 );
 
 aliases = {
