@@ -8,6 +8,10 @@ puts caller
 puts "#" * 80
 endsnippet
 
+snippet irb "IRB debugging"
+require 'irb'; binding.irb
+endsnippet
+
 snippet rpry "Remote pry debugging"
 require 'pry-remote'; binding.remote_pry
 endsnippet
