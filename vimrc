@@ -282,7 +282,6 @@ let g:gist_post_private = 1 " always private to begin with
 
 " turbux (minitest for unit tests)
 let g:turbux_command_prefix = 'bundle exec'
-let g:turbux_test_type = 'minitest'
 
 " ctrlp
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' } " super fast py ext
@@ -462,6 +461,8 @@ if !exists("autocommands_loaded")
   au BufRead,BufNewFile {Capfile,Gemfile,Appraisals,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
   autocmd BufNewFile,BufRead {*.md,*.txt,*.markdown} call s:auto_goyo()
+  autocmd BufNewFile,BufRead {*_test.rb} let g:turbux_test_type='minitest'
+  autocmd BufNewFile,BufRead {*_spec.rb} let g:turbux_test_type='rspec'
 
   " insert Markdown URLS (from sys clipboard) on highlighted text (ctrl-a)
   autocmd FileType markdown vnoremap <c-a> <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
