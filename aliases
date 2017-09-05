@@ -4,7 +4,7 @@
 alias g='git'
 alias v='vim'
 alias vi='vim'
-alias fhp='cd ~/Documents/firehose/job\ prep/;ll'
+alias fhp='cd ~/Documents/firehose/job\ prep/;ll;mate ~/Documents/firehose/resources/mentor_session_test.rb;open https://www.thefirehoseproject.com/courses'
 alias gpgme='gpg -e -u "matt@hiddenloop.com" -r "matt@hiddenloop.com"'
 alias irc='ssh hoth -t "screen -x"'
 alias con='tail -40 -f /var/log/system.log'
