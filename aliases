@@ -34,6 +34,26 @@ alias cdwb='cd /u/code/workbench'
 # roo
 alias cdf='cd /u/apps/freeagent'
 
+# commit changes as fixup to previous commit, rebase with branch (master) with
+# auto-squashing (no editor)
+function fixup {
+  CHANGES=`git status -s`
+  if [ -z "$CHANGES" ]
+  then
+    echo "aborting .. nothing to add or commit"
+  else
+    REBASE_WITH="master"
+    if [ -n "$1" ]
+    then
+      REBASE_WITH=$1
+    fi
+
+    git add .
+    git commit --fixup HEAD
+    GIT_SEQUENCE_EDITOR=: git rebase -i --autosquash $REBASE_WITH
+  fi
+}
+
 # git commit extracting story ID from branch name
 function gc {
   if [ -n "$1" ]

@@ -187,6 +187,7 @@ set complete=.,w,b,kspell,k           " complete on current, windows, buffers an
 " dictionary locations
 set dictionary+=~/.vim/spell/en.utf-8.add
 set dictionary+=/usr/share/dict/words
+set spellfile=~/.vim/spell/en.utf-8.add
 
 " searching
 set ignorecase                    " case-insensitive searching
