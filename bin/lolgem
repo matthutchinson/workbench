@@ -7,7 +7,7 @@ if [ $# -eq 0 ]; then
 fi
 
 # clone sample repo
-git clone git@github.com:lolcommits/lolcommits-loltext.git ./lolcommits-$1
+git clone git@github.com:lolcommits/lolcommits-uploldz.git ./lolcommits-$1
 
 # init empty git repo
 cd ./lolcommits-$1
@@ -15,16 +15,16 @@ rm -rf .git
 git init
 
 # rename files
-mv lolcommits-loltext.gemspec lolcommits-$1.gemspec
-mv lib/lolcommits/loltext.rb lib/lolcommits/$1.rb
-mv lib/lolcommits/plugin/loltext.rb lib/lolcommits/plugin/$1.rb
-mv lib/lolcommits/loltext lib/lolcommits/$1
-mv test/lolcommits/plugin/loltext_test.rb test/lolcommits/plugin/$1_test.rb
+mv lolcommits-uploldz.gemspec lolcommits-$1.gemspec
+mv lib/lolcommits/uploldz.rb lib/lolcommits/$1.rb
+mv lib/lolcommits/plugin/uploldz.rb lib/lolcommits/plugin/$1.rb
+mv lib/lolcommits/uploldz lib/lolcommits/$1
+mv test/lolcommits/plugin/uploldz_test.rb test/lolcommits/plugin/$1_test.rb
 
 # search and replace gem name
 capitalized=`ruby -e "print '$1'.capitalize"`
-grep -rl loltext . | xargs sed -i '' s/loltext/$1/g
-grep -rl Loltext . | xargs sed -i '' s/Loltext/$capitalized/g
+grep -rl uploldz . | xargs sed -i '' s/uploldz/$1/g
+grep -rl Uploldz . | xargs sed -i '' s/Uploldz/$capitalized/g
 
 # we're done!
 echo 'lolcommits-'$1 'gem created!'
