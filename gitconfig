@@ -82,9 +82,9 @@
 [diff "exif"]
 	textconv = exiftool
 [merge]
-  tool = myvimdiff
+  ; tool = myvimdiff
   conflictStyle = diff3
-  ; tool = opendiff
+  tool = opendiff
 [mergetool]
   keepBackup = false
   prompt = false
