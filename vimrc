@@ -113,8 +113,10 @@ vnoremap <Leader>y "*y
 vnoremap <Leader>c "*c
 vnoremap <Leader>x "*d
 
-" marks
+" fzf shortcuts
 nnoremap <leader>m :Marks<cr>
+nnoremap <leader>s :Snippets<cr>
+nnoremap <leader>g :BCommits<cr>
 
 " function keys
 map <F1> :sp ~/Documents/system/vim_help.md<cr>
