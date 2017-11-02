@@ -27,7 +27,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'rking/ag.vim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-  Plug 'junegunn/goyo.vim'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
   Plug 'tpope/vim-commentary'
@@ -139,9 +138,6 @@ nnoremap <Down>  <nop>
 nnoremap <Left>  <nop>
 nnoremap <Right> <nop>
 
-
-
-
 " #### Editor
 
 " load matchit (use % to jump)
@@ -223,6 +219,13 @@ set shiftround                    " use multiple of shiftwidth when indenting wi
 set foldmethod=syntax
 set foldcolumn=4
 set nofoldenable
+
+" easier movement in vim command line
+cnoremap <C-a>  <Home>
+cnoremap <C-f>  <Right>
+cnoremap <C-d>  <Delete>
+cnoremap <Esc>b <S-Left>
+cnoremap <Esc>f <S-Right>
 
 " #### Plugin Shortcuts
 
@@ -440,11 +443,6 @@ function! CleverTab()
 endfunction
 inoremap <Tab> <C-R>=CleverTab()<CR>
 
-" Goyo (distraction free editing in text files (txt, markdown etc.)
-function! s:auto_goyo()
-  Goyo 90
-endfunction
-
 " #### Autocommands
 if !exists("autocommands_loaded")
   let autocommands_loaded = 1
@@ -461,7 +459,6 @@ if !exists("autocommands_loaded")
   au BufNewFile,BufRead /private/etc/apache2/*.conf* set ft=apache
   au BufRead,BufNewFile {Capfile,Gemfile,Appraisals,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
-  autocmd BufNewFile,BufRead {*.md,*.txt,*.markdown} call s:auto_goyo()
   autocmd BufNewFile,BufRead {*_test.rb} let g:turbux_test_type='minitest'
   autocmd BufNewFile,BufRead {*_spec.rb} let g:turbux_test_type='rspec'
 
