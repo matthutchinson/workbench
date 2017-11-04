@@ -140,7 +140,7 @@ nnoremap <Down>  <nop>
 nnoremap <Left>  <nop>
 nnoremap <Right> <nop>
 
-" #### Editor
+" #### Editing
 
 " load matchit (use % to jump)
 filetype plugin indent on
@@ -221,6 +221,10 @@ set shiftround                    " use multiple of shiftwidth when indenting wi
 set foldmethod=syntax
 set foldcolumn=4
 set nofoldenable
+
+" Maintain undo history between sessions
+set undofile
+set undodir=~/.vim/undodir
 
 " easier movement in vim command line
 cnoremap <C-a>  <Home>
