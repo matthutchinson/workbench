@@ -43,6 +43,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/webapi-vim'
   Plug 'mattn/gist-vim'
   Plug 'mhinz/vim-startify'
+  Plug 'vimwiki/vimwiki'
 
   " tmux
   Plug 'sagotsky/vim-turbux'            " shortcuts for tslime testing (fork with minitest support)
@@ -118,17 +119,17 @@ nnoremap <leader>s :Snippets<cr>
 nnoremap <leader>g :BCommits<cr>
 
 " function keys
-map <F1> :sp ~/Documents/system/vim_help.md<cr>
-map <F2> :sp ~/Documents/system/todos.md<cr>
-map <F3> :sp ~/Documents/system/secrets.enc.md<cr>
-map <F4> :sp ~/Documents/system/notes.md<cr>
-" F5 formats and tidy up
-noremap <F5> mmgg=G'm
-inoremap <silent> <F5> <Esc> mmgg=G'mi
+map <F2> :sp ~/Documents/system/vim_wiki/Vim Help.md<cr>
+map <F3> :sp ~/Documents/system/vim_wiki/Todos.md<cr>
+map <F4> :sp ~/Documents/system/vim_wiki/Scratch.md<cr>
+map <F5> :sp ~/Documents/system/secrets.enc.md<cr>
+" F6 formats and tidy up
+noremap <F6> mmgg=G'm
+inoremap <silent> <F6> <Esc> mmgg=G'mi
 " alphabetize sorts inner css
-nmap <F6> :g#\({\n\)\@<=#.,/}/sort<cr>
-" F7 spell checks
-map <F7> :setlocal spell! spelllang=en<cr>
+nmap <F7> :g#\({\n\)\@<=#.,/}/sort<cr>
+" F8 spell checks
+map <F8> :setlocal spell! spelllang=en<cr>
 
 " ruby/rails shortcuts
 map <leader>ch :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<cr>
@@ -149,7 +150,11 @@ runtime macros/matchit.vim
 " appearance
 set t_Co=256                      " 256 color scheme
 syntax on                         " turn on syntax highlighting
-colorscheme jellybeans
+" colorscheme mirodark
+colorscheme iceberg
+" colorscheme jellybeans
+" colorscheme molokai
+
 set textwidth=80                  " set textwidth
 set fo-=t
 set colorcolumn=+1                " show vertical break at textwidth
@@ -277,6 +282,9 @@ map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
 
 " ag
 let g:ag_working_path_mode="r"
+
+" vimwiki
+let g:vimwiki_list = [{ 'path': '~/Documents/system/vim_wiki/', 'syntax': 'markdown', 'ext': '.md' }]
 
 " git gutter
 set updatetime=500
