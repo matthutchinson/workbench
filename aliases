@@ -9,8 +9,8 @@ alias gpgme='gpg -e -u "matt@hiddenloop.com" -r "matt@hiddenloop.com"'
 alias irc='ssh hoth -t "screen -x"'
 alias con='tail -40 -f /var/log/system.log'
 alias gpg='gpg2'
-alias notes="vi ~/Documents/system/notes.md"
-alias todos="vi ~/Documents/system/todos.md"
+alias scratch="vi ~/Documents/system/vim_wiki/Scratch.md"
+alias todos="vi ~/Documents/system/vim_wiki/Todos.md"
 alias secrets="vi ~/Documents/system/secrets.enc.md"
 
 # VNC (needs ssh config set)
