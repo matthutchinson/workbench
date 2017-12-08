@@ -77,6 +77,9 @@ map <leader>M :! mate %<cr>
 " re-tag project with ctags
 map <leader>ct :!echo 'retagging ctags...'; ctags --tag-relative -Rf.git/tags.$$ --exclude=.git --languages=-javascript,sql; mv .git/tags.$$ .git/tags<cr><cr>
 
+" allow the . to execute once for each line of a visual selection
+vnoremap . :normal .<CR>
+
 " use :w!! to save with sudo
 cmap w!! w !sudo tee % >/dev/null
 
