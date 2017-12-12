@@ -288,6 +288,7 @@ let g:ag_working_path_mode="r"
 
 " vimwiki
 let g:vimwiki_list = [{ 'path': '~/Documents/system/vim_wiki/', 'syntax': 'markdown', 'ext': '.md' }]
+nmap <Leader>dt <Plug>VimwikiTabMakeDiaryNote
 
 " git gutter
 set updatetime=500
