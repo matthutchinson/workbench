@@ -22,6 +22,14 @@ Rails.logger.info("var: #{${1:nil}} ${2}")
 Rails.logger.info "#" * 80
 endsnippet
 
+snippet gem "Gemfile gem"
+gem "${1}", "${2}"
+endsnippet
+
+snippet gemp "Gemfile gem with path"
+gem "${1}", path: "${2}"
+endsnippet
+
 snippet ttag "simple test tag"
 <${1:div}>
   Hello World
