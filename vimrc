@@ -135,10 +135,10 @@ nmap <F7> :g#\({\n\)\@<=#.,/}/sort<cr>
 map <F8> :setlocal spell! spelllang=en<cr>
 
 " ruby/rails shortcuts
-" convert hash rockets
-map <leader>ch :%s/:\([^ ]*\)\(\s*\)=>/\1:/g<cr>
+" convert hash rockets, visually select hash first, or on a single line
+map <leader>ch :s/:\([^ ]*\)\(\s*\)=>/\1:/g<cr>
 " convert string hash (with rockets) to symbols
-map <leader>sh :%s/\"\(.*\)\"\s*=>/\1:/g<cr>
+map <leader>sh :s/[\"']\(.*\)[\"']\s*=>/\1:/g<cr>
 " run spec
 map <leader>rs :<C-U>!bundle exec rspec <c-r>=expand("%:p") <cr> -c -l <c-r>=line(".") <cr><cr>
 
