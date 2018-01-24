@@ -3,6 +3,6 @@ if File.exist?(irbrc_path)
   begin
     load irbrc_path
   rescue Exception
-    warn "Could not load: #{ irbrc_pathj }" # because of $!.message
+    warn "Could not load: #{ irbrc_path }"
   end
 end
