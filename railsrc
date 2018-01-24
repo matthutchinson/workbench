@@ -16,6 +16,16 @@ def sql(query)
   ActiveRecord::Base.connection.select_all(query)
 end
 
+# get a specific route via index or name
+def route(index_or_name)
+  case index_or_name
+    when Integer
+      Rails.application.routes.routes[index_or_name]
+    when Symbol # named route
+      Rails.application.routes.named_routes.get index_or_name
+    end
+end
+
 # show Rails app name and RAILS_ENV name in prompt
 app_env  = (ENV['RAILS_ENV'] || Rails.env)[0...3]
 app_name = (defined?(Rails) ? Rails.application.class.parent_name : Dir.pwd.split('/').last).downcase
@@ -32,3 +42,14 @@ IRB.conf[:PROMPT][:RAILS] = {
   :AUTO_INDENT => true,
 }
 IRB.conf[:PROMPT_MODE] = :RAILS
+
+# FA specific helpers
+if defined?(Freeagent)
+  def fac
+    @_fac ||= Company.find_by_subdomain('fac')
+  end
+
+  def company
+    @_company ||= fac
+  end
+end
