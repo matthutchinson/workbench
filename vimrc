@@ -158,9 +158,13 @@ runtime macros/matchit.vim
 set t_Co=256                      " 256 color scheme
 syntax on                         " turn on syntax highlighting
 " colorscheme mirodark
-colorscheme iceberg
-" colorscheme jellybeans
 " colorscheme molokai
+
+colorscheme Tomorrow-Night
+" colorscheme Tomorrow-Night-Bright
+" colorscheme Tomorrow-Night-Eighties
+" colorscheme jellybeans
+" colorscheme iceberg
 
 set textwidth=80                  " set textwidth
 set fo-=t
