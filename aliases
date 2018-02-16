@@ -34,6 +34,14 @@ alias cdwb='cd /u/code/workbench'
 # roo
 alias cdf='cd /u/apps/freeagent'
 
+# encrypt a string with eyaml for puppet config and copy to clipboard
+function pupencrypt {
+  working_dir=$PWD
+  cd /u/code/puppet-config;
+  bundle exec eyaml encrypt -o string -s “$1” | tr -d '\n' | pbcopy
+  cd $working_dir
+}
+
 # commit changes as fixup to previous commit, rebase with branch (master) with
 # auto-squashing (no editor)
 function fixup {
