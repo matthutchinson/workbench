@@ -155,3 +155,6 @@ eval "$(scmpuff init -s)"
 # fzf
 export FZF_DEFAULT_COMMAND='ag -g ""'     # use ag to help with git ignore filtering
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash  # source installed fzf extensions
+
+# prefer older QT for capybara-webkit gem
+export PATH="$(brew --prefix qt@5.5)/bin:$PATH"
