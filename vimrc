@@ -121,6 +121,9 @@ nnoremap <leader>m :Marks<cr>
 nnoremap <leader>s :Snippets<cr>
 nnoremap <leader>g :BCommits<cr>
 
+" jump between two files with backspace
+nnoremap <bs> <c-^>
+
 " function keys
 map <F2> :sp ~/Documents/system/vim_wiki/Vim Help.md<cr>
 map <F3> :sp ~/Documents/system/vim_wiki/Todos.md<cr>
