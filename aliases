@@ -38,7 +38,7 @@ alias cdf='cd /u/apps/freeagent'
 function pupencrypt {
   working_dir=$PWD
   cd /u/code/puppet-config;
-  bundle exec eyaml encrypt -o string -s “$1” | tr -d '\n' | pbcopy
+  bundle exec eyaml encrypt -o string -s "$1" | tr -d '\n' | pbcopy
   cd $working_dir
 }
 
@@ -103,6 +103,7 @@ alias rdbp='bundle exec rake db:test:prepare'
 alias gb="git branch"
 alias gg="git pull"
 alias gp="git push"
+alias gl="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | vim -R -c 'set filetype=git nowrap' -"
 alias grm="git rebase master -i"
 
 # mysql

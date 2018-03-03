@@ -84,7 +84,7 @@ vnoremap . :normal .<CR>
 cmap w!! w !sudo tee % >/dev/null
 
 " grep project folder for word
-nnoremap K :grep! "\b<C-R><C-W>\b"<cr>:cw<cr>
+nnoremap F :grep! "\b<C-R><C-W>\b"<cr>:cw<cr>
 nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<cr>
 " format paragraphs to textwidth
 nnoremap <leader>q gqip
