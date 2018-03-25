@@ -1,7 +1,7 @@
 [user]
 	name = Matthew Hutchinson
 	email = matt@hiddenloop.com
-	signingkey = 5716B6E4
+	signingkey = D6325D3A5716B6E4
 [color]
   status = auto
   diff = auto
@@ -97,3 +97,5 @@
 	extendedRegexp = true
 [rebase]
 	autosquash = true
+[commit]
+	gpgsign = true

@@ -75,7 +75,7 @@ function gc {
       GIT_COMMIT_MSG="[$STORY_ID] $1"
     fi;
 
-    git commit -am "$GIT_COMMIT_MSG"
+    git commit -S -am "$GIT_COMMIT_MSG"
   else
     echo "usage: gc 'your commit message'"
   fi
@@ -97,7 +97,8 @@ alias sg='bundle exec rails generate'
 alias bes='bundle exec rspec'
 alias bec='bundle exec cucumber'
 alias rdbm='bundle exec rake db:migrate'
-alias rdbp='bundle exec rake db:test:prepare'
+alias rdbp='bundle exec rake db:prepare'
+alias rdbpp='bundle exec rake parallel:prepare'
 
 # git
 alias gb="git branch"
