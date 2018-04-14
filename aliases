@@ -9,9 +9,9 @@ alias gpgenc='gpg --encrypt --sign --armor -r' # args are email and file
 alias irc='ssh hoth -t "screen -x"'
 alias con='tail -40 -f /var/log/system.log'
 alias gpg='gpg2'
-alias scratch="vi ~/Documents/system/vim_wiki/Scratch.md"
-alias todos="vi ~/Documents/system/vim_wiki/Todos.md"
-alias secrets="vi ~/Documents/system/secrets.enc.md"
+alias scratch="vi ~/Documents/system/notes/scratch.md"
+alias todos="vi ~/Documents/system/notes/todos.md"
+alias secrets="vi ~/Documents/system/notes/secrets.enc.md"
 
 # VNC (needs ssh config set)
 alias vnc-hoth="ssh -f hoth.vnc.tunnel -N; open vnc://localhost:5999"

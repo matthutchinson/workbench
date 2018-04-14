@@ -43,7 +43,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/webapi-vim'
   Plug 'mattn/gist-vim'
   Plug 'mhinz/vim-startify'
-  Plug 'vimwiki/vimwiki'
 
   " tmux
   Plug 'sagotsky/vim-turbux'            " shortcuts for tslime testing (fork with minitest support)
@@ -125,10 +124,10 @@ nnoremap <leader>g :BCommits<cr>
 nnoremap <bs> <c-^>
 
 " function keys
-map <F2> :sp ~/Documents/system/vim_wiki/Vim Help.md<cr>
-map <F3> :sp ~/Documents/system/vim_wiki/Todos.md<cr>
-map <F4> :sp ~/Documents/system/vim_wiki/Scratch.md<cr>
-map <F5> :sp ~/Documents/system/secrets.enc.md<cr>
+map <F2> :sp ~/Documents/system/notes/vim help.md<cr>
+map <F3> :sp ~/Documents/system/notes/todos.md<cr>
+map <F4> :sp ~/Documents/system/notes/scratch.md<cr>
+map <F5> :sp ~/Documents/system/notes/secrets.enc.md<cr>
 " F6 formats and tidy up
 noremap <F6> mmgg=G'm
 inoremap <silent> <F6> <Esc> mmgg=G'mi
