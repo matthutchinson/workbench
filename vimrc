@@ -452,8 +452,7 @@ if !exists("autocommands_loaded")
     autocmd Filetype markdown map <silent><buffer> <C-@> :call ToggleTodo()<cr>
   endif
 
-  " always spellcheck on text like files
-  au BufRead,BufNewFile {*.md,*.txt,*.markdown,*.rdoc} setlocal spell
+  " spellcheck highlights
   highlight clear SpellBad
   highlight SpellBad term=standout ctermfg=5 term=underline cterm=underline
 
