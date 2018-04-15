@@ -82,14 +82,11 @@
 [diff "exif"]
 	textconv = exiftool
 [merge]
-  ; tool = myvimdiff
   conflictStyle = diff3
   tool = opendiff
 [mergetool]
   keepBackup = false
   prompt = false
-[mergetool "myvimdiff"]
-  cmd = vim -f -d $LOCAL $MERGED $REMOTE -c "MergeMode"
 [merge "pofile"]
   name = Gettext merge driver
   driver = git merge-po %O %A %B

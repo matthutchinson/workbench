@@ -240,7 +240,7 @@ set foldmethod=syntax
 set foldcolumn=4
 set nofoldenable
 
-" Maintain undo history between sessions
+" maintain undo history between sessions
 set undofile
 set undodir=~/.vim/undodir
 
@@ -250,6 +250,9 @@ cnoremap <C-f>  <Right>
 cnoremap <C-d>  <Delete>
 cnoremap <Esc>b <S-Left>
 cnoremap <Esc>f <S-Right>
+
+" double enter smart opens links/files (:help gx)
+map <ENTER><ENTER> gx
 
 " #### Plugin Shortcuts
 
@@ -288,8 +291,6 @@ map <leader>gd :Gdiff<cr>
 map <leader>ge :Gedit<cr>
 map <leader>gl :Glog -250<cr><cr>:copen<cr><cr>
 map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
-
-
 
 " #### Plugin Settings
 
@@ -334,7 +335,7 @@ let g:lightline = {
 \ }
 
 
-" snippets trigger configuration
+" UltiSnips triggers
 let g:UltiSnipsExpandTrigger="<S-tab>"
 let g:UltiSnipsJumpForwardTrigger="<S-tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-u>"
@@ -344,14 +345,7 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
 
 
-" #### Vim Functions
-
-" helper to exec a macro on multiple (visually sel) lines
-xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<cr>
-function! ExecuteMacroOverVisualRange()
-  echo "@".getcmdline()
-  execute ":'<,'>normal @".nr2char(getchar())
-endfunction
+" #### Functions
 
 " lightline bar components
 function! LightLineModified()
@@ -390,7 +384,27 @@ function! LightLineFilename()
        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
-" rename a file
+" toggle markdown todo items
+function! ToggleTodo()
+  let saved_cursor = getpos('.')
+  let current_line = getline('.')
+
+  if (current_line =~ '- \[\s*\]')
+    execute 's/- \[\s*\]/- [X]/g'
+  else
+    execute 's/- \[X\]/- [ ]/g'
+  endif
+  call setpos('.', saved_cursor)
+endfunction
+
+" execute a macro on multiple (visually selected) lines
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<cr>
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+
+" rename current file
 function! RenameFile()
   let old_name = expand('%')
   let new_name = input('New file name: ', expand('%'), 'file')
@@ -414,59 +428,6 @@ function! OpenChangedFiles()
 endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
 
-" solve merge conflicts in vim - http://howivim.com/2016/karl-yngve-lervag
-function! s:setup_merge_mode()
-  if !&diff | return | endif
-
-  " Create straightforward mappings
-  nmap     ]] ]n
-  nmap     [[ [n
-  nnoremap do <nop>
-  nnoremap <silent> dp        :diffput 2<cr>
-  nnoremap <silent> dol       :diffget 1<cr>
-  nnoremap <silent> dor       :diffget 3<cr>
-  nnoremap <silent> do1       :diffget 1<cr>
-  nnoremap <silent> do3       :diffget 3<cr>
-  nnoremap <silent> <leader>q :xa!<cr>
-
-  " Add some more complex mappings
-  let l:sid = matchstr(expand('<sfile>'), '\zs<SNR>\d\+_\ze.*$')
-  execute 'nnoremap <silent> u :call ' . l:sid . 'undo()<cr>'
-
-  " Set buffer options
-  1wincmd w
-  setlocal noswapfile
-  setlocal nomodifiable
-  3wincmd w
-  setlocal noswapfile
-  setlocal nomodifiable
-
-  " Move to local window and to first conflict
-  2wincmd w
-  normal gg]]
-endfunction
-
-function! s:undo()
-  if winnr() ==# 2
-    normal! u
-  else
-    2wincmd w
-    normal! u
-    wincmd p
-  endif
-endfunction
-command! MergeMode :call s:setup_merge_mode()
-
-" insert tab if line is all whitespace, or fire autocomplete
-function! CleverTab()
-    if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-      return "\<Tab>"
-    else
-      return "\<C-N>"
-    endif
-endfunction
-inoremap <Tab> <C-R>=CleverTab()<CR>
-
 " #### Autocommands
 if !exists("autocommands_loaded")
   let autocommands_loaded = 1
@@ -486,8 +447,10 @@ if !exists("autocommands_loaded")
   autocmd BufNewFile,BufRead {*_test.rb} let g:turbux_test_type='minitest'
   autocmd BufNewFile,BufRead {*_spec.rb} let g:turbux_test_type='rspec'
 
-  " insert Markdown URLS (from sys clipboard) on highlighted text (ctrl-a)
-  autocmd FileType markdown vnoremap <c-a> <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
+  if has('unix')
+    " toggle todo lists in markdown with Ctrl+Space
+    autocmd Filetype markdown map <silent><buffer> <C-@> :call ToggleTodo()<cr>
+  endif
 
   " always spellcheck on text like files
   au BufRead,BufNewFile {*.md,*.txt,*.markdown,*.rdoc} setlocal spell
@@ -518,6 +481,5 @@ if !exists("autocommands_loaded")
 endif
 
 " #### Ignores
-
 set wildignore+=*.o,*.obj,*/.hg/*,*/.svn/*,*.so,*/.git
 set wildignore+=**/vendor/rails/**,**/vendor/bundle/**,**/tmp/**
