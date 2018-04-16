@@ -9,9 +9,9 @@ alias gpgenc='gpg --encrypt --sign --armor -r' # args are email and file
 alias irc='ssh hoth -t "screen -x"'
 alias con='tail -40 -f /var/log/system.log'
 alias gpg='gpg2'
-alias scratch="vi ~/Documents/system/vim_wiki/Scratch.md"
-alias todos="vi ~/Documents/system/vim_wiki/Todos.md"
-alias secrets="vi ~/Documents/system/secrets.enc.md"
+alias scratch="vi ~/Documents/system/notes/scratch.md"
+alias todos="vi ~/Documents/system/notes/todos.md"
+alias secrets="vi ~/Documents/system/notes/secrets.enc.md"
 
 # VNC (needs ssh config set)
 alias vnc-hoth="ssh -f hoth.vnc.tunnel -N; open vnc://localhost:5999"
@@ -89,6 +89,23 @@ alias tdl='tail -f ./log/development.log'
 alias ttl='tail -f ./log/test.log'
 alias rst='touch ./tmp/restart.txt'
 alias rbenvit='rbenv shell `cat .ruby-version`'
+
+# autocomplete for rake db:migrate:down{tab}
+# TODO: replace with fzf version for up/down and type to autocomplete
+_rake_migrate() {
+  COMPREPLY=()
+  if [ $3 != "db:migrate:down" ]; then
+    return 0
+  fi
+  local cur="${COMP_WORDS[COMP_CWORD]}"
+  IFS='=' read -r -a array <<< "$cur"
+  local version_number_part=${array[1]}
+  if [ "$COMP_CWORD" -eq 2 ]; then
+    local res=$(find db/migrate/ -type f -exec basename {} \; | grep ${version_number_part})
+    COMPREPLY=($(compgen -W "$res" ))
+  fi
+}
+complete -F _rake_migrate rake
 
 # bundler / rake / spec / cucumber
 alias be='bundle exec'
