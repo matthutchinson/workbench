@@ -31,8 +31,9 @@ alias cdbe='cd /u/apps/beyondendurance'
 alias cdhbb='cd /u/apps/bugle'
 alias cdwb='cd /u/code/workbench'
 
-# roo
+# freeagent
 alias cdf='cd /u/apps/freeagent'
+alias intg='devkit server list | grep -v "\t\S" | head -n 1 | xargs devkit server grab'
 
 # encrypt a string with eyaml for puppet config and copy to clipboard
 function pupencrypt {
