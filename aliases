@@ -86,6 +86,7 @@ function gc {
 alias gofast='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = true\"" config/environments/development.rb'
 alias goslow='ruby -i -pe "gsub /cache_classes \= (.+)$/, \"cache_classes = false\"" config/environments/development.rb'
 alias tdl='tail -f ./log/development.log'
+alias tdlr="tdl | egrep 'Processing|Parameters\:'"
 alias ttl='tail -f ./log/test.log'
 alias rst='touch ./tmp/restart.txt'
 alias rbenvit='rbenv shell `cat .ruby-version`'
