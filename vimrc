@@ -284,7 +284,7 @@ map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
 
 " vimdiff apply (local/remote) and move to next hunk
 nmap <leader>dl :diffget LOCAL<cr>]c
-nmap <leader>dr :diffget RE<cr>]c
+nmap <leader>dr :diffget REMOTE<cr>]c
 
 " #### Plugin Settings
 
