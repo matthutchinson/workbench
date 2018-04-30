@@ -12,16 +12,6 @@ let g:mapleader=","
 "   brew install --HEAD universal-ctags
 
 " #### Plugins (https://github.com/junegunn/vim-plug)
-let g:ascii = [
-      \ '        __',
-      \ '.--.--.|__|.--------.',
-      \ '|  |  ||  ||        |',
-      \ ' \___/ |__||__|__|__|',
-      \ ''
-      \]
-let g:startify_custom_header =
-      \ 'map(g:ascii + startify#fortune#quote(), "\"   \".v:val")'
-
 call plug#begin('~/.vim/plugged')
   " core
   Plug 'rking/ag.vim'
@@ -297,6 +287,19 @@ nmap <leader>dl :diffget LOCAL<cr>]c
 nmap <leader>dr :diffget RE<cr>]c
 
 " #### Plugin Settings
+
+let g:ascii = [
+      \ '        __',
+      \ '.--.--.|__|.--------.',
+      \ '|  |  ||  ||        |',
+      \ ' \___/ |__||__|__|__|',
+      \ ''
+      \]
+
+let g:startify_change_to_vcs_root = 1
+let g:startify_custom_header =
+      \ 'map(g:ascii + startify#fortune#quote(), "\"   \".v:val")'
+
 
 " ag
 let g:ag_working_path_mode="r"
