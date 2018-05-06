@@ -115,7 +115,6 @@ alias sc='bundle exec rails console'
 alias sg='bundle exec rails generate'
 alias bes='bundle exec rspec'
 alias bec='bundle exec cucumber'
-alias rdbm='bundle exec rake db:migrate'
 alias rdbp='bundle exec rake db:prepare'
 alias rdbpp='bundle exec rake parallel:prepare'
 

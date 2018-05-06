@@ -2,9 +2,8 @@
 
 # https://github.com/junegunn/fzf
 # brew install fzf
-# /usr/local/opt/fzf/install
 
-# style the bash fzf
+# fzf style
 export FZF_DEFAULT_OPTS='--height 40% --reverse'
 
 # helper to echo and execute a command
@@ -13,34 +12,32 @@ function _echo_and_execute() {
   eval $1
 }
 
-## History related
+## History
 
 # search history and re-run, filtering first with grep on arg, then with fzf; e.g
-# USAGE: hist [keyword for grep]
 function hist(){
   $(history | tail -r | grep -iE "$*" | fzf | xargs | cut -d ' ' -f 2- | xargs | tr -d '\n' | pbcopy)
 }
 
 
-## PID related
+## PIDs
 
-# helper to fzf a PID
+# fzf a PID
 function _fzf_pid() {
   echo -n $(ps axww -o pid,user,%cpu,%mem,start,time,command | fzf | sed 's/^ *//' | cut -f1 -d' ')
 }
 
-# copy a PID to clipboard
-# USAGE: psp
-function psp() {
+# copy PID to clipboard
+function pid() {
   pid=$(_fzf_pid)
   echo -n "$pid" | pbcopy
 }
 
 
-## GIT related
+## GIT
 
-# helper to fzf a local branch, trims leading whitespace, and "*"
-function _fzf_git_branch(){
+# fzf a local branch, trims leading whitespace, and "*"
+function _fzf_git_branch() {
   echo $(git branch | sed 's/^. //' | fzf | xargs echo)
 }
 
@@ -57,8 +54,27 @@ function gbp() {
 # `git branch checkout`
 alias gbc="gbp git co"
 
-# `git branch merge`
-alias gbm="gbp git merge"
-
 # `git branch delete
 alias gbd="gbp git br -D"
+
+
+## Rails
+
+# fzf (with preview) a rails migration and pass it as the command VERSION
+function _fzf_rails_migration() {
+  echo $(ls ./db/migrate/ | fzf --preview 'head -20 ./db/migrate/{}' | xargs | cut -d '_' -f 1 | xargs | tr -d '\n')
+}
+
+function rdbm() {
+  if [ $# -eq 0 ]; then
+    _echo_and_execute "bundle exec rake db:migrate"
+  else
+    migrate_version=$(_fzf_rails_migration)
+    _echo_and_execute "$*$migrate_version"
+  fi
+}
+
+# db migrate up/down/redo with VERSION
+alias rdbmu="rdbm rake db:migrate:up VERSION="
+alias rdbmd="rdbm rake db:migrate:down VERSION="
+alias rdbmr="rdbm rake db:migrate:redo VERSION="
