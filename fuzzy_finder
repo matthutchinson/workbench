@@ -66,11 +66,17 @@ function _fzf_rails_migration() {
 }
 
 function rdbm() {
-  if [ $# -eq 0 ]; then
-    _echo_and_execute "bundle exec rake db:migrate"
+  if [ ! -d "./db/migrate" ]; then
+    echo "Opps, you're not in a Rails directory"
   else
-    migrate_version=$(_fzf_rails_migration)
-    _echo_and_execute "$*$migrate_version"
+    if [ $# -eq 0 ]; then
+      _echo_and_execute "bundle exec rake db:migrate"
+    else
+      migrate_version=$(_fzf_rails_migration)
+      if [ ! -z $migrate_version ]; then
+        _echo_and_execute "$*$migrate_version"
+      fi
+    fi
   fi
 }
 
