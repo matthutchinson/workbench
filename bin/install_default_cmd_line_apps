@@ -1,15 +1,9 @@
 #!/bin/sh
 
-brew install xctool        # xctool - http://nshipster.com/xctool/
-brew install go            # golang - https://golang.org
+# homebrew
+brew install xctool    # xctool - http://nshipster.com/xctool/
+brew install asciinema # asciicinema - https://asciinema.org
 
-brew install youtube-dl    # youtube-dl - https://github.com/rg3/youtube-dl
-npm install --global emoj  # emoj - https://github.com/sindresorhus/emoj
-brew install asciinema     # asciicinema - https://asciinema.org
-brew tap victor/whereami && brew install whereami # https://github.com/victor/whereami
-
-go get -u github.com/schachmat/wego # wego # requires a valid ~/.wegorc
-
-
-
-
+# Node
+npm install -g tldr   # http://tldr.sh
+npm install -g emoj   # emoj - https://github.com/sindresorhus/emoj
