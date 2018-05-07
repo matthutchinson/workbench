@@ -1,6 +1,8 @@
 ## My Workbench
 
-My own vim folder, dotfiles and handy scripts. [Plug](https://github.com/junegunn/vim-plug) is used for vim plugins.  You can install (or refresh) symlinks to the workbench with;
+My own vim folder, dotfiles and handy scripts.
+[Plug](https://github.com/junegunn/vim-plug) is used for vim plugins.  You can
+install (or refresh) symlinks to the workbench with;
 
 ```
 $ cd workbench

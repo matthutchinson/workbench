@@ -81,6 +81,6 @@ function rdbm() {
 }
 
 # db migrate up/down/redo with VERSION
-alias rdbmu="rdbm rake db:migrate:up VERSION="
-alias rdbmd="rdbm rake db:migrate:down VERSION="
-alias rdbmr="rdbm rake db:migrate:redo VERSION="
+alias rdbmu="rdbm bundle exec rake db:migrate:up VERSION="
+alias rdbmd="rdbm bundle exec rake db:migrate:down VERSION="
+alias rdbmr="rdbm bundle exec rake db:migrate:redo VERSION="

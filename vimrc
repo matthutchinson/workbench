@@ -149,26 +149,26 @@ runtime macros/matchit.vim
 " appearance
 set t_Co=256                      " 256 color scheme
 syntax on                         " turn on syntax highlighting
-" colorscheme mirodark
-" colorscheme molokai
 
+colorscheme iceberg
+" colorscheme molokai
+" colorscheme mirodark
+" colorscheme jellybeans
 " colorscheme Tomorrow-Night
 " colorscheme Tomorrow-Night-Bright
 " colorscheme Tomorrow-Night-Eighties
-" colorscheme jellybeans
-colorscheme iceberg
 
-set textwidth=80                  " set textwidth
-set fo-=t
-set colorcolumn=+1                " show vertical break at textwidth
-set number                        " show line numbers
-set ruler                         " show cursor position
-set title                         " set the terminal's title
-set visualbell                    " visual flash
-set noerrorbells                  " no beeping please
-set laststatus=2                  " always show a status bar
-set cursorline                    " only use cursorline for current window
-set cpoptions+=$                  " show $ to indicate editing range
+set tw=80           " set textwidth
+set fo-=t           " set format options, don't auto-wrap at tw
+set colorcolumn=+1  " show vertical break at textwidth
+set number          " show line numbers
+set ruler           " show cursor position
+set title           " set the terminal's title
+set visualbell      " visual flash
+set noerrorbells    " no beeping please
+set laststatus=2    " always show a status bar
+set cursorline      " only use cursorline for current window
+set cpoptions+=$    " show $ to indicate editing range
 
 " speedy scrolling
 syntax sync minlines=100
@@ -177,7 +177,7 @@ set norelativenumber
 set ttyfast
 set ttyscroll=3
 set lazyredraw
-set regexpengine=1                " issue with ruby syntax highlighting (use older RE engine)
+set regexpengine=1 " issue with ruby syntax highlighting (use older RE engine)
 
 " general
 set encoding=utf-8
@@ -475,8 +475,9 @@ if !exists("autocommands_loaded")
 
   " auto strip whitespace when saving
   au BufWritePre * :%s/\s\+$//e
-  " auto spell check & limit width of git commit messages
-  au Filetype gitcommit setlocal spell textwidth=72
+  " auto spell check & limit width of git commit messages and always wrap
+  au Filetype gitcommit setlocal spell tw=72 fo+=aw
+  au Filetype gitcommit setlocal spell tw=72 fo+=aw
   " turn off backups and swap on encrypted files
   au BufRead *.enc.* setlocal nobackup noswapfile nowritebackup
 
