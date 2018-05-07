@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # install useful gems we want on all rubies
-gem install bundler git-whistles lolcommits tmuxinator terminal-notifier foreman awesome_print pry pry-doc pry-nav cocoapods --no-ri --no-rdoc
+gem install bundler git-whistles lolcommits tmuxinator terminal-notifier foreman awesome_print pry pry-doc pry-nav cocoapods github-auth --no-ri --no-rdoc
 
 # FA
 gem install --source http://rubygems.eng.fre.ag/private freeagent-devkit

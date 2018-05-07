@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# https://collectiveidea.com/blog/archives/2014/02/18/a-simple-pair-programming-setup-with-ssh-and-tmux
+# gem install github-auth
+
+# remove pairing user public key(s)
+gh-auth remove --users $1
+
+# show the authorized keys
+echo
+cat ~/.ssh/authorized_keys

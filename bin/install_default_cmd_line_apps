@@ -2,7 +2,8 @@
 
 # homebrew
 brew install xctool    # xctool - http://nshipster.com/xctool/
-brew install asciinema # asciicinema - https://asciinema.org
+brew install asciinema # asciicinema - https://asciinema.erg
+brew install ngrok     # ngrok - https://ngrok.com
 
 # Node
 npm install -g tldr   # http://tldr.sh

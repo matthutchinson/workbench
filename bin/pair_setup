@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# https://collectiveidea.com/blog/archives/2014/02/18/a-simple-pair-programming-setup-with-ssh-and-tmux
+
+# create an account alias
+sudo dscl . -append /Users/$USER RecordName Pair pair
+
+# configure sshd to only allow public-key authentication
+sudo sed -E -i.bak 's/^#?(PasswordAuthentication|ChallengeResponseAuthentication).*$/\1 no/' /etc/ssh/sshd_config
+
+# restart sshd
+sudo launchctl unload /System/Library/LaunchDaemons/ssh.plist
+sudo launchctl load -w /System/Library/LaunchDaemons/ssh.plist
