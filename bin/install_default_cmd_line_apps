@@ -1,10 +1,10 @@
 #!/bin/sh
 
 # homebrew
-brew install xctool    # xctool - http://nshipster.com/xctool/
-brew install asciinema # asciicinema - https://asciinema.erg
-brew install ngrok     # ngrok - https://ngrok.com
+brew install xctool      # xctool - http://nshipster.com/xctool/
+brew install asciinema   # asciicinema - https://asciinema.erg
+brew cask install ngrok  # ngrok - https://ngrok.com
 
 # Node
-npm install -g tldr   # http://tldr.sh
-npm install -g emoj   # emoj - https://github.com/sindresorhus/emoj
+npm install -g tldr # http://tldr.sh
+npm install -g emoj # emoj - https://github.com/sindresorhus/emoj

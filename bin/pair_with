@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # https://collectiveidea.com/blog/archives/2014/02/18/a-simple-pair-programming-setup-with-ssh-and-tmux
-# brew install ngrok
+# brew cask install ngrok
 # gem install github-auth
 
 # add pair user public key(s)
@@ -9,5 +9,4 @@ touch ~/.ssh/authorized_keys
 gh-auth add --users $1 --command="$( which tmux ) attach -t pair"
 
 # start the tunnel (eu region)
-# ngrok tcp 22 --region eu
-ngrok start pairing
+ngrok tcp 22 --region eu

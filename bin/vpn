@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+run_list() {
+  osascript <<OSA
+    tell application "Viscosity"
+      repeat with theConnection in connections
+        set theName to name of theConnection
+        set theState to state of theConnection
+        log theName & ": " & theState
+      end repeat
+    end tell
+OSA
+}
+
+run_connect() {
+  if [ "$#" -eq 0 ]; then
+    osascript -e 'tell application "Viscosity" to connectall'
+  else
+    while connection="$1"; shift; do
+      osascript -e "tell application \"Viscosity\" to connect \"$connection\""
+    done
+  fi
+}
+
+run_disconnect() {
+  if [ "$#" -eq 0 ]; then
+    osascript -e 'tell application "Viscosity" to disconnectall'
+  else
+    while connection="$1"; shift; do
+      osascript -e "tell application \"Viscosity\" to disconnect \"$connection\""
+    done
+  fi
+}
+
+run_help() {
+  echo "Usage:"
+  echo "    $(basename "$0") [list]                 	# List available VPNs"
+  echo "    $(basename "$0") connect [VPN [...]]    	# Connect to specified VPNs (or all)"
+  echo "    $(basename "$0") disconnect [VPN [...]] 	# Disconnect from specified VPNs (or all)"
+}
+
+run_version() {
+  echo "vpn 1.0.0"
+}
+
+main() {
+  local command="$1"
+  shift
+
+  case "$command" in
+  list | "" ) run_list ;;
+  connect ) run_connect ;;
+  disconnect ) run_disconnect ;;
+  -h | --help ) run_help ;;
+  -v | --version ) run_version ;;
+  *)
+    echo "$(basename "$0"): unknown command: $command" 1>&2
+    exit 1
+    ;;
+  esac
+}
+
+main $@
