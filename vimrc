@@ -35,8 +35,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'mhinz/vim-startify'
 
   " tmux
-  Plug 'sagotsky/vim-turbux'            " shortcuts for tslime testing (fork with minitest support)
   Plug 'jgdavey/tslime.vim'             " launch commands in tmux windows
+  Plug 'jgdavey/vim-turbux'             " run tests and focused tests
   Plug 'christoomey/vim-tmux-navigator' " navigation across splits & panes
 
   " syntax
@@ -45,9 +45,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'toyamarinyon/vim-swift', { 'for': 'swift' }
   Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 call plug#end()
-
-
-
 
 " #### Shortcuts
 
@@ -241,7 +238,7 @@ cnoremap <C-d>  <Delete>
 cnoremap <Esc>b <S-Left>
 cnoremap <Esc>f <S-Right>
 
-" double enter smart opens links/files (:help gx)
+" double enter smart opens links/files (see :help gx)
 map <ENTER><ENTER> gx
 
 " #### Plugin Shortcuts
@@ -265,7 +262,8 @@ vmap <leader>a: :Tabularize /:\zs<cr>
 nmap <leader>c gcc
 vmap <leader>c gc
 
-" save and run in Tmux
+" t-slime
+nmap <C-c>t <Plug>SetTmuxVars
 map <leader>r :w\|:call SendToTmux("\"".expand('%:p%h')."\"\n")<cr>
 
 " ulti-snips
@@ -316,8 +314,9 @@ let g:gist_open_browser_after_post = 1
 let g:gist_detect_filetype = 1
 let g:gist_post_private = 1 " always private to begin with
 
-" turbux (minitest for unit tests)
+" turbux prefix (and hotfix)
 let g:turbux_command_prefix = 'bundle exec'
+let g:turbux_test_type='x'
 
 " ctrlp
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' } " super fast py ext
@@ -460,9 +459,6 @@ if !exists("autocommands_loaded")
   au BufNewFile,BufRead {*.md,*.markdown} set ft=markdown
   au BufNewFile,BufRead /private/etc/apache2/*.conf* set ft=apache
   au BufRead,BufNewFile {Capfile,Gemfile,Appraisals,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
-
-  autocmd BufNewFile,BufRead {*_test.rb} let g:turbux_test_type='minitest'
-  autocmd BufNewFile,BufRead {*_spec.rb} let g:turbux_test_type='rspec'
 
   if has('unix')
     " toggle todo lists in markdown with Ctrl+Space
