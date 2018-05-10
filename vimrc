@@ -23,11 +23,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-bundler'
   Plug 'tpope/vim-rails'
   Plug 'tpope/vim-unimpaired'
+
+  " status
   Plug 'itchyny/lightline.vim'
 
   " extras
   Plug 'airblade/vim-gitgutter'
-  Plug 'godlygeek/tabular'
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
   Plug 'mattn/webapi-vim'
@@ -35,15 +36,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'mhinz/vim-startify'
 
   " tmux
+  Plug 'christoomey/vim-tmux-navigator' " navigation across splits & panes
   Plug 'jgdavey/tslime.vim'             " launch commands in tmux windows
   Plug 'jgdavey/vim-turbux'             " run tests and focused tests
-  Plug 'christoomey/vim-tmux-navigator' " navigation across splits & panes
 
   " syntax
-  Plug 'tpope/vim-markdown', { 'for': 'markdown' }
   Plug 'tpope/vim-cucumber', { 'for': 'cucumber' }
-  Plug 'toyamarinyon/vim-swift', { 'for': 'swift' }
-  Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 call plug#end()
 
 " #### Shortcuts
@@ -103,9 +101,10 @@ vnoremap <Leader>c "*c
 vnoremap <Leader>x "*d
 
 " fzf shortcuts
+nnoremap <space> :FZF<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>s :Snippets<cr>
-nnoremap <leader>g :BCommits<cr>
+nnoremap <leader>g :Commits<cr>
 
 " jump between two files with backspace
 nnoremap <bs> <c-^>
@@ -245,10 +244,6 @@ map <ENTER><ENTER> gx
 
 " start a global search
 map <C-F> :Ag --hidden<space>
-
-" change CtrlP shortcut
-" let g:ctrlp_map = '<space>'
-map <space> :FZF<cr>
 
 " tabularize
 nmap <leader>a> :Tabularize /=><cr>
@@ -444,6 +439,24 @@ function! OpenChangedFiles()
 endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
 
+" remove smart quotes, etc.
+function! RemoveFancyCharacters()
+    let typo = {}
+    let typo["“"] = '"'
+    let typo["”"] = '"'
+    let typo["‘"] = "'"
+    let typo["’"] = "'"
+    let typo["–"] = '--'
+    let typo["—"] = '---'
+    let typo["…"] = '...'
+    :exe ":%s/".join(keys(typo), '\|').'/\=typo[submatch(0)]/ge'
+endfunction
+
+command! RemoveFancyCharacters :call RemoveFancyCharacters()
+
+" insert the current time
+command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
+
 " #### Autocommands
 if !exists("autocommands_loaded")
   let autocommands_loaded = 1
@@ -460,10 +473,14 @@ if !exists("autocommands_loaded")
   au BufNewFile,BufRead /private/etc/apache2/*.conf* set ft=apache
   au BufRead,BufNewFile {Capfile,Gemfile,Appraisals,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
-  if has('unix')
-    " toggle todo lists in markdown with Ctrl+Space
-    autocmd Filetype markdown map <silent><buffer> <C-@> :call ToggleTodo()<cr>
-  endif
+  " toggle todo lists in markdown with Ctrl+Space
+  autocmd Filetype markdown map <silent><buffer> <C-@> :call ToggleTodo()<cr>
+
+  " don't syntax highlight markdown because it's often wrong
+  autocmd! FileType markdown setlocal syn=off
+
+  " remove enter mapping in cmd line window, since it's used to run commands
+  autocmd! CmdwinEnter * :unmap <ENTER><ENTER>
 
   " spellcheck highlights
   highlight clear SpellBad
