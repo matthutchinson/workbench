@@ -53,22 +53,4 @@ puts '  Updating vim plugins ...'
 # make sure vim backup dir exists
 `mkdir -p ~/.vim/tmp`
 
-# # setup local nginx config
-# puts '  Applying nginx config ...'
-# `mkdir -p /usr/local/var/log/nginx`
-# `mkdir -p /usr/local/etc/nginx`
-# `mkdir -p /usr/local/etc/nginx/client_body_temp`
-# `ln -sfh #{workbench_path}/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf`
-# `ln -sfh #{workbench_path}/nginx/sites-available /usr/local/etc/nginx/sites-available`
-# `ln -sfh #{workbench_path}/nginx/sites-enabled /usr/local/etc/nginx/sites-enabled`
-# `ln -sfh #{workbench_path}/nginx/includes /usr/local/etc/nginx/includes`
-
-# # ensure local ssl certs exist for dev domains
-# nginx_dir = "/usr/local/etc/nginx"
-# domains   = %w(nginx.dev)
-# domains.each do |domain|
-#   next if File.exists?("#{nginx_dir}/ssl/#{domain}.crt")
-#   `#{workbench_path}/bin/nginx_ssl_cert_builder #{domain}`
-# end
-
 puts "\n  All done!"
