@@ -2,4 +2,4 @@
 
 # https://github.com/postmodern/chruby
 source /usr/local/opt/chruby/share/chruby/chruby.sh
-source /usr/local/opt/chruby/share/chruby/auto.sh
+source ~/.bash/chruby_auto.sh # fixes remembering default in ~/.ruby-version
