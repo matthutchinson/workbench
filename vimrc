@@ -474,13 +474,10 @@ if !exists("autocommands_loaded")
   au BufRead,BufNewFile {Capfile,Gemfile,Appraisals,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
   " toggle todo lists in markdown with Ctrl+Space
-  autocmd Filetype markdown map <silent><buffer> <C-@> :call ToggleTodo()<cr>
+  au Filetype markdown map <silent><buffer> <C-@> :call ToggleTodo()<cr>
 
   " don't syntax highlight markdown because it's often wrong
-  autocmd! FileType markdown setlocal syn=off
-
-  " remove enter mapping in cmd line window, since it's used to run commands
-  autocmd! CmdwinEnter * :unmap <ENTER><ENTER>
+  au FileType markdown setlocal syn=off
 
   " spellcheck highlights
   highlight clear SpellBad
