@@ -3,3 +3,4 @@ vim/tmp
 vim/plugged
 vim/undodir
 vim/autoload/plug.vim.old
+bash/local
