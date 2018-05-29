@@ -97,7 +97,13 @@ function set_bash_prompt {
     GIT_PROMPT=''
   fi
 
-  PS1="$LIGHT_BLUE[$GRAY\u$DARK_GRAY@$GRAY\h:$WHITE\W$LIGHT_BLUE]$GIT_PROMPT$COLOR_NONE$ "
+  if [[ $HOSTNAME =~ "FA220" ]]; then
+    HOST_PROMPT='freeagent'
+  else
+    HOST_PROMPT='\h'
+  fi
+
+  PS1="$LIGHT_BLUE[$GRAY\u$DARK_GRAY@$GRAY$HOST_PROMPT:$WHITE\W$LIGHT_BLUE]$GIT_PROMPT$COLOR_NONE$ "
   PS2='> '
   PS4='+ '
 }
