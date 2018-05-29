@@ -98,7 +98,7 @@ function set_bash_prompt {
   fi
 
   if [[ $HOSTNAME =~ "FA220" ]]; then
-    HOST_PROMPT='freeagent'
+    HOST_PROMPT='fa'
   else
     HOST_PROMPT='\h'
   fi
