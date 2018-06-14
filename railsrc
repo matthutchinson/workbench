@@ -43,13 +43,12 @@ IRB.conf[:PROMPT][:RAILS] = {
 }
 IRB.conf[:PROMPT_MODE] = :RAILS
 
-# FA specific helpers
 if defined?(Freeagent)
-  def fac
-    @_fac ||= Company.find_by_subdomain('fac')
+  def company
+    @_company ||= Company.find_by_subdomain('fac')
   end
 
-  def company
-    @_company ||= fac
+  def user
+    @_user ||= company.account_owner
   end
 end

@@ -20,3 +20,5 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 # scmpuff
 eval "$(scmpuff init -s)"
+
+export PATH="$HOME/.cargo/bin:$PATH"
