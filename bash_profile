@@ -2,7 +2,7 @@
 
 # exports
 export TERM="screen-256color"
-export PATH="~/go/bin:~/bin:usr/local/php/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
+export PATH="~/.cargo/bin:~/go/bin:~/bin:usr/local/php/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
 export EDITOR="/usr/local/bin/vim"
 export NODE_PATH="/usr/local/lib/node_modules"
 export CLICOLOR=1
@@ -20,5 +20,3 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 # scmpuff
 eval "$(scmpuff init -s)"
-
-export PATH="$HOME/.cargo/bin:$PATH"
