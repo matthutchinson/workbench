@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # homebrew
+brew install neofetch    # neofetch - https://github.com/dylanaraps/neofetch
 brew install xctool      # xctool - http://nshipster.com/xctool/
 brew install asciinema   # asciicinema - https://asciinema.erg
 brew cask install ngrok  # ngrok - https://ngrok.com
