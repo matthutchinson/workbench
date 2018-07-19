@@ -5,6 +5,12 @@ set nocompatible
 let mapleader=","
 let g:mapleader=","
 
+" silently execute python3 once on the top of your vimrc
+" fixes plugin issues with py2 and py3
+if has('python3')
+  silent! python3 1
+endif
+
 " #### Requirements
 " for ctags setup see http://tinyurl.com/3lcrsrh
 " now using http://docs.ctags.io (install with)
