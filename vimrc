@@ -479,6 +479,9 @@ if !exists("autocommands_loaded")
   au BufNewFile,BufRead /private/etc/apache2/*.conf* set ft=apache
   au BufRead,BufNewFile {Capfile,Gemfile,Appraisals,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
+  " write file,build and cargo run (via Tmux) for rust files
+  au Filetype rust map <leader>r :w\|:Tmux clear && cargo run<cr>
+
   " toggle todo lists in markdown with Ctrl+Space
   au Filetype markdown map <silent><buffer> <C-@> :call ToggleTodo()<cr>
 
