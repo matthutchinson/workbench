@@ -481,6 +481,7 @@ if !exists("autocommands_loaded")
 
   " write file,build and cargo run (via Tmux) for rust files
   au Filetype rust map <leader>r :w\|:Tmux clear && cargo run<cr>
+  au Filetype rust map <leader>t :w\|:Tmux clear && cargo test<cr>
 
   " toggle todo lists in markdown with Ctrl+Space
   au Filetype markdown map <silent><buffer> <C-@> :call ToggleTodo()<cr>
