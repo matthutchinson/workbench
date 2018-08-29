@@ -58,7 +58,7 @@ map <Esc>[24~ <F12>
 
 map <leader>w :w!<cr>
 map <leader>e :new <C-R>=expand("%:p:h")<cr><cr>
-map <leader>rn :w ! %<cr>
+map <leader>rn :w !cd %:p:h; %<cr>
 map <leader>ev :sp ~/.vimrc<cr>
 map <leader>sv :so ~/.vimrc<cr>
 map <leader>cd :lcd %:h<cr>
@@ -481,6 +481,9 @@ if !exists("autocommands_loaded")
 
   " write file,build and cargo run (via Tmux) for rust files
   au Filetype rust map <leader>r :w\|:Tmux clear && cargo run<cr>
+  au Filetype rust map <leader>t :w\|:Tmux clear && cargo test<cr>
+  au Filetype rust map <leader>rn :w\|:!cd %:p:h; cargo run<cr>
+  au Filetype rust map <leader>rt :w\|:!cd %:p:h; cargo test<cr>
 
   " toggle todo lists in markdown with Ctrl+Space
   au Filetype markdown map <silent><buffer> <C-@> :call ToggleTodo()<cr>
