@@ -487,7 +487,7 @@ if !exists("autocommands_loaded")
 
   " write file, run or test cargo projects
   au Filetype rust map <Leader>r :w\|:call VimuxRunCommand("clear; cargo run")<CR>
-  au Filetype rust map <Leader>t :w\|:call VimuxRunCommand("clear; cargo test)<CR>
+  au Filetype rust map <Leader>t :w\|:call VimuxRunCommand("clear; cargo test")<CR>
   au Filetype rust map <Leader>T :w\|:call VimuxRunCommand("clear; cargo test " . bufname("%"))<CR>
 
   " toggle todo lists in markdown with Ctrl+Space
