@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# use vi for editing mode
+# http://www.catonmat.net/blog/bash-vi-editing-mode-cheat-sheet/
+set editing-mode vi
+
 # exports
 export TERM="screen-256color"
 export PATH="~/.cargo/bin:~/go/bin:~/bin:usr/local/php/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"

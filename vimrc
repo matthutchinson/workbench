@@ -43,7 +43,7 @@ call plug#begin('~/.vim/plugged')
 
   " tmux
   Plug 'christoomey/vim-tmux-navigator' " navigation across splits & panes
-  Plug 'jgdavey/tslime.vim'             " launch commands in tmux windows
+  Plug 'benmills/vimux'                 " launch commands in tmux windows
   Plug 'jgdavey/vim-turbux'             " run tests and focused tests
 
   " syntax
@@ -114,6 +114,9 @@ nnoremap <leader>g :Commits<cr>
 
 " jump between two files with backspace
 nnoremap <bs> <c-^>
+
+" vv to generate new vertical split
+nnoremap <silent> vv <C-w>v
 
 " function keys
 map <F2> :sp ~/Documents/system/notes/vim help.md<cr>
@@ -263,9 +266,16 @@ vmap <leader>a: :Tabularize /:\zs<cr>
 nmap <leader>c gcc
 vmap <leader>c gc
 
-" t-slime
-nmap <C-c>t <Plug>SetTmuxVars
-map <leader>r :w\|:call SendToTmux("\"".expand('%:p%h')."\"\n")<cr>
+" Tmux/Vimux
+" prompt for a command to run, run last, inspect, zoom
+map <Leader>vp :VimuxPromptCommand<cr>
+map <Leader>vl :VimuxRunLastCommand<cr>
+map <Leader>vi :VimuxInspectRunner<cr>
+map <Leader>vz :VimuxZoomRunner<cr>
+
+" turbux prefix (and hotfix)
+let g:turbux_command_prefix = 'bundle exec'
+let g:turbux_test_type='x'
 
 " ulti-snips
 map <leader>U :UltiSnipsEdit<cr>
@@ -314,10 +324,6 @@ nmap <Leader>hv <Plug>GitGutterPreviewHunk
 let g:gist_open_browser_after_post = 1
 let g:gist_detect_filetype = 1
 let g:gist_post_private = 1 " always private to begin with
-
-" turbux prefix (and hotfix)
-let g:turbux_command_prefix = 'bundle exec'
-let g:turbux_test_type='x'
 
 " ctrlp
 let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' } " super fast py ext
@@ -479,11 +485,10 @@ if !exists("autocommands_loaded")
   au BufNewFile,BufRead /private/etc/apache2/*.conf* set ft=apache
   au BufRead,BufNewFile {Capfile,Gemfile,Appraisals,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
-  " write file,build and cargo run (via Tmux) for rust files
-  au Filetype rust map <leader>r :w\|:Tmux clear && cargo run<cr>
-  au Filetype rust map <leader>t :w\|:Tmux clear && cargo test<cr>
-  au Filetype rust map <leader>rn :w\|:!cd %:p:h; cargo run<cr>
-  au Filetype rust map <leader>rt :w\|:!cd %:p:h; cargo test<cr>
+  " write file, run or test cargo projects
+  au Filetype rust map <Leader>r :w\|:call VimuxRunCommand("clear; cargo run")<CR>
+  au Filetype rust map <Leader>t :w\|:call VimuxRunCommand("clear; cargo test)<CR>
+  au Filetype rust map <Leader>T :w\|:call VimuxRunCommand("clear; cargo test " . bufname("%"))<CR>
 
   " toggle todo lists in markdown with Ctrl+Space
   au Filetype markdown map <silent><buffer> <C-@> :call ToggleTodo()<cr>
