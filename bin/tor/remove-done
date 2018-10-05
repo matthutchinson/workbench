@@ -1,0 +1,20 @@
+#!/bin/sh
+# script to check for completed torrents and remove them from transmission
+
+TORRENT_AUTH="transmission:transmission"
+TORRENT_LIST=`/usr/bin/transmission-remote -n "$TORRENT_AUTH" --list | sed -e '1d;$d;s/^ *//' | cut -f1 -d' '`
+
+for TORRENT_ID in $TORRENT_LIST
+do
+  TORRENT_ID=`echo "$TORRENT_ID" | sed 's:*::'`
+    
+  INFO=`/usr/bin/transmission-remote -n "$TORRENT_AUTH" --torrent $TORRENT_ID --info`
+  NAME=`echo "$INFO" | grep "Name: *"`
+  DL_DONE=`echo "$INFO" | grep "Percent Done: 100%"`
+
+  if [ "$DL_DONE" != "" ]; then
+    #echo "Torrent ID: $TORRENT_ID is done!"
+    #echo "Removing from list: $NAME"
+    /usr/bin/transmission-remote -n "$TORRENT_AUTH" --torrent $TORRENT_ID --remove
+  fi
+done
