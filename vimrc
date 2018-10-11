@@ -83,9 +83,10 @@ nnoremap <leader>q gqip
 nmap <C-n> :cn<cr>
 nmap <C-p> :cp<cr>
 
-" buffers
-nmap <Tab> :bp<cr>
-nmap <S-Tab> :bn<cr>
+" buffers (next with tab, prev with S-tab or backspace)
+nmap <Tab> :bn<cr>
+nmap <S-Tab> :bp<cr>
+nnoremap <bs> :bp<cr>
 nnoremap <leader><leader> :b#<cr>
 nmap <leader>d :bd<cr>
 nmap <leader>D :bufdo bd<cr>
@@ -111,9 +112,6 @@ nnoremap <space> :FZF<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>s :Snippets<cr>
 nnoremap <leader>g :Commits<cr>
-
-" jump between two files with backspace
-nnoremap <bs> <c-^>
 
 " vv to generate new vertical split
 nnoremap <silent> vv <C-w>v
