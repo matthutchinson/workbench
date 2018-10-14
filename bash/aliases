@@ -125,6 +125,11 @@ alias gp="git push"
 alias gl="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | vim -R -c 'set filetype=git nowrap' -"
 alias grm="git rebase master -i"
 
+# git commit again (without editing)
+alias gca="git commit --amend --no-edit"
+# force push with a lease
+alias gpf="git push --force-with-lease"
+
 # mysql
 alias mysql='mysql -uroot'
 alias mypmf='mysql faqtory_development'

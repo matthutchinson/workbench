@@ -97,3 +97,4 @@
 	autosquash = true
 [commit]
 	gpgsign = true
+	verbose = true
