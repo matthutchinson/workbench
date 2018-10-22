@@ -24,25 +24,23 @@ function generate_keys_and_csrs() {
 	echo "OK, working with Org ID: $org_id and SSA ID: $ssa_id"
 	echo
 
+	signing_path=$ssa_id/signing
+	transport_path=$ssa_id/transport
+	subject="/C=GB/ST=/L=/O=OpenBanking/OU=$org_id/CN=$ssa_id"
+  paths=($signing_path $transport_path)
+
 	rm -r $ssa_id
 	mkdir -p $ssa_id
-	mkdir -p $ssa_id/signing
-	mkdir -p $ssa_id/transport
+	mkdir -p $signing_path
+	mkdir -p $transport_path
 
-	signing_filepath=$ssa_id/signing/tpp_sig_$org_id_$ssa_id
-	transport_filepath=$ssa_id/transport/tpp_trans_$org_id_$ssa_id
-
-	_echo_and_execute "openssl genrsa -out $signing_filepath.key.pem 2048"
-	_echo_and_execute "openssl req -new -sha256 \
-	  -key $signing_filepath.key.pem \
-	  -subj "/C=GB/O=OpenBanking/OU=$org_id/CN=$ssa_id" \
-	  -out $signing_filepath.csr"
-
-	_echo_and_execute "openssl genrsa -out $transport_filepath.key.pem 2048"
-	_echo_and_execute "openssl req -new -sha256 \
-	  -key $transport_filepath.key.pem \
-	  -subj "/C=GB/O=OpenBanking/OU=$org_id/CN=$ssa_id" \
-	  -out $transport_filepath.csr"
+  for path in ${paths[*]}
+  do
+    _echo_and_execute "openssl req -new -newkey rsa:2048 \
+      -nodes -out $path/$ssa_id.csr \
+      -keyout $path/$ssa_id.key \
+      -subj \"$subject\" -sha256"
+  done
 
 	echo
 	echo "OK Done!"
