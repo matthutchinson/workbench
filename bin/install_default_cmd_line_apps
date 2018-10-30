@@ -1,11 +1,10 @@
 #!/bin/sh
 
-# homebrew
+# brew
 brew install neofetch    # neofetch - https://github.com/dylanaraps/neofetch
 brew install xctool      # xctool - http://nshipster.com/xctool/
 brew install asciinema   # asciicinema - https://asciinema.erg
 brew cask install ngrok  # ngrok - https://ngrok.com
 
-# Node
+# node
 npm install -g tldr # http://tldr.sh
-npm install -g emoj # emoj - https://github.com/sindresorhus/emoj
