@@ -61,7 +61,7 @@
   whitespace = nowarn
 [push]
   # push current branch even if you've never pushed it before
-  default = current
+  default = simple
 [heroku]
 	account = personal
 [init]
