@@ -129,6 +129,7 @@ alias grm="git rebase master -i"
 alias gca="git commit --amend --no-edit"
 # force push with a lease
 alias gpf="git push --force-with-lease"
+alias gfp="git push --set-upstream origin $br"
 
 # mysql
 alias mysql='mysql -uroot'

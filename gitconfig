@@ -26,8 +26,6 @@
   br = branch
   ci = commit
   co = checkout
-  fp = push -u
-  firstpush = push -u
   staged = diff --cached
   unstaged = diff
   logline = log --pretty=oneline
