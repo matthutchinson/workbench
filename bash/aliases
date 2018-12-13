@@ -63,6 +63,7 @@ function fixup {
   fi
 }
 
+
 # git commit extracting story ID from branch name
 function gc {
   if [ -n "$1" ]
@@ -80,6 +81,13 @@ function gc {
   else
     echo "usage: gc 'your commit message'"
   fi
+}
+
+# first push of a branch, pushes then sets upstream for it
+# requires git push setting: `default = current`
+function gfp {
+  git push
+  git branch --set-upstream-to=origin/"$br" "$br"
 }
 
 # rails / ruby
@@ -129,7 +137,6 @@ alias grm="git rebase master -i"
 alias gca="git commit --amend --no-edit"
 # force push with a lease
 alias gpf="git push --force-with-lease"
-alias gfp="git push --set-upstream origin $br"
 
 # mysql
 alias mysql='mysql -uroot'

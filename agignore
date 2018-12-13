@@ -1,7 +1,2 @@
-metric_fu/*
 vendor/*
-coverage/*
-tags
-sass-cache/*
-.git/*
-log/*
+*.min.js

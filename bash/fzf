@@ -6,11 +6,12 @@
 # fzf style
 export FZF_DEFAULT_OPTS='--height 40% --reverse'
 
-# respect gitignore and use git ls-tree in git repos
-export FZF_DEFAULT_COMMAND='
-  (git ls-tree -r --name-only HEAD ||
-    find . -path "*/\.*" -prune -o -type f -print -o -type l -print |
-    sed s/^..//) 2> /dev/null'
+# use silver searcher (Ag) piped to fzf, respects .gitignore, .agignore and
+# local .ignore
+export FZF_DEFAULT_COMMAND='ag -l -p "./"'
+
+# apply key bindings for bash, Ctrl+t, Ctrl+r and Alt+c
+source ~/.fzf.bash
 
 # helper to echo and execute a command
 function _echo_and_execute() {
@@ -57,12 +58,36 @@ function gbp() {
   _echo_and_execute "$* $branch"
 }
 
+# cleverer branch deleting with fzf selection
+# * if you attempt to delete branch you are on, explain you cant and move to master
+# * asks to delete remote branch too (if it exists)
+function gbd() {
+  branch=$(_fzf_git_branch)
+  if [ $# -eq 0 ]; then
+    _echo_and_execute "git br -D $branch"
+    if [ $? -eq 0 ]; then
+      remote_exists=$(git br -r | grep $branch)
+      if [ $? -eq 0 ]; then
+        read -r -p "Delete remote branch? [y/N] " response
+        case "$response" in
+          [yY][eE][sS]|[yY])
+            _echo_and_execute "git push origin :$branch"
+            ;;
+          *)
+            return
+            ;;
+        esac
+      fi
+    else
+      echo "⚠️". "you are already on this branch, I'll shift you to master"
+      git checkout master
+    fi
+    return
+  fi
+}
+
 # `git branch checkout`
-alias gbc="gbp git co"
-
-# `git branch delete
-alias gbd="gbp git br -D"
-
+alias gbc="gbp git checkout"
 
 ## Rails
 
