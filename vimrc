@@ -410,10 +410,10 @@ function! ToggleTodo()
   let saved_cursor = getpos('.')
   let current_line = getline('.')
 
-  if (current_line =~ '- \[\s*\]')
-    execute 's/- \[\s*\]/- [X]/g'
-  else
+  if (current_line =~ '- \[X]')
     execute 's/- \[X\]/- [ ]/g'
+  elseif (current_line =~ '- \[.*\]')
+    execute 's/- \[.*\]/- [X]/g'
   endif
   call setpos('.', saved_cursor)
 endfunction
