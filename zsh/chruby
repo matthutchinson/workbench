@@ -1,0 +1,29 @@
+#!/usr/bin/env zsh
+
+########################################################################
+# chruby with auto-switching
+########################################################################
+
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/opt/chruby/share/chruby/auto.sh
+
+########################################################################
+
+# remove need for bundle exec by adding ./bin to path, if the current
+# project is trusted and binstubs are present (see `git trust` alias)
+
+function set_local_bin_path {
+  # replace any existing local bin paths with our new one
+  export PATH="${1:-""}`echo "$PATH"|sed -e 's,[^:]*\.git/[^:]*bin:,,g'`"
+}
+
+function add_local_bin_to_path_if_trusted {
+  if [[ -d "$PWD/.git/safe" ]]; then
+    set_local_bin_path "$PWD/.git/safe/../../bin:"
+  fi
+}
+
+if [[ ! "$preexec_functions" == *add_local_bin_to_path_if_trusted* ]]; then
+  # make sure function runs after chruby
+  preexec_functions+=("add_local_bin_to_path_if_trusted")
+fi

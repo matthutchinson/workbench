@@ -38,6 +38,8 @@
   me = log --author='Matthew Hutchinson'
   prune-remotes = remote prune origin
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
+  # mark a repo as trusted (so ./bin/ lands in PATH)
+  trust = "!mkdir -p .git/safe"
 [format]
   # git log uses --pretty format by default, so this changes the default
   # e.g. 4436819 [23 hours ago] (Gabe Berke-Williams) One line prompt

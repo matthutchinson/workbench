@@ -1,17 +1,19 @@
-#build theme
-set -g status-bg black
+# set colours and size
+set -g status-bg colour233
 set -g status-fg colour238
-set -g status-left-length 30
-set -g status-right-length 140
+set -g status-left-length 72
+set -g status-right-length 144
 
 # status bar
-set -g window-status-separator ''
-set -g status-interval 10
-set -g status-left '#[bg=colour235,fg=colour245] #S #[bg=colour000,fg=colour235]⮀ '
-set -g status-right '#(~/tmux/segments/machine-stats)#(~/tmux/segments/battery)#(~/tmux/segments/lan-ip)#[fg=colour213] %H:%M'
-setw -g window-status-format '#[bg=colour000,fg=colour238]#I #[fg=colour244]#W#[default]  '
-setw -g window-status-current-format '#[bg=colour255,fg=colour000]⮀ #W #[bg=colour000,fg=colour255]⮀ '
+set -g status-interval 15
+set -g status-left '#[bg=colour000,fg=colour242] #S #[bg=colour233,fg=colour000]#[default] '
+set -g status-right '#(~/.tmux/segments/machine_status) #(~/.tmux/segments/battery_status)#(~/.tmux/segments/lan_ip)#[fg=colour213,bg=colour000] %H:%M'
+setw -g window-status-format '#[bg=colour233,fg=colour238] #I #[fg=colour244]#W#[default]  '
+setw -g window-status-current-format '#[bg=colour253,fg=colour233]#[bg=colour253,fg=colour000] #W #[bg=colour233,fg=colour253]#[default]'
 
 # pane borders
-set -g pane-border-fg 'colour236'
-set -g pane-active-border-fg 'colour246'
+set -g pane-border-fg 'colour235'
+set -g pane-active-border-fg 'colour238'
+
+# windows
+set -g window-status-separator ''

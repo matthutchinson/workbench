@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -e
+
+function lan_ip {
+  local nic0="en0"
+  local nic1="en1"
+
+  # get wired IP
+  local lan_ip=$(
+    /sbin/ifconfig $nic0 2>/dev/null | \
+      grep 'inet ' \
+      | awk '{print $2}'
+  )
+
+  # or get wireless IP
+  if [ -z "$lan_ip" ]; then
+    lan_ip=$(
+      /sbin/ifconfig $nic1 2>/dev/null | \
+        grep 'inet ' | \
+        awk '{print $2}'
+    )
+  fi
+
+  if [ -n "$lan_ip" ]; then
+    echo "#[bg=colour060,fg=colour255] ${lan_ip} #[bg=colour060,fg=colour000]#[default]"
+  fi
+}
+
+lan_ip

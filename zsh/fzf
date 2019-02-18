@@ -1,0 +1,110 @@
+#!/usr/bin/env zsh
+
+########################################################################
+# Configure fzf - https://github.com/junegunn/fzf
+########################################################################
+
+export FZF_DEFAULT_OPTS='--height 40% --reverse' # set style
+export FZF_DEFAULT_COMMAND='ag -l -p "./"'       # ag pipe, respects ignores
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh           # bindings and completion
+
+# helper function
+function _echo_and_execute {
+  echo $1
+  eval $1
+}
+
+########################################################################
+# PIDs
+########################################################################
+
+function _fzf_pid {
+  echo -n $(ps axww -o pid,user,%cpu,%mem,start,time,command | fzf | sed 's/^ *//' | cut -f1 -d' ')
+}
+
+# copy PID to clipboard
+function pid {
+  echo -n "$(_fzf_pid)" | pbcopy
+}
+
+########################################################################
+# Git
+########################################################################
+
+function _fzf_git_branch {
+  # fzf a local branch, trim leading whitespace, and "*"
+  echo $(git branch | sed 's/^. //' | fzf | xargs echo)
+}
+
+# choose branch and pass as last arg to a command, or copy branch name
+# if there are no arguments
+function gbp {
+  branch=$(_fzf_git_branch)
+  if [ $# -eq 0 ]; then
+    echo -n $branch | pbcopy; return;
+  fi
+  _echo_and_execute "$* $branch"
+}
+
+# fzf a branch to checkout
+alias gbc="gbp git checkout"
+
+# branch deleting with fzf
+function gbd {
+  branch=$(_fzf_git_branch)
+
+  if [ $# -eq 0 ]; then
+    _echo_and_execute "git branch -D $branch"
+    if [ $? -eq 0 ]; then
+      remote_exists=$(git branch -r | grep $branch)
+      # asks to delete remote branch too (if it exists)
+      if [ $? -eq 0 ]; then
+        printf "I found a remote branch, delete it too? [y/N] "
+        read -rs -k 1 response
+        case "$response" in
+          [yY][eE][sS]|[yY])
+            printf "Yes\n"
+            _echo_and_execute "git push origin :$branch"
+            ;;
+          *)
+            printf "No\n"
+            return
+            ;;
+        esac
+      fi
+    # if deleting current branch, explain you can't and checkout master
+    elif [ $branch != 'master' ]; then
+      echo "⚠️". "you are already on this branch, checking out master"
+      git checkout master
+    fi
+    return
+  fi
+}
+
+########################################################################
+# Rails migrations
+########################################################################
+
+function _fzf_rails_migration {
+  # pass migration number from chosen file as VERSION argumentto cmd
+  echo $(ls ./db/migrate/ | fzf --preview 'head -20 ./db/migrate/{}' | xargs | cut -d '_' -f 1 | xargs | tr -d '\n')
+}
+
+function rdbm {
+  if [ ! -d "./db/migrate" ]; then
+    echo "Oops, you are not in a Rails directory"
+  else
+    if [ $# -eq 0 ]; then
+      _echo_and_execute "bundle exec rake db:migrate"
+    else
+      migrate_version=$(_fzf_rails_migration)
+      if [ ! -z $migrate_version ]; then
+        _echo_and_execute "$*$migrate_version"
+      fi
+    fi
+  fi
+}
+
+alias rdbmu="rdbm bundle exec rake db:migrate:up VERSION="
+alias rdbmd="rdbm bundle exec rake db:migrate:down VERSION="
+alias rdbmr="rdbm bundle exec rake db:migrate:redo VERSION="

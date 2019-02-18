@@ -1,0 +1,57 @@
+#!/usr/bin/env zsh
+
+########################################################################
+# Powerline symbols - https://github.com/ryanoasis/nerd-fonts
+########################################################################
+
+local powerline_hard_left_divider='%{%G%}'
+local powerline_soft_left_divider='%{%G%}'
+local powerline_hard_right_divider='%{%G%}'
+local powerline_soft_right_divider='%{%G%}'
+local powerline_branch='%{%G%}'
+local powerline_line_number='%{%G%}'
+local powerline_lock='%{%G%}'
+local powerline_edit_mode='%{✳%G%}'
+
+########################################################################
+# Detect editing-mode
+########################################################################
+
+function zle-keymap-select() {
+  zle reset-prompt
+  zle -R
+}
+
+zle -N zle-keymap-select
+
+function vi_mode_prompt_info {
+  local mode_indicator="%{%K{236}%F{185}%}$powerline_hard_right_divider"
+  mode_indicator+="%{%K{185}%F{234}%} $powerline_edit_mode "
+  mode_indicator+="%{%K{185}%F{236}%}$powerline_hard_right_divider%{%f%k%}"
+  echo "${${KEYMAP/vicmd/$mode_indicator}/(main|viins)/}"
+}
+
+########################################################################
+# Left
+########################################################################
+
+PROMPT="$ "
+
+########################################################################
+# Right
+########################################################################
+
+RPROMPT="%{%K{000}%F{233}%}$powerline_hard_right_divider%{%f%k%}"
+RPROMPT+="%{%K{233}%F{234}%}$powerline_hard_right_divider%{%f%k%}"
+RPROMPT+="%{%K{234}%F{236}%}$powerline_hard_right_divider%{%f%k%}"
+
+# show editing mode in prompt
+RPROMPT+='$(vi_mode_prompt_info)'
+
+# doubly-truncated path
+RPROMPT+='%{%K{236}%F{247}%} %30<…<%(5~|%-1~/…/%3~|%4~)%-0<< %{%f%k%}'
+
+# if git available, show vcs info (see ~/.zsh/vcs_info.zsh)
+if hash git >/dev/null 2>&1; then
+  RPROMPT+='${vcs_info_msg_0_}'
+fi

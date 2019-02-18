@@ -1,0 +1,106 @@
+#!/usr/bin/env zsh
+
+########################################################################
+# Editing mode with vi
+########################################################################
+
+bindkey -v          # use vi, see mappings below
+export KEYTIMEOUT=1 # less lag when switching between modes
+export EDITOR=vi    # vi for editing
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^A' vi-beginning-of-line
+bindkey '^E' vi-end-of-line
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+########################################################################
+# Options
+########################################################################
+
+setopt ALWAYS_TO_END      # move cursor to end after completion
+setopt AUTO_CD            # cd to dir if exists and not a cmd
+setopt COMPLETE_IN_WORD   # completion from both ends
+setopt CORRECT            # auto guess cmds
+setopt NOTIFY             # report jobs right away
+setopt PROMPT_SUBST       # allow dynamic prompt substition
+setopt PUSHD_IGNORE_DUPS  # ignore dup dirs on the dir stack
+setopt PUSHD_TO_HOME      # psuhd on its own, pushes to $HOME
+setopt EXTENDED_GLOB      # better globbing e.g. ls (bin|lib)* ls -d ^*.json ls -R ls *(U)
+
+########################################################################
+# History
+########################################################################
+
+setopt EXTENDED_HISTORY   # more info in history file
+setopt HIST_FIND_NO_DUPS  # hide dups in results
+setopt HIST_IGNORE_DUPS   # dont store dups
+setopt HIST_IGNORE_SPACE  # dont store cmds that start with a <space>
+setopt SHARE_HISTORY
+
+export HISTFILE="$HOME/.history"
+export HISTFILESIZE=50000000
+export HISTSIZE=5000000
+export SAVEHIST=$HISTSIZE
+
+########################################################################
+# Colours
+########################################################################
+
+autoload -Uz colors && colors
+export CLICOLOR=1
+export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
+export GREP_OPTIONS="--color"
+
+########################################################################
+# Completion
+########################################################################
+
+autoload -Uz compinit && compinit
+
+# use menu select and match approximately
+zstyle ':completion:*:*:*:*:*' menu select
+zstyle ':completion:*::::' _expand completer _complete _match _approximate
+
+# case- and hyphen-insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
+
+# pasting with tabs doesn't perform completion
+zstyle ':completion:*' insert-tab pending
+
+# complete .. and .
+zstyle ':completion:*' special-dirs true
+
+# colours with LSCOLORS
+zstyle ':completion:*' list-colors ${(s.:.)LSCOLORS}
+
+# messaging
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:descriptions' format "$fg[yellow]%B--- %d%b"
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format "$fg[red]No matches for:$reset_color %d"
+zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
+zstyle ':completion:*' group-name
+
+# split cmd options into groups
+zstyle ':completion:*' tag-order \
+    'options:-long:long\ options
+     options:-short:short\ options
+     options:-single-letter:single\ letter\ options'
+zstyle ':completion:*:options-long' ignored-patterns '[-+](|-|[^-]*)'
+zstyle ':completion:*:options-short' ignored-patterns '--*' '[-+]?'
+zstyle ':completion:*:options-single-letter' ignored-patterns '???*'
+
+########################################################################
+# Misc
+########################################################################
+
+# obvious EOL marker
+export PROMPT_EOL_MARK='<EOL'
+
+# cd to apps and code
+typeset -U cdpath
+cdpath=( $HOME /u/apps /u/code $cdpath )

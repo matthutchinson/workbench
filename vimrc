@@ -34,7 +34,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
 
   " extras
-  Plug 'airblade/vim-gitgutter'
   Plug 'SirVer/ultisnips'
   Plug 'honza/vim-snippets'
   Plug 'mattn/webapi-vim'
@@ -161,7 +160,7 @@ colorscheme iceberg
 " colorscheme Tomorrow-Night-Bright
 " colorscheme Tomorrow-Night-Eighties
 
-set tw=80           " set textwidth
+set tw=72           " set textwidth
 set fo-=t           " set format options, don't auto-wrap at tw
 set colorcolumn=+1  " show vertical break at textwidth
 set number          " show line numbers
@@ -311,13 +310,6 @@ let g:startify_custom_header =
 " ag
 let g:ag_working_path_mode="r"
 
-" git gutter
-set updatetime=500
-" working with hunks (blocks of changes)
-nmap <Leader>ha <Plug>GitGutterStageHunk
-nmap <Leader>hr <Plug>GitGutterUndoHunk
-nmap <Leader>hv <Plug>GitGutterPreviewHunk
-
 " gist-vim
 let g:gist_open_browser_after_post = 1
 let g:gist_detect_filetype = 1
@@ -341,10 +333,9 @@ let g:lightline = {
   \   'fugitive': 'LightLineFugitive',
   \   'filename': 'LightLineFilename'
   \ },
-  \ 'separator': { 'left': '⮀', 'right': '⮂' },
-  \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+  \ 'separator': { 'left': '', 'right': '' },
+  \ 'subseparator': { 'left': '', 'right': '' }
 \ }
-
 
 " UltiSnips triggers
 let g:UltiSnipsExpandTrigger="<S-tab>"
@@ -375,7 +366,7 @@ function! LightLineReadonly()
   if &filetype == "help"
     return ""
   elseif &readonly
-    return "⭤"
+    return ""
   else
     return ""
   endif
@@ -383,8 +374,8 @@ endfunction
 
 function! LightLineFugitive()
   if exists("*fugitive#head")
-    let _ = fugitive#head()
-    return strlen(_) ? '⭠ '._ : ''
+    let branch = fugitive#head()
+		return branch !=# '' ? ' '.branch : ''
   endif
   return ''
 endfunction

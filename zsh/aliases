@@ -1,0 +1,48 @@
+#!/usr/bin/env zsh
+
+########################################################################
+# Misc
+########################################################################
+
+alias fhp='cd ~/Documents/firehose/job\ prep/;ll;mate ~/Documents/firehose/resources/mentor_session_test.rb;open https://www.thefirehoseproject.com/courses'
+alias irc='ssh kessel -t "screen -x"'
+alias scratch='vi ~/Documents/system/notes/scratch.md'
+alias todos='vi ~/Documents/system/notes/todos.md'
+alias secrets='vi ~/Documents/system/notes/secrets.enc.md'
+alias reload='source ~/.zshrc'
+alias vnc-hoth='ssh -f hoth.vnc.tunnel -N; open vnc://localhost:5999'
+alias tml='tmux ls'
+alias ll='LC_ALL=en_US.UTF-8 LANG=en ls++ -a' # https://github.com/trapd00r/ls--/issues/14
+
+########################################################################
+# Quick cds
+########################################################################
+
+alias cdwb='cd /u/code/workbench'
+alias cdpmf='cd /u/apps/pmfaqtory-store'
+
+########################################################################
+# Ruby / Rails
+########################################################################
+
+alias be='bundle exec'
+alias ss='bundle exec rails server'
+alias sc='bundle exec rails console'
+alias sg='bundle exec rails generate'
+alias rdbp='bundle exec rake db:prepare'
+alias rdbpp='bundle exec rake parallel:prepare'
+alias tdl='tail -f ./log/development.log'
+alias tdlp="tdl | egrep 'Processing|Parameters\:'"
+alias rst='touch ./tmp/restart.txt'
+
+########################################################################
+# Git
+########################################################################
+
+alias gb='git branch'
+alias gg='git pull'
+alias gp='git push'
+alias gl="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | vim -R -c 'set filetype=git nowrap' -"
+alias grm='git rebase master -i'
+alias gca='git commit --amend --no-edit'
+alias gpf='git push --force-with-lease'
