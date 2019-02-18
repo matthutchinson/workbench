@@ -30,6 +30,7 @@ setopt PROMPT_SUBST       # allow dynamic prompt substition
 setopt PUSHD_IGNORE_DUPS  # ignore dup dirs on the dir stack
 setopt PUSHD_TO_HOME      # psuhd on its own, pushes to $HOME
 setopt EXTENDED_GLOB      # better globbing e.g. ls (bin|lib)* ls -d ^*.json ls -R ls *(U)
+setopt RM_STAR_SILENT     # go ahead, rm /* if you like
 
 ########################################################################
 # History
