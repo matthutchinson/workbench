@@ -23,7 +23,7 @@ local df_fgcolour=000  # default fg colour
 # Utilities
 ########################################################################
 
-function git-status-has-anything       { grep -m 1 '^\s*[C|D|M|R|A|??]\s\+' <<< "$1" &> /dev/null }
+function git-status-has-anything       { grep -m 1 '^\s*[C|D|M|R|A|?]?*\s\+' <<< "$1" &> /dev/null }
 function git-status-has-copied-files   { grep -m 1 '^\s*C\s\+'  <<< "$1" &> /dev/null }
 function git-status-has-deleted-files  { grep -m 1 '^\s*D\s\+'  <<< "$1" &> /dev/null }
 function git-status-has-modified-files { grep -m 1 '^\s*M\s\+'  <<< "$1" &> /dev/null }
@@ -144,6 +144,8 @@ function +vi-git-branch {
   # include time since last local commit (short-handed, e.g 1d, 4h, 3m)
   hook_com[branch]="%{%K{$prev_colour}%F{$br_bgcolour}%}$powerline_hard_right_divider%{%f%k%}"
   hook_com[branch]+="%{%K{$br_bgcolour}%F{$df_fgcolour}%} ${user_data[git_time]} ${powerline_branch} %25>…>${hook_com[branch_orig]}%<< %{%f%k%}"
+  # export branch name for other scripts to use
+  export git_branch=$hook_com[branch_orig]
 }
 
 function +vi-git-revision {

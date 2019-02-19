@@ -40,5 +40,5 @@ function gfp {
   # pushes then sets upstream for a branch; git config for [push] must
   # set with: `default = current`
   git push
-  git branch --set-upstream-to=origin/"$branch" "$branch"
+  git branch --set-upstream-to=origin/"$git_branch" "$git_branch"
 }

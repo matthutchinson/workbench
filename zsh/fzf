@@ -39,7 +39,7 @@ function _fzf_git_branch {
 # choose branch and pass as last arg to a command, or copy branch name
 # if there are no arguments
 function gbp {
-  branch=$(_fzf_git_branch)
+  local branch=$(_fzf_git_branch)
   if [ $# -eq 0 ]; then
     echo -n $branch | pbcopy; return;
   fi
@@ -51,12 +51,12 @@ alias gbc="gbp git checkout"
 
 # branch deleting with fzf
 function gbd {
-  branch=$(_fzf_git_branch)
+  local branch=$(_fzf_git_branch)
 
   if [ $# -eq 0 ]; then
     _echo_and_execute "git branch -D $branch"
     if [ $? -eq 0 ]; then
-      remote_exists=$(git branch -r | grep $branch)
+      local remote_exists=$(git branch -r | grep $branch)
       # asks to delete remote branch too (if it exists)
       if [ $? -eq 0 ]; then
         printf "I found a remote branch, delete it too? [y/N] "
@@ -97,7 +97,7 @@ function rdbm {
     if [ $# -eq 0 ]; then
       _echo_and_execute "bundle exec rake db:migrate"
     else
-      migrate_version=$(_fzf_rails_migration)
+      local migrate_version=$(_fzf_rails_migration)
       if [ ! -z $migrate_version ]; then
         _echo_and_execute "$*$migrate_version"
       fi
