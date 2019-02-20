@@ -40,6 +40,7 @@ function git-status-fetch-if-needed {
 function git-fetch-commit-time-if-needed {
   # time since last local commit (short-handed, e.g 1d, 4h, 3m)
   if (( ! ${+user_data[git_time]} )); then
+    # TODO: be smarter, and don't show if less than 60 secs
     user_data[git_time]="$(git log --format='%cr' -n1 | sed 's/\([0-9]*\) \([ywdhms]\).*/\1\2/')"
   fi
 }

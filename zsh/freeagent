@@ -10,12 +10,15 @@ export STATSD_HOST=localhost
 export GRAPHITE_HOST=localhost
 export FREEAGENT_CACHE_STORE=memcached
 
-# app aliases
+# aliases
 alias intg='devkit server list | grep -E "int[0-9]+\s+$" | head -n 1 | xargs devkit server grab'
 alias cdf='cd /u/apps/freeagent'
+alias jlog='jenkins-log'
 
 # use older QT and node@6
 export PATH="/usr/local/opt/qt@5.5/bin:/usr/local/opt/node@6/bin:$PATH"
+# add jenkins log to path
+export PATH="/u/code/jenkins-log/bin:$PATH"
 
 # encrypt a string with eyaml in the puppet repo and copy to clipboard
 function puppet_encrypt {
