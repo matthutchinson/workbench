@@ -37,7 +37,8 @@ function git-status-fetch-if-needed {
   fi
 }
 
-function git-last-commit-time {
+function git-fetch-commit-time-if-needed {
+  # time since last local commit (short-handed, e.g 1d, 4h, 3m)
   if (( ! ${+user_data[git_time]} )); then
     user_data[git_time]="$(git log --format='%cr' -n1 | sed 's/\([0-9]*\) \([ywdhms]\).*/\1\2/')"
   fi
@@ -141,9 +142,8 @@ function +vi-git-action {
 }
 
 function +vi-git-branch {
-  git-last-commit-time
-
   # include time since last local commit (short-handed, e.g 1d, 4h, 3m)
+  git-fetch-commit-time-if-needed
   hook_com[branch]="%{%K{$prev_colour}%F{$br_bgcolour}%}$powerline_hard_right_divider%{%f%k%}"
   hook_com[branch]+="%{%K{$br_bgcolour}%F{$df_fgcolour}%} ${user_data[git_time]} ${powerline_branch} %25>…>${hook_com[branch_orig]}%<< %{%f%k%}"
   # export branch name for other scripts to use
