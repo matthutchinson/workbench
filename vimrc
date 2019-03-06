@@ -334,7 +334,7 @@ let g:lightline = {
   \             [ 'fugitive', 'filename' ] ],
   \   'right': [ [ 'lineinfo' ],
   \              [ 'percent' ],
-  \              [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
+  \              [ 'linter_checking', 'linter_errors', 'linter_warnings' ],
   \              [ 'fileformat', 'fileencoding', 'filetype' ]],
   \ },
   \ 'component_function': {
@@ -351,7 +351,6 @@ let g:lightline = {
   \  'linter_checking': 'lightline#ale#checking',
   \  'linter_warnings': 'lightline#ale#warnings',
   \  'linter_errors': 'lightline#ale#errors',
-  \  'linter_ok': 'lightline#ale#ok',
   \ },
   \ 'separator': { 'left': '', 'right': '' },
   \ 'subseparator': { 'left': '', 'right': '' }
@@ -360,7 +359,6 @@ let g:lightline = {
 let g:lightline#ale#indicator_checking = ""
 let g:lightline#ale#indicator_warnings = ""
 let g:lightline#ale#indicator_errors = ""
-let g:lightline#ale#indicator_ok = ""
 
 " UltiSnips triggers
 let g:UltiSnipsExpandTrigger="<S-tab>"
