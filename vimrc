@@ -36,8 +36,8 @@ call plug#begin('~/.vim/plugged')
   " extras
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'  " snippets
   Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'      " post gists
+  Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'      " linting
   Plug 'mhinz/vim-startify'
-  Plug 'w0rp/ale'
 
   " tmux
   Plug 'christoomey/vim-tmux-navigator' " navigation across splits & panes
@@ -331,15 +331,36 @@ let g:lightline = {
   \ 'colorscheme': 'wombat',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'fugitive', 'filename' ] ]
+  \             [ 'fugitive', 'filename' ] ],
+  \   'right': [ [ 'lineinfo' ],
+  \              [ 'percent' ],
+  \              [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
+  \              [ 'fileformat', 'fileencoding', 'filetype' ]],
   \ },
   \ 'component_function': {
   \   'fugitive': 'LightLineFugitive',
   \   'filename': 'LightLineFilename'
   \ },
+  \ 'component_type': {
+  \     'linter_checking': 'left',
+  \     'linter_warnings': 'warning',
+  \     'linter_errors': 'error',
+  \     'linter_ok': 'left',
+  \ },
+  \ 'component_expand': {
+  \  'linter_checking': 'lightline#ale#checking',
+  \  'linter_warnings': 'lightline#ale#warnings',
+  \  'linter_errors': 'lightline#ale#errors',
+  \  'linter_ok': 'lightline#ale#ok',
+  \ },
   \ 'separator': { 'left': '', 'right': '' },
   \ 'subseparator': { 'left': '', 'right': '' }
 \ }
+
+let g:lightline#ale#indicator_checking = ""
+let g:lightline#ale#indicator_warnings = ""
+let g:lightline#ale#indicator_errors = ""
+let g:lightline#ale#indicator_ok = ""
 
 " UltiSnips triggers
 let g:UltiSnipsExpandTrigger="<S-tab>"
