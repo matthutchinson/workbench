@@ -34,11 +34,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
 
   " extras
-  Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
-  Plug 'mattn/webapi-vim'
-  Plug 'mattn/gist-vim'
+  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'  " snippets
+  Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'      " post gists
   Plug 'mhinz/vim-startify'
+  Plug 'w0rp/ale'
 
   " tmux
   Plug 'christoomey/vim-tmux-navigator' " navigation across splits & panes
@@ -292,6 +291,11 @@ map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
 nmap <leader>dl :diffget LOCAL<cr>]c
 nmap <leader>dr :diffget REMOTE<cr>]c
 
+" navigate locations (fixes in ale)
+nnoremap <leader>ln :lnext<CR>
+nnoremap <leader>lp :lprevious<CR>
+nnoremap <leader>lr :lrewind<CR>
+
 " #### Plugin Settings
 
 let g:ascii = [
@@ -345,7 +349,9 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
-
+" ale | linting engine
+let g:ale_lint_on_text_changed = 'never'  " only on save
+let g:ale_lint_on_enter = 0               " not on open
 
 " #### Functions
 
