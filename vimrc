@@ -291,10 +291,11 @@ map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
 nmap <leader>dl :diffget LOCAL<cr>]c
 nmap <leader>dr :diffget REMOTE<cr>]c
 
-" navigate locations (fixes in ale)
-nnoremap <leader>ln :lnext<CR>
-nnoremap <leader>lp :lprevious<CR>
-nnoremap <leader>lr :lrewind<CR>
+" ale
+nmap <leader>l :call ALELintAndOpen()<cr>
+nnoremap <leader>lo :lopen<cr>
+nnoremap <leader>ln :ALENextWrap<cr>
+nnoremap <leader>lp :ALEPreviousWrap<cr>
 
 " #### Plugin Settings
 
@@ -368,9 +369,10 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
-" ale | linting engine
-let g:ale_lint_on_text_changed = 'never'  " only on save
-let g:ale_lint_on_enter = 0               " not on open
+" ale linting engine
+let g:ale_lint_on_text_changed = 'never'  " never on editing
+let g:ale_lint_on_enter = 0               " never on open
+"let g:ale_lint_on_save = 0                " never on save
 
 " #### Functions
 
@@ -439,6 +441,14 @@ xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<cr>
 function! ExecuteMacroOverVisualRange()
   echo "@".getcmdline()
   execute ":'<,'>normal @".nr2char(getchar())
+endfunction
+
+" after linting, open list, then remove the hook
+function ALELintAndOpen()
+  augroup ALEAutoOpen
+    au User ALELintPost :lopen|:autocmd! ALEAutoOpen
+  augroup END
+  exec ':ALELint'
 endfunction
 
 " rename current file
