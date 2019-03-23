@@ -33,7 +33,7 @@ alias sg='bundle exec rails generate'
 alias rdbp='bundle exec rake db:prepare'
 alias rdbpp='bundle exec rake parallel:prepare'
 alias tdl='tail -f ./log/development.log'
-alias tdlp="tdl | egrep 'Processing|Parameters\:'"
+alias tdlp="tdl | egrep 'Completed|Processing|Parameters\:'"
 alias rst='touch ./tmp/restart.txt'
 
 ########################################################################

@@ -2,4 +2,4 @@
 # non-interactive shell environment
 ########################################################################
 
-export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:/usr/local/sbin:$HOME/bin"

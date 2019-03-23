@@ -20,6 +20,16 @@ local ac_fgcolour=253  # actions fg colour
 local df_fgcolour=000  # default fg colour
 
 ########################################################################
+# Margin for truncating
+# See `man zshmisc` for help with `%-n(l.true-text.false-text)` below
+########################################################################
+
+# restrict VCS info to this % of the line width
+type add-zsh-hook > /dev/null 2>&1 || autoload -Uz add-zsh-hook
+function set-margin { export MARGIN="$(( $COLUMNS * 25 / 100 ))" }
+add-zsh-hook precmd set-margin
+
+########################################################################
 # Utilities
 ########################################################################
 
@@ -46,7 +56,7 @@ function git-fetch-commit-time-if-needed {
 }
 
 ########################################################################
-# vcs info configuration
+# VCS info config
 ########################################################################
 
 if hash git >/dev/null 2>&1; then
@@ -54,7 +64,6 @@ if hash git >/dev/null 2>&1; then
   type vcs_info > /dev/null 2>&1 || autoload -Uz vcs_info
   # add as a precmd via a hook
   vcs_info_precmd () { vcs_info }
-  type add-zsh-hook > /dev/null 2>&1 || autoload -Uz add-zsh-hook
   add-zsh-hook precmd vcs_info_precmd
 
   zstyle ':vcs_info:*' enable git # disable other backends
@@ -87,17 +96,19 @@ fi
 
 
 ########################################################################
-# vcs info hooks
+# VCS info hooks
 ########################################################################
 
 function +vi-git-action {
   git-status-fetch-if-needed
 
+  # truncating wrapper
+  hook_com[action]="%${MARGIN}(l."
   # decide color for divider based on git status having anything to show
   if git-status-has-anything "${user_data[git_status]}"; then
-    hook_com[action]="%{%K{$st_bgcolour}%F{$ac_fgcolour}%}$powerline_hard_right_divider%{%f%k%}"
+    hook_com[action]+="%{%K{$st_bgcolour}%F{$ac_fgcolour}%}$powerline_hard_right_divider%{%f%k%}."
   else
-    hook_com[action]="%{%K{$rv_bgcolour}%F{$ac_fgcolour}%}$powerline_hard_right_divider%{%f%k%}"
+    hook_com[action]+="%{%K{$rv_bgcolour}%F{$ac_fgcolour}%}$powerline_hard_right_divider%{%f%k%}."
   fi
 
   hook_com[action]+="%{%K{$ac_fgcolour}%F{$ac_bgcolour}%} "
@@ -139,21 +150,32 @@ function +vi-git-action {
       ;;
   esac
 
-  hook_com[action]+=" %{%f%k%}"
+  hook_com[action]+=" %{%f%k%})"
 }
 
 function +vi-git-branch {
   # include time since last local commit (short-handed, e.g 1d, 4h, 3m)
   git-fetch-commit-time-if-needed
-  hook_com[branch]="%{%K{$prev_colour}%F{$br_bgcolour}%}$powerline_hard_right_divider%{%f%k%}"
+
+  # truncating wrapper
+  hook_com[branch]="%${MARGIN}(l."
+  hook_com[branch]+="%{%K{$prev_colour}%F{$br_bgcolour}%}$powerline_hard_right_divider%{%f%k%}."
+  hook_com[branch]+="%{%K{$prev_colour}%F{$br_bgcolour}%}$powerline_hard_right_divider%{%f%k%}"
+  # branch truncated to 25 chars max
   hook_com[branch]+="%{%K{$br_bgcolour}%F{$df_fgcolour}%} ${user_data[git_time]} ${powerline_branch} %25>…>${hook_com[branch_orig]}%<< %{%f%k%}"
+  hook_com[branch]+=")"
+
   # export branch name for other scripts to use
   export git_branch=$hook_com[branch_orig]
 }
 
 function +vi-git-revision {
-  hook_com[revision]="%{%K{$br_bgcolour}%F{$rv_bgcolour}%}$powerline_hard_right_divider%{%f%k%}"
+  # truncating wrapper
+  hook_com[revision]="%${MARGIN}(l."
+  hook_com[revision]+="%{%K{$br_bgcolour}%F{$rv_bgcolour}%}$powerline_hard_right_divider%{%f%k%}."
+  hook_com[revision]+="%{%K{$br_bgcolour}%F{$rv_bgcolour}%}$powerline_hard_right_divider%{%f%k%}"
   hook_com[revision]+="%{%K{$rv_bgcolour}%F{$df_fgcolour}%} ${hook_com[revision_orig][0,7]} %{%f%k%}"
+  hook_com[revision]+=")"
 }
 
 function +vi-git-copied-files {
@@ -164,15 +186,20 @@ function +vi-git-copied-files {
   # the `staged` variable. This requires that the first hook clear
   # `${hook_com[staged]}`, and THIS hook is the first one. All
   # others MUST append.
+  hook_com[staged]=""
 
-  # check if we have changes at all, if so start divider
+  # check if we have changes at all, if so start divider and spacer
   if git-status-has-anything "${user_data[git_status]}"; then
+    # truncating wrapper
     hook_com[staged]+="%{%K{$rv_bgcolour}%F{$st_bgcolour}%}$powerline_hard_right_divider%{%f%k%}"
     hook_com[staged]+="%{%K{$st_bgcolour}%F{$df_fgcolour}%}"
+    hook_com[staged]+="%${MARGIN}(l.. )"
   fi
 
   if git-status-has-copied-files "${user_data[git_status]}"; then
-    hook_com[staged]+=' %{%G%}'
+    hook_com[staged]+="%${MARGIN}(l.."
+    hook_com[staged]+='%{%G%} '
+    hook_com[staged]+=')'
   fi
 }
 
@@ -180,7 +207,9 @@ function +vi-git-deleted-files {
   git-status-fetch-if-needed
 
   if git-status-has-deleted-files "${user_data[git_status]}"; then
-    hook_com[staged]+=' %{%G%}'
+    hook_com[staged]+="%${MARGIN}(l.."
+    hook_com[staged]+='%{%G%} '
+    hook_com[staged]+=')'
   fi
 }
 
@@ -188,7 +217,9 @@ function +vi-git-modified-files {
   git-status-fetch-if-needed
 
   if git-status-has-modified-files "${user_data[git_status]}"; then
-    hook_com[staged]+=' %{%G%}'
+    hook_com[staged]+="%${MARGIN}(l.."
+    hook_com[staged]+='%{%G%} '
+    hook_com[staged]+=')'
   fi
 }
 
@@ -196,7 +227,9 @@ function +vi-git-renamed-files {
   git-status-fetch-if-needed
 
   if git-status-has-renamed-files "${user_data[git_status]}"; then
-    hook_com[staged]+=' %{⤨%G%}'
+    hook_com[staged]+="%${MARGIN}(l.."
+    hook_com[staged]+='%{⤨%G%} '
+    hook_com[staged]+=')'
   fi
 }
 
@@ -204,19 +237,18 @@ function +vi-git-staged-files {
   git-status-fetch-if-needed
 
   if git-status-has-staged-files "${user_data[git_status]}"; then
-    hook_com[staged]+=' %{%G%}'
+    hook_com[staged]+="%${MARGIN}(l.."
+    hook_com[staged]+='%{%G%} '
+    hook_com[staged]+=')'
   fi
 }
 
 function +vi-git-unstaged-files {
   git-status-fetch-if-needed
 
-  # add spacer if appending onto some content in the stagedstr
-  if git-status-has-anything "${user_data[git_status]}"; then
-    hook_com[unstaged]+=" "
-  fi
-
   if git-status-has-unstaged-files "${user_data[git_status]}"; then
+    hook_com[unstaged]+="%${MARGIN}(l.."
     hook_com[unstaged]+='%{❊%G%} '
+    hook_com[unstaged]+=')'
   fi
 }
