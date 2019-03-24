@@ -15,6 +15,7 @@ $ ./bin/benchpress
 * Tmux
 * Tmuxinator
 * Bash aliases, bash_profile
+* ZSH profile and config
 * Dot files for ctags, ack, ag, rsync, synergy, rails, irb, gems and more
 * Global git hooks and custom merges
 
