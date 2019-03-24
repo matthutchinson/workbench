@@ -9,24 +9,27 @@
 # Colours
 ########################################################################
 
+local df_fgcolour=251  # default fg colour
 local prev_colour=236  # bg colour of previous chars in prompt
 
-local br_bgcolour=168  # branch bg colour
-local rv_bgcolour=174  # revision bg colour
-local st_bgcolour=180  # staged/unstaged changes bg colour
-local ac_bgcolour=060  # actions bg colour
+local br_bgcolour=018  # branch bg colour
+local rv_bgcolour=019  # revision bg colour
 
-local ac_fgcolour=253  # actions fg colour
-local df_fgcolour=000  # default fg colour
+local st_bgcolour=008  # staged/unstaged changes bg colour
+local st_fgcolour=255  # staged/unstaged changes bg colour
+
+local ac_bgcolour=222  # actions bg colour
+local ac_fgcolour=000  # actions fg colour
 
 ########################################################################
 # Margin for truncating
 # See `man zshmisc` for help with `%-n(l.true-text.false-text)` below
+# http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Conditional-Substrings-in-Prompts
 ########################################################################
 
 # restrict VCS info to this % of the line width
 type add-zsh-hook > /dev/null 2>&1 || autoload -Uz add-zsh-hook
-function set-margin { export MARGIN="$(( $COLUMNS * 25 / 100 ))" }
+function set-margin { export MARGIN="$(( $COLUMNS * 40 / 100 ))" }
 add-zsh-hook precmd set-margin
 
 ########################################################################
@@ -76,8 +79,8 @@ if hash git >/dev/null 2>&1; then
   # %u is value of unstagedstr
   # %a is action in progress (for autoformats)
 
-  zstyle ':vcs_info:*' formats '%b%i%c%u%{%f%k%}'
-  zstyle ':vcs_info:*' actionformats '%b%i%c%u%a%{%f%k%}'
+  zstyle ':vcs_info:*' formats '%b%i%c%u'
+  zstyle ':vcs_info:*' actionformats '%b%i%c%u%a'
 
   type is-at-least > /dev/null 2>&1 || autoload -Uz is-at-least
   if is-at-least 4.3.11; then
@@ -102,16 +105,14 @@ fi
 function +vi-git-action {
   git-status-fetch-if-needed
 
-  # truncating wrapper
-  hook_com[action]="%${MARGIN}(l."
   # decide color for divider based on git status having anything to show
   if git-status-has-anything "${user_data[git_status]}"; then
-    hook_com[action]+="%{%K{$st_bgcolour}%F{$ac_fgcolour}%}$powerline_hard_right_divider%{%f%k%}."
+    hook_com[action]="%{%K{$st_bgcolour}%F{$ac_bgcolour}%}$powerline_hard_right_divider%{%f%k%}"
   else
-    hook_com[action]+="%{%K{$rv_bgcolour}%F{$ac_fgcolour}%}$powerline_hard_right_divider%{%f%k%}."
+    hook_com[action]="%{%K{$rv_bgcolour}%F{$ac_bgcolour}%}$powerline_hard_right_divider%{%f%k%}"
   fi
 
-  hook_com[action]+="%{%K{$ac_fgcolour}%F{$ac_bgcolour}%} "
+  hook_com[action]+="%{%K{$ac_bgcolour}%F{$ac_fgcolour}%} "
 
   # provide action sigil
   case "${hook_com[action_orig]}" in
@@ -150,7 +151,7 @@ function +vi-git-action {
       ;;
   esac
 
-  hook_com[action]+=" %{%f%k%})"
+  hook_com[action]+=" %{%f%k%}"
 }
 
 function +vi-git-branch {
@@ -192,7 +193,7 @@ function +vi-git-copied-files {
   if git-status-has-anything "${user_data[git_status]}"; then
     # truncating wrapper
     hook_com[staged]+="%{%K{$rv_bgcolour}%F{$st_bgcolour}%}$powerline_hard_right_divider%{%f%k%}"
-    hook_com[staged]+="%{%K{$st_bgcolour}%F{$df_fgcolour}%}"
+    hook_com[staged]+="%{%K{$st_bgcolour}%F{$st_fgcolour}%}"
     hook_com[staged]+="%${MARGIN}(l.. )"
   fi
 
