@@ -2,6 +2,9 @@
 
 ########################################################################
 # Powerline symbols - https://github.com/ryanoasis/nerd-fonts
+#
+# Patch an existing font with glyphs via nerd tree font patcher e.g.
+#   ./font-patcher -l -s --octicons --powersymbols --powerline font.otf
 ########################################################################
 
 local powerline_hard_left_divider='%{%G%}'
