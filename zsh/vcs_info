@@ -6,7 +6,7 @@
 ########################################################################
 
 ########################################################################
-# Colours
+# Colour
 ########################################################################
 
 local df_fgcolour=251  # default fg colour
@@ -15,21 +15,25 @@ local prev_colour=236  # bg colour of previous chars in prompt
 local br_bgcolour=018  # branch bg colour
 local rv_bgcolour=019  # revision bg colour
 
-local st_bgcolour=008  # staged/unstaged changes bg colour
+local st_bgcolour=022  # staged/unstaged changes bg colour
 local st_fgcolour=255  # staged/unstaged changes bg colour
 
 local ac_bgcolour=222  # actions bg colour
 local ac_fgcolour=000  # actions fg colour
 
+local reset="%{%f%k%}" # reset colors
+
 ########################################################################
-# Margin for truncating
-# See `man zshmisc` for help with `%-n(l.true-text.false-text)` below
-# http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Conditional-Substrings-in-Prompts
+# Margin
+#
+# To make each section optional and only  allow it to appear if there is
+# room a ternary operator of the form `%n(l.unwanted.wanted)` is used.
+# See `man zshmisc` for help or visit http://tinyurl.com/bmdbnyw
+#
 ########################################################################
 
-# restrict VCS info to this % of the line width
 type add-zsh-hook > /dev/null 2>&1 || autoload -Uz add-zsh-hook
-function set-margin { export MARGIN="$(( $COLUMNS * 40 / 100 ))" }
+function set-margin { export MARGIN="$(( $COLUMNS * 33 / 100))" }
 add-zsh-hook precmd set-margin
 
 ########################################################################
@@ -84,7 +88,8 @@ if hash git >/dev/null 2>&1; then
 
   type is-at-least > /dev/null 2>&1 || autoload -Uz is-at-least
   if is-at-least 4.3.11; then
-    # format vcs_info, see functions below; order is significant
+    # format vcs_info, see functions below; order is significant due to
+    # the required color resets
     zstyle ':vcs_info:git+set-message:*' hooks git-action         \
                                                git-branch         \
                                                git-revision       \
@@ -107,9 +112,9 @@ function +vi-git-action {
 
   # decide color for divider based on git status having anything to show
   if git-status-has-anything "${user_data[git_status]}"; then
-    hook_com[action]="%{%K{$st_bgcolour}%F{$ac_bgcolour}%}$powerline_hard_right_divider%{%f%k%}"
+    hook_com[action]="%{%K{$st_bgcolour}%F{$ac_bgcolour}%}$powerline_hard_right_divider"
   else
-    hook_com[action]="%{%K{$rv_bgcolour}%F{$ac_bgcolour}%}$powerline_hard_right_divider%{%f%k%}"
+    hook_com[action]="%{%K{$rv_bgcolour}%F{$ac_bgcolour}%}$powerline_hard_right_divider"
   fi
 
   hook_com[action]+="%{%K{$ac_bgcolour}%F{$ac_fgcolour}%} "
@@ -151,7 +156,7 @@ function +vi-git-action {
       ;;
   esac
 
-  hook_com[action]+=" %{%f%k%}"
+  hook_com[action]+=" $reset"
 }
 
 function +vi-git-branch {
@@ -160,10 +165,11 @@ function +vi-git-branch {
 
   # truncating wrapper
   hook_com[branch]="%${MARGIN}(l."
-  hook_com[branch]+="%{%K{$prev_colour}%F{$br_bgcolour}%}$powerline_hard_right_divider%{%f%k%}."
-  hook_com[branch]+="%{%K{$prev_colour}%F{$br_bgcolour}%}$powerline_hard_right_divider%{%f%k%}"
+  hook_com[branch]+="%{%K{$prev_colour}%F{$br_bgcolour}%}$powerline_hard_right_divider."
+  hook_com[branch]+="%{%K{$prev_colour}%F{$br_bgcolour}%}$powerline_hard_right_divider"
   # branch truncated to 25 chars max
-  hook_com[branch]+="%{%K{$br_bgcolour}%F{$df_fgcolour}%} ${user_data[git_time]} ${powerline_branch} %25>…>${hook_com[branch_orig]}%<< %{%f%k%}"
+  hook_com[branch]+="%{%K{$br_bgcolour}%F{$df_fgcolour}%} ${user_data[git_time]} ${powerline_branch} %25>…>${hook_com[branch_orig]}%<<"
+  hook_com[branch]+=" $reset"
   hook_com[branch]+=")"
 
   # export branch name for other scripts to use
@@ -173,9 +179,10 @@ function +vi-git-branch {
 function +vi-git-revision {
   # truncating wrapper
   hook_com[revision]="%${MARGIN}(l."
-  hook_com[revision]+="%{%K{$br_bgcolour}%F{$rv_bgcolour}%}$powerline_hard_right_divider%{%f%k%}."
-  hook_com[revision]+="%{%K{$br_bgcolour}%F{$rv_bgcolour}%}$powerline_hard_right_divider%{%f%k%}"
-  hook_com[revision]+="%{%K{$rv_bgcolour}%F{$df_fgcolour}%} ${hook_com[revision_orig][0,7]} %{%f%k%}"
+  hook_com[revision]+="%{%K{$br_bgcolour}%F{$rv_bgcolour}%}$powerline_hard_right_divider."
+  hook_com[revision]+="%{%K{$br_bgcolour}%F{$rv_bgcolour}%}$powerline_hard_right_divider"
+  hook_com[revision]+="%{%K{$rv_bgcolour}%F{$df_fgcolour}%} ${hook_com[revision_orig][0,7]}"
+  hook_com[revision]+=" $reset"
   hook_com[revision]+=")"
 }
 
@@ -192,9 +199,10 @@ function +vi-git-copied-files {
   # check if we have changes at all, if so start divider and spacer
   if git-status-has-anything "${user_data[git_status]}"; then
     # truncating wrapper
-    hook_com[staged]+="%{%K{$rv_bgcolour}%F{$st_bgcolour}%}$powerline_hard_right_divider%{%f%k%}"
-    hook_com[staged]+="%{%K{$st_bgcolour}%F{$st_fgcolour}%}"
-    hook_com[staged]+="%${MARGIN}(l.. )"
+    hook_com[staged]+="%${MARGIN}(l.."
+    hook_com[staged]+="%{%K{$rv_bgcolour}%F{$st_bgcolour}%}$powerline_hard_right_divider"
+    hook_com[staged]+="%{%K{$st_bgcolour}%F{$st_fgcolour}%} "
+    hook_com[staged]+=')'
   fi
 
   if git-status-has-copied-files "${user_data[git_status]}"; then
@@ -229,7 +237,7 @@ function +vi-git-renamed-files {
 
   if git-status-has-renamed-files "${user_data[git_status]}"; then
     hook_com[staged]+="%${MARGIN}(l.."
-    hook_com[staged]+='%{⤨%G%} '
+    hook_com[staged]+='%{⤨%G%}  '
     hook_com[staged]+=')'
   fi
 }
@@ -252,4 +260,7 @@ function +vi-git-unstaged-files {
     hook_com[unstaged]+='%{❊%G%} '
     hook_com[unstaged]+=')'
   fi
+
+  # always reset colors (since action or EOL comes next)
+  hook_com[unstaged]+="$reset"
 }

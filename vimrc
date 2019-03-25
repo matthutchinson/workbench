@@ -29,6 +29,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-bundler'
   Plug 'tpope/vim-rails'
   Plug 'tpope/vim-unimpaired'
+  Plug 'cocopon/iceberg.vim'
 
   " status
   Plug 'itchyny/lightline.vim'
@@ -148,28 +149,22 @@ filetype plugin indent on
 runtime macros/matchit.vim
 
 " appearance
-set t_Co=256                      " 256 color scheme
-syntax on                         " turn on syntax highlighting
+set t_Co=256              " 256 color scheme
+syntax on                 " turn on syntax highlighting
+colorscheme iceberg-matt  " modifed iceberg to mix with base16 theme
+" colorscheme iceberg
 
-colorscheme iceberg
-" colorscheme molokai
-" colorscheme mirodark
-" colorscheme jellybeans
-" colorscheme Tomorrow-Night
-" colorscheme Tomorrow-Night-Bright
-" colorscheme Tomorrow-Night-Eighties
-
-set tw=72           " set textwidth
-set fo-=t           " set format options, don't auto-wrap at tw
-set colorcolumn=+1  " show vertical break at textwidth
-set number          " show line numbers
-set ruler           " show cursor position
-set title           " set the terminal's title
-set visualbell      " visual flash
-set noerrorbells    " no beeping please
-set laststatus=2    " always show a status bar
-set cursorline      " only use cursorline for current window
-set cpoptions+=$    " show $ to indicate editing range
+set tw=72             " set textwidth
+set fo-=t             " set format options, don't auto-wrap at tw
+set colorcolumn=+1    " show vertical break at textwidth
+set number            " show line numbers
+set ruler             " show cursor position
+set title             " set the terminal's title
+set visualbell        " visual flash
+set noerrorbells      " no beeping please
+set laststatus=2      " always show a status bar
+set cursorline        " only use cursorline for current window
+set cpoptions+=$      " show $ to indicate editing range
 
 " speedy scrolling
 syntax sync minlines=100
@@ -182,14 +177,14 @@ set regexpengine=1 " issue with ruby syntax highlighting (use older RE engine)
 
 " general
 set encoding=utf-8
-set history=200                       " remember all the things
-set backspace=indent,eol,start        " intuitive backspacing
-set hidden                            " handle multiple buffers better
-set wildmode=list:longest             " complete files like a shell
-set splitbelow                        " open vertical splits below
-set splitright                        " open horizontal splits on the right
-set cm=blowfish2                      " encryption mode (http://tuxdiary.com/2015/01/13/encrypt-files-with-vim/)
-set complete=.,w,b,kspell,k           " complete on current, windows, buffers and dictionary
+set history=200                   " remember all the things
+set backspace=indent,eol,start    " intuitive backspacing
+set hidden                        " handle multiple buffers better
+set wildmode=list:longest         " complete files like a shell
+set splitbelow                    " open vertical splits below
+set splitright                    " open horizontal splits on the right
+set cm=blowfish2                  " encryption mode (http://tuxdiary.com/2015/01/13/encrypt-files-with-vim/)
+set complete=.,w,b,kspell,k       " complete on current, windows, buffers and dictionary
 
 " dictionary locations
 set dictionary+=~/.vim/spell/en.utf-8.add
@@ -228,7 +223,7 @@ set expandtab                     " use spaces instead of tabs
 set smarttab                      " insert tabs on the start of a line according to shiftwidth, not
 set shiftround                    " use multiple of shiftwidth when indenting with '<' and '>'
 set foldmethod=syntax
-set foldcolumn=4
+set foldcolumn=1
 set nofoldenable
 
 " maintain undo history between sessions
@@ -329,7 +324,7 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-stand
 
 " lightline
 let g:lightline = {
-  \ 'colorscheme': 'wombat',
+  \ 'colorscheme': 'iceberg',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'fugitive', 'filename' ] ],

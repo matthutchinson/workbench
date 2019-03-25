@@ -49,12 +49,19 @@ export SAVEHIST=$HISTSIZE
 
 ########################################################################
 # Colours
+#
+# I've modifed ocean-dark from ocean, with black bg and extra colours in
+# the 256 space. http://chriskempson.com/projects/base16/ for details.
 ########################################################################
 
 autoload -Uz colors && colors
 export CLICOLOR=1
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export GREP_OPTIONS="--color"
+
+#sel 220742| bg 16171e
+local colorscheme="$HOME/.zsh/base16-shell/base16-ocean-dark.sh"
+[ -n "$PS1" ] && [[ -s $colorscheme ]] && source $colorscheme
 
 ########################################################################
 # Completion
@@ -98,9 +105,6 @@ zstyle ':completion:*:options-single-letter' ignored-patterns '???*'
 ########################################################################
 # Misc
 ########################################################################
-
-# obvious EOL marker
-export PROMPT_EOL_MARK='<EOL'
 
 # cd to apps and code
 typeset -U cdpath
