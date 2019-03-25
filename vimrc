@@ -152,7 +152,6 @@ runtime macros/matchit.vim
 set t_Co=256              " 256 color scheme
 syntax on                 " turn on syntax highlighting
 colorscheme iceberg-matt  " modifed iceberg to mix with base16 theme
-" colorscheme iceberg
 
 set tw=72             " set textwidth
 set fo-=t             " set format options, don't auto-wrap at tw

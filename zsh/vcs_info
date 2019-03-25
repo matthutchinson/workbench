@@ -33,7 +33,7 @@ local reset="%{%f%k%}" # reset colors
 ########################################################################
 
 type add-zsh-hook > /dev/null 2>&1 || autoload -Uz add-zsh-hook
-function set-margin { export MARGIN="$(( $COLUMNS * 33 / 100))" }
+function set-margin { export MARGIN="$(( $COLUMNS * 50 / 100))" }
 add-zsh-hook precmd set-margin
 
 ########################################################################
@@ -164,8 +164,7 @@ function +vi-git-branch {
   git-fetch-commit-time-if-needed
 
   # truncating wrapper
-  hook_com[branch]="%${MARGIN}(l."
-  hook_com[branch]+="%{%K{$prev_colour}%F{$br_bgcolour}%}$powerline_hard_right_divider."
+  hook_com[branch]="%${MARGIN}(l.."
   hook_com[branch]+="%{%K{$prev_colour}%F{$br_bgcolour}%}$powerline_hard_right_divider"
   # branch truncated to 25 chars max
   hook_com[branch]+="%{%K{$br_bgcolour}%F{$df_fgcolour}%} ${user_data[git_time]} ${powerline_branch} %25>…>${hook_com[branch_orig]}%<<"
@@ -178,8 +177,7 @@ function +vi-git-branch {
 
 function +vi-git-revision {
   # truncating wrapper
-  hook_com[revision]="%${MARGIN}(l."
-  hook_com[revision]+="%{%K{$br_bgcolour}%F{$rv_bgcolour}%}$powerline_hard_right_divider."
+  hook_com[revision]="%${MARGIN}(l.."
   hook_com[revision]+="%{%K{$br_bgcolour}%F{$rv_bgcolour}%}$powerline_hard_right_divider"
   hook_com[revision]+="%{%K{$rv_bgcolour}%F{$df_fgcolour}%} ${hook_com[revision_orig][0,7]}"
   hook_com[revision]+=" $reset"
@@ -217,7 +215,7 @@ function +vi-git-deleted-files {
 
   if git-status-has-deleted-files "${user_data[git_status]}"; then
     hook_com[staged]+="%${MARGIN}(l.."
-    hook_com[staged]+='%{%G%} '
+    hook_com[staged]+='%{✘%G%} '
     hook_com[staged]+=')'
   fi
 }
@@ -237,7 +235,7 @@ function +vi-git-renamed-files {
 
   if git-status-has-renamed-files "${user_data[git_status]}"; then
     hook_com[staged]+="%${MARGIN}(l.."
-    hook_com[staged]+='%{⤨%G%}  '
+    hook_com[staged]+='%{⧉%G%} '
     hook_com[staged]+=')'
   fi
 }
@@ -257,7 +255,7 @@ function +vi-git-unstaged-files {
 
   if git-status-has-unstaged-files "${user_data[git_status]}"; then
     hook_com[unstaged]+="%${MARGIN}(l.."
-    hook_com[unstaged]+='%{❊%G%} '
+    hook_com[unstaged]+='%{✸%G%} '
     hook_com[unstaged]+=')'
   fi
 
