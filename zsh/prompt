@@ -4,9 +4,9 @@
 # Powerline symbols
 #
 # Use the nerd-font patcher from https://github.com/ryanoasis/nerd-fonts
-#   ./font-patcher -l -s --octicons --powersymbols --powerline font.otf
+#   ./font-patcher -l --octicons --powerline font.otf
 #
-# SF Mono lives here:
+# SF Mono can be found here:
 # /Applications/Xcode.app/Contents/SharedFrameworks/DVTKit.framework/\
 #   /Versions/A/Resources/Fonts/
 ########################################################################
