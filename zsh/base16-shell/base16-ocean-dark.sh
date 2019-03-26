@@ -2,6 +2,7 @@
 # base16-shell (https://github.com/chriskempson/base16-shell)
 # Base16 Shell template by Chris Kempson (http://chriskempson.com)
 # Ocean scheme by Chris Kempson (http://chriskempson.com)
+# Customised by Matthew Hutchinson (more colors added, altered)
 
 color00="00/00/00" # Base 00 - Black
 color01="bf/61/6a" # Base 08 - Red
@@ -10,7 +11,7 @@ color03="eb/cb/8b" # Base 0A - Yellow
 color04="8f/a1/b3" # Base 0D - Blue
 color05="b4/8e/ad" # Base 0E - Magenta
 color06="96/b5/b4" # Base 0C - Cyan
-color07="c0/c5/ce" # Base 05 - White
+color07="d5/d5/d5" # Base 05 - White
 color08="65/73/7e" # Base 03 - Bright Black
 color09=$color01 # Base 08 - Bright Red
 color10=$color02 # Base 0B - Bright Green
@@ -29,7 +30,7 @@ color21="df/e1/e8" # Base 06
 # extra colours
 color22="65/73/7e" # was Base 03 - Bright Black
 
-# backported colours for iceberg vim scheme to work
+# overriding colours for iceberg vim scheme to work
 color23="16/17/1e"
 color24="22/07/42"
 color25="2a/31/58"
@@ -109,12 +110,12 @@ put_template 230 $color230
 # foreground / background / cursor color
 if [ -n "$ITERM_SESSION_ID" ]; then
   # iTerm2 proprietary escape codes
-  put_template_custom Pg c0c5ce # foreground
+  put_template_custom Pg d5d5d5 # foreground (was c0c5ce)
   put_template_custom Ph 000000 # background
-  put_template_custom Pi c0c5ce # bold color
+  put_template_custom Pi d5d5d5 # bold color
   put_template_custom Pj 4f5b66 # selection color
-  put_template_custom Pk c0c5ce # selected text color
-  put_template_custom Pl c0c5ce # cursor
+  put_template_custom Pk d5d5d5 # selected text color
+  put_template_custom Pl d5d5d5 # cursor
   put_template_custom Pm 2b303b # cursor text
 else
   put_template_var 10 $color_foreground
