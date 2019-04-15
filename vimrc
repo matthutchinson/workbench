@@ -135,6 +135,9 @@ map <leader>ch :s/:\([^ ]*\)\(\s*\)=>/\1:/g<cr>
 map <leader>sh :s/[\"']\(.*\)[\"']\s*=>/\1:/g<cr>
 " run spec
 map <leader>rs :<C-U>!bundle exec rspec <c-r>=expand("%:p") <cr> -c -l <c-r>=line(".") <cr><cr>
+" alt file with vim-rails and split to view
+map <leader>a :A<cr>
+map <leader>v :SView<cr>
 
 " turn OFF evil arrow keys
 nnoremap <Up>    <nop>
@@ -366,7 +369,7 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 " ale linting engine
 let g:ale_lint_on_text_changed = 'never'  " never on editing
 let g:ale_lint_on_enter = 0               " never on open
-"let g:ale_lint_on_save = 0                " never on save
+let g:ale_lint_on_save = 0                " never on save
 
 " #### Functions
 
