@@ -8,6 +8,16 @@ source /usr/local/opt/chruby/share/chruby/chruby.sh
 source /usr/local/opt/chruby/share/chruby/auto.sh
 
 ########################################################################
+# chruby default with env var
+########################################################################
+
+if [ -z "$DEFAULT_CHRUBY" ]; then
+  export DEFAULT_CHRUBY=`cat ~/.ruby-version`
+fi
+
+chruby $DEFAULT_CHRUBY
+
+########################################################################
 
 # remove need for bundle exec by adding ./bin to path, if the current
 # project is trusted and binstubs are present (see `git trust` alias)
