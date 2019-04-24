@@ -29,6 +29,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-bundler'
   Plug 'tpope/vim-rails'
   Plug 'tpope/vim-unimpaired'
+  Plug 'godlygeek/tabular'
   Plug 'cocopon/iceberg.vim'
 
   " status
