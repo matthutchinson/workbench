@@ -116,3 +116,6 @@ zstyle ':completion:*:options-single-letter' ignored-patterns '???*'
 # cd to apps and code
 typeset -U cdpath
 cdpath=( $HOME /u/apps /u/code /u/code/lolcommits-plugins $cdpath )
+
+# added by travis gem
+[ -f /Users/matt/.travis/travis.sh ] && source /Users/matt/.travis/travis.sh

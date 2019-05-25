@@ -56,22 +56,22 @@ function gbd {
   if [ $# -eq 0 ]; then
     _echo_and_execute "git branch -D $branch"
     if [ $? -eq 0 ]; then
-      local remote_exists=$(git branch -r | grep $branch)
-      # asks to delete remote branch too (if it exists)
-      if [ $? -eq 0 ]; then
-        printf "I found a remote branch, delete it too? [y/N] "
-        read -rs -k 1 response
-        case "$response" in
-          [yY][eE][sS]|[yY])
-            printf "Yes\n"
-            _echo_and_execute "git push origin :$branch"
-            ;;
-          *)
-            printf "No\n"
-            return
-            ;;
-        esac
-      fi
+      # local remote_exists=$(git fetch origin;git branch -r | grep $branch)
+      # # asks to delete remote branch too (if it exists)
+      # if [ $? -eq 0 ]; then
+      #   printf "I found a remote branch, delete it too? [y/N] "
+      #   read -rs -k 1 response
+      #   case "$response" in
+      #     [yY][eE][sS]|[yY])
+      #       printf "Yes\n"
+      #       _echo_and_execute "git push origin :$branch"
+      #       ;;
+      #     *)
+      #       printf "No\n"
+      #       return
+      #       ;;
+      #   esac
+      # fi
     # if deleting current branch, explain you can't and checkout master
     elif [ $branch != 'master' ]; then
       echo "⚠️". "you are already on this branch, checking out master"
