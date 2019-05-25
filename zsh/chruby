@@ -11,11 +11,7 @@ source /usr/local/opt/chruby/share/chruby/auto.sh
 # chruby default with env var
 ########################################################################
 
-if [ -z "$DEFAULT_CHRUBY" ]; then
-  export DEFAULT_CHRUBY=`cat ~/.ruby-version`
-fi
-
-chruby $DEFAULT_CHRUBY
+chruby 2.6.3
 
 ########################################################################
 
