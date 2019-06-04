@@ -5,3 +5,5 @@ vim/undodir
 bash/local
 vim/autoload/plug.vim.old
 vim/autoload/plug.vim
+config/htop
+config/configstore

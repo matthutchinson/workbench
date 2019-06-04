@@ -7,6 +7,7 @@ brew install asciinema   # asciicinema - https://asciinema.erg
 brew install bat         # bat, like cat - https://github.com/sharkdp/bat
 brew install prettyping  # https://github.com/denilsonsa/prettyping
 brew install htop        # http://hisham.hm/htop/
+brew install httpie      # https://httpie.org
 brew cask install ngrok  # ngrok - https://ngrok.com
 
 # node

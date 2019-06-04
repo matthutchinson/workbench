@@ -4,11 +4,14 @@
 # Powerline symbols
 #
 # Use the nerd-font patcher from https://github.com/ryanoasis/nerd-fonts
-#   ./font-patcher -l --octicons --powerline font.otf
+# to patch built-in SF Mono.
 #
-# SF Mono can be found here:
-# /Applications/Xcode.app/Contents/SharedFrameworks/DVTKit.framework/\
-#   /Versions/A/Resources/Fonts/
+#  ./font-patcher -l --octicons --powerline --fontawesome \
+#    /Applications/Xcode.app/Contents/SharedFrameworks\
+#    /DVTKit.framework/Versions/A/Resources/Fonts/SF-Mono-Regular.otf
+#
+# (includes `--fontawesome` for the colorls gem)
+#
 ########################################################################
 
 local powerline_hard_left_divider='%{%G%}'

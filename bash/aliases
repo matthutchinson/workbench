@@ -21,9 +21,6 @@ alias vnc-dagobah="ssh -f dagobah.vnc.tunnel -N; open vnc://localhost:5998"
 alias tm="tmux ls"
 alias tma="tmux a -t "
 
-# https://github.com/trapd00r/ls--/issues/14
-alias ll=' LC_ALL=en_US.UTF-8 LANG=en ls++ -a'
-
 # quick project cds
 alias cdpmf='cd /u/apps/faqtory'
 alias cdpms='cd /u/apps/pmfaqtory-store'
