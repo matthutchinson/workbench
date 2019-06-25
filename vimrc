@@ -426,12 +426,28 @@ function! ToggleTodo()
   let saved_cursor = getpos('.')
   let current_line = getline('.')
 
-  if (current_line =~ '- \[X]')
-    execute 's/- \[X\]/- [ ]/g'
-  elseif (current_line =~ '- \[.*\]')
-    execute 's/- \[.*\]/- [X]/g'
+  if (current_line =~ '- \[x\]')
+    execute 's/- \[x\]/- [\+]/g'
+  elseif (current_line =~ '- \[+\]')
+    execute 's/- \[+\]/- [\-]/g'
+  elseif (current_line =~ '- \[\-]')
+    execute 's/- \[\-\]/- [\.]/g'
+  elseif (current_line =~ '- \[\.\]')
+    execute 's/- \[\.\]/- [ ]/g'
+  elseif (current_line =~ '- \[ \]')
+    execute 's/- \[\ \]/- [x]/g'
   endif
+
   call setpos('.', saved_cursor)
+endfunction
+
+" basic auto inserting of markdown styled todos
+function AddTodo()
+  if (getline('.') =~ ' *\- \[.*\]')
+    return "- [ ] "
+  else
+    return ""
+  endif
 endfunction
 
 " execute a macro on multiple (visually selected) lines
@@ -512,11 +528,14 @@ if !exists("autocommands_loaded")
   au Filetype rust map <Leader>t :w\|:call VimuxRunCommand("clear; cargo test")<CR>
   au Filetype rust map <Leader>T :w\|:call VimuxRunCommand("clear; cargo test " . bufname("%"))<CR>
 
-  " toggle todo lists in markdown with Ctrl+Space
-  au Filetype markdown map <silent><buffer> <C-@> :call ToggleTodo()<cr>
-
   " don't syntax highlight markdown because it's often wrong
-  au FileType markdown setlocal syn=off
+  " au FileType markdown setlocal syn=off
+
+  " markdown todos, toggle with Ctrl+Space and auto-insert
+  au Filetype markdown map <silent><buffer> <C-@> :call ToggleTodo()<cr>
+  au Filetype markdown inoremap <expr><buffer> <CR> getline('.') =~ ' *\- \[ ] $' ? '<c-U><Esc>0i' : '<CR>'.AddTodo()
+  au Filetype markdown nnoremap <expr><buffer> o "o".AddItem()
+  au Filetype markdown nnoremap <expr><buffer> O "O".AddItem()
 
   " spellcheck highlights
   highlight clear SpellBad
