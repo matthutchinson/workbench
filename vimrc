@@ -157,7 +157,7 @@ set t_Co=256              " 256 color scheme
 syntax on                 " turn on syntax highlighting
 colorscheme iceberg-matt  " modifed iceberg to mix with base16 theme
 
-set tw=72             " set textwidth
+set tw=80             " set textwidth
 set fo-=t             " set format options, don't auto-wrap at tw
 set colorcolumn=+1    " show vertical break at textwidth
 set number            " show line numbers
@@ -534,8 +534,8 @@ if !exists("autocommands_loaded")
   " markdown todos, toggle with Ctrl+Space and auto-insert
   au Filetype markdown map <silent><buffer> <C-@> :call ToggleTodo()<cr>
   au Filetype markdown inoremap <expr><buffer> <CR> getline('.') =~ ' *\- \[ ] $' ? '<c-U><Esc>0i' : '<CR>'.AddTodo()
-  au Filetype markdown nnoremap <expr><buffer> o "o".AddItem()
-  au Filetype markdown nnoremap <expr><buffer> O "O".AddItem()
+  au Filetype markdown nnoremap <expr><buffer> o "o".AddTodo()
+  au Filetype markdown nnoremap <expr><buffer> O "O".AddTodo()
 
   " spellcheck highlights
   highlight clear SpellBad
@@ -543,9 +543,10 @@ if !exists("autocommands_loaded")
 
   " auto strip whitespace when saving
   au BufWritePre * :%s/\s\+$//e
+
   " auto spell check & limit width of git commit messages and always wrap
   au Filetype gitcommit setlocal spell tw=72 fo+=aw
-  au Filetype gitcommit setlocal spell tw=72 fo+=aw
+
   " turn off backups and swap on encrypted files
   au BufRead *.enc.* setlocal nobackup noswapfile nowritebackup
 
