@@ -11,7 +11,7 @@ source /usr/local/opt/chruby/share/chruby/auto.sh
 # chruby default with env var
 ########################################################################
 
-chruby 2.6.3
+chruby ruby-2.6.3
 
 ########################################################################
 

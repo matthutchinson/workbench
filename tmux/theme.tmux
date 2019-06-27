@@ -12,8 +12,8 @@ setw -g window-status-format '#[bg=colour233,fg=colour238] #I #[fg=colour244]#W#
 setw -g window-status-current-format '#[bg=colour253,fg=colour233]#[bg=colour253,fg=colour000] #W #[bg=colour233,fg=colour253]#[default]'
 
 # pane borders
-set -g pane-border-fg 'colour235'
-set -g pane-active-border-fg 'colour238'
+set -g pane-border-style 'fg=colour235'
+set -g pane-active-border-style 'fg=colour238'
 
 # windows
 set -g window-status-separator ''

@@ -31,8 +31,9 @@ alias top='htop'
 # Quick cds
 ########################################################################
 
-alias cdwb='cd /u/code/workbench'
-alias cdpmf='cd /u/apps/pmfaqtory-store'
+alias cdwb='cd ~/code/workbench'
+alias cdpmf='cd ~/apps/pmfaqtory-store'
+alias cdob='cd ~/apps/open-banking-on-rails'
 
 ########################################################################
 # Ruby / Rails
