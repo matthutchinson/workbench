@@ -16,7 +16,7 @@ alias cdf='cd ~/apps/freeagent'
 alias jlog='jenkins-log'
 
 # add jenkins log to path
-export PATH="~/code/jenkins-log/bin:$PATH"
+export PATH="/Users/matt/code/jenkins-log/bin:$PATH"
 
 # encrypt a string with eyaml in the puppet repo and copy to clipboard
 function puppet_encrypt {
