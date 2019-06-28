@@ -37,10 +37,10 @@ function _fzf_git_branch {
 }
 
 # choose branch and pass as last arg to a command, or copy branch name
-# if there are no arguments
+# if there are no arguments (git branch pick, gbp)
 function gbp {
   local branch=$(_fzf_git_branch)
-  if [ $# -eq 0 ]; then
+  if [[ ($# -eq 0) && (! -z $branch) ]]; then
     echo -n $branch | pbcopy; return;
   fi
   _echo_and_execute "$* $branch"
@@ -49,31 +49,37 @@ function gbp {
 # fzf a branch to checkout
 alias gbc="gbp git checkout"
 
-# branch deleting with fzf
+# fzf a local branch to delete
 function gbd {
   local branch=$(_fzf_git_branch)
 
-  if [ $# -eq 0 ]; then
+  if [[ ($# -eq 0) && (! -z $branch) ]]; then
+    _echo_and_execute "git branch -D $branch"
+    if [[ ($? -ne 0) && ($branch != 'master') ]]; then
+      # deleting current branch, explain you can't and checkout master
+      echo "⚠️". "you are already on this branch, checking out master"
+      git checkout master
+    fi
+    return
+  fi
+}
+
+# fzf a branch to delete (also deletes remote in a fork)
+function gbdd {
+  local branch=$(_fzf_git_branch)
+  if [[ ($# -eq 0) && (! -z $branch) ]]; then
     _echo_and_execute "git branch -D $branch"
     if [ $? -eq 0 ]; then
-      # local remote_exists=$(git fetch origin;git branch -r | grep $branch)
-      # # asks to delete remote branch too (if it exists)
-      # if [ $? -eq 0 ]; then
-      #   printf "I found a remote branch, delete it too? [y/N] "
-      #   read -rs -k 1 response
-      #   case "$response" in
-      #     [yY][eE][sS]|[yY])
-      #       printf "Yes\n"
-      #       _echo_and_execute "git push origin :$branch"
-      #       ;;
-      #     *)
-      #       printf "No\n"
-      #       return
-      #       ;;
-      #   esac
-      # fi
-    # if deleting current branch, explain you can't and checkout master
+      # checking for remote br in silent fork, will be deleted if it exists
+      ((
+        local remote_exists=$(git fetch origin;git branch -r | grep $branch)
+        if [[ ($# -eq 0) && (! -z $remote_exists) ]]; then
+          echo "found a remote branch, deleting it too ..."
+          _echo_and_execute "git push origin :$branch"
+        fi
+      )&) 2>/dev/null
     elif [ $branch != 'master' ]; then
+      # deleting current branch, explain you can't and checkout master
       echo "⚠️". "you are already on this branch, checking out master"
       git checkout master
     fi
