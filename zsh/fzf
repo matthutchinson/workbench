@@ -15,6 +15,43 @@ function _echo_and_execute {
 }
 
 ########################################################################
+# Files
+########################################################################
+
+# fe [FUZZY PATTERN] - Open the selected file with the default editor
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+function fe {
+  local files
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
+  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+}
+
+########################################################################
+# Tmux
+########################################################################
+
+# fzf select a pane to jump to
+function tj {
+  local panes current_window current_pane target target_window target_pane
+  panes=$(tmux list-panes -s -F '#I:#P - #{pane_current_path} #{pane_current_command}')
+  current_pane=$(tmux display-message -p '#I:#P')
+  current_window=$(tmux display-message -p '#I')
+
+  target=$(echo "$panes" | grep -v "$current_pane" | fzf +m --reverse) || return
+
+  target_window=$(echo $target | awk 'BEGIN{FS=":|-"} {print$1}')
+  target_pane=$(echo $target | awk 'BEGIN{FS=":|-"} {print$2}' | cut -c 1)
+
+  if [[ $current_window -eq $target_window ]]; then
+    tmux select-pane -t ${target_window}.${target_pane}
+  else
+    tmux select-pane -t ${target_window}.${target_pane} &&
+    tmux select-window -t $target_window
+  fi
+}
+
+########################################################################
 # PIDs
 ########################################################################
 
@@ -25,6 +62,21 @@ function _fzf_pid {
 # copy PID to clipboard
 function pid {
   echo -n "$(_fzf_pid)" | pbcopy
+}
+
+# kill a process
+function pkill {
+  local pid
+  if [ "$UID" != "0" ]; then
+    pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+  else
+    pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+  fi
+
+  if [ "x$pid" != "x" ]
+  then
+    echo $pid | xargs kill -${1:-9}
+  fi
 }
 
 ########################################################################
@@ -87,6 +139,28 @@ function gbdd {
   fi
 }
 
+# git look - fzf commit browser, shows preview on enter
+function glook {
+  git log $1 --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index \
+      --header "enter to view, ctrl+s to toggle sort" \
+      --bind "ctrl-s:toggle-sort" \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {} FZF-EOF"
+}
+
+# git look (see above) with this branch compared to master (unless br is master)
+function glm {
+  if [[ $git_branch == 'master' ]]; then
+    glook
+  else
+    glook "master..$git_branch"
+  fi
+}
+
 ########################################################################
 # Rails migrations
 ########################################################################
@@ -101,7 +175,7 @@ function rdbm {
     echo "Oops, you are not in a Rails directory"
   else
     if [ $# -eq 0 ]; then
-      _echo_and_execute "bundle exec rake db:migrate"
+     _echo_and_execute "bundle exec rake db:migrate"
     else
       local migrate_version=$(_fzf_rails_migration)
       if [ ! -z $migrate_version ]; then
