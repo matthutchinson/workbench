@@ -1,0 +1,261 @@
+#!/usr/bin/env zsh
+
+########################################################################
+# Inspired by emilyst - https://github.com/emilyst/home
+#                     - http://tinyurl.com/d748o6l (vcs info docs)
+########################################################################
+
+########################################################################
+# Colour
+########################################################################
+
+local df_fgcolour=251  # default fg colour
+local prev_colour=236  # bg colour of previous chars in prompt
+
+local br_bgcolour=018  # branch bg colour
+local rv_bgcolour=019  # revision bg colour
+
+local st_bgcolour=022  # staged/unstaged changes bg colour
+local st_fgcolour=255  # staged/unstaged changes bg colour
+
+local ac_bgcolour=222  # actions bg colour
+local ac_fgcolour=000  # actions fg colour
+
+local reset="%{%f%k%}" # reset colors
+
+########################################################################
+# Sigils
+########################################################################
+
+local powerline_hard_left_divider='%{%G%}'
+local powerline_soft_left_divider='%{%G%}'
+local powerline_hard_right_divider='%{%G%}'
+local powerline_soft_right_divider='%{%G%}'
+local powerline_branch='%{%G%}'
+
+local copied_sigil=""
+local deleted_sigil="✘"
+local modified_sigil=""
+local renamed_sigil="→"
+local staged_sigil=""
+local unstaged_sigil="✸"
+
+########################################################################
+# Utilities
+########################################################################
+
+function get_tmux_cwd                  { tmux display -p -F "#{pane_current_path}" }
+function git-status-has-anything       { grep -m 1 '^\s*[C|D|M|R|A|?]?*\s\+' <<< "$1" &> /dev/null }
+function git-status-has-copied-files   { grep -m 1 '^\s*C\s\+'  <<< "$1" &> /dev/null }
+function git-status-has-deleted-files  { grep -m 1 '^\s*D\s\+'  <<< "$1" &> /dev/null }
+function git-status-has-modified-files { grep -m 1 '^\s*M\s\+'  <<< "$1" &> /dev/null }
+function git-status-has-renamed-files  { grep -m 1 '^\s*R\s\+'  <<< "$1" &> /dev/null }
+function git-status-has-staged-files   { grep -m 1 '^\s*A\s\+'  <<< "$1" &> /dev/null }
+function git-status-has-unstaged-files { grep -m 1 '^\s*??\s\+' <<< "$1" &> /dev/null }
+
+function git-status-fetch-if-needed {
+  if (( ! ${+user_data[git_status]} )); then
+    user_data[git_status]="$(git status --porcelain --ignore-submodules --find-renames)"
+  fi
+}
+
+function git-fetch-commit-time-if-needed {
+  # time since last local commit (short-handed, e.g 1d, 4h, 3m)
+  if (( ! ${+user_data[git_time]} )); then
+    # TODO: be smarter, and don't show if less than 60 secs
+    user_data[git_time]="$(git log --format='%cr' -n1 | sed 's/\([0-9]*\) \([ywdhms]\).*/\1\2/')"
+  fi
+}
+
+########################################################################
+# VCS info hooks
+########################################################################
+
+function +vi-git-action {
+  git-status-fetch-if-needed
+
+  # decide color for divider based on git status having anything to show
+  if git-status-has-anything "${user_data[git_status]}"; then
+    hook_com[action]="%{%K{$st_bgcolour}%F{$ac_bgcolour}%}$powerline_hard_right_divider"
+  else
+    hook_com[action]="%{%K{$rv_bgcolour}%F{$ac_bgcolour}%}$powerline_hard_right_divider"
+  fi
+
+  hook_com[action]+="%{%K{$ac_bgcolour}%F{$ac_fgcolour}%} "
+
+  # provide action sigil
+  case "${hook_com[action_orig]}" in
+    "rebase")
+      hook_com[action]+="⤵"
+      ;;
+    "am/rebase")
+      hook_com[action]+="⤵ ✉"
+      ;;
+    "rebase-i")
+      hook_com[action]+="⤵"
+      ;;
+    "rebase-m")
+      hook_com[action]+="⤵ ⇓"
+      ;;
+    "merge")
+      hook_com[action]+="⇓"
+      ;;
+    "am")
+      hook_com[action]+="✉⇓"
+      ;;
+    "bisect")
+      hook_com[action]+="⇅"
+      ;;
+    "cherry")
+      hook_com[action]+="↩"
+      ;;
+    "cherry-seq")
+      hook_com[action]+="↩"
+      ;;
+    "cherry-or-revert")
+      hook_com[action]+="↩"
+      ;;
+    *)
+      hook_com[action]+="${hook_com[action_orig]}"
+      ;;
+  esac
+
+  hook_com[action]+=" $reset"
+}
+
+function +vi-git-branch {
+  # include time since last local commit (short-handed, e.g 1d, 4h, 3m)
+  git-fetch-commit-time-if-needed
+
+  hook_com[branch]="%{%K{$prev_colour}%F{$br_bgcolour}%}$powerline_hard_right_divider"
+  hook_com[branch]+="%{%K{$br_bgcolour}%F{$df_fgcolour}%}"
+  hook_com[branch]+="%${MARGIN}(l.."
+  hook_com[branch]+=" $user_data[git_time] ${powerline_branch} %20>…>${hook_com[branch_orig]}%<<"
+  hook_com[branch]+=" $reset"
+  hook_com[branch]+=")"
+
+  # export branch name for other scripts to use
+  export git_branch=$hook_com[branch_orig]
+}
+
+function +vi-git-revision {
+  hook_com[revision]="%{%K{$br_bgcolour}%F{$rv_bgcolour}%}$powerline_hard_right_divider"
+  hook_com[revision]+="%{%K{$rv_bgcolour}%F{$df_fgcolour}%}"
+  hook_com[revision]+="%${MARGIN}(l.."
+  hook_com[revision]+=" ${hook_com[revision_orig][0,5]}"
+  hook_com[revision]+=" $reset"
+  hook_com[revision]+=")"
+}
+
+function +vi-git-copied-files {
+  git-status-fetch-if-needed
+
+  # `vcs_info` doesn't provide explicit formats for all the extra info
+  # I want to provide, so the best thing to do is to pack it all into
+  # the `staged` variable. This requires that the first hook clear
+  # `${hook_com[staged]}`, and THIS hook is the first one. All others
+  # MUST append.
+  hook_com[staged]=""
+
+  # check if we have changes at all, if so start divider and spacer
+  if git-status-has-anything "${user_data[git_status]}"; then
+    hook_com[staged]+="%{%K{$rv_bgcolour}%F{$st_bgcolour}%}$powerline_hard_right_divider"
+    hook_com[staged]+="%{%K{$st_bgcolour}%F{$st_fgcolour}%} "
+  fi
+
+  # debug all staged sigils
+  # hook_com[staged]+="$copied_sigil $deleted_sigil $modified_sigil $renamed_sigil $staged_sigil $unstaged_sigil "
+
+  if git-status-has-copied-files "${user_data[git_status]}"; then
+    hook_com[staged]+="%${MARGIN}(l..%{$copied_sigil%G%} )"
+  fi
+}
+
+function +vi-git-deleted-files {
+  git-status-fetch-if-needed
+
+  if git-status-has-deleted-files "${user_data[git_status]}"; then
+    hook_com[staged]+="%${MARGIN}(l..%{$deleted_sigil%G%} )"
+  fi
+}
+
+function +vi-git-modified-files {
+  git-status-fetch-if-needed
+
+  if git-status-has-modified-files "${user_data[git_status]}"; then
+    hook_com[staged]+="%${MARGIN}(l..%{$modified_sigil%G%} )"
+  fi
+}
+
+function +vi-git-renamed-files {
+  git-status-fetch-if-needed
+
+  if git-status-has-renamed-files "${user_data[git_status]}"; then
+    hook_com[staged]+="%${MARGIN}(l..%{$renamed_sigil%G%} )"
+  fi
+}
+
+function +vi-git-staged-files {
+  git-status-fetch-if-needed
+
+  if git-status-has-staged-files "${user_data[git_status]}"; then
+    hook_com[staged]+="%${MARGIN}(l..%{$staged_sigil%G%} )"
+  fi
+}
+
+function +vi-git-unstaged-files {
+  git-status-fetch-if-needed
+
+  if git-status-has-unstaged-files "${user_data[git_status]}"; then
+    hook_com[unstaged]+="%${MARGIN}(l..%{$unstaged_sigil%G%} )"
+  fi
+
+  # always reset colors (since action or EOL comes next)
+  hook_com[unstaged]+="$reset"
+}
+
+
+
+
+
+if hash git >/dev/null 2>&1; then
+  tmux_path=$(get_tmux_cwd)
+  cd "$tmux_path"
+
+  # load vcs_info function
+  type vcs_info > /dev/null 2>&1 || autoload -Uz vcs_info
+
+  zstyle ':vcs_info:*' enable git # disable other backends
+  zstyle ':vcs_info:*' get-revision true
+  zstyle ':vcs_info:*' use-prompt-escapes true
+
+  # %b is branch
+  # %i is revision
+  # %c is value of stagedstr
+  # %u is value of unstagedstr
+  # %a is action in progress (for autoformats)
+
+  zstyle ':vcs_info:*' formats '%b%i%c%u'
+  zstyle ':vcs_info:*' actionformats '%b%i%c%u%a'
+
+  type is-at-least > /dev/null 2>&1 || autoload -Uz is-at-least
+  if is-at-least 4.3.11; then
+    # format vcs_info, see functions below; order is significant due to
+    # the required color resets
+    zstyle ':vcs_info:git+set-message:*' hooks git-action         \
+                                               git-branch         \
+                                               git-revision       \
+                                               git-copied-files   \
+                                               git-deleted-files  \
+                                               git-modified-files \
+                                               git-renamed-files  \
+                                               git-staged-files   \
+                                               git-unstaged-files
+  fi
+
+  # output vcs info
+  vcs_info
+  echo
+  echo ${vcs_info_msg_0_}
+  echo
+fi

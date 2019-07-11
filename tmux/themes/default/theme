@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# set colours and size
+set -g status-bg colour233
+set -g status-fg colour238
+set -g status-left-length 72
+set -g status-right-length 144
+
+# pane borders
+set -g pane-border-style 'fg=colour235'
+set -g pane-active-border-style 'fg=colour238'
+
+# status
+set -g status on
+set -g status-interval 2
+set -g status-justify "left"
+# set -g status-left-length 100
+# set -g status-right-length 100
+set -g status-left '#(~/.tmux/themes/default/left)'
+set -g status-right '#(~/.tmux/themes/default/right)'
+
+# window status
+setw -g window-status-separator ''
+setw -g window-status-format '#[bg=colour233,fg=colour238] #I #[fg=colour244]#W#[default]  '
+setw -g window-status-current-format '#[bg=colour253,fg=colour233]#[bg=colour253,fg=colour000] #W #[bg=colour233,fg=colour253]#[default]'

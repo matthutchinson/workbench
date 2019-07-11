@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -e
+
+# function build {
+#   local output=""
+#   local segments=(
+#     "time" \
+#     "lan_ip" \
+#     "battery" \
+#     "disk" \
+#     "memory" \
+#     "cpu" \
+#   )
+
+#   for segment_index in "${!segments[@]}"; do
+#     segment="#(~/.tmux/segments/${segments[$segment_index]})"
+#     segment="$segment  "
+#     output="$segment$output"
+#   done
+#
+#   echo $output
+# }
+#
+# echo $(build)
+
+# echo '#(~/.tmux/segments/cpu)  #(~/.tmux/segments/memory)  #(~/.tmux/segments/disk) #(~/.tmux/segments/battery)#(~/.tmux/segments/lan_ip)#[fg=colour213,bg=colour000] #(~/.tmux/segments/time)'
+echo '#(~/.tmux/segments/cpu)  #(~/.tmux/segments/disk) #(~/.tmux/segments/battery)#(~/.tmux/segments/lan_ip)#[fg=colour213,bg=colour000] #(~/.tmux/segments/time)'

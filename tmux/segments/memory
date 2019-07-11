@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -e
+
+function free_memory {
+  local pages_free=$(
+    vm_stat | \
+      grep free | \
+      awk '{ print $3 }' | \
+      sed 's/\.//'
+  )
+
+  echo "$((($pages_free * 4096)/1048576)) Mb"
+}
+
+echo $(free_memory)

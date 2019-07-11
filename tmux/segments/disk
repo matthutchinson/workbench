@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -e
+
+function hd_percentage_free {
+  local percent=$((100-(`df | head -n 2 | tail -n 1 | awk '{printf "%d", $5}'`)))
+
+  # color range
+  local color_lower_than=40
+  local fg_colors=(161 167 173 179 250)
+  local range=$(($percent / ($color_lower_than / ${#fg_colors[*]})))
+  local fg_color=default
+
+  # only color if less than this
+  if (( $percent < $color_lower_than )); then
+    fg_color=${fg_colors[$range]}
+  fi
+
+  echo "#[fg=colour$fg_color]HD $percent%#[default]"
+}
+
+echo "$(hd_percentage_free)"
