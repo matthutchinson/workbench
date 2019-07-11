@@ -38,7 +38,7 @@ call plug#begin('~/.vim/plugged')
   " extras
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'  " snippets
   Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'      " post gists
-  Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'      " linting
+  " Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'      " linting
   Plug 'mhinz/vim-startify'
 
   " tmux

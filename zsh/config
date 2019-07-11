@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
-########################################################################
+################################################################################
 # Editing mode with vi
-########################################################################
+################################################################################
 
 bindkey -v          # use vi, see mappings below
 export KEYTIMEOUT=1 # less lag when switching between modes
@@ -17,9 +17,9 @@ bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 bindkey '^r' history-incremental-search-backward
 
-########################################################################
+################################################################################
 # Options
-########################################################################
+################################################################################
 
 setopt ALWAYS_TO_END      # move cursor to end after completion
 setopt AUTO_CD            # cd to dir if exists and not a cmd
@@ -32,9 +32,9 @@ setopt PUSHD_TO_HOME      # psuhd on its own, pushes to $HOME
 setopt EXTENDED_GLOB      # better globbing e.g. ls (bin|lib)* ls -d ^*.json ls -R ls *(U)
 setopt RM_STAR_SILENT     # go ahead, rm /* if you like
 
-########################################################################
+################################################################################
 # History
-########################################################################
+################################################################################
 
 setopt EXTENDED_HISTORY   # more info in history file
 setopt HIST_FIND_NO_DUPS  # hide dups in results
@@ -54,27 +54,33 @@ zle -N history-beginning-search-forward-end history-search-end
 bindkey "\e[A" history-beginning-search-backward-end
 bindkey "\e[B" history-beginning-search-forward-end
 
-########################################################################
+################################################################################
 # Colours
 #
-# I've modifed ocean-dark from ocean, with black bg and extra colours in
-# the 256 space. http://chriskempson.com/projects/base16/ for details.
-########################################################################
+# I've modifed ocean-dark from ocean, with black bg and extra colours in the 256
+# space. http://chriskempson.com/projects/base16/ for details.
+################################################################################
 
 autoload -Uz colors && colors
 export CLICOLOR=1
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export GREP_OPTIONS="--color"
 
-#sel 220742| bg 16171e
+# source colorscheme if we have a prompt
 local colorscheme="$HOME/.zsh/base16-shell/base16-ocean-dark.sh"
 [ -n "$PS1" ] && [[ -s $colorscheme ]] && source $colorscheme
 
-########################################################################
+################################################################################
 # Completion
-########################################################################
+################################################################################
 
-autoload -Uz compinit && compinit
+# faster compinit, don't check ~/.zcompdump every time, only once/day
+autoload -Uz compinit
+if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
+  compinit
+else
+  compinit -C
+fi
 
 # use menu select and match approximately
 zstyle ':completion:*:*:*:*:*' menu select
@@ -109,13 +115,20 @@ zstyle ':completion:*:options-long' ignored-patterns '[-+](|-|[^-]*)'
 zstyle ':completion:*:options-short' ignored-patterns '--*' '[-+]?'
 zstyle ':completion:*:options-single-letter' ignored-patterns '???*'
 
-########################################################################
+################################################################################
 # Misc
-########################################################################
+################################################################################
 
-# cd to apps and code
+# easy cd to apps and code
 typeset -U cdpath
 cdpath=( $HOME ~/apps ~/code ~/code/lolcommits-plugins $cdpath )
 
 # added by travis gem
 [ -f /Users/matt/.travis/travis.sh ] && source /Users/matt/.travis/travis.sh
+
+################################################################################
+# Benchmarking - https://blog.jonlu.ca/posts/speeding-up-zsh
+################################################################################
+
+# zmodload zsh/zprof
+# then run `zprof` in new shells

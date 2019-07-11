@@ -74,47 +74,6 @@ function git-fetch-commit-time-if-needed {
 }
 
 ########################################################################
-# VCS info config
-########################################################################
-
-if hash git >/dev/null 2>&1; then
-  # load vcs_info function
-  type vcs_info > /dev/null 2>&1 || autoload -Uz vcs_info
-  # add as a precmd via a hook
-  vcs_info_precmd () { vcs_info }
-  add-zsh-hook precmd vcs_info_precmd
-
-  zstyle ':vcs_info:*' enable git # disable other backends
-  zstyle ':vcs_info:*' get-revision true
-  zstyle ':vcs_info:*' use-prompt-escapes true
-
-  # %b is branch
-  # %i is revision
-  # %c is value of stagedstr
-  # %u is value of unstagedstr
-  # %a is action in progress (for autoformats)
-
-  zstyle ':vcs_info:*' formats '%b%i%c%u'
-  zstyle ':vcs_info:*' actionformats '%b%i%c%u%a'
-
-  type is-at-least > /dev/null 2>&1 || autoload -Uz is-at-least
-  if is-at-least 4.3.11; then
-    # format vcs_info, see functions below; order is significant due to
-    # the required color resets
-    zstyle ':vcs_info:git+set-message:*' hooks git-action         \
-                                               git-branch         \
-                                               git-revision       \
-                                               git-copied-files   \
-                                               git-deleted-files  \
-                                               git-modified-files \
-                                               git-renamed-files  \
-                                               git-staged-files   \
-                                               git-unstaged-files
-  fi
-fi
-
-
-########################################################################
 # VCS info hooks
 ########################################################################
 
@@ -260,3 +219,43 @@ function +vi-git-unstaged-files {
   # always reset colors (since action or EOL comes next)
   hook_com[unstaged]+="$reset"
 }
+
+########################################################################
+# VCS info config
+########################################################################
+
+if hash git >/dev/null 2>&1; then
+  # load vcs_info function
+  type vcs_info > /dev/null 2>&1 || autoload -Uz vcs_info
+  # add as a precmd via a hook
+  vcs_info_precmd () { vcs_info }
+  add-zsh-hook precmd vcs_info_precmd
+
+  zstyle ':vcs_info:*' enable git # disable other backends
+  zstyle ':vcs_info:*' get-revision true
+  zstyle ':vcs_info:*' use-prompt-escapes true
+
+  # %b is branch
+  # %i is revision
+  # %c is value of stagedstr
+  # %u is value of unstagedstr
+  # %a is action in progress (for autoformats)
+
+  zstyle ':vcs_info:*' formats '%b%i%c%u'
+  zstyle ':vcs_info:*' actionformats '%b%i%c%u%a'
+
+  type is-at-least > /dev/null 2>&1 || autoload -Uz is-at-least
+  if is-at-least 4.3.11; then
+    # format vcs_info, see functions below; order is significant due to
+    # the required color resets
+    zstyle ':vcs_info:git+set-message:*' hooks git-action         \
+                                               git-branch         \
+                                               git-revision       \
+                                               git-copied-files   \
+                                               git-deleted-files  \
+                                               git-modified-files \
+                                               git-renamed-files  \
+                                               git-staged-files   \
+                                               git-unstaged-files
+  fi
+fi

@@ -8,12 +8,6 @@ source /usr/local/opt/chruby/share/chruby/chruby.sh
 source /usr/local/opt/chruby/share/chruby/auto.sh
 
 ########################################################################
-# chruby default with env var
-########################################################################
-
-chruby ruby-2.6.3
-
-########################################################################
 
 # remove need for bundle exec by adding ./bin to path, if the current
 # project is trusted and binstubs are present (see `git trust` alias)
