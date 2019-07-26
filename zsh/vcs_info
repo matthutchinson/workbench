@@ -1,248 +1,395 @@
 #!/usr/bin/env zsh
 
-########################################################################
+# TODO: benchmark, try alt switcher, benchmark again
+
+################################################################################
+# VCS info - http://tinyurl.com/d748o6l
 # Inspired by emilyst - https://github.com/emilyst/home
-#                     - http://tinyurl.com/d748o6l (vcs info docs)
-########################################################################
+#
+# Decorates the tmux status bar with custom formatted vcs info. Alternatively
+# (if a tmux session is not detected) `vcs_info_msg_0_` can be used in zsh's
+# prompt. Currently only git is supported.
+#
+# Since I want to use `left-status` in tmux for this, but `RPROMPT` in zsh
+# `build-segements` is required to format and colourise each segment depending
+# on the direction.
+#
+# `vcs_info_msg_0_` is auto-trimmed depending on the number of `$COLUMNS`
+# available (width).
+################################################################################
 
-########################################################################
-# Colour
-########################################################################
+if [[ $TMUX ]]; then
+  local vcs_direction="right"
+  local left_status_pad=56
+else
+  local vcs_direction="left"
+fi
 
-local df_fgcolour=251  # default fg colour
-local prev_colour=236  # bg colour of previous chars in prompt
+# need to use precmd hooks to update
+type add-zsh-hook > /dev/null 2>&1 || autoload -Uz add-zsh-hook
 
-local br_bgcolour=018  # branch bg colour
-local rv_bgcolour=019  # revision bg colour
-
-local st_bgcolour=022  # staged/unstaged changes bg colour
-local st_fgcolour=255  # staged/unstaged changes bg colour
-
-local ac_bgcolour=222  # actions bg colour
-local ac_fgcolour=000  # actions fg colour
-
-local reset="%{%f%k%}" # reset colors
-
-########################################################################
+################################################################################
 # Sigils
-########################################################################
+################################################################################
 
-local copied_sigil=""
-local deleted_sigil="✘"
-local modified_sigil=""
-local renamed_sigil="→"
-local staged_sigil=""
-local unstaged_sigil="✸"
+local copied="Ξ"
+local deleted="✘"
+local modified=""
+local renamed="→"
+local staged=""
+local unstaged="✸"
+local reset="%{%f%k%}"
+local left_divider=""
+local right_divider=""
 
-########################################################################
+################################################################################
 # Margin
 #
-# To make each section optional and only  allow it to appear if there is
-# room a ternary operator of the form `%n(l.unwanted.wanted)` is used.
-# See `man zshmisc` for help or visit http://tinyurl.com/bmdbnyw
+# To make each section optional and only  allow it to appear if there is room a
+# ternary operator of the form `%n(l.unwanted.wanted)` is used. See CONDITIONAL
+# SUBSTRINGS IN PROMPTS with `man zshmisc` for help.
 #
-########################################################################
+# http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Conditional-Substrings-in-Prompts
+################################################################################
 
-type add-zsh-hook > /dev/null 2>&1 || autoload -Uz add-zsh-hook
-function set-margin { export MARGIN="$(( $COLUMNS * 33 / 100))" }
-add-zsh-hook precmd set-margin
+function margin-trim { echo "%${MARGIN}(l..$1)" }
+function margin-set  { export MARGIN="$(( $COLUMNS * 33 / 100))" }
+add-zsh-hook precmd margin-set
 
-########################################################################
+################################################################################
 # Utilities
-########################################################################
+################################################################################
 
-function git-status-has-anything       { grep -m 1 '^\s*[C|D|M|R|A|?]?*\s\+' <<< "$1" &> /dev/null }
 function git-status-has-copied-files   { grep -m 1 '^\s*C\s\+'  <<< "$1" &> /dev/null }
 function git-status-has-deleted-files  { grep -m 1 '^\s*D\s\+'  <<< "$1" &> /dev/null }
 function git-status-has-modified-files { grep -m 1 '^\s*M\s\+'  <<< "$1" &> /dev/null }
 function git-status-has-renamed-files  { grep -m 1 '^\s*R\s\+'  <<< "$1" &> /dev/null }
 function git-status-has-staged-files   { grep -m 1 '^\s*A\s\+'  <<< "$1" &> /dev/null }
 function git-status-has-unstaged-files { grep -m 1 '^\s*??\s\+' <<< "$1" &> /dev/null }
+function sigil-icon                    { local sigil="%{$1%G%} "; echo "$(margin-trim $sigil)" }
 
-function git-status-fetch-if-needed {
+function string-pad {
+  # pad a srting ($1) to a certain length ($2) with spaces
+  local pad_str=$1
+  let pad_count=$2
+
+  while [ $pad_count -gt 0 ]
+  do
+    pad_str+=" "
+    ((pad_count--))
+  done
+
+  echo $pad_str
+}
+
+function git-status-fetch {
+  # fetch git status (if not already fetched)
   if (( ! ${+user_data[git_status]} )); then
     user_data[git_status]="$(git status --porcelain --ignore-submodules --find-renames)"
   fi
 }
 
-function git-fetch-commit-time-if-needed {
+function git-fetch-commit-time {
   # time since last local commit (short-handed, e.g 1d, 4h, 3m)
   if (( ! ${+user_data[git_time]} )); then
-    # TODO: be smarter, and don't show if less than 60 secs
     user_data[git_time]="$(git log --format='%cr' -n1 | sed 's/\([0-9]*\) \([ywdhms]\).*/\1\2/')"
   fi
 }
 
-########################################################################
+function tmux-format-status {
+  # format colours as tmux status bar colours, assumes %{%K{}%F{}%} is used and
+  # removes escaping around dividers and margin trims
+  local formatted=$(echo $1 | sed 's/%{%K{\([0-9]*\)}%F{\([0-9]*\)}%}/#[bg=colour\1,fg=colour\2]/g
+                                   s/%{%f%k%}/#[default]/g
+                                   s/%[0-9]*(l\.\.\([^)]*\))/\1/g
+                                   s/%{\(.\)%G%}/\1/g')
+
+  # right pad status to max length (left_status_pad) (prevents shifting center status)
+  local raw_status=$(echo $formatted | sed 's/#\[[^]]*\]//g')
+  echo "$(string-pad $formatted $(($left_status_pad - ${#raw_status})))"
+}
+
+function tmux-set-status {
+  # set tmux status bar (location e.g. status-left, string)
+  tmux set-window-option "$1" "$2" > /dev/null
+}
+
+function tmux-update-status {
+  # appends $1 to tmux status bar if present, otherwise reset to default status
+  local status_location="status-left"
+  local default_status=$(tmux show -vg "$status_location")
+
+  if [[ $1 ]]; then
+    local new_status=$(tmux-format-status $1)
+    # 1 char removed from default status, to adjust for initial divider
+    tmux-set-status $status_location "${default_status%?}${new_status}"
+  else
+    # right pad default status
+    local padded_status=$(string-pad $default_status $(($left_status_pad-1)))
+    tmux-set-status $status_location "$padded_status"
+  fi
+}
+
+function build-segments {
+  # build segment dividers (if not already built)
+  # appearance differs between tmux (left status) or zsh (right prompt)
+  if (( ! ${+user_data[divider_rev]} )); then
+    # colours
+    local branch_bg=18
+    local branch_fg=251
+    local revision_bg=19
+    local revision_fg=251
+    local changes_bg=22
+    local changes_fg=255
+    local action_fg=0
+    local action_bg=222
+    local tmux_status_bg=233
+    local prompt_bg=236
+
+    if [[ $vcs_direction = "right" ]]; then
+      local divider="%{$left_divider%G%}"
+      # revision
+      user_data[divider_rev]="%{%K{$revision_bg}%F{$action_fg}%}${divider}"
+      user_data[actions_rev]=${user_data[divider_rev]}
+      user_data[changes_rev]="%{%K{$revision_bg}%F{$changes_bg}%}${divider}"
+      user_data[rev_start]="%{%K{$revision_bg}%F{$revision_fg}%}"
+      # branch
+      user_data[divider_bra]="%{%K{$branch_bg}%F{$revision_bg}%}${divider}%{%K{$branch_bg}%F{$branch_fg}%}"
+      user_data[closing_bra]="%{%K{$tmux_status_bg}%F{$branch_bg}%}${divider}"
+      # staged
+      user_data[changes_stg]="%{%K{$changes_bg}%F{$changes_fg}%}"
+      user_data[actions_stg]="%{%K{$changes_bg}%F{$action_bg}%}${divider}%{%K{$changes_bg}%F{$changes_fg}%}"
+      user_data[divider_stg]="%{%K{$changes_bg}%F{$action_fg}%}${divider}"
+      # action
+      user_data[changes_act]=""
+      user_data[divider_act]=""
+      user_data[act_start]="%{%K{$action_bg}%F{$action_fg}%}${divider}"
+    else
+      local divider="%{$right_divider%G%}"
+      # revision
+      user_data[divider_rev]="%{%K{$branch_bg}%F{$revision_bg}%}${divider}"
+      user_data[actions_rev]=${user_data[divider_rev]}
+      user_data[changes_rev]=${user_data[divider_rev]}
+      user_data[rev_start]="%{%K{$revision_bg}%F{$revision_fg}%}"
+      # branch
+      user_data[divider_bra]="%{%K{$prompt_bg}%F{$branch_bg}%}${divider}%{%K{$branch_bg}%F{$branch_fg}%}"
+      user_data[closing_bra]=""
+      # staged
+      user_data[changes_stg]="%{%K{$revision_bg}%F{$changes_bg}%}${divider}%{%K{$changes_bg}%F{$changes_fg}%}"
+      user_data[actions_stg]=""
+      user_data[divider_stg]=""
+      # action
+      user_data[changes_act]="%{%K{$changes_bg}%F{$action_bg}%}${divider}"
+      user_data[divider_act]="%{%K{$revision_bg}%F{$action_bg}%}${divider}"
+      user_data[act_start]="%{%K{$action_bg}%F{$action_fg}%}"
+    fi
+  fi
+}
+
+################################################################################
 # VCS info hooks
-########################################################################
+################################################################################
 
 function +vi-git-action {
-  git-status-fetch-if-needed
+  build-segments
+  git-status-fetch
 
-  # decide color for divider based on git status having anything to show
-  if git-status-has-anything "${user_data[git_status]}"; then
-    hook_com[action]="%{%K{$st_bgcolour}%F{$ac_bgcolour}%}$powerline_hard_right_divider"
+  if [[ ! -z ${user_data[git_status]} ]]; then
+    hook_com[action]=${user_data[changes_act]}
   else
-    hook_com[action]="%{%K{$rv_bgcolour}%F{$ac_bgcolour}%}$powerline_hard_right_divider"
+    hook_com[action]=${user_data[divider_act]}
   fi
 
-  hook_com[action]+="%{%K{$ac_bgcolour}%F{$ac_fgcolour}%} "
+  hook_com[action]+=${user_data[act_start]}
 
-  # provide action sigil
+  local action_sigil""
   case "${hook_com[action_orig]}" in
     "rebase")
-      hook_com[action]+="⤵"
+      action_sigil+="⤵"
       ;;
     "am/rebase")
-      hook_com[action]+="⤵ ✉"
+      action_sigil+="⤵ ✉"
       ;;
     "rebase-i")
-      hook_com[action]+="⤵"
+      action_sigil+="⤵"
       ;;
     "rebase-m")
-      hook_com[action]+="⤵ ⇓"
+      action_sigil+="⤵ ⇓"
       ;;
     "merge")
-      hook_com[action]+="⇓"
+      action_sigil+="⇓"
       ;;
     "am")
-      hook_com[action]+="✉⇓"
+      action_sigil+="✉⇓"
       ;;
     "bisect")
-      hook_com[action]+="⇅"
+      action_sigil+="⇅"
       ;;
     "cherry")
-      hook_com[action]+="↩"
+      action_sigil+="↩"
       ;;
     "cherry-seq")
-      hook_com[action]+="↩"
+      action_sigil+="↩"
       ;;
     "cherry-or-revert")
-      hook_com[action]+="↩"
+      action_sigil+="↩"
       ;;
     *)
-      hook_com[action]+="${hook_com[action_orig]}"
+      action_sigil+="${hook_com[action_orig]}"
       ;;
   esac
 
-  hook_com[action]+=" $reset"
+  hook_com[action]+=" $(sigil-icon $action_sigil)"
+  hook_com[action]+="$reset"
 }
 
 function +vi-git-branch {
-  # include time since last local commit (short-handed, e.g 1d, 4h, 3m)
-  git-fetch-commit-time-if-needed
+  build-segments
+  git-fetch-commit-time
 
-  hook_com[branch]="%{%K{$prev_colour}%F{$br_bgcolour}%}$powerline_hard_right_divider"
-  hook_com[branch]+="%{%K{$br_bgcolour}%F{$df_fgcolour}%}"
-  hook_com[branch]+="%${MARGIN}(l.."
-  hook_com[branch]+=" $user_data[git_time] ${powerline_branch} %20>…>${hook_com[branch_orig]}%<<"
-  hook_com[branch]+=" $reset"
-  hook_com[branch]+=")"
+  # export branch name as $BR for other scripts
+  local branch=$hook_com[branch_orig]
+  export BR=$branch
 
-  # export branch name for other scripts to use
-  export git_branch=$hook_com[branch_orig]
+  # truncate long branch names
+  local branch_limit=20
+  local branch_icon='%{%G%}'
+  if [ ${#branch} -gt $branch_limit ]; then
+    branch="${branch[0,(( $branch_limit-1 ))]}…"
+  fi
+
+  local segment=" $user_data[git_time] ${branch_icon} ${branch} "
+  hook_com[branch]=${user_data[divider_bra]}
+  hook_com[branch]+="$(margin-trim $segment)"
+  hook_com[branch]+=${user_data[closing_bra]}
+  hook_com[branch]+=$reset
 }
 
 function +vi-git-revision {
-  hook_com[revision]="%{%K{$br_bgcolour}%F{$rv_bgcolour}%}$powerline_hard_right_divider"
-  hook_com[revision]+="%{%K{$rv_bgcolour}%F{$df_fgcolour}%}"
-  hook_com[revision]+="%${MARGIN}(l.."
-  hook_com[revision]+=" ${hook_com[revision_orig][0,5]}"
-  hook_com[revision]+=" $reset"
-  hook_com[revision]+=")"
+  build-segments
+  local revision_limit=5
+  local segment=" ${hook_com[revision_orig][0,$revision_limit]} "
+
+  if [[ ! -z ${user_data[git_status]} ]]; then
+    hook_com[revision]=${user_data[changes_rev]}
+  else
+    if [[ ! -z ${hook_com[action_orig]} ]]; then
+      hook_com[revision]=${user_data[actions_rev]}
+    else
+      hook_com[revision]=${user_data[divider_rev]}
+    fi
+  fi
+
+  hook_com[revision]+=${user_data[rev_start]}
+  hook_com[revision]+="$(margin-trim $segment)"
+  hook_com[revision]+=$reset
 }
 
 function +vi-git-copied-files {
-  git-status-fetch-if-needed
+  build-segments
+  git-status-fetch
 
-  # `vcs_info` doesn't provide explicit formats for all the extra info
-  # I want to provide, so the best thing to do is to pack it all into
-  # the `staged` variable. This requires that the first hook clear
-  # `${hook_com[staged]}`, and THIS hook is the first one. All others
-  # MUST append.
+  # `vcs_info` doesn't provide explicit formats for all the extra info I want to
+  # provide, so the best thing to do is to pack it all into the `staged`
+  # variable. This requires that the first hook clear `${hook_com[staged]}`,
+  # and THIS hook is the first one. All others MUST append.
   hook_com[staged]=""
 
-  # check if we have changes at all, if so start divider and spacer
-  if git-status-has-anything "${user_data[git_status]}"; then
-    hook_com[staged]+="%{%K{$rv_bgcolour}%F{$st_bgcolour}%}$powerline_hard_right_divider"
-    hook_com[staged]+="%{%K{$st_bgcolour}%F{$st_fgcolour}%} "
+  if [[ ! -z ${user_data[git_status]} ]]; then
+    if [[ ! -z ${hook_com[action_orig]} ]]; then
+      hook_com[staged]+=${user_data[actions_stg]}
+    else
+      hook_com[staged]+=${user_data[divider_stg]}
+    fi
+    hook_com[staged]+="${user_data[changes_stg]} "
   fi
 
-  # debug all staged sigils
-  # hook_com[staged]+="$copied_sigil $deleted_sigil $modified_sigil $renamed_sigil $staged_sigil $unstaged_sigil "
-
   if git-status-has-copied-files "${user_data[git_status]}"; then
-    hook_com[staged]+="%${MARGIN}(l..%{$copied_sigil%G%} )"
+    hook_com[staged]+="$(sigil-icon $copied)"
   fi
 }
 
 function +vi-git-deleted-files {
-  git-status-fetch-if-needed
-
+  build-segments
+  git-status-fetch
   if git-status-has-deleted-files "${user_data[git_status]}"; then
-    hook_com[staged]+="%${MARGIN}(l..%{$deleted_sigil%G%} )"
+    hook_com[staged]+="$(sigil-icon $deleted)"
   fi
 }
 
 function +vi-git-modified-files {
-  git-status-fetch-if-needed
-
+  build-segments
+  git-status-fetch
   if git-status-has-modified-files "${user_data[git_status]}"; then
-    hook_com[staged]+="%${MARGIN}(l..%{$modified_sigil%G%} )"
+    hook_com[staged]+="$(sigil-icon $modified)"
   fi
 }
 
 function +vi-git-renamed-files {
-  git-status-fetch-if-needed
-
+  build-segments
+  git-status-fetch
   if git-status-has-renamed-files "${user_data[git_status]}"; then
-    hook_com[staged]+="%${MARGIN}(l..%{$renamed_sigil%G%} )"
+    hook_com[staged]+="$(sigil-icon $renamed)"
   fi
 }
 
 function +vi-git-staged-files {
-  git-status-fetch-if-needed
-
+  build-segments
+  git-status-fetch
   if git-status-has-staged-files "${user_data[git_status]}"; then
-    hook_com[staged]+="%${MARGIN}(l..%{$staged_sigil%G%} )"
+    hook_com[staged]+="$(sigil-icon $staged)"
   fi
 }
 
 function +vi-git-unstaged-files {
-  git-status-fetch-if-needed
-
+  build-segments
+  git-status-fetch
   if git-status-has-unstaged-files "${user_data[git_status]}"; then
-    hook_com[unstaged]+="%${MARGIN}(l..%{$unstaged_sigil%G%} )"
+    hook_com[unstaged]+="$(sigil-icon $unstaged)"
   fi
 
-  # always reset colors (since action or EOL comes next)
   hook_com[unstaged]+="$reset"
 }
 
-########################################################################
+function update-vcs-info {
+  vcs_info
+
+  if [[ $TMUX ]]; then
+    # update tmux and remove from prompt
+    tmux-update-status ${vcs_info_msg_0_}
+    unset vcs_info_msg_0_
+  fi
+}
+
+################################################################################
 # VCS info config
-########################################################################
+################################################################################
 
 if hash git >/dev/null 2>&1; then
   # load vcs_info function
   type vcs_info > /dev/null 2>&1 || autoload -Uz vcs_info
-  # add as a precmd via a hook
-  vcs_info_precmd () { vcs_info }
-  add-zsh-hook precmd vcs_info_precmd
 
   zstyle ':vcs_info:*' enable git # disable other backends
   zstyle ':vcs_info:*' get-revision true
   zstyle ':vcs_info:*' use-prompt-escapes true
 
+  if [[ $vcs_direction = "right" ]]; then
+    local vcs_formats="%c%u%i%b"
+    local vcs_action_formats="%a${vcs_formats}"
+  else
+    local vcs_formats="%b%i%c%u"
+    local vcs_action_formats="${vcs_formats}%a"
+  fi
+
   # %b is branch
   # %i is revision
-  # %c is value of stagedstr
-  # %u is value of unstagedstr
+  # %c is value of staged
+  # %u is value of unstaged
   # %a is action in progress (for autoformats)
-
-  zstyle ':vcs_info:*' formats '%b%i%c%u'
-  zstyle ':vcs_info:*' actionformats '%b%i%c%u%a'
+  zstyle ':vcs_info:*' formats $vcs_formats
+  zstyle ':vcs_info:*' actionformats $vcs_action_formats
+  unset vcs_formats
+  unset vcs_action_formats
 
   type is-at-least > /dev/null 2>&1 || autoload -Uz is-at-least
   if is-at-least 4.3.11; then
@@ -258,4 +405,7 @@ if hash git >/dev/null 2>&1; then
                                                git-staged-files   \
                                                git-unstaged-files
   fi
+
+  # build and update on precmd
+  add-zsh-hook precmd update-vcs-info
 fi

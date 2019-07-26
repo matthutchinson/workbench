@@ -58,7 +58,7 @@ map <Esc>[24~ <F12>
 
 map <leader>w :w!<cr>
 map <leader>e :new <C-R>=expand("%:p:h")<cr><cr>
-map <leader>rn :w !cd %:p:h; %<cr>
+map <leader>r :w !%:p<cr>
 map <leader>ev :sp ~/.vimrc<cr>
 map <leader>sv :so ~/.vimrc<cr>
 map <leader>cd :lcd %:h<cr>

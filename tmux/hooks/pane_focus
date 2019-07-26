@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+
+################################################################################
+# Conditionally update TMUX status bar with VCS info on pane focus
+################################################################################
+
+# compare env var (previous saved dir) to git root of current pane dir ($1)
+# if they differ, we call `update-vcs-info` after changing wd to new pane dir
+# if no git root detected we set var and reset tmux status
+
+source "$HOME/.zsh/vcs_info"
+cd $1
+
+local git_top_level=$(git rev-parse --show-toplevel)
+
+if [[ -z $git_top_level ]]; then
+  # no git
+  tmux setenv -g TMUX_PREV_GIT_DIR $1
+  tmux-update-status
+elif [[ "$TMUX_PREV_GIT_DIR" != $git_top_level ]]; then
+  # no match, status needs to update
+  tmux setenv -g TMUX_PREV_GIT_DIR $git_top_level
+  update-vcs-info
+fi

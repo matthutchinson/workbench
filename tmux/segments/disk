@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 set -e
 
 function hd_percentage_free {
@@ -19,4 +18,4 @@ function hd_percentage_free {
   echo "#[fg=colour$fg_color]HD $percent%#[default]"
 }
 
-echo "$(hd_percentage_free)"
+hd_percentage_free

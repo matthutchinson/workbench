@@ -58,7 +58,7 @@ bindkey "\e[B" history-beginning-search-forward-end
 # Colours
 #
 # I've modifed ocean-dark from ocean, with black bg and extra colours in the 256
-# space. http://chriskempson.com/projects/base16/ for details.
+# space. See http://chriskempson.com/projects/base16/ for details.
 ################################################################################
 
 autoload -Uz colors && colors
@@ -67,6 +67,7 @@ export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export GREP_OPTIONS="--color"
 
 # source colorscheme if we have a prompt
+# TODO: use a common colourscheme that works in Terminal & iTerm (incl. vim)
 local colorscheme="$HOME/.zsh/base16-shell/base16-ocean-dark.sh"
 [ -n "$PS1" ] && [[ -s $colorscheme ]] && source $colorscheme
 
@@ -125,10 +126,3 @@ cdpath=( $HOME ~/apps ~/code ~/code/lolcommits-plugins $cdpath )
 
 # added by travis gem
 [ -f /Users/matt/.travis/travis.sh ] && source /Users/matt/.travis/travis.sh
-
-################################################################################
-# Benchmarking - https://blog.jonlu.ca/posts/speeding-up-zsh
-################################################################################
-
-# zmodload zsh/zprof
-# then run `zprof` in new shells

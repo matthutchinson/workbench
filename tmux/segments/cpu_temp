@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -e
+
+# requires iStats gem - https://github.com/Chris911/iStats
+
+function cpu_temp {
+  local temp=$(istats cpu temp --value-only | sed 's/\..*//g')
+
+  local colour_higher_than=55
+  local high_hot_colour_at=95
+  local fg_colours=(246 214 208 202 196)
+  local fg_colour=default
+
+  if (( $temp > $colour_higher_than )); then
+    local fg_index=$(( ( ($temp - $colour_higher_than) * (${#fg_colours[*]} - 1)) / ($high_hot_colour_at - $colour_higher_than) ))
+    fg_colour="colour${fg_colours[$fg_index]}"
+  fi
+
+  echo "#[fg=$fg_colour]${temp}°C#[default]"
+}
+
+cpu_temp

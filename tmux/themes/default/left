@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-echo '#[bg=colour000,fg=colour242] #S #[bg=colour233,fg=colour000]#[default] '

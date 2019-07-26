@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 set -e
 
 function battery_status {
@@ -42,12 +41,14 @@ function battery_status {
           fg_color=${fg_colors[$range]}
 
           # is charging? show icon
-          if [[ "$is_charging" == "Yes" ]]; then
-            icon='♥ ';
+          if [[ $fully_charged == "Yes" ]]; then
+            icon="♥"
+          elif [[ $is_charging == "Yes" ]]; then
+            icon=""
           else
-            icon="♡ ";
+            icon="♡"
           fi
-          status_line="#[bg=colour233,fg=colour$bg_color]#[bg=colour$bg_color,fg=colour$fg_color] $icon$percent% #[fg=colour022,bg=colour$bg_color]#[default]"
+          status_line="#[bg=colour233,fg=colour$bg_color]#[bg=colour$bg_color,fg=colour$fg_color] $icon $percent% #[fg=colour022,bg=colour$bg_color]#[default]"
         fi
 
         echo $status_line

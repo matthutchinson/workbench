@@ -1,41 +1,38 @@
 #!/usr/bin/env bash
-
 set -e
 
 function cpu_load {
   local cpu_load=$(
-    top -l 1 | \
+    /usr/bin/top -l 1 | \
       head -n 4 | \
       tail -n 1 | \
       awk '{printf "%3d%%\n", $3}' | \
-      sed 's/( *|%)//'
+      sed 's/[\( *\)\|%]//g'
   )
 
   # defaults
-  local line_icon=" "
   local line_length=10
-  local base_color=133
-  local active_count=$(($cpu_load / $line_length))
+  local min_colourise=50
+  local min_color=161
+  local base_color=125
+  local active_count=$((line_length * cpu_load / 100))
 
-  # build load line
-  # local active_count=3
-  local load_line=""
-
+  # right aligned and padded to line_length
   for (( i = 0; i < line_length; i++ )); do
-    local line_color="#[fg=colour$(($base_color - $i))]"
+    local line_icon=" "
+    local divider=$((line_length-active_count))
 
-    if [[ $i -ge $active_count ]]; then
-      line_icon=" "
-    elif [[ $active_count -gt 2 ]]; then
+    if [[ i -ge divider ]]; then
       line_icon="✺"
-    else
-      line_icon="☉"
+      if [[ cpu_load -ge min_colourise ]]; then
+        line_icon="#[fg=colour$((base_color + i))]✺"
+      fi
     fi
 
-    load_line="$load_line$line_color$line_icon"
+    load_line="$load_line$line_icon"
   done
 
   echo "$load_line#[default]"
 }
 
-echo $(cpu_load)
+cpu_load

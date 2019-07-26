@@ -1,13 +1,13 @@
 #!/usr/bin/env zsh
 
-########################################################################
+################################################################################
 # chruby with auto-switching
-########################################################################
+################################################################################
 
 source /usr/local/opt/chruby/share/chruby/chruby.sh
 source /usr/local/opt/chruby/share/chruby/auto.sh
 
-########################################################################
+################################################################################
 
 # remove need for bundle exec by adding ./bin to path, if the current
 # project is trusted and binstubs are present (see `git trust` alias)
