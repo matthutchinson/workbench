@@ -154,10 +154,10 @@ function glook {
 
 # git look (see above) with this branch compared to master (unless br is master)
 function glm {
-  if [[ $git_branch == 'master' ]]; then
+  if [[ $BR == 'master' ]]; then
     glook
   else
-    glook "master..$git_branch"
+    glook "master..$BR"
   fi
 }
 
