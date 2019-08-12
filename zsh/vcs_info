@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
-# TODO: benchmark, try alt switcher, benchmark again
+# TODO: benchmark, check whats slow, and improve (consider not updating tmux
+# directly, do so in a subshell OR write to file and poll)
 
 ################################################################################
 # VCS info - http://tinyurl.com/d748o6l
@@ -311,7 +312,6 @@ function +vi-git-copied-files {
 
 function +vi-git-deleted-files {
   build-segments
-  git-status-fetch
   if git-status-has-deleted-files "${user_data[git_status]}"; then
     hook_com[staged]+="$(sigil-icon $deleted)"
   fi
@@ -319,7 +319,6 @@ function +vi-git-deleted-files {
 
 function +vi-git-modified-files {
   build-segments
-  git-status-fetch
   if git-status-has-modified-files "${user_data[git_status]}"; then
     hook_com[staged]+="$(sigil-icon $modified)"
   fi
@@ -327,7 +326,6 @@ function +vi-git-modified-files {
 
 function +vi-git-renamed-files {
   build-segments
-  git-status-fetch
   if git-status-has-renamed-files "${user_data[git_status]}"; then
     hook_com[staged]+="$(sigil-icon $renamed)"
   fi
@@ -335,7 +333,6 @@ function +vi-git-renamed-files {
 
 function +vi-git-staged-files {
   build-segments
-  git-status-fetch
   if git-status-has-staged-files "${user_data[git_status]}"; then
     hook_com[staged]+="$(sigil-icon $staged)"
   fi
@@ -343,7 +340,6 @@ function +vi-git-staged-files {
 
 function +vi-git-unstaged-files {
   build-segments
-  git-status-fetch
   if git-status-has-unstaged-files "${user_data[git_status]}"; then
     hook_com[unstaged]+="$(sigil-icon $unstaged)"
   fi

@@ -9,6 +9,7 @@ brew install prettyping  # https://github.com/denilsonsa/prettyping
 brew install htop        # http://hisham.hm/htop/
 brew install httpie      # https://httpie.org
 brew cask install ngrok  # ngrok - https://ngrok.com
+brew install direnv      # direnv - https://direnv.net
 
 # node
 npm install -g tldr # http://tldr.sh

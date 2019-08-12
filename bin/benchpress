@@ -53,4 +53,7 @@ puts '  Updating vim plugins ...'
 # make sure vim backup dir exists
 `mkdir -p ~/.vim/tmp`
 
+puts '  Pruning direnv ...'
+`direnv prune`
+
 puts "\n  All done!"
