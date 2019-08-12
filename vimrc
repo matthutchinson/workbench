@@ -515,6 +515,7 @@ if !exists("autocommands_loaded")
   au WinEnter,FocusGained * setlocal cursorline
   au WinLeave,FocusLost   * setlocal nocursorline
 
+  au BufRead,BufNewFile .envrc set ft=sh
   au BufRead,BufNewFile *.as   set ft=actionscript
   au BufRead,BufNewFile *.mxml set ft=mxml
   au BufNewFile,BufRead *.json set ft=javascript
@@ -527,9 +528,6 @@ if !exists("autocommands_loaded")
   au Filetype rust map <Leader>r :w\|:call VimuxRunCommand("clear; cargo run")<CR>
   au Filetype rust map <Leader>t :w\|:call VimuxRunCommand("clear; cargo test")<CR>
   au Filetype rust map <Leader>T :w\|:call VimuxRunCommand("clear; cargo test " . bufname("%"))<CR>
-
-  " don't syntax highlight markdown because it's often wrong
-  " au FileType markdown setlocal syn=off
 
   " markdown todos, toggle with Ctrl+Space and auto-insert
   au Filetype markdown map <silent><buffer> <C-@> :call ToggleTodo()<cr>

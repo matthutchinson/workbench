@@ -17,7 +17,8 @@ alias lc='colorls' # https://github.com/athityakumar/colorls
 alias ll='colorls -lA --sd --gs -t' # 1 per line, newest & dirs first, git info
 alias tree='colorls --tree' # tree with dirs first
 alias wget='wget --no-hsts' # stop logging .hsts files
-alias help='tldr'
+alias help='tldr'  # http://tldr.sh
+alias intg='devkit server list | grep -E "int[0-9]+\s+$" | head -n 1 | xargs devkit server grab'
 
 ################################################################################
 # Overrides
@@ -28,16 +29,10 @@ alias ping='prettyping'
 alias top='htop'
 
 ################################################################################
-# Disabled corrections
-################################################################################
-
-alias rspec='nocorrect rspec'
-alias spring='nocorrect spring'
-
-################################################################################
 # Quick cds
 ################################################################################
 
+alias cdf='cd ~/apps/freeagent'
 alias cdwb='cd ~/code/workbench'
 alias cdpmf='cd ~/apps/pmfaqtory-store'
 alias cdob='cd ~/apps/open-banking-on-rails'
@@ -67,3 +62,10 @@ alias gl="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | vim -R -c '
 alias grm='git rebase master -i'
 alias gca='git commit --amend --no-edit'
 alias gpf='git push --force-with-lease'
+
+################################################################################
+# Disabled corrections
+################################################################################
+
+alias rspec='nocorrect rspec'
+alias spring='nocorrect spring'
