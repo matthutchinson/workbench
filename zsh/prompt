@@ -21,7 +21,8 @@ local powerline_soft_right_divider='%{%G%}'
 local powerline_branch='%{%G%}'
 local powerline_line_number='%{%G%}'
 local powerline_lock='%{%G%}'
-local powerline_edit_mode='%{⚡%G%}'
+local powerline_vi_edit='%{%G%}'
+local powerline_prompt='%{%G%}'
 
 ################################################################################
 # Detect editing-mode
@@ -36,7 +37,7 @@ zle -N zle-keymap-select
 
 function vi_mode_prompt_info {
   local mode_indicator="%{%K{236}%F{238}%}$powerline_hard_right_divider"
-  mode_indicator+="%{%K{238}%F{222}%} $powerline_edit_mode"
+  mode_indicator+="%{%K{238}%F{002}%} $powerline_vi_edit "
   mode_indicator+="%{%K{238}%F{236}%}$powerline_hard_right_divider%{%f%k%}"
   echo "${${KEYMAP/vicmd/$mode_indicator}/(main|viins)/}"
 }
@@ -45,7 +46,7 @@ function vi_mode_prompt_info {
 # Left
 ################################################################################
 
-PROMPT="$ "
+PROMPT="%{%K{000}%F{3}%}$powerline_prompt %{%b%f%k%}"
 
 ################################################################################
 # Right
@@ -58,10 +59,10 @@ RPROMPT+="%{%K{234}%F{236}%}$powerline_hard_right_divider%{%f%k%}"
 # show editing mode in prompt
 RPROMPT+='$(vi_mode_prompt_info)'
 
-# truncated path
+# truncate path
 RPROMPT+='%{%K{236}%F{247}%} %30[>…]%1~%<< %{%f%k%}'
 
-# if git available, show vcs info (see ~/.zsh/vcs_info.zsh)
+# show vcs info (see ~/.zsh/vcs_info.zsh)
 if hash git >/dev/null 2>&1; then
   RPROMPT+='${vcs_info_msg_0_}'
 fi

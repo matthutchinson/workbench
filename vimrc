@@ -153,9 +153,9 @@ filetype plugin indent on
 runtime macros/matchit.vim
 
 " appearance
-set t_Co=256              " 256 color scheme
-syntax on                 " turn on syntax highlighting
-colorscheme iceberg-matt  " modifed iceberg to mix with base16 theme
+set t_Co=256          " 256 color scheme
+syntax on             " turn on syntax highlighting
+colorscheme iceberg
 
 set tw=80             " set textwidth
 set fo-=t             " set format options, don't auto-wrap at tw

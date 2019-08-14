@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
 
-# TODO: benchmark, check whats slow, and improve (consider not updating tmux
-# directly, do so in a subshell OR write to file and poll)
-
 ################################################################################
 # VCS info - http://tinyurl.com/d748o6l
 # Inspired by emilyst - https://github.com/emilyst/home
@@ -18,6 +15,9 @@
 # `vcs_info_msg_0_` is auto-trimmed depending on the number of `$COLUMNS`
 # available (width).
 ################################################################################
+
+# TODO: benchmark, check whats slow, and improve (consider not updating tmux
+# directly, do so in a subshell OR write to file and poll)
 
 if [[ $TMUX ]]; then
   local vcs_direction="right"
@@ -136,14 +136,14 @@ function build-segments {
   # appearance differs between tmux (left status) or zsh (right prompt)
   if (( ! ${+user_data[divider_rev]} )); then
     # colours
-    local branch_bg=18
-    local branch_fg=251
-    local revision_bg=19
-    local revision_fg=251
-    local changes_bg=22
-    local changes_fg=255
+    local branch_bg=10
+    local branch_fg=013
+    local revision_bg=11
+    local revision_fg=013
+    local changes_bg=015
+    local changes_fg=013
     local action_fg=0
-    local action_bg=222
+    local action_bg=003
     local tmux_status_bg=233
     local prompt_bg=236
 

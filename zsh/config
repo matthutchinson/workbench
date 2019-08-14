@@ -66,11 +66,6 @@ export CLICOLOR=1
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export GREP_OPTIONS="--color"
 
-# source colorscheme if we have a prompt
-# TODO: use a common colourscheme that works in Terminal & iTerm (incl. vim)
-local colorscheme="$HOME/.zsh/base16-shell/base16-ocean-dark.sh"
-[ -n "$PS1" ] && [[ -s $colorscheme ]] && source $colorscheme
-
 ################################################################################
 # Completion
 ################################################################################

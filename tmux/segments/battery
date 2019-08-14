@@ -24,14 +24,15 @@ function battery_status {
         local percent=100
         local bg_color=042
         local fg_color=000
-        local status_line="#[fg=colour022,bg=default]#[default]"
+        local prev_color=011
+        local status_line="#[fg=colour$prev_color,bg=default]#[default]"
 
         if [[ "$fully_charged" == "No" ]]; then
           percent=$((100 * $current / $max))
         fi
 
         # color range
-        local bg_colors=(088 166 172 178 109)
+        local bg_colors=(088 167 173 179 002)
         local fg_colors=(015 000 000 000 000)
         local range=$(($percent / (100 / ${#bg_colors[*]})))
 
@@ -48,7 +49,7 @@ function battery_status {
           else
             icon="♡"
           fi
-          status_line="#[bg=colour233,fg=colour$bg_color]#[bg=colour$bg_color,fg=colour$fg_color] $icon $percent% #[fg=colour022,bg=colour$bg_color]#[default]"
+          status_line="#[bg=colour233,fg=colour$bg_color]#[bg=colour$bg_color,fg=colour$fg_color] $icon $percent% #[fg=colour$prev_color,bg=colour$bg_color]#[default]"
         fi
 
         echo $status_line

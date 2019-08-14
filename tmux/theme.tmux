@@ -18,4 +18,4 @@ set -g status-right '#(~/.tmux/segments/combined)'
 # window status
 setw -g window-status-separator ''
 setw -g window-status-format '#[bg=colour233,fg=colour233]#[bg=colour233,fg=colour238] #I #[fg=colour244]#W #[bg=colour233,fg=colour233]#[default]'
-setw -g window-status-current-format '#[bg=colour253,fg=colour233]#[bg=colour253,fg=colour000]  #W #[bg=colour233,fg=colour253]#[default]'
+setw -g window-status-current-format '#[bg=colour250,fg=colour233]#[bg=colour250,fg=colour000]  #W #[bg=colour233,fg=colour250]#[default]'
