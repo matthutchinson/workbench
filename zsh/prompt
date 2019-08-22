@@ -10,7 +10,7 @@
 #    /Applications/Xcode.app/Contents/SharedFrameworks\
 #    /DVTKit.framework/Versions/A/Resources/Fonts/SF-Mono-Regular.otf
 #
-# (includes `--fontawesome` for the colorls gem)
+# (`--fontawesome` required for the colorls gem)
 #
 ################################################################################
 

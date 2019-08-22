@@ -8,3 +8,4 @@ vim/autoload/plug.vim
 config/htop
 config/configstore
 config/direnv
+irssi/certs/*.pem

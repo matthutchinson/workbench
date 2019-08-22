@@ -1,67 +1,12 @@
 servers = (
-  { address = "irc.dal.net"; chatnet = "DALnet"; port = "6667"; },
-  {
-    address = "ssl.efnet.org";
-    chatnet = "EFNet";
-    port = "9999";
-    use_tls = "yes";
-  },
-  {
-    address = "irc.esper.net";
-    chatnet = "EsperNet";
-    port = "6697";
-    use_tls = "yes";
-    tls_verify = "yes";
-  },
   {
     address = "chat.freenode.net";
     chatnet = "Freenode";
     port = "6697";
     use_tls = "yes";
+    tls_cert = "~/.irssi/certs/freenode.pem";
     tls_verify = "yes";
-  },
-  {
-    address = "irc.gamesurge.net";
-    chatnet = "GameSurge";
-    port = "6667";
-  },
-  {
-    address = "eu.irc6.net";
-    chatnet = "IRCnet";
-    port = "6667";
-    use_tls = "yes";
-  },
-  { address = "open.ircnet.net"; chatnet = "IRCnet"; port = "6667"; },
-  {
-    address = "irc.ircsource.net";
-    chatnet = "IRCSource";
-    port = "6667";
-  },
-  { address = "irc.netfuze.net"; chatnet = "NetFuze"; port = "6667"; },
-  {
-    address = "irc.oftc.net";
-    chatnet = "OFTC";
-    port = "6697";
-    use_tls = "yes";
-    tls_verify = "yes";
-  },
-  {
-    address = "irc.quakenet.org";
-    chatnet = "QuakeNet";
-    port = "6667";
-  },
-  {
-    address = "irc.rizon.net";
-    chatnet = "Rizon";
-    port = "6697";
-    use_tls = "yes";
-    tls_verify = "yes";
-  },
-  { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; },
-  {
-    address = "irc.undernet.org";
-    chatnet = "Undernet";
-    port = "6667";
+    autoconnect = "yes";
   },
   {
     address = "irc.perl.org";
@@ -74,88 +19,27 @@ servers = (
 );
 
 chatnets = {
-  DALnet = {
-    type = "IRC";
-    max_kicks = "4";
-    max_msgs = "20";
-    max_whois = "30";
-  };
-  EFNet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "4";
-    max_whois = "1";
-  };
-  EsperNet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "4";
-    max_whois = "1";
-  };
   Freenode = {
     type = "IRC";
     max_kicks = "1";
     max_msgs = "4";
     max_whois = "1";
+    sasl_mechanism = "external";
+    sasl_username = "hiddenloop";
+    nick = "hiddenloop";
+    alternate_nick = "matt_hiddenloop";
   };
-  GameSurge = {
+  Perl = {
     type = "IRC";
-    max_kicks = "1";
-    max_msgs = "1";
-    max_whois = "1";
+    nick = "matt";
+    alternate_nick = "matt_hiddenloop";
   };
-  IRCnet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "1";
-    max_whois = "1";
-  };
-  IRCSource = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "4";
-    max_whois = "1";
-  };
-  NetFuze = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "1";
-    max_whois = "1";
-  };
-  OFTC = { type = "IRC"; max_kicks = "1"; max_msgs = "1"; max_whois = "1"; };
-  QuakeNet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "1";
-    max_whois = "1";
-  };
-  Rizon = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "1";
-    max_whois = "1";
-  };
-  SILC = { type = "SILC"; };
-  Undernet = {
-    type = "IRC";
-    max_kicks = "1";
-    max_msgs = "1";
-    max_whois = "1";
-  };
-  Perl = { type = "IRC"; nick = "matt"; };
 };
 
 channels = (
-  { name = "#lobby"; chatnet = "EsperNet"; autojoin = "No"; },
   { name = "#freenode"; chatnet = "Freenode"; autojoin = "No"; },
   { name = "#irssi"; chatnet = "Freenode"; autojoin = "No"; },
-  { name = "#gamesurge"; chatnet = "GameSurge"; autojoin = "No"; },
-  { name = "#irssi"; chatnet = "IRCNet"; autojoin = "No"; },
-  { name = "#ircsource"; chatnet = "IRCSource"; autojoin = "No"; },
-  { name = "#netfuze"; chatnet = "NetFuze"; autojoin = "No"; },
-  { name = "#oftc"; chatnet = "OFTC"; autojoin = "No"; },
-  { name = "silc"; chatnet = "SILC"; autojoin = "No"; },
-  { name = "#cabal"; chatnet = "Perl"; autojoin = "yes"; },
+  { name = "#cabal"; chatnet = "Perl"; autojoin = "No"; }
 );
 
 aliases = {
@@ -361,6 +245,7 @@ statusbar = {
         act = { priority = "10"; };
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
+        usercount = { };
       };
     };
 
@@ -415,6 +300,51 @@ settings = {
     real_name = "Matthew Hutchinson";
     user_name = "matt";
     nick = "matt";
+    timestamp_format = "%H:%M:%S";
   };
-  "fe-text" = { actlist_sort = "refnum"; };
+  "fe-text" = {
+    actlist_sort = "refnum";
+    term_force_colors = "yes";
+    scrollback_time = "7day ";
+  };
+  "fe-common/core" = { theme = "default"; };
+  "perl/core/scripts" = {
+    usercount_show_zero = "yes";
+    usercount_show_ircops = "yes";
+    usercount_show_halfops = "no";
+    hilightwin_show_network = "yes";
+  };
+};
+hilights = (
+  { text = "Boo!"; nick = "yes"; word = "yes"; },
+  { text = "yournick"; nick = "no"; word = "yes"; },
+  { text = "mike"; nick = "yes"; word = "yes"; },
+  {
+    text = "redbull";
+    color = "%G";
+    act_color = "%Y";
+    nick = "yes";
+    word = "yes";
+    fullword = "yes";
+  },
+  { text = "matt"; nick = "no"; word = "yes"; },
+  { text = "matt_hiddenloop"; nick = "no"; word = "yes"; }
+);
+windows = {
+  1 = { immortal = "yes"; name = "(status)"; level = "ALL"; };
+  2 = { name = "hilight"; };
+};
+mainwindows = {
+  1 = { 
+    first_line = "8";
+    lines = "46";
+    first_column = "0";
+    columns = "102";
+  };
+  2 = { 
+    first_line = "1";
+    lines = "7";
+    first_column = "0";
+    columns = "102";
+  };
 };

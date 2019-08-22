@@ -3,14 +3,14 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-#env:
+env:
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  #TERM: xterm-256color
+  TERM: xterm-256color
 
 window:
   # Window dimensions (changes require restart)
@@ -96,7 +96,7 @@ scrolling:
 # Some applications, like Emacs, rely on knowing about the width of a tab.
 # To prevent unexpected behavior in these applications, it's also required to
 # change the `it` value in terminfo when altering this setting.
-tabspaces: 8
+tabspaces: 4
 
 # Font configuration (changes require restart)
 font:
@@ -168,7 +168,7 @@ font:
   use_thin_strokes: true
 
 # If `true`, bold text is drawn using the bright color variants.
-draw_bold_text_with_bright_colors: true
+draw_bold_text_with_bright_colors: false
 
 # Base16 Ocean Dark
 colors:
@@ -246,8 +246,8 @@ background_opacity: 1.0
 #
 # All available `mods` and `action` values are documented in the key binding
 # section.
-mouse_bindings:
-  - { mouse: Middle, action: PasteSelection }
+# mouse_bindings:
+#   - { mouse: Middle, action: PasteSelection }
 
 mouse:
   # Click settings
@@ -317,10 +317,10 @@ live_config_reload: true
 #   - (macOS) /bin/bash --login
 #   - (Linux) user login shell
 #   - (Windows) powershell
-# shell:
-#   program: /bin/bash
-#   args:
-#     - --login
+shell:
+  program: /usr/local/bin/zsh
+  args:
+    - --login
 
 # Startup directory
 #
@@ -590,4 +590,14 @@ key_bindings:
   - { key: F11,      mods: Super,   chars: "\x1b[23;3~"                      }
   - { key: F12,      mods: Super,   chars: "\x1b[24;3~"                      }
   - { key: NumpadEnter,             chars: "\n"                              }
+
+  # macOS UK keyboard
   - { key: Key3,     mods: Alt,     chars: "#"                               }
+
+  # irssi scrolling with Alt+UP,DOWN
+  - { key: Up,       mods: Alt,     chars: "\x1bp"                           }
+  - { key: Down,     mods: Alt,     chars: "\x1bn"                           }
+
+  # quality of life improvements :)
+  - { key: N,        mods: Command, action: SpawnNewInstance                 }
+  - { key: Space,    mods: Alt,     chars: " "                               }
