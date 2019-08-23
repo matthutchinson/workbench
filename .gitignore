@@ -9,3 +9,4 @@ config/htop
 config/configstore
 config/direnv
 irssi/certs/*.pem
+irssi/fnotify
