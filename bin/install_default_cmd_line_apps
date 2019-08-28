@@ -10,6 +10,7 @@ brew install htop        # http://hisham.hm/htop/
 brew install httpie      # https://httpie.org
 brew cask install ngrok  # ngrok - https://ngrok.com
 brew install direnv      # direnv - https://direnv.net
+brew install terminal-notifier # terminal-notifier - https://github.com/julienXX/terminal-notifier
 
 # node
 npm install -g tldr # http://tldr.sh
