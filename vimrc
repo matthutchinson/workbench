@@ -29,6 +29,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-bundler'
   Plug 'tpope/vim-rails'
   Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-dispatch'
   Plug 'godlygeek/tabular'
   Plug 'cocopon/iceberg.vim'
 
@@ -36,18 +37,15 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
 
   " extras
-  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'  " snippets
-  Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'      " post gists
-  " Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'      " linting
-  Plug 'mhinz/vim-startify'
+  Plug 'mhinz/vim-startify' " nicer start screen with MRU
+  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " snippets
+  Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'     " post gists
+  " Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'   " linting
 
   " tmux
-  Plug 'christoomey/vim-tmux-navigator' " navigation across splits & panes
   Plug 'benmills/vimux'                 " launch commands in tmux windows
-  Plug 'jgdavey/vim-turbux'             " run tests and focused tests
+  Plug 'christoomey/vim-tmux-navigator' " nav across vim splits & tmux panes
 
-  " syntax
-  Plug 'tpope/vim-cucumber', { 'for': 'cucumber' }
 call plug#end()
 
 " #### Shortcuts
@@ -96,6 +94,10 @@ nnoremap <leader>b :Buffer<cr>
 nmap X "_d
 nmap XX "_dd
 vmap X "_d
+
+" vim-dispatch (e.g. rails testing)
+nmap <leader>t :w\|:Dispatch<cr>
+nmap <leader>T :w\|:.Dispatch<cr>
 
 " use leader to interact with the system clipboard on y(ank), c(opy), x(elete)
 nnoremap <Leader>p "*]p
@@ -256,20 +258,15 @@ vmap <leader>a= :Tabularize /=<cr>
 nmap <leader>a: :Tabularize /:\zs<cr>
 vmap <leader>a: :Tabularize /:\zs<cr>
 
+" vimux
+nmap <Leader>vp :VimuxPromptCommand<cr>
+nmap <Leader>vl :VimuxRunLastCommand<cr>
+nmap <Leader>vi :VimuxInspectRunner<cr>
+nmap <Leader>vz :VimuxZoomRunner<cr>
+
 " commentary
 nmap <leader>c gcc
 vmap <leader>c gc
-
-" Tmux/Vimux
-" prompt for a command to run, run last, inspect, zoom
-map <Leader>vp :VimuxPromptCommand<cr>
-map <Leader>vl :VimuxRunLastCommand<cr>
-map <Leader>vi :VimuxInspectRunner<cr>
-map <Leader>vz :VimuxZoomRunner<cr>
-
-" turbux prefix (and hotfix)
-let g:turbux_command_prefix = 'bundle exec'
-let g:turbux_test_type='x'
 
 " ulti-snips
 map <leader>U :UltiSnipsEdit<cr>
@@ -524,16 +521,16 @@ if !exists("autocommands_loaded")
   au BufNewFile,BufRead /private/etc/apache2/*.conf* set ft=apache
   au BufRead,BufNewFile {Capfile,Gemfile,Appraisals,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
-  " write file, run or test cargo projects
-  au Filetype rust map <Leader>r :w\|:call VimuxRunCommand("clear; cargo run")<CR>
-  au Filetype rust map <Leader>t :w\|:call VimuxRunCommand("clear; cargo test")<CR>
-  au Filetype rust map <Leader>T :w\|:call VimuxRunCommand("clear; cargo test " . bufname("%"))<CR>
-
   " markdown todos, toggle with Ctrl+Space and auto-insert
   au Filetype markdown map <silent><buffer> <C-@> :call ToggleTodo()<cr>
   au Filetype markdown inoremap <expr><buffer> <CR> getline('.') =~ ' *\- \[ ] $' ? '<c-U><Esc>0i' : '<CR>'.AddTodo()
   au Filetype markdown nnoremap <expr><buffer> o "o".AddTodo()
   au Filetype markdown nnoremap <expr><buffer> O "O".AddTodo()
+
+  " rust / cargo
+  au Filetype rust map <Leader>r :w\|:call VimuxRunCommand("clear; cargo run")<cr>
+  au Filetype rust map <Leader>t :w\|:Dispatch cargo test<cr>
+  au Filetype rust map <Leader>T :w\|:Dispatch cargo test %<cr>
 
   " spellcheck highlights
   highlight clear SpellBad
