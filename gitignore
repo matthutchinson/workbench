@@ -8,3 +8,5 @@ vendor/bundle/*
 vim/session/*
 bundle/cache
 .envrc
+config/master.key
+config/credentials/*.key
