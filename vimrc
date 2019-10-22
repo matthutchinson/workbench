@@ -19,32 +19,30 @@ endif
 
 " #### Plugins (https://github.com/junegunn/vim-plug)
 call plug#begin('~/.vim/plugged')
-  " core
-  Plug 'rking/ag.vim'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
-  Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-rhubarb'
-  Plug 'tpope/vim-commentary'
-  Plug 'tpope/vim-bundler'
-  Plug 'tpope/vim-rails'
-  Plug 'tpope/vim-unimpaired'
-  Plug 'tpope/vim-dispatch'
-  Plug 'godlygeek/tabular'
-  Plug 'cocopon/iceberg.vim'
+  Plug 'mileszs/ack.vim'        " searching using ag (see below)
+  Plug 'junegunn/fzf'           " adds fzf to rtp (brew install fzf)
+  Plug 'junegunn/fzf.vim'       " fzf mappings for vim
+  Plug 'tpope/vim-fugitive'     " useful Git helpers and mappings
+  Plug 'tpope/vim-rhubarb'      " GitHub companion for fugitive
+  Plug 'tpope/vim-commentary'   " comment toggling
+  Plug 'tpope/vim-bundler'      " wrap bundle command
+  Plug 'tpope/vim-rails'        " useful Rails nav, helpers and mappings
+  Plug 'tpope/vim-endwise'      " end certain structures automatically
+  Plug 'tpope/vim-unimpaired'   " complementary pairs of mappings
+  Plug 'tpope/vim-dispatch'     " async testing/building
+  Plug 'godlygeek/tabular'      " easy aligning
+  Plug 'cocopon/iceberg.vim'    " colors
 
-  " status
-  Plug 'itchyny/lightline.vim'
+  Plug 'itchyny/lightline.vim'  " nicer status line
+  Plug 'mhinz/vim-startify'     " nicer start screen with MRU
 
-  " extras
-  Plug 'mhinz/vim-startify' " nicer start screen with MRU
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " snippets
   Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'     " post gists
-  " Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'   " linting
+  " Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'   " auto linting
 
   " tmux
   Plug 'benmills/vimux'                 " launch commands in tmux windows
-  Plug 'christoomey/vim-tmux-navigator' " nav across vim splits & tmux panes
+  Plug 'christoomey/vim-tmux-navigator' " navigate vim splits & tmux panes
 
 call plug#end()
 
@@ -109,7 +107,7 @@ vnoremap <Leader>y "*y
 vnoremap <Leader>c "*c
 vnoremap <Leader>x "*d
 
-" fzf shortcuts
+" fzf
 nnoremap <space> :FZF<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>s :Snippets<cr>
@@ -204,8 +202,9 @@ set incsearch                     " highlight matches as you type
 set tags+=.git/tags               " include tags from here
 set hlsearch                      " highlight matches
 
-" use Ag instead of grep (the silver searcher)
+" use Ag (silver searcherf) instead of grep / ack
 set grepprg=ag\ --nogroup\ --nocolor\ --hidden
+let g:ackprg='ag --vimgrep --smart-case'
 
 " scrolling
 set nowrap                        " turn on line wrapping
@@ -247,8 +246,8 @@ map <ENTER><ENTER> gx
 
 " #### Plugin Shortcuts
 
-" start a global search
-map <C-F> :Ag --hidden<space>
+" start a global search (will use ag)
+map <C-F> :Ack --hidden<space>
 
 " tabularize
 nmap <leader>a> :Tabularize /=><cr>
