@@ -11,6 +11,9 @@ if has('python3')
   silent! python3 1
 endif
 
+" add fzf to rtp
+set rtp+=/usr/local/opt/fzf
+
 " #### Requirements
 " for ctags setup see http://tinyurl.com/3lcrsrh
 " now using http://docs.ctags.io (install with)
@@ -19,22 +22,20 @@ endif
 
 " #### Plugins (https://github.com/junegunn/vim-plug)
 call plug#begin('~/.vim/plugged')
-  Plug 'mileszs/ack.vim'        " searching using ag (see below)
-  Plug 'junegunn/fzf'           " adds fzf to rtp (brew install fzf)
-  Plug 'junegunn/fzf.vim'       " fzf mappings for vim
-  Plug 'tpope/vim-fugitive'     " useful Git helpers and mappings
-  Plug 'tpope/vim-rhubarb'      " GitHub companion for fugitive
-  Plug 'tpope/vim-commentary'   " comment toggling
-  Plug 'tpope/vim-bundler'      " wrap bundle command
-  Plug 'tpope/vim-rails'        " useful Rails nav, helpers and mappings
-  Plug 'tpope/vim-endwise'      " end certain structures automatically
-  Plug 'tpope/vim-unimpaired'   " complementary pairs of mappings
-  Plug 'tpope/vim-dispatch'     " async testing/building
-  Plug 'godlygeek/tabular'      " easy aligning
-  Plug 'cocopon/iceberg.vim'    " colors
-
-  Plug 'itchyny/lightline.vim'  " nicer status line
-  Plug 'mhinz/vim-startify'     " nicer start screen with MRU
+  Plug 'mileszs/ack.vim'       " searching using ag (see below)
+  Plug 'junegunn/fzf.vim'      " fzf mappings for vim (must be in runtime path)
+  Plug 'tpope/vim-fugitive'    " useful Git helpers and mappings
+  Plug 'tpope/vim-rhubarb'     " GitHub companion for fugitive
+  Plug 'tpope/vim-commentary'  " comment toggling
+  Plug 'tpope/vim-bundler'     " wrap bundle command
+  Plug 'tpope/vim-rails'       " useful Rails nav, helpers and mappings
+  Plug 'tpope/vim-endwise'     " end certain structures automatically
+  Plug 'tpope/vim-unimpaired'  " complementary pairs of mappings
+  Plug 'tpope/vim-dispatch'    " async testing/building
+  Plug 'godlygeek/tabular'     " easy aligning
+  Plug 'cocopon/iceberg.vim'   " colors
+  Plug 'itchyny/lightline.vim' " nicer status line
+  Plug 'mhinz/vim-startify'    " nicer start screen with MRU
 
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " snippets
   Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'     " post gists

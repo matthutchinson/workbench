@@ -6,7 +6,12 @@
 
 export FZF_DEFAULT_OPTS='--height 40% --reverse' # set style
 export FZF_DEFAULT_COMMAND='ag -l -p "./"'       # ag pipe, respects ignores
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh           # bindings and completion
+
+# auto-completion
+[[ $- == *i* ]] && source "/usr/local/opt/fzf/shell/completion.zsh" 2> /dev/null
+
+# key bindings
+source "/usr/local/opt/fzf/shell/key-bindings.zsh"
 
 # helper function
 function _echo_and_execute {
