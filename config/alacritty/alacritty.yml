@@ -170,34 +170,59 @@ font:
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: false
 
-# Base16 Ocean Dark
-colors:
-  # Default colors
-  primary:
-    background: '0x000000'
-    foreground: '0xc0c5ce'
+schemes:
+  iceberg: &iceberg
+    primary:
+      background: '0x161821'
+      foreground: '0xd2d4de'
 
-  # Normal colors
-  normal:
-    black:   '0x000000'
-    red:     '0xbf616a'
-    green:   '0xa3be8c'
-    yellow:  '0xebcb8b'
-    blue:    '0x8fa1b3'
-    magenta: '0xb48ead'
-    cyan:    '0x96b5b4'
-    white:   '0xc0c5ce'
+    normal:
+      black:   '0x161821'
+      red:     '0xe27878'
+      green:   '0xb4be82'
+      yellow:  '0xe2a478'
+      blue:    '0x84a0c6'
+      magenta: '0xa093c7'
+      cyan:    '0x89b8c2'
+      white:   '0xc6c8d1'
 
-  # Bright colors
-  bright:
-    black:   '0x000000'
-    red:     '0xd08770'
-    green:   '0x343d46'
-    yellow:  '0x4f5b66'
-    blue:    '0xa7adba'
-    magenta: '0xdfe1e8'
-    cyan:    '0xab7967'
-    white:   '0x65737d'
+    bright:
+      black:   '0x6b7089'
+      red:     '0xe98989'
+      green:   '0xc0ca8e'
+      yellow:  '0xe9b189'
+      blue:    '0x91acd1'
+      magenta: '0xada0d3'
+      cyan:    '0x95c4ce'
+      white:   '0xd2d4de'
+
+  ocean_dark: &ocean_dark
+    primary:
+      background: '0x000000'
+      foreground: '0xc0c5ce'
+
+    normal:
+      black:   '0x000000'
+      red:     '0xbf616a'
+      green:   '0xa3be8c'
+      yellow:  '0xebcb8b'
+      blue:    '0x8fa1b3'
+      magenta: '0xb48ead'
+      cyan:    '0x96b5b4'
+      white:   '0xc0c5ce'
+
+    bright:
+      black:   '0x000000'
+      red:     '0xd08770'
+      green:   '0x343d46'
+      yellow:  '0x4f5b66'
+      blue:    '0xa7adba'
+      magenta: '0xdfe1e8'
+      cyan:    '0xab7967'
+      white:   '0x65737d'
+
+# chose from schemes above
+colors: *ocean_dark
 
 # Visual Bell
 #
