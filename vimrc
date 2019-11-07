@@ -33,8 +33,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-unimpaired'  " complementary pairs of mappings
   Plug 'tpope/vim-dispatch'    " async testing/building
   Plug 'godlygeek/tabular'     " easy aligning
-  Plug 'cocopon/iceberg.vim'   " colors
   Plug 'itchyny/lightline.vim' " nicer status line
+  Plug 'cocopon/iceberg.vim'   " colors
   Plug 'mhinz/vim-startify'    " nicer start screen with MRU
 
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " snippets
@@ -152,6 +152,13 @@ nnoremap <Right> <nop>
 " load matchit (use % to jump)
 filetype plugin indent on
 runtime macros/matchit.vim
+
+" turn on full color support, with fixes for TMUX
+if exists('+termguicolors')
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 
 " appearance
 set t_Co=256          " 256 color scheme
