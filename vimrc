@@ -22,8 +22,13 @@ set rtp+=/usr/local/opt/fzf
 
 " #### Plugins (https://github.com/junegunn/vim-plug)
 call plug#begin('~/.vim/plugged')
+  " essential
   Plug 'mileszs/ack.vim'       " searching using ag (see below)
   Plug 'junegunn/fzf.vim'      " fzf mappings for vim (must be in runtime path)
+  Plug 'cocopon/iceberg.vim'   " colors
+  Plug 'gkeep/iceberg-dark'    " darker lightline scheme for readability
+
+  " tpope
   Plug 'tpope/vim-fugitive'    " useful Git helpers and mappings
   Plug 'tpope/vim-rhubarb'     " GitHub companion for fugitive
   Plug 'tpope/vim-commentary'  " comment toggling
@@ -32,18 +37,18 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-endwise'     " end certain structures automatically
   Plug 'tpope/vim-unimpaired'  " complementary pairs of mappings
   Plug 'tpope/vim-dispatch'    " async testing/building
-  Plug 'godlygeek/tabular'     " easy aligning
-  Plug 'itchyny/lightline.vim' " nicer status line
-  Plug 'cocopon/iceberg.vim'   " colors
-  Plug 'mhinz/vim-startify'    " nicer start screen with MRU
-
-  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " snippets
-  Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'     " post gists
-  " Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'   " auto linting
 
   " tmux
   Plug 'benmills/vimux'                 " launch commands in tmux windows
   Plug 'christoomey/vim-tmux-navigator' " navigate vim splits & tmux panes
+
+  " non-essential
+  Plug 'godlygeek/tabular'     " easy aligning
+  Plug 'itchyny/lightline.vim' " nicer status line
+  Plug 'mhinz/vim-startify'    " nicer start screen with MRU
+  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " snippets
+  Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'     " post gists
+  " Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'   " auto linting
 
 call plug#end()
 
@@ -153,18 +158,14 @@ nnoremap <Right> <nop>
 filetype plugin indent on
 runtime macros/matchit.vim
 
-" turn on full color support, with fixes for TMUX
-if exists('+termguicolors')
-  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
+" enable true color in TMUX see :help xterm-true-color for details
+let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
 
 " appearance
-set t_Co=256          " 256 color scheme
+colorscheme iceberg   " https://cocopon.github.io/iceberg.vim/
 syntax on             " turn on syntax highlighting
-colorscheme iceberg
-
 set tw=80             " set textwidth
 set fo-=t             " set format options, don't auto-wrap at tw
 set colorcolumn=+1    " show vertical break at textwidth
@@ -331,7 +332,7 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-stand
 
 " lightline
 let g:lightline = {
-  \ 'colorscheme': 'iceberg',
+  \ 'colorscheme': 'icebergDark',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'fugitive', 'filename' ] ],
