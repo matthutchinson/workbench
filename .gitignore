@@ -10,3 +10,5 @@ config/configstore
 config/direnv
 irssi/certs/*.pem
 irssi/fnotify
+tmux/plugins
+tmux/resurrect
