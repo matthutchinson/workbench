@@ -25,8 +25,11 @@ call plug#begin('~/.vim/plugged')
   " essential
   Plug 'mileszs/ack.vim'       " searching using ag (see below)
   Plug 'junegunn/fzf.vim'      " fzf mappings for vim (must be in runtime path)
+
+  " appearance
   Plug 'cocopon/iceberg.vim'   " colors
   Plug 'gkeep/iceberg-dark'    " darker lightline scheme for readability
+  Plug 'itchyny/lightline.vim' " nicer status line
 
   " tpope
   Plug 'tpope/vim-fugitive'    " useful Git helpers and mappings
@@ -36,20 +39,21 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-rails'       " useful Rails nav, helpers and mappings
   Plug 'tpope/vim-endwise'     " end certain structures automatically
   Plug 'tpope/vim-unimpaired'  " complementary pairs of mappings
-  Plug 'tpope/vim-dispatch'    " async testing/building
+  Plug 'tpope/vim-dispatch'    " async building (tests, running etc.)
 
   " tmux
   Plug 'benmills/vimux'                 " launch commands in tmux windows
   Plug 'christoomey/vim-tmux-navigator' " navigate vim splits & tmux panes
 
   " non-essential
+  Plug 'janko/vim-test'        " async test runners (dispatch strategy)
   Plug 'godlygeek/tabular'     " easy aligning
-  Plug 'itchyny/lightline.vim' " nicer status line
   Plug 'mhinz/vim-startify'    " nicer start screen with MRU
-  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " snippets
-  Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'     " post gists
-  " Plug 'w0rp/ale' | Plug 'maximbaz/lightline-ale'   " auto linting
+  Plug 'mattn/webapi-vim'      " web requests (for gist-vim)
+  Plug 'mattn/gist-vim'        " post gists
 
+  " trialing
+  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " snippets
 call plug#end()
 
 " #### Shortcuts
@@ -99,9 +103,14 @@ nmap X "_d
 nmap XX "_dd
 vmap X "_d
 
-" vim-dispatch (e.g. rails testing)
-nmap <leader>t :w\|:Dispatch<cr>
-nmap <leader>T :w\|:.Dispatch<cr>
+" vim-test / vim-dispatch
+let test#strategy = "dispatch"
+
+nmap <leader>t :w\|:TestNearest<cr>
+nmap <leader>T :w\|:TestFile<cr>
+nmap <leader>ts w\|:TestSuite<cr>
+nmap <leader>tl w\|:TestLast<cr>
+nmap <leader>tv :TestVisit<cr>
 
 " use leader to interact with the system clipboard on y(ank), c(opy), x(elete)
 nnoremap <Leader>p "*]p
@@ -537,8 +546,6 @@ if !exists("autocommands_loaded")
 
   " rust / cargo
   au Filetype rust map <Leader>r :w\|:call VimuxRunCommand("clear; cargo run")<cr>
-  au Filetype rust map <Leader>t :w\|:Dispatch cargo test<cr>
-  au Filetype rust map <Leader>T :w\|:Dispatch cargo test %<cr>
 
   " spellcheck highlights
   highlight clear SpellBad
