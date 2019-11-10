@@ -32,8 +32,8 @@ function battery_status {
         fi
 
         # color range
-        local bg_colors=(088 167 173 179 002)
-        local fg_colors=(015 000 000 000 000)
+        local bg_colors=(160 167 173 179 002)
+        local fg_colors=(255 000 000 000 000)
         local range=$(($percent / (100 / ${#bg_colors[*]})))
 
         # not fully charged? show the segment
