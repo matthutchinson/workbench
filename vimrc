@@ -27,7 +27,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf.vim'      " fzf mappings for vim (must be in runtime path)
 
   " appearance
-  Plug 'cocopon/iceberg.vim'   " colors
+  Plug 'cocopon/iceberg.vim'   " colorscheme
   Plug 'gkeep/iceberg-dark'    " darker lightline scheme for readability
   Plug 'itchyny/lightline.vim' " nicer status line
 
