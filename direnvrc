@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+set -e
+
+################################################################################
+# find_up_ - https://github.com/direnv/direnv/wiki/Find-Up-with-Alternates
+#          - e.g. `find_up_ .node-version .nvmrc`
+################################################################################
+
+find_up_()
+{
+  (
+    while true; do
+      for v in "${@}"; do
+        if [[ -f "${v}" ]]; then
+          echo "${PWD}/${v}"
+          return 0
+        fi
+      done
+
+      if [[ "${PWD}" == / ]] || [[ "${PWD}" == // ]]; then
+        return 1
+      fi
+
+      cd ..
+    done
+  )
+}
+
+read_version_file()
+{
+  local file
+  file="$(find_up_ "${@}")"
+
+  [[ -z "${file}" ]] && return
+
+  watch_file "${file}"
+  ruby -e "puts ARGF.readline" 2> /dev/null "${file}"
+}
+
+################################################################################
+# chruby - https://github.com/direnv/direnv/wiki/Ruby#-chruby
+################################################################################
+
+use_chruby()
+{
+  local version
+  version="${1}"
+
+  [[ "${version}" == --auto ]] && version="$(read_version_file .ruby-version)"
+  [[ -z "${version}" ]] && return
+
+  local chruby
+
+  if has brew; then
+    local brew_prefix
+    brew_prefix="$(brew --prefix)"
+
+    if [[ -e "${brew_prefix}/opt/chruby/share/chruby/chruby.sh" ]]; then
+      chruby="${brew_prefix}/opt/chruby/share/chruby/chruby.sh"
+    fi
+  fi
+
+  [[ -z "${chruby}" ]] && [[ -e /usr/local/share/chruby/chruby.sh ]] &&
+    chruby=/usr/local/share/chruby/chruby.sh
+
+  [[ -z "${chruby}" ]] && return
+
+  source "${chruby}"
+  chruby "${version}"
+}
