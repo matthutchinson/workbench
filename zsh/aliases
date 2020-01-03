@@ -42,11 +42,11 @@ alias cdob='cd ~/apps/open-banking-on-rails'
 ################################################################################
 
 alias be='bundle exec'
-alias ss='bundle exec rails server'
-alias sc='bundle exec rails console'
-alias sg='bundle exec rails generate'
-alias rdbp='bundle exec rake db:prepare'
-alias rdbpp='bundle exec rake parallel:prepare'
+alias ss='rails server'
+alias sc='rails console'
+alias sg='rails generate'
+alias rdbp='rake db:prepare'
+alias rdbpp='rake parallel:prepare'
 alias tdl='tail -f ./log/development.log'
 alias tdlp="tdl | egrep 'Completed|Processing|Parameters\:'"
 alias rst='touch ./tmp/restart.txt'
