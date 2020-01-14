@@ -8,8 +8,8 @@ loaded                  = []
 IRB.conf[:AUTO_INDENT]  = true
 IRB.conf[:SAVE_HISTORY] = 1000
 
-# use gem install wirble hirb awesome_print pry pry-doc pry-nav
-%w(wirble hirb awesome_print pry pry-doc pry-nav).each do |gem|
+# use gem install wirble hirb awesome_print pry pry-nav
+%w(wirble hirb awesome_print pry pry-nav).each do |gem|
   begin
     require gem
     loaded << gem

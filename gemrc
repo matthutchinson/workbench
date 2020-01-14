@@ -1,6 +1,7 @@
 ---
 gem: --no-document
 :sources:
+- http://rubygems.eng.fre.ag/private/
 - https://rubygems.org/
 :update_sources: true
 :backtrace: false
