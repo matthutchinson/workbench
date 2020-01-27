@@ -93,7 +93,7 @@ function git-status-fetch {
 function git-fetch-commit-time {
   # time since last local commit (short-handed, e.g 1d, 4h, 3m)
   if (( ! ${+user_data[git_time]} )); then
-    user_data[git_time]="$(git log --format='%cr' -n1 | sed 's/\([0-9]*\) \([ywdhms]\).*/\1\2/')"
+    user_data[git_time]="$(git log 2>/dev/null --format='%cr' -n1 | sed 's/\([0-9]*\) \([ywdhms]\).*/\1\2/')"
   fi
 }
 
@@ -248,6 +248,8 @@ function +vi-git-branch {
   build-segments
   git-fetch-commit-time
 
+  local segment=""
+
   # export branch name as $BR for other scripts
   local branch=$hook_com[branch_orig]
   export BR=$branch
@@ -255,11 +257,16 @@ function +vi-git-branch {
   # truncate long branch names
   local branch_limit=20
   local branch_icon='%{%G%}'
+
   if [ ${#branch} -gt $branch_limit ]; then
     branch="${branch[0,(( $branch_limit-1 ))]}…"
   fi
 
-  local segment=" $user_data[git_time] ${branch_icon} ${branch} "
+  if [[ ! -z ${user_data[git_time]} ]]; then
+    segment+=" $user_data[git_time]"
+  fi
+
+  segment+=" ${branch_icon} ${branch} "
   hook_com[branch]=${user_data[divider_bra]}
   hook_com[branch]+="$(margin-trim $segment)"
   hook_com[branch]+=${user_data[closing_bra]}
@@ -269,21 +276,25 @@ function +vi-git-branch {
 function +vi-git-revision {
   build-segments
   local revision_limit=5
-  local segment=" ${hook_com[revision_orig][0,$revision_limit]} "
+  local revision=${hook_com[revision_orig]}
 
-  if [[ ! -z ${user_data[git_status]} ]]; then
-    hook_com[revision]=${user_data[changes_rev]}
-  else
-    if [[ ! -z ${hook_com[action_orig]} ]]; then
-      hook_com[revision]=${user_data[actions_rev]}
+  if [[ ! -z ${revision} ]]; then
+    local segment=" ${revision[0,$revision_limit]} "
+
+    if [[ ! -z ${user_data[git_status]} ]]; then
+      hook_com[revision]=${user_data[changes_rev]}
     else
-      hook_com[revision]=${user_data[divider_rev]}
+      if [[ ! -z ${hook_com[action_orig]} ]]; then
+        hook_com[revision]=${user_data[actions_rev]}
+      else
+        hook_com[revision]=${user_data[divider_rev]}
+      fi
     fi
-  fi
 
-  hook_com[revision]+=${user_data[rev_start]}
-  hook_com[revision]+="$(margin-trim $segment)"
-  hook_com[revision]+=$reset
+    hook_com[revision]+=${user_data[rev_start]}
+    hook_com[revision]+="$(margin-trim $segment)"
+    hook_com[revision]+=$reset
+  fi
 }
 
 function +vi-git-copied-files {
