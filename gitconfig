@@ -29,7 +29,7 @@
   staged = diff --cached
   unstaged = diff
   logline = log --pretty=oneline
-  amend = commit --amend
+  amend = commit --amend --no-edit
   plre = pull --rebase
   unstage = reset HEAD
   last = log -p -n1 --pretty=fuller

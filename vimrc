@@ -534,7 +534,6 @@ if !exists("autocommands_loaded")
   au BufRead,BufNewFile *.mxml set ft=mxml
   au BufNewFile,BufRead *.json set ft=javascript
   au BufNewFile,BufRead *.god  set ft=ruby
-  au BufNewFile,BufRead {*.md,*.markdown} set ft=markdown
   au BufNewFile,BufRead /private/etc/apache2/*.conf* set ft=apache
   au BufRead,BufNewFile {Capfile,Gemfile,Appraisals,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
