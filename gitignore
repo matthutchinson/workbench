@@ -10,3 +10,4 @@ bundle/cache
 .envrc
 config/master.key
 config/credentials/*.key
+config/gh
