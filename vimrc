@@ -63,12 +63,19 @@ map <Esc>[Z <S-Tab>
 map <Esc>[24~ <F12>
 
 map <leader>w :w!<cr>
+map <leader>w :w!<cr>
 map <leader>e :new <C-R>=expand("%:p:h")<cr><cr>
 map <leader>r :w !%:p<cr>
 map <leader>ev :sp ~/.vimrc<cr>
 map <leader>sv :so ~/.vimrc<cr>
 map <leader>cd :lcd %:h<cr>
 map <leader>M :! mate %<cr>
+
+" quick jump out of insert mode with jj (back to normal)
+inoremap jj <ESC>
+
+" visually select the last paste
+nnoremap <leader>v V`]
 
 " re-tag project with ctags
 map <leader>ct :!echo 'retagging ctags...'; ctags --tag-relative -Rf.git/tags.$$ --exclude=.git --languages=-javascript,sql; mv .git/tags.$$ .git/tags<cr><cr>
@@ -102,6 +109,10 @@ nnoremap <leader>b :Buffer<cr>
 nmap X "_d
 nmap XX "_dd
 vmap X "_d
+
+" underlines with `=` and `-` chars
+nnoremap <leader>1 yypVr-
+nnoremap <leader>2 yypVr=
 
 " vim-test / vim-dispatch
 let test#strategy = "dispatch"
@@ -151,15 +162,20 @@ map <leader>ch :s/:\([^ ]*\)\(\s*\)=>/\1:/g<cr>
 map <leader>sh :s/[\"']\(.*\)[\"']\s*=>/\1:/g<cr>
 " run spec
 map <leader>rs :<C-U>!bundle exec rspec <c-r>=expand("%:p") <cr> -c -l <c-r>=line(".") <cr><cr>
-" alt file with vim-rails and split to view
+" alt file with vim-rails and view switch (switch to rails view)
 map <leader>a :A<cr>
-map <leader>v :SView<cr>
+map <leader>vs :SView<cr>
 
-" turn OFF evil arrow keys
+" turn OFF arrow keys in both normal and insert
 nnoremap <Up>    <nop>
 nnoremap <Down>  <nop>
 nnoremap <Left>  <nop>
 nnoremap <Right> <nop>
+inoremap <Up>    <nop>
+inoremap <Down>  <nop>
+inoremap <Left>  <nop>
+inoremap <Right> <nop>
+
 
 " #### Editing
 
@@ -173,28 +189,29 @@ let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 
 " appearance
-colorscheme iceberg   " https://cocopon.github.io/iceberg.vim/
-syntax on             " turn on syntax highlighting
-set tw=80             " set textwidth
-set fo-=t             " set format options, don't auto-wrap at tw
-set colorcolumn=+1    " show vertical break at textwidth
-set number            " show line numbers
-set ruler             " show cursor position
-set title             " set the terminal's title
-set visualbell        " visual flash
-set noerrorbells      " no beeping please
-set laststatus=2      " always show a status bar
-set cursorline        " only use cursorline for current window
-set cpoptions+=$      " show $ to indicate editing range
+colorscheme iceberg         " https://cocopon.github.io/iceberg.vim/
+syntax on                   " turn on syntax highlighting
+set tw=80                   " set textwidth
+set fo-=t                   " set format options, don't auto-wrap at tw
+set colorcolumn=+1          " show vertical break at textwidth
+set number                  " show line numbers
+set ruler                   " show cursor position
+set title                   " set the terminal's title
+set visualbell              " visual flash
+set noerrorbells            " no beeping please
+set laststatus=2            " always show a status bar
+set cursorline              " only use cursorline for current window
+set cpoptions+=$            " show $ to indicate editing range
+set listchars=tab:▸\ ,eol:¬ " use these special chars with :set list
 
 " speedy scrolling
 syntax sync minlines=100
 set nocursorcolumn
-set norelativenumber
 set ttyfast
 set ttyscroll=3
 set lazyredraw
 set regexpengine=1 " issue with ruby syntax highlighting (use older RE engine)
+set relativenumber " show relative line numbers
 
 " general
 set encoding=utf-8
@@ -267,7 +284,7 @@ map <ENTER><ENTER> gx
 " start a global search (will use ag)
 map <C-F> :Ack --hidden<space>
 
-" tabularize
+" tabularize (think 'align')
 nmap <leader>a> :Tabularize /=><cr>
 vmap <leader>a> :Tabularize /=><cr>
 nmap <leader>a= :Tabularize /=<cr>
