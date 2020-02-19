@@ -11,8 +11,9 @@ brew install httpie      # https://httpie.org
 brew cask install ngrok  # ngrok - https://ngrok.com
 brew install direnv      # direnv - https://direnv.net
 brew install terminal-notifier # terminal-notifier - https://github.com/julienXX/terminal-notifier
-brew install hexyl       # https://github.com/sharkdp/hexyl
-brew install tig         # https://jonas.github.io/tig/
+brew install hexyl        # https://github.com/sharkdp/hexyl
+brew install tig          # https://jonas.github.io/tig/
+brew install github/gh/gh # https://cli.github.com
 
 # node
 npm install -g tldr # http://tldr.sh

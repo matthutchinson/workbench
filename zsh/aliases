@@ -24,9 +24,9 @@ alias intg='devkit server list | grep -E "int[0-9]+\s+$" | head -n 1 | xargs dev
 # Overrides
 ################################################################################
 
-alias cat='bat --theme=TwoDark'
-alias ping='prettyping'
-alias top='htop'
+alias cat='bat --theme=TwoDark' # https://github.com/sharkdp/bat
+alias ping='prettyping'         # https://github.com/denilsonsa/prettyping
+alias top='htop'                # http://hisham.hm/htop/
 
 ################################################################################
 # Quick cds
@@ -62,6 +62,11 @@ alias gl="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | vim -R -c '
 alias grm='git rebase master -i'
 alias gca='git commit --amend --no-edit'
 alias gpf='git push --force-with-lease'
+
+# GitHub CLI - https://cli.github.com
+
+alias gpr='gh pr create'
+alias gcsi='gh issue list --label "Core Services"'
 
 ################################################################################
 # Disabled corrections
