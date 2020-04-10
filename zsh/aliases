@@ -5,7 +5,8 @@
 ################################################################################
 
 alias fhp='cd ~/Documents/firehose/job\ prep/;ll;mate ~/Documents/firehose/resources/mentor_session_test.rb;open https://www.thefirehoseproject.com/courses'
-alias irc='ssh kessel -t "screen -x"'
+alias irc='ssh kessel.lan -t "screen -x"'
+alias ircr='ssh kessel -t "screen -x"'
 alias scratch='vi ~/Documents/system/notes/scratch.md'
 alias todos='vi ~/Documents/system/notes/todos.md'
 alias secrets='vi ~/Documents/system/notes/secrets.enc.md'
@@ -46,7 +47,8 @@ alias ss='rails server'
 alias sc='rails console'
 alias sg='rails generate'
 alias rdbp='rake db:prepare'
-alias rdbpp='rake parallel:prepare'
+alias rdbtp='rake db:prepare RAILS_ENV=test'
+alias rdbmt='rake db:migrate RAILS_ENV=test'
 alias tdl='tail -f ./log/development.log'
 alias tdlp="tdl | egrep 'Completed|Processing|Parameters\:'"
 alias rst='touch ./tmp/restart.txt'
