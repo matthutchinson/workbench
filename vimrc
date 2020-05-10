@@ -117,8 +117,8 @@ nnoremap <leader>2 yypVr=
 " vim-test / vim-dispatch
 let test#strategy = "dispatch"
 
-nmap <leader>t :w\|:TestNearest<cr>
-nmap <leader>T :w\|:TestFile<cr>
+nmap <leader>T :w\|:TestNearest<cr>
+nmap <leader>t :w\|:TestFile<cr>
 nmap <leader>ts w\|:TestSuite<cr>
 nmap <leader>tl w\|:TestLast<cr>
 nmap <leader>tv :TestVisit<cr>
