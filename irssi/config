@@ -4,7 +4,7 @@ servers = (
     chatnet = "Freenode";
     port = "6697";
     use_tls = "yes";
-    tls_cert = "~/.irssi/certs/freenode.pem";
+    tls_cert = "/home/matt/.irssi/certs/freenode.pem";
     tls_verify = "yes";
     autoconnect = "yes";
   },
@@ -220,9 +220,9 @@ statusbar = {
     topic = " $topic";
     topic_empty = " Irssi v$J - http://www.irssi.org";
 
-    lag = "{sb Lag: $0-}";
+    lag = "{sb Lag: %m$0-%n}";
     act = "{sb Act: $0-}";
-    more = "-- more --";
+    more = "%k%3-- more --%n";
   };
 
   default = {
@@ -307,7 +307,10 @@ settings = {
     term_force_colors = "yes";
     scrollback_time = "7day ";
   };
-  "fe-common/core" = { theme = "default"; };
+  "fe-common/core" = { 
+    theme = "solarized-universal";
+    hilight_color = "= %R"; 
+  };
   "perl/core/scripts" = {
     usercount_show_zero = "yes";
     usercount_show_ircops = "yes";
@@ -327,8 +330,8 @@ hilights = (
     word = "yes";
     fullword = "yes";
   },
-  { text = "matt"; nick = "no"; word = "yes"; },
-  { text = "matt_hiddenloop"; nick = "no"; word = "yes"; }
+  { text = "matt"; nick = "yes"; word = "yes"; color = "%M"; },
+  { text = "matt_hiddenloop"; nick = "yes"; word = "yes"; color = "%M"; }
 );
 windows = {
   1 = { immortal = "yes"; name = "(status)"; level = "ALL"; };
