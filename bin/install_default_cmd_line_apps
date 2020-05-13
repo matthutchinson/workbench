@@ -14,6 +14,7 @@ brew install terminal-notifier # terminal-notifier - https://github.com/julienXX
 brew install hexyl        # https://github.com/sharkdp/hexyl
 brew install tig          # https://jonas.github.io/tig/
 brew install github/gh/gh # https://cli.github.com
+brew install overmind     # https://github.com/DarthSim/overmind
 
 # node
 npm install -g tldr # http://tldr.sh
