@@ -3,19 +3,23 @@
 require 'rubygems'
 require 'irb/completion'
 require 'irb/ext/save-history'
+require "amazing_print"
 
 loaded                  = []
 IRB.conf[:AUTO_INDENT]  = true
 IRB.conf[:SAVE_HISTORY] = 1000
 
-# use gem install wirble hirb awesome_print pry pry-nav
-%w(wirble hirb awesome_print pry pry-nav).each do |gem|
+# use gem install wirble hirb pry pry-nav
+%w(wirble hirb pry pry-nav).each do |gem|
   begin
     require gem
     loaded << gem
   rescue LoadError
   end
 end
+
+# use Amazing Print
+AmazingPrint.irb! if defined?(AmazingPrint)
 
 # configure wirble
 if defined?(Wirble)
