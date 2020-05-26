@@ -341,9 +341,6 @@ let g:startify_custom_header =
       \ 'map(g:ascii + startify#fortune#quote(), "\"   \".v:val")'
 
 
-" ag
-let g:ag_working_path_mode="r"
-
 " gist-vim
 let g:gist_open_browser_after_post = 1
 let g:gist_detect_filetype = 1
