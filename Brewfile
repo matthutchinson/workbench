@@ -24,9 +24,6 @@ brew "httpie"
 # https://direnv.net
 brew "direnv"
 
-# http://tldr.sh
-brew "tldr"
-
 # https://github.com/julienXX/terminal-notifier
 brew "terminal-notifier"
 
