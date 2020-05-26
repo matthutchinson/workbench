@@ -23,7 +23,7 @@ set rtp+=/usr/local/opt/fzf
 " #### Plugins (https://github.com/junegunn/vim-plug)
 call plug#begin('~/.vim/plugged')
   " essential
-  Plug 'mileszs/ack.vim'       " searching using ag (see below)
+  Plug 'mileszs/ack.vim'       " searching using rg (see below)
   Plug 'junegunn/fzf.vim'      " fzf mappings for vim (must be in runtime path)
 
   " appearance
@@ -237,9 +237,9 @@ set incsearch                     " highlight matches as you type
 set tags+=.git/tags               " include tags from here
 set hlsearch                      " highlight matches
 
-" use Ag (silver searcherf) instead of grep / ack
-set grepprg=ag\ --nogroup\ --nocolor\ --hidden
-let g:ackprg='ag --vimgrep --smart-case'
+" use rg (ripgrep) instead of grep / ack
+set grepprg=rg\ --vimgrep\ --smart-case
+let g:ackprg='rg --vimgrep --smart-case'
 
 " scrolling
 set nowrap                        " turn on line wrapping
@@ -281,7 +281,7 @@ map <ENTER><ENTER> gx
 
 " #### Plugin Shortcuts
 
-" start a global search (will use ag)
+" start a global search
 map <C-F> :Ack --hidden<space>
 
 " tabularize (think 'align')

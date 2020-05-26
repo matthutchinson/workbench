@@ -16,6 +16,7 @@ alias vnc-hoth='ssh -f hoth.vnc.tunnel -N; open vnc://localhost:5999'
 alias tml='tmux ls'
 alias lc='colorls' # https://github.com/athityakumar/colorls
 alias ll='colorls -lA --sd --gs -t' # 1 per line, newest & dirs first, git info
+
 alias tree='colorls --tree' # tree with dirs first
 alias wget='wget --no-hsts' # stop logging .hsts files
 alias help='tldr'  # http://tldr.sh
@@ -76,3 +77,4 @@ alias gcsi='gh issue list --label "Core Services"'
 
 alias rspec='nocorrect rspec'
 alias spring='nocorrect spring'
+alias rg='nocorrect rg'

@@ -39,5 +39,16 @@ brew "github/gh/gh"
 # https://github.com/DarthSim/overmind
 brew "overmind"
 
+# https://tldr.sh
+brew "tldr"
+
+# https://github.com/BurntSushi/ripgrep
+brew "rg"
+
+# https://stedolan.github.io/jq/
+brew "jq"
+
+# Casks
+
 # https://ngrok.com
 cask "ngrok"
