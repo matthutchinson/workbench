@@ -134,6 +134,13 @@ vnoremap <Leader>c "*c
 vnoremap <Leader>x "*d
 
 " fzf
+
+" global keyword searching with Rg and previews
+command! -bang -nargs=* Rg
+\ call fzf#vim#grep(
+\   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+\   fzf#vim#with_preview(), <bang>0)
+
 nnoremap <space> :FZF<cr>
 nnoremap <leader>m :Marks<cr>
 nnoremap <leader>s :Snippets<cr>
