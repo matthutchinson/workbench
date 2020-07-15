@@ -245,8 +245,10 @@ set tags+=.git/tags               " include tags from here
 set hlsearch                      " highlight matches
 
 " use rg (ripgrep) instead of grep / ack
-set grepprg=rg\ --vimgrep\ --smart-case
-let g:ackprg='rg --vimgrep --smart-case'
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --smart-case
+  let g:ackprg='rg --vimgrep --smart-case'
+endif
 
 " scrolling
 set nowrap                        " turn on line wrapping
@@ -289,7 +291,7 @@ map <ENTER><ENTER> gx
 " #### Plugin Shortcuts
 
 " start a global search
-map <C-F> :Ack --hidden<space>
+map <C-F> :Ack<space>
 
 " tabularize (think 'align')
 nmap <leader>a> :Tabularize /=><cr>
