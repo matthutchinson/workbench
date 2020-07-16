@@ -16,5 +16,9 @@ PATH_add ~/.cargo/bin
 # switch nodes, with `use node` and a local ~/.nvmrc or ~/.node-version
 export NODE_VERSIONS=~/.node-versions
 
+# overmind config
+export OVERMIND_IGNORE_PROCESSES=release
+export OVERMIND_AUTO_RESTART=web,worker
+
 # ensure aws-vault uses login keychain
 export AWS_VAULT_KEYCHAIN_NAME=login
