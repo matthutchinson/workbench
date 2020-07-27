@@ -99,3 +99,7 @@
 	verbose = true
 [diff]
 	noprefix = true
+[pull]
+	rebase = false
+[url "git@github.com:"]
+	insteadOf = https://github.com/
