@@ -27,9 +27,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf.vim'      " fzf mappings for vim (must be in runtime path)
 
   " appearance
-  Plug 'cocopon/iceberg.vim'   " colorscheme
-  Plug 'gkeep/iceberg-dark'    " darker lightline scheme for readability
-  Plug 'itchyny/lightline.vim' " nicer status line
+  Plug 'cocopon/iceberg.vim'     " colorscheme
+  Plug 'gkeep/iceberg-dark'      " darker lightline scheme for readability
+  Plug 'itchyny/lightline.vim'   " nicer status line
+  Plug 'plasticboy/vim-markdown' " non-broken markdown highlighting
 
   " tpope
   Plug 'tpope/vim-fugitive'    " useful Git helpers and mappings
@@ -121,6 +122,7 @@ nmap <leader>T :w\|:TestNearest<cr>
 nmap <leader>t :w\|:TestFile<cr>
 nmap <leader>ts w\|:TestSuite<cr>
 nmap <leader>tl w\|:TestLast<cr>
+
 nmap <leader>tv :TestVisit<cr>
 
 " use leader to interact with the system clipboard on y(ank), c(opy), x(elete)
@@ -329,7 +331,7 @@ map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
 nmap <leader>dl :diffget LOCAL<cr>]c
 nmap <leader>dr :diffget REMOTE<cr>]c
 
-" ale
+" ALE
 nmap <leader>l :call ALELintAndOpen()<cr>
 nnoremap <leader>lo :lopen<cr>
 nnoremap <leader>ln :ALENextWrap<cr>
@@ -548,6 +550,8 @@ command! InsertTime :normal a<c-r>=strftime('%F %H:%M:%S.0 %z')<cr>
 if !exists("autocommands_loaded")
   let autocommands_loaded = 1
   let g:markdown_fenced_languages = ['html', 'css', 'javascript', 'ruby', 'python', 'bash=sh', 'yaml', 'json', 'go', 'php']
+  let g:vim_markdown_auto_insert_bullets = 0
+  let g:vim_markdown_new_list_item_indent = 0
 
   au WinEnter,FocusGained * setlocal cursorline
   au WinLeave,FocusLost   * setlocal nocursorline
@@ -557,6 +561,7 @@ if !exists("autocommands_loaded")
   au BufRead,BufNewFile *.mxml set ft=mxml
   au BufNewFile,BufRead *.json set ft=javascript
   au BufNewFile,BufRead *.god  set ft=ruby
+
   au BufNewFile,BufRead /private/etc/apache2/*.conf* set ft=apache
   au BufRead,BufNewFile {Capfile,Gemfile,Appraisals,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
