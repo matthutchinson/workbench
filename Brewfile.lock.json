@@ -2,7 +2,7 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "2f64602cbb1ad803e642a6c9ef67a8a453523d23"
+        "revision": "ff97a486e8f7a2899f07a6daba217376808c98c0"
       },
       "heroku/brew": {
         "revision": "43de466d82a7ae152fa2f6fc3b0ae6598129ad38"
@@ -538,6 +538,12 @@
         "options": {
           "full_name": "ngrok"
         }
+      },
+      "aws-vault": {
+        "version": "5.4.4",
+        "options": {
+          "full_name": "aws-vault"
+        }
       }
     }
   },
@@ -546,7 +552,7 @@
       "catalina": {
         "HOMEBREW_VERSION": "2.4.13",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "e7456702a97b06445c0fe0da82327a1e192a38dc",
+        "Homebrew/homebrew-core": "5fde3f3ffcf1d039277a20b9a4d6b755b0cd8857",
         "CLT": "12.0.0.0.1.1597368733",
         "Xcode": "11.6",
         "macOS": "10.15.6"

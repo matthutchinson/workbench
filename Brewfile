@@ -66,6 +66,5 @@ tap "heroku/brew"
 brew "heroku"
 
 # Casks
-
-# https://ngrok.com
 cask "ngrok"
+cask "aws-vault"

@@ -8,6 +8,7 @@ vim/autoload/plug.vim
 config/htop
 config/configstore
 config/direnv
+config/devkit
 irssi/certs/*.pem
 irssi/fnotify
 tmux/plugins
