@@ -48,6 +48,23 @@ brew "rg"
 # https://stedolan.github.io/jq/
 brew "jq"
 
+brew "scmpuff"
+brew "node"
+brew "postgresql"
+brew "git"
+brew "vim"
+brew "wget"
+brew "puma/puma/puma-dev"
+brew "yarn"
+brew "rabbitmq"
+brew "memcached"
+brew "redis"
+brew "mercurial"
+brew "ffmpeg"
+
+tap "heroku/brew"
+brew "heroku"
+
 # Casks
 
 # https://ngrok.com

@@ -17,7 +17,7 @@ PATH_add ~/.cargo/bin
 export NODE_VERSIONS=~/.node-versions
 
 # overmind config
-export OVERMIND_IGNORE_PROCESSES=release
+export OVERMIND_IGNORED_PROCESSES=release
 export OVERMIND_AUTO_RESTART=web,worker
 
 # ensure aws-vault uses login keychain
