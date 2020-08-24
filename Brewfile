@@ -61,6 +61,7 @@ brew "memcached"
 brew "redis"
 brew "mercurial"
 brew "ffmpeg"
+brew "awscli"
 
 tap "heroku/brew"
 brew "heroku"
