@@ -99,6 +99,8 @@
 	verbose = true
 [diff]
 	noprefix = true
+[diff "rspec"]
+  xfuncname = "^[ \t]*((RSpec|describe|context|it|before|after|around|feature|scenario|background)[ \t].*)$"
 [pull]
 	rebase = false
 [url "git@github.com:"]
