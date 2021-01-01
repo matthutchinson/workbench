@@ -48,6 +48,9 @@ brew "rg"
 # https://stedolan.github.io/jq/
 brew "jq"
 
+# https://github.com/antonmedv/fx
+brew "fx"
+
 brew "scmpuff"
 brew "node"
 brew "postgresql"
