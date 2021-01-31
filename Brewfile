@@ -15,6 +15,9 @@ brew "bat"
 # https://github.com/denilsonsa/prettyping
 brew "prettyping"
 
+# https://github.com/orf/gping
+brew "gping"
+
 # http://hisham.hm/htop/
 brew "htop"
 
