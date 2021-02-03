@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# Requirements
+#   brew install restic #  https://github.com/restic/restic
+#
+#   Ensure you have a keychain entries for these credentials
+#
+#   RESTIC_B2_ACCOUNT_ID
+#   RESTIC_B2_ACCOUNT_KEY
+#   RESTIC_REPOSITORY
+#   RESTIC_PASSWORD
+
+# export ENV var from the OSX keychain against $USER account
+#  - args {env var name} {service name}
+function export_osx_keychain_password() {
+  export $1=`security 2>&1 > /dev/null find-generic-password -s $2 -a $USER -g | sed 's/.*"\(.*\)"/\1/' | head -1`
+}
+
+# request unlock to avoid multiple prompts
+security -i unlock-keychain
+
+# export ENV vars from keychain for duplicity commands
+export_osx_keychain_password "B2_ACCOUNT_ID" "RESTIC_B2_ACCOUNT_ID"
+export_osx_keychain_password "B2_ACCOUNT_KEY" "RESTIC_B2_ACCOUNT_KEY"
+export_osx_keychain_password "RESTIC_REPOSITORY" "RESTIC_REPOSITORY"
+export_osx_keychain_password "RESTIC_PASSWORD" "RESTIC_PASSWORD"
+
+backup_dirs="/Users/$USER/Downloads /Users/$USER/Documents /Users/$USER/Desktop /Users/$USER/apps /Users/$USER/code /Users/$USER/.ssh /Users/$USER/.aws /Users/$USER/.gnupg"
+exclude_file="/Users/$USER/.config/restic/excludes.txt"
+
+if [ "$1" == "restore" ]; then
+  # restore
+  echo "Starting Restore (to /)"
+  restic -r $RESTIC_REPOSITORY restore --verbose latest --target /
+else
+  echo "Starting Backup"
+  restic -r $RESTIC_REPOSITORY --verbose backup $backup_dirs --exclude-file=$exclude_file
+fi
+
+# clear out sensitive ENV vars
+export B2_ACCOUNT_ID=
+export B2_ACCOUNT_KEY=
+export RESTIC_REPOSITORY=
+export RESTIC_PASSWORD=
