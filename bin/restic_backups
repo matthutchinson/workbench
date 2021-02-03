@@ -10,6 +10,9 @@
 #   RESTIC_REPOSITORY
 #   RESTIC_PASSWORD
 
+# restore to / with
+# restic -r $RESTIC_REPOSITORY restore --verbose latest --target /
+
 # export ENV var from the OSX keychain against $USER account
 #  - args {env var name} {service name}
 function export_osx_keychain_password() {
@@ -28,14 +31,14 @@ export_osx_keychain_password "RESTIC_PASSWORD" "RESTIC_PASSWORD"
 backup_dirs="/Users/$USER/Downloads /Users/$USER/Documents /Users/$USER/Desktop /Users/$USER/apps /Users/$USER/code /Users/$USER/.ssh /Users/$USER/.aws /Users/$USER/.gnupg"
 exclude_file="/Users/$USER/.config/restic/excludes.txt"
 
-if [ "$1" == "restore" ]; then
-  # restore
-  echo "Starting Restore (to /)"
-  restic -r $RESTIC_REPOSITORY restore --verbose latest --target /
+if [ "$1" == "--local" ]; then
+  echo "Starting Backup (local)"
+  export RESTIC_REPOSITORY="/Volumes/WD/restic"
 else
-  echo "Starting Backup"
-  restic -r $RESTIC_REPOSITORY --verbose backup $backup_dirs --exclude-file=$exclude_file
+  echo "Starting Backup (B2)"
 fi
+
+restic -r $RESTIC_REPOSITORY --verbose backup $backup_dirs --exclude-file=$exclude_file
 
 # clear out sensitive ENV vars
 export B2_ACCOUNT_ID=
