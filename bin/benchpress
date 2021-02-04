@@ -25,31 +25,31 @@ Dir.chdir(workbench_path) do
   end
 end
 
-# install/update launchd for this host (if we have any)
-launchd_scripts = Dir.glob("#{workbench_path}/launchd/#{host}/*")
+# install/update enabled launchd's
+launchd_scripts = Dir.glob("#{workbench_path}/launchd/enabled/*")
 if launchd_scripts.empty?
-  puts "  No launchd scripts to apply for #{host} ..."
+  puts "  No launchd scripts to apply ..."
 else
-  puts "  Installing launchd scripts for #{host} ..."
+  puts "  Installing user launchd scripts (~/Library/LaunchAgents) ..."
   launchd_scripts.each do |launchd_script|
     script_name = launchd_script.split('/').last
     launch_agent_dir = "#{ENV['HOME']}/Library/LaunchAgents"
 
     if File.exists?("#{launch_agent_dir}/#{script_name}")
-      puts "    - #{script_name} (relaunching) ..."
-      `launchctl unload -w #{launch_agent_dir}/#{script_name} > /dev/null`
-      `launchctl load -w #{launch_agent_dir}/#{script_name}`
-    else
-      puts "    - #{script_name} (adding) ..."
-      `ln -sfh #{launchd_script} #{launch_agent_dir}`
-      `launchctl load -w #{launch_agent_dir}/#{script_name}`
+      puts "    - #{script_name} (unloading) ..."
+      `sudo launchctl unload -w #{launch_agent_dir}/#{script_name} > /dev/null`
     end
+
+    puts "    - #{script_name} (loading) ..."
+    `sudo cp #{launchd_script} #{launch_agent_dir}`
+    `sudo launchctl load -w #{launch_agent_dir}/#{script_name}`
   end
 end
 
 # upgrade vim-plug plugin, then all upgrade all plugins
 puts '  Updating vim plugins ...'
 `vim +PlugUpgrade +PlugUpdate +PlugClean! +qa!`
+
 # make sure vim backup dir exists
 `mkdir -p ~/.vim/tmp`
 
