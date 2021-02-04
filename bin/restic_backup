@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Requirements
+#
+# brew install restic # https://github.com/restic/restic
+# restic env config and settings at ~/.config/restic/env
+# /bin/sh needs Full Disk Access (or at least access to $BACKUP_DIRS)
+#
+# Restore backups to / with:
+# restic -r $RESTIC_REPOSITORY restore --verbose latest --target /
+
+# source env vars for restic
+source /Users/matt/.config/restic/env
+
+if [ "$1" == "--local" ]; then
+  echo "Starting Backup (local)"
+  export RESTIC_REPOSITORY="/Volumes/WD/restic"
+else
+  echo "Starting Backup"
+fi
+
+echo "Running: /usr/local/bin/restic -r $RESTIC_REPOSITORY --verbose backup $BACKUP_DIRS --exclude-file=$EXCLUDE_FILE"
+/usr/local/bin/restic -r $RESTIC_REPOSITORY --verbose backup $BACKUP_DIRS --exclude-file=$EXCLUDE_FILE
+
+/usr/local/bin/restic forget --keep-last $KEEP_SNAPSHOTS
