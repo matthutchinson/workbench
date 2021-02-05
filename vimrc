@@ -28,7 +28,7 @@ call plug#begin('~/.vim/plugged')
 
   " appearance
   Plug 'cocopon/iceberg.vim'     " colorscheme
-  Plug 'gkeep/iceberg-dark'      " darker lightline scheme for readability
+  Plug 'gkeep/iceberg-dark'      " icebergDark lightline scheme (readability)
   Plug 'itchyny/lightline.vim'   " nicer status line
   Plug 'plasticboy/vim-markdown' " non-broken markdown highlighting
 
@@ -52,6 +52,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'mhinz/vim-startify'    " nicer start screen with MRU
   Plug 'mattn/webapi-vim'      " web requests (for gist-vim)
   Plug 'mattn/gist-vim'        " post gists
+
+  " linting
+  Plug 'dense-analysis/ale'     " ALE
+  Plug 'maximbaz/lightline-ale' " Lint status in lightline
 
   " trialing
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " snippets
@@ -199,6 +203,7 @@ set termguicolors
 
 " appearance
 colorscheme iceberg         " https://cocopon.github.io/iceberg.vim/
+set bg=dark                 " use the dark theme (not light)
 syntax on                   " turn on syntax highlighting
 set tw=80                   " set textwidth
 set fo-=t                   " set format options, don't auto-wrap at tw
@@ -332,9 +337,8 @@ nmap <leader>dl :diffget LOCAL<cr>]c
 nmap <leader>dr :diffget REMOTE<cr>]c
 
 " ALE
-nmap <leader>l :call ALELintAndOpen()<cr>
-nnoremap <leader>lo :lopen<cr>
-nnoremap <leader>ln :ALENextWrap<cr>
+nnoremap <leader>l :ALENextWrap<cr>
+nnoremap <leader>lo :ALEDetail<cr>
 nnoremap <leader>lp :ALEPreviousWrap<cr>
 
 " #### Plugin Settings
@@ -364,6 +368,7 @@ let g:ctrlp_follow_symlinks = 1  " do follow symlinks
 let g:ctrlp_use_caching = 0      " so fast we dont need to cache
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f'] " respects git ignore
 
+
 " lightline
 let g:lightline = {
   \ 'colorscheme': 'icebergDark',
@@ -372,7 +377,7 @@ let g:lightline = {
   \             [ 'fugitive', 'filename' ] ],
   \   'right': [ [ 'lineinfo' ],
   \              [ 'percent' ],
-  \              [ 'linter_checking', 'linter_errors', 'linter_warnings' ],
+  \              [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],
   \              [ 'fileformat', 'fileencoding', 'filetype' ]],
   \ },
   \ 'component_function': {
@@ -380,23 +385,29 @@ let g:lightline = {
   \   'filename': 'LightLineFilename'
   \ },
   \ 'component_type': {
-  \     'linter_checking': 'left',
-  \     'linter_warnings': 'warning',
-  \     'linter_errors': 'error',
-  \     'linter_ok': 'left',
-  \ },
+    \     'linter_checking': 'right',
+    \     'linter_infos': 'right',
+    \     'linter_warnings': 'warning',
+    \     'linter_errors': 'error',
+    \     'linter_ok': 'right',
+    \ },
   \ 'component_expand': {
-  \  'linter_checking': 'lightline#ale#checking',
-  \  'linter_warnings': 'lightline#ale#warnings',
-  \  'linter_errors': 'lightline#ale#errors',
+    \  'linter_checking': 'lightline#ale#checking',
+    \  'linter_infos': 'lightline#ale#infos',
+    \  'linter_warnings': 'lightline#ale#warnings',
+    \  'linter_errors': 'lightline#ale#errors',
+    \  'linter_ok': 'lightline#ale#ok',
   \ },
   \ 'separator': { 'left': '', 'right': '' },
   \ 'subseparator': { 'left': '', 'right': '' }
 \ }
 
-let g:lightline#ale#indicator_checking = ""
-let g:lightline#ale#indicator_warnings = ""
-let g:lightline#ale#indicator_errors = ""
+" ALE lightline icons
+let g:lightline#ale#indicator_checking = ""
+let g:lightline#ale#indicator_infos = "  "
+let g:lightline#ale#indicator_warnings = "  "
+let g:lightline#ale#indicator_errors = "  "
+let g:lightline#ale#indicator_ok = ""
 
 " UltiSnips triggers
 let g:UltiSnipsExpandTrigger="<S-tab>"
@@ -406,10 +417,9 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
-" ale linting engine
-let g:ale_lint_on_text_changed = 'never'  " never on editing
-let g:ale_lint_on_enter = 0               " never on open
-let g:ale_lint_on_save = 0                " never on save
+" ale linting engine, don't lint on edits, only opens/saves
+let g:ale_lint_on_text_changed = "never"
+let g:ale_lint_on_insert_leave = 0
 
 " #### Functions
 
@@ -494,14 +504,6 @@ xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<cr>
 function! ExecuteMacroOverVisualRange()
   echo "@".getcmdline()
   execute ":'<,'>normal @".nr2char(getchar())
-endfunction
-
-" after linting, open list, then remove the hook
-function ALELintAndOpen()
-  augroup ALEAutoOpen
-    au User ALELintPost :lopen|:autocmd! ALEAutoOpen
-  augroup END
-  exec ':ALELint'
 endfunction
 
 " rename current file

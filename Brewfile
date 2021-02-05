@@ -37,7 +37,7 @@ brew "hexyl"
 brew "tig"
 
 # https://cli.github.com
-brew "github/gh/gh"
+brew "gh"
 
 # https://github.com/DarthSim/overmind
 brew "overmind"
@@ -78,3 +78,4 @@ brew "heroku"
 # Casks
 cask "ngrok"
 cask "aws-vault"
+cask "alacritty"
