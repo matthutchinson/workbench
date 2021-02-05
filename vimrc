@@ -338,6 +338,7 @@ nmap <leader>dr :diffget REMOTE<cr>]c
 
 " ALE
 nnoremap <leader>l :ALENextWrap<cr>
+nnoremap <leader>lt :ALEToggle<cr>
 nnoremap <leader>lo :ALEDetail<cr>
 nnoremap <leader>lp :ALEPreviousWrap<cr>
 
