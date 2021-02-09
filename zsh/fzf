@@ -112,10 +112,10 @@ function gbd {
 
   if [[ ($# -eq 0) && (! -z $branch) ]]; then
     _echo_and_execute "git branch -D $branch"
-    if [[ ($? -ne 0) && ($branch != 'master') ]]; then
-      # deleting current branch, explain you can't and checkout master
-      echo "⚠️". "you are already on this branch, checking out master"
-      git checkout master
+    if [[ ($? -ne 0) && ($branch != 'main') ]]; then
+      # deleting current branch, explain you can't and checkout main
+      echo "⚠️". "you are already on this branch, checking out main"
+      git checkout main
     fi
     return
   fi
@@ -135,10 +135,10 @@ function gbdd {
           _echo_and_execute "git push origin :$branch"
         fi
       )&) 2>/dev/null
-    elif [ $branch != 'master' ]; then
-      # deleting current branch, explain you can't and checkout master
-      echo "⚠️". "you are already on this branch, checking out master"
-      git checkout master
+    elif [ $branch != 'main' ]; then
+      # deleting current branch, explain you can't and checkout main
+      echo "⚠️". "you are already on this branch, checking out main"
+      git checkout main
     fi
     return
   fi
@@ -157,12 +157,12 @@ function glook {
                 {} FZF-EOF"
 }
 
-# git look (see above) with this branch compared to master (unless br is master)
+# git look (see above) with this branch compared to main (unless br is main)
 function glm {
-  if [[ $BR == 'master' ]]; then
+  if [[ $BR == 'main' ]]; then
     glook
   else
-    glook "master..$BR"
+    glook "main..$BR"
   fi
 }
 

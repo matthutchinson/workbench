@@ -23,7 +23,7 @@ $ ./bin/benchpress
 The `tmux/` directory contains various segments for my tmux status bar, and a
 custom theme. It all comes together to look something like this;
 
-![tmux theme status bar screenshot](https://raw.githubusercontent.com/matthutchinson/workbench/master/tmux/themeshot.png)
+![tmux theme status bar screenshot](https://raw.githubusercontent.com/matthutchinson/workbench/main/tmux/themeshot.png)
 
 ### Disclaimer
 

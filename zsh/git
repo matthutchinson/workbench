@@ -18,7 +18,7 @@ function fixup {
   then
     echo "aborting .. nothing to add or commit"
   else
-    REBASE_WITH="master"
+    REBASE_WITH="main"
     if [ -n "$1" ]
     then
       REBASE_WITH=$1
