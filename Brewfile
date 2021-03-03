@@ -55,7 +55,6 @@ brew "jq"
 brew "fx"
 
 brew "scmpuff"
-brew "gpg2"
 brew "circleci"
 brew "node"
 brew "fzf"
