@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+
+if pgrep nginx | grep "[0-9]" > /dev/null; then
+  echo "🐯 Starting puma-dev (shutting down NGINX)"
+  # stop nginx via launchctl
+  launchctl unload -w ~/Library/LaunchAgents/dev.up.nginx.plist
+  # start puma-dev
+  launchctl load -w ~/Library/LaunchAgents/io.puma.dev.plist
+elif pgrep puma-dev | grep "[0-9]" > /dev/null; then
+  echo "💚 Starting NGINX (shutting down puma-dev)"
+  # stop puma-dev with kill
+  launchctl unload -w ~/Library/LaunchAgents/io.puma.dev.plist
+  # start nginx via launchtl
+  launchctl load -w ~/Library/LaunchAgents/dev.up.nginx.plist
+fi

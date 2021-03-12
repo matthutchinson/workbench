@@ -11,4 +11,8 @@ bundle/cache
 config/master.key
 config/credentials/*.key
 config/gh
+config/dev
+config/gcloud
+config/nix*
+config/shadowenv
 *.tags

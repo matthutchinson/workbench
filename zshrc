@@ -17,6 +17,11 @@ export DIRENV_LOG_FORMAT=  # comment this out to be more verbose
 eval "$(direnv hook zsh)"
 
 ################################################################################
+# shopify dev - https://github.com/Shopify/dev
+################################################################################
+[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
+
+################################################################################
 # Benchmarking - https://blog.jonlu.ca/posts/speeding-up-zsh
 ################################################################################
 
