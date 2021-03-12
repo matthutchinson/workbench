@@ -7,6 +7,7 @@ db/*.sqlite3
 vendor/bundle/*
 vim/session/*
 bundle/cache
+bundle/config
 .envrc
 config/master.key
 config/credentials/*.key
