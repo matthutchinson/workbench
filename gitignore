@@ -17,3 +17,4 @@ config/gcloud
 config/nix*
 config/shadowenv
 *.tags
+.shadowenv.d

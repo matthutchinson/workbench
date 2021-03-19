@@ -10,11 +10,6 @@ use chruby --auto
 
 # add ~/bin folder to PATH
 PATH_add ~/bin
-# add cargo to PATH
-PATH_add ~/.cargo/bin
-
-# switch nodes, with `use node` and a local ~/.nvmrc or ~/.node-version
-export NODE_VERSIONS=~/.node-versions
 
 # overmind config
 export OVERMIND_IGNORED_PROCESSES=release

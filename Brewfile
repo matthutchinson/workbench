@@ -54,6 +54,9 @@ brew "jq"
 # https://github.com/antonmedv/fx
 brew "fx"
 
+# https://deno.land
+brew "deno"
+
 brew "scmpuff"
 brew "circleci"
 brew "node"

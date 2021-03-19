@@ -227,7 +227,6 @@ set nocursorcolumn
 set ttyfast
 set ttyscroll=3
 set lazyredraw
-set regexpengine=1 " issue with ruby syntax highlighting (use older RE engine)
 set relativenumber " show relative line numbers
 
 " general
