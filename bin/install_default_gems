@@ -1,4 +1,4 @@
 #!/bin/sh
 
 # install useful gems I want on all rubies
-gem install iStats git-whistles lolcommits foreman amazing_print pry pry-doc pry-nav github-auth travis colorls --no-document
+gem install iStats git-whistles inch lolcommits foreman amazing_print pry pry-doc pry-nav github-auth travis colorls --no-document

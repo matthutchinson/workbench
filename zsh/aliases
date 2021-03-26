@@ -63,6 +63,7 @@ alias gg='git pull'
 alias gp='git push'
 alias gl="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | vim -R -c 'set filetype=git nowrap' -"
 alias grm='git rebase main -i'
+alias grmm='git rebase master -i'
 alias gca='git commit --amend --no-edit'
 alias gpf='git push --force-with-lease'
 
