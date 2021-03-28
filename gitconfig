@@ -38,6 +38,8 @@
   me = log --author='Matthew Hutchinson'
   prune-remotes = remote prune origin
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
+	delete-merged = !git branch --merged main | egrep -v \"(^\\*|^  main$)\" | xargs git branch --delete
+	delete-gone = !git fetch --prune && git branch --verbose | awk '/\\[gone]/{print $1}' | xargs git branch --delete --force
 [format]
   # git log uses --pretty format by default, so this changes the default
   # e.g. 4436819 [23 hours ago] (Gabe Berke-Williams) One line prompt
@@ -114,5 +116,5 @@
 	insteadOf = ssh://git@github.com/Shopify/
 	insteadOf = ssh://git@github.com/shopify/
 [credential]
-	helper = 
+	helper =
 	helper = store --file /opt/dev/var/private/git_credential_store

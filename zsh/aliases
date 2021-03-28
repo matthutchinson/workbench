@@ -34,10 +34,7 @@ alias top='htop'                # http://hisham.hm/htop/
 # Quick cds
 ################################################################################
 
-alias cdf='cd ~/apps/freeagent'
 alias cdwb='cd ~/code/workbench'
-alias cdpmf='cd ~/apps/pmfaqtory-store'
-alias cdob='cd ~/apps/open-banking-on-rails'
 
 ################################################################################
 # Ruby / Rails
@@ -58,7 +55,7 @@ alias rst='touch ./tmp/restart.txt'
 # Git
 ################################################################################
 
-alias gb='git branch'
+alias gb='git branch --verbose'
 alias gg='git pull'
 alias gp='git push'
 alias gl="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | vim -R -c 'set filetype=git nowrap' -"

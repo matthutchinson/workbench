@@ -90,7 +90,7 @@ function pkill {
 
 function _fzf_git_branch {
   # fzf a local branch, trim leading whitespace, and "*"
-  echo $(git branch | sed 's/^. //' | fzf | xargs echo)
+  echo $(git branch --verbose | sed 's/^. //' | fzf | xargs echo)
 }
 
 # choose branch and pass as last arg to a command, or copy branch name
@@ -136,7 +136,7 @@ function gbdd {
         fi
       )&) 2>/dev/null
     elif [ $branch != 'main' ]; then
-      # deleting current branch, explain you can't and checkout main
+      # deleting current branch, not allowed
       echo "⚠️". "you are already on this branch, checking out main"
       git checkout main
     fi
