@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
+function user_with_short_hostname {
+  echo "$(whoami)@$(hostname -s)"
+}
+
+user_with_short_hostname

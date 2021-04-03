@@ -142,7 +142,7 @@ function build-segments {
     local revision_fg=013
     local changes_bg=015
     local changes_fg=013
-    local action_fg=0
+    local action_fg=234
     local action_bg=003
     local tmux_status_bg=233
     local prompt_bg=236
