@@ -12,7 +12,7 @@ set -g pane-active-border-style 'fg=colour238'
 set -g status on
 set -g status-interval 5
 set -g status-justify "centre"
-set -g status-left '#[bg=colour236,fg=colour007] #(~/.tmux/segments/hostname) #[bg=colour234,fg=colour236]#[fg=colour245] #S #[default]#[bg=colour233,fg=colour234]'
+set -g status-left '#[bg=colour236,fg=colour007] #U@#{hostname_short} #[bg=colour234,fg=colour236]#[fg=colour245] #S #[default]#[bg=colour233,fg=colour234]'
 set -g status-right '#(~/.tmux/segments/combined)'
 
 # window status
