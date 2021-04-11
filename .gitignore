@@ -14,3 +14,4 @@ irssi/fnotify
 tmux/plugins
 tmux/resurrect
 config/restic/env
+Brewfile.lock.json

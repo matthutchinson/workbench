@@ -13,6 +13,7 @@ endif
 
 " add fzf to rtp
 set rtp+=/usr/local/opt/fzf
+set rtp+=/opt/homebrew/opt/fzf
 
 " #### Requirements
 " for ctags setup see http://tinyurl.com/3lcrsrh

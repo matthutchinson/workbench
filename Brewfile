@@ -3,9 +3,6 @@ tap "homebrew/cask"
 # https://github.com/dylanaraps/neofetch
 brew "neofetch"
 
-# http://nshipster.com/xctool/
-brew "xctool"
-
 # https://asciinema.erg
 brew "asciinema"
 
@@ -58,7 +55,6 @@ brew "fx"
 brew "deno"
 
 brew "scmpuff"
-brew "circleci"
 brew "node"
 brew "fzf"
 brew "postgresql"
@@ -81,8 +77,3 @@ brew "mupdf"
 
 tap "heroku/brew"
 brew "heroku"
-
-# Casks
-cask "ngrok"
-cask "aws-vault"
-cask "alacritty"

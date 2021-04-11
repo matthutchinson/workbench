@@ -2,6 +2,9 @@
 # Interactive shell environment
 ################################################################################
 
+# for alt homebrew e.g. ARM (Apple M1)
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin::$PATH"
+
 if [ -d $HOME/.zsh ]; then
   # source all files in ~/.zsh
   for zsh_config in $HOME/.zsh/*(.); do
