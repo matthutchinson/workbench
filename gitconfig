@@ -104,8 +104,6 @@
   xfuncname = "^[ \t]*((RSpec|describe|context|it|before|after|around|feature|scenario|background)[ \t].*)$"
 [pull]
 	rebase = false
-[url "git@github.com:"]
-	insteadOf = https://github.com/
 [gc]
 	writeCommitGraph = true
 [protocol]
