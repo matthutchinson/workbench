@@ -2,18 +2,14 @@
 set -e
 
 ################################################################################
-# Common .envrc - see ~/.direnvrc and `man direnv-stdlib`
+# common .envrc - see ~/.config/direnv/direnvrc and `man direnv-stdlib`
 ################################################################################
 
-# auto-switch rubies
+# ruby
 use chruby --auto
 
-# add ~/bin folder to PATH
+# add utils to PATH
 PATH_add ~/bin
 
-# overmind config
-export OVERMIND_IGNORED_PROCESSES=release
-export OVERMIND_AUTO_RESTART=web,worker
-
-# ensure aws-vault uses login keychain
+# aws-vault should use login keychain
 export AWS_VAULT_KEYCHAIN_NAME=login
