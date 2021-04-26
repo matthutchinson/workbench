@@ -2,8 +2,9 @@
 # non-interactive shell environment
 ########################################################################
 
-# for homebrew
-export PATH="/opt/homebrew/bin:/usr/local/sbin:$PATH"
+# homebrew
+export PATH="$(brew --prefix)/bin:$(brew --prefix)/sbin:$PATH"
+
 # rust
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 

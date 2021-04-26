@@ -2,9 +2,6 @@
 # Interactive shell environment
 ################################################################################
 
-# for alt homebrew e.g. ARM (Apple M1)
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin::$PATH"
-
 # source all files in ~/.zsh
 if [ -d $HOME/.zsh ]; then
   for zsh_config in $HOME/.zsh/*(.); do
@@ -15,12 +12,12 @@ fi
 ################################################################################
 # chruby - no autoswitch, use .envrc for that
 ################################################################################
-source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+source "$(brew --prefix)/opt/chruby/share/chruby/chruby.sh"
 
 ################################################################################
 # direnv - https://github.com/direnv/direnv (see ~/.direnvrc and ~/.envrc)
 ################################################################################
-export DIRENV_LOG_FORMAT=  # comment this out to be more verbose
+export DIRENV_LOG_FORMAT=  # comment this to debug or be verbose
 eval "$(direnv hook zsh)"
 
 ################################################################################
