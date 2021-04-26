@@ -2,6 +2,12 @@
 # Interactive shell environment
 ################################################################################
 
+################################################################################
+# homebrew - with PATH for arm M1 install
+################################################################################
+[ -d "/opt/homebrew" ] && export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+[ -d "/usr/local" ] && export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+
 # source all files in ~/.zsh
 if [ -d $HOME/.zsh ]; then
   for zsh_config in $HOME/.zsh/*(.); do
