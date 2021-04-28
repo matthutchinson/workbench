@@ -3,10 +3,11 @@
 ################################################################################
 
 ################################################################################
-# homebrew - with PATH for arm M1 install
+# homebrew - with PATH for arm M1 install (older node for M1)
 ################################################################################
 [ -d "/opt/homebrew" ] && export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 [ -d "/usr/local" ] && export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+[ -d "/opt/homebrew/opt/node@14" ] && export PATH="/opt/homebrew/opt/node@14/bin:$PATH"
 
 # source all files in ~/.zsh
 if [ -d $HOME/.zsh ]; then

@@ -56,6 +56,7 @@ brew "deno"
 
 brew "scmpuff"
 brew "node"
+brew "node@14"
 brew "fzf"
 brew "postgresql"
 brew "git"
