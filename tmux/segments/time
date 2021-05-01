@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-echo "#[fg=colour213,bg=colour000] "`date "+%H:%M"`

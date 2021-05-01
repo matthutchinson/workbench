@@ -3,20 +3,20 @@ set -e
 
 function build {
   local segments=(
-    "time" \
     "lan_ip" \
     "battery" \
     "disk" \
     "memory" \
     "cpu_temp" \
     "cpu" \
+    "env_info" \
   )
 
   local dividers=(
-    "" \
-    "" \
+    "#[fg=colour213,bg=colour000]" \
     "" \
     " " \
+    "  " \
     "  " \
     "  " \
     "  " \
@@ -24,7 +24,7 @@ function build {
 
   local output=""
   for i in "${!segments[@]}"; do
-    output="#(~/.tmux/segments/${segments[$i]})${dividers[$i]}$output"
+    output="$(~/.tmux/segments/${segments[$i]})${dividers[$i]}$output"
   done
 
   echo $output
