@@ -3,13 +3,14 @@
 ################################################################################
 
 ################################################################################
-# homebrew - with PATH for arm M1 install (older node for M1)
+# brew - https://brew.sh
 ################################################################################
 [ -d "/opt/homebrew" ] && export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 [ -d "/usr/local" ] && export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-[ -d "/opt/homebrew/opt/node@14" ] && export PATH="/opt/homebrew/opt/node@14/bin:$PATH"
 
-# source all files in ~/.zsh
+################################################################################
+# source files in ~/.zsh
+################################################################################
 if [ -d $HOME/.zsh ]; then
   for zsh_config in $HOME/.zsh/*(.); do
     source $zsh_config
@@ -17,12 +18,7 @@ if [ -d $HOME/.zsh ]; then
 fi
 
 ################################################################################
-# chruby - no autoswitch, use .envrc for that
-################################################################################
-source "$(brew --prefix)/opt/chruby/share/chruby/chruby.sh"
-
-################################################################################
-# direnv - https://github.com/direnv/direnv (see ~/.direnvrc and ~/.envrc)
+# direnv - https://github.com/direnv/direnv
 ################################################################################
 export DIRENV_LOG_FORMAT=  # comment this to debug or be verbose
 eval "$(direnv hook zsh)"

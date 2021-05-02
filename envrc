@@ -2,11 +2,8 @@
 set -e
 
 ################################################################################
-# common .envrc - see ~/.config/direnv/direnvrc and `man direnv-stdlib`
+# common .envrc - see `man direnv-stdlib`
 ################################################################################
-
-# ruby
-use chruby --auto
 
 # add utils to PATH
 PATH_add ~/bin

@@ -4,7 +4,11 @@ set -e
 function env_info {
   local pane_id=$(tmux display -p "#{pane_id}" | sed 's/^\%//' 2>&1)
   local ruby_version=$(tmux showenv -g TMUX_PANE_${pane_id}_RUBY_VERSION | cut -f2 -d'=' 2>&1)
-  echo "#[fg=colour052]#[default] $ruby_version#[default]"
+  if [[ -z $ruby_version ]]; then
+    echo ""
+  else
+    echo "#[fg=colour052]#[default] ${ruby_version}#[default]  "
+  fi
 }
 
 env_info

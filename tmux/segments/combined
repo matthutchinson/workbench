@@ -19,7 +19,6 @@ function build {
     "  " \
     "  " \
     "  " \
-    "  " \
   )
 
   local output=""
