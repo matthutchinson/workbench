@@ -7,11 +7,12 @@ vim/autoload/plug.vim.old
 vim/autoload/plug.vim
 config/htop
 config/configstore
-config/direnv
 config/devkit
+config/gh
+config/restic/env
+config/shadowenv
 irssi/certs/*.pem
 irssi/fnotify
 tmux/plugins
 tmux/resurrect
-config/restic/env
 Brewfile.lock.json
