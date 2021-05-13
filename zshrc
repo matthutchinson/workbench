@@ -27,6 +27,7 @@ eval "$(direnv hook zsh)"
 # shopify dev - https://github.com/Shopify/dev
 ################################################################################
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
+[ -d $(brew --prefix)/Caskroom/google-cloud-sdk ] && source $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 
 ################################################################################
 # Benchmarking - https://blog.jonlu.ca/posts/speeding-up-zsh
