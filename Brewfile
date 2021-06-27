@@ -55,6 +55,7 @@ brew "fx"
 brew "deno"
 
 brew "scmpuff"
+brew "exiftool"
 brew "node"
 brew "node@14"
 brew "fzf"
