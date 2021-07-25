@@ -116,3 +116,18 @@
 [credential]
 	helper =
 	helper = store --file /opt/dev/var/private/git_credential_store
+[pager]
+  diff = delta
+  log = delta
+  reflog = delta
+  show = delta
+[delta]
+  side-by-side = true
+  features = decorations
+  navigate = true
+  whitespace-error-style = 22 reverse
+[delta "decorations"]
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none
+  hunk-header-decoration-style = yellow box

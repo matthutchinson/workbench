@@ -13,4 +13,8 @@ elif pgrep puma-dev | grep "[0-9]" > /dev/null; then
   launchctl unload -w ~/Library/LaunchAgents/io.puma.dev.plist
   # start nginx via launchtl
   launchctl load -w ~/Library/LaunchAgents/dev.up.nginx.plist
+else
+  echo "🐯 Starting puma-dev"
+  # start puma-dev
+  launchctl load -w ~/Library/LaunchAgents/io.puma.dev.plist
 fi
