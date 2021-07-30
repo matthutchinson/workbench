@@ -46,7 +46,35 @@ function vi_mode_prompt_info {
 # Left
 ################################################################################
 
-PROMPT="%{%K{000}%F{3}%}$powerline_prompt %{%b%f%k%}"
+function seasonal_chevrons {
+  local date=$(date)
+  local chevrons="❯❯❯"
+
+  case $date in
+    # spring
+    *Mar*|*Apr*|*May*)
+      chevrons="%F{magenta}❯%F{cyan}❯%F{green}❯%f"
+      ;;
+    # summer
+    *Jun*|*Jul*|*Aug*)
+      chevrons="%F{cyan}❯%F{green}❯%F{yellow}❯%f"
+      ;;
+    # fall
+    *Sep*|*Oct*|*Nov*)
+      chevrons="%F{yellow}❯%F{009}❯%F{magenta}❯%f"
+      ;;
+    # winter
+    *Dec*|*Jan*|*Feb*)
+      chevrons="%F{006}❯%F{004}❯%F{011}❯%f"
+      ;;
+    *)
+      ;;
+  esac
+
+  echo -en $chevrons
+}
+
+PROMPT="$(seasonal_chevrons) %{%b%f%k%}"
 
 ################################################################################
 # Right
