@@ -87,8 +87,8 @@ RPROMPT+="%{%K{234}%F{236}%}$powerline_hard_right_divider%{%f%k%}"
 # show editing mode in prompt
 RPROMPT+='$(vi_mode_prompt_info)'
 
-# truncate path
-RPROMPT+='%{%K{236}%F{247}%} %30[>…]%1~%<< %{%f%k%}'
+# path %~ (truncate start if > 50 chars)
+RPROMPT+='%{%K{236}%F{247}%} %50[<…]%~%<< %{%f%k%}'
 
 # show vcs info (see ~/.zsh/vcs_info.zsh)
 if hash git >/dev/null 2>&1; then
