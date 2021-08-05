@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+# https://github.com/postmodern/chruby#auto-switching
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
