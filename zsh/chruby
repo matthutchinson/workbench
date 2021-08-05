@@ -3,3 +3,15 @@
 # https://github.com/postmodern/chruby#auto-switching
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
+
+if [[ $TMUX ]]; then
+  function update_tmux_ruby_version_env_info {
+    local pane_id=$(tmux display -p "#{pane_id}" | sed 's/^\%//' 2>&1)
+    local ruby_version=$(ruby --version | cut -d' ' -f2)
+    tmux setenv -g TMUX_PANE_${pane_id}_RUBY_VERSION ${ruby_version}
+  }
+  
+  add-zsh-hook precmd update_tmux_ruby_version_env_info
+fi
+
+

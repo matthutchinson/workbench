@@ -9,7 +9,7 @@ function build {
     "memory" \
     "cpu_temp" \
     "cpu" \
-    # "env_info" \
+    "env_info" \
   )
 
   local dividers=(

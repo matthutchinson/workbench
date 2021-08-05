@@ -2,6 +2,7 @@
 set -e
 
 function env_info {
+  # TMUX_PANE_${pane_id}_RUBY_VERSION is set from a precmd hook (see ~/.zsh/chruby)
   local pane_id=$(tmux display -p "#{pane_id}" | sed 's/^\%//' 2>&1)
   local ruby_version=$(tmux showenv -g TMUX_PANE_${pane_id}_RUBY_VERSION | cut -f2 -d'=' 2>&1)
   if [[ -z $ruby_version ]]; then
