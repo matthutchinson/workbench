@@ -51,7 +51,7 @@ end
 
 # upgrade vim-plug plugin, then all install/upgrade all plugins (color disabled)
 puts '  Updating vim with Plug...'
-`vim +PlugUpgrade +PlugUpdate +PlugClean! +qa!`
+`vim +PlugUpgrade +PlugUpdate +PlugClean! +qa! > /dev/null 2>&1`
 
 # make sure vim backup dir exists
 `mkdir -p ~/.vim/tmp`
