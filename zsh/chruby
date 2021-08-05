@@ -4,7 +4,11 @@
 source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 
+
 if [[ $TMUX ]]; then
+  # ensure hooks are enabled
+  type add-zsh-hook > /dev/null 2>&1 || autoload -Uz add-zsh-hook
+  
   function update_tmux_ruby_version_env_info {
     local pane_id=$(tmux display -p "#{pane_id}" | sed 's/^\%//' 2>&1)
     local ruby_version=$(ruby --version | cut -d' ' -f2)
