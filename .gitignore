@@ -13,6 +13,6 @@ config/restic/env
 config/shadowenv
 irssi/certs/*.pem
 irssi/fnotify
-tmux/resurrect
 tmux/plugins/*
+tmux/resurrect
 Brewfile.lock.json
