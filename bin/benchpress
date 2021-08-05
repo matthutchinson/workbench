@@ -24,7 +24,7 @@ Dir.chdir(workbench_path) do
     end
   end
 
-  puts "  Running brew bundle ..."
+  puts "  Brew bundle ..."
   `brew bundle`
 end
 
@@ -50,8 +50,8 @@ else
 end
 
 # upgrade vim-plug plugin, then all install/upgrade all plugins (color disabled)
-puts '  Updating vim plugins with Plug...'
-`vim -c ":colorscheme defaults" +PlugUpgrade +PlugUpdate +PlugClean! +qa!`
+puts '  Updating vim with Plug...'
+`vim +PlugUpgrade +PlugUpdate +PlugClean! +qa!`
 
 # make sure vim backup dir exists
 `mkdir -p ~/.vim/tmp`

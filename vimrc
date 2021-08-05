@@ -206,21 +206,21 @@ let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 
 " appearance
-colorscheme iceberg         " https://cocopon.github.io/iceberg.vim/
-set bg=dark                 " use the dark theme (not light)
-syntax on                   " turn on syntax highlighting
-set tw=80                   " set textwidth
-set fo-=t                   " set format options, don't auto-wrap at tw
-set colorcolumn=+1          " show vertical break at textwidth
-set number                  " show line numbers
-set ruler                   " show cursor position
-set title                   " set the terminal's title
-set visualbell              " visual flash
-set noerrorbells            " no beeping please
-set laststatus=2            " always show a status bar
-set cursorline              " only use cursorline for current window
-set cpoptions+=$            " show $ to indicate editing range
-set listchars=tab:▸\ ,eol:¬ " use these special chars with :set list
+:silent! colorscheme iceberg " https://cocopon.github.io/iceberg.vim/
+set bg=dark                  " use the dark theme (not light)
+syntax on                    " turn on syntax highlighting
+set tw=80                    " set textwidth
+set fo-=t                    " set format options, don't auto-wrap at tw
+set colorcolumn=+1           " show vertical break at textwidth
+set number                   " show line numbers
+set ruler                    " show cursor position
+set title                    " set the terminal's title
+set visualbell               " visual flash
+set noerrorbells             " no beeping please
+set laststatus=2             " always show a status bar
+set cursorline               " only use cursorline for current window
+set cpoptions+=$             " show $ to indicate editing range
+set listchars=tab:▸\ ,eol:¬  " use these special chars with :set list
 
 " speedy scrolling
 syntax sync minlines=100
