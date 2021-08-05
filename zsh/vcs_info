@@ -37,8 +37,8 @@ local copied="Ξ"
 local deleted="✘"
 local modified=""
 local renamed="→"
-local staged=""
-local unstaged="✸"
+local staged=""
+local unstaged=""
 local reset="%{%f%k%}"
 local left_divider=""
 local right_divider=""
@@ -61,13 +61,14 @@ add-zsh-hook precmd margin-set
 # Utilities
 ################################################################################
 
-function git-status-has-copied-files   { grep -m 1 '^\s*C\s\+'  <<< "$1" &> /dev/null }
-function git-status-has-deleted-files  { grep -m 1 '^\s*D\s\+'  <<< "$1" &> /dev/null }
-function git-status-has-modified-files { grep -m 1 '^\s*M\s\+'  <<< "$1" &> /dev/null }
-function git-status-has-renamed-files  { grep -m 1 '^\s*R\s\+'  <<< "$1" &> /dev/null }
-function git-status-has-staged-files   { grep -m 1 '^\s*A\s\+'  <<< "$1" &> /dev/null }
-function git-status-has-unstaged-files { grep -m 1 '^\s*??\s\+' <<< "$1" &> /dev/null }
-function sigil-icon                    { local sigil="%{$1%G%} "; echo "$(margin-trim $sigil)" }
+function git-status-has-copied-files     { grep -m 1 '^\s*C\s\+'  <<< "$1" &> /dev/null }
+function git-status-has-deleted-files    { grep -m 1 '^\s*D\s\+'  <<< "$1" &> /dev/null }
+function git-status-has-modified-files   { grep -m 1 '^\s*[ ,A-Z]\+M\s\+'  <<< "$1" &> /dev/null }
+function git-status-has-renamed-files    { grep -m 1 '^\s*R\s\+'  <<< "$1" &> /dev/null }
+function git-status-has-staged-files     { grep -m 1 '^\s*M \s\+' <<< "$1" &> /dev/null }
+function git-status-has-unstaged-files   { grep -m 1 '^\s*??\s\+' <<< "$1" &> /dev/null }
+function git-status-has-unpushed-changes { grep -m 1 '\s\[ahead\s[0-9]\+\]' <<< "$1" &> /dev/null }
+function sigil-icon                      { local sigil="%{$1%G%} "; echo "$(margin-trim $sigil)" }
 
 function string-pad {
   # pad a srting ($1) to a certain length ($2) with spaces
@@ -86,7 +87,7 @@ function string-pad {
 function git-status-fetch {
   # fetch git status (if not already fetched)
   if (( ! ${+user_data[git_status]} )); then
-    user_data[git_status]="$(git status --porcelain --ignore-submodules --find-renames)"
+    user_data[git_status]="$(git status --porcelain --ignore-submodules --find-renames --branch)"
   fi
 }
 
@@ -143,9 +144,22 @@ function build-segments {
     local changes_bg=015
     local changes_fg=013
     local action_fg=234
-    local action_bg=003
+    local action_bg=103
     local tmux_status_bg=233
     local prompt_bg=236
+
+    # fetch status and color the changes segment bg/fg
+    git-status-fetch
+    if git-status-has-unstaged-files "${user_data[git_status]}"; then
+      changes_bg=006
+      changes_fg=000
+    elif git-status-has-modified-files "${user_data[git_status]}"; then
+      changes_bg=002
+      changes_fg=000
+    elif git-status-has-staged-files "${user_data[git_status]}"; then
+      changes_bg=003
+      changes_fg=000
+    fi
 
     if [[ $vcs_direction = "right" ]]; then
       local divider="%{$left_divider%G%}"
@@ -264,6 +278,10 @@ function +vi-git-branch {
 
   if [[ ! -z ${user_data[git_time]} ]]; then
     segment+=" $user_data[git_time]"
+  fi
+
+  if git-status-has-unpushed-changes "${user_data[git_status]}"; then
+    branch_icon="%{%K{010}%F{005}%}${branch_icon}%{%K{010}%F{013}%}"
   fi
 
   segment+=" ${branch_icon} ${branch} "
@@ -402,9 +420,9 @@ if hash git >/dev/null 2>&1; then
                                                git-revision       \
                                                git-copied-files   \
                                                git-deleted-files  \
-                                               git-modified-files \
                                                git-renamed-files  \
                                                git-staged-files   \
+                                               git-modified-files \
                                                git-unstaged-files
   fi
 
