@@ -54,9 +54,15 @@ puts '  Updating vim with Plug...'
 `vim +PlugUpgrade +PlugUpdate +PlugClean! +qa! > /dev/null 2>&1`
 
 # ensure tmux tpm exists (https://github.com/tmux-plugins/tpm)
-unless File.exists?("~/.tmux/plugins/tpm")
+if File.exists?("#{ENV['HOME']}/.tmux/plugins/tpm")
+  puts '  Updating/cleaning tmux plugins...'
+  `~/.tmux/plugins/tpm/bin/update_plugins all`
+  `~/.tmux/plugins/tpm/bin/clean_plugins`
+else
   puts '  Installing tpm (tmux plugin manager)...'
-  `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
+  `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm > /dev/null 2>&1`
+  puts '  Installing tmux plugins...'
+  `~/.tmux/plugins/tpm/bin/install_plugins`
 end
 
 # make sure vim backup dir exists
