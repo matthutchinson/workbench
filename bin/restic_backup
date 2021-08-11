@@ -21,10 +21,10 @@ else
   echo "Starting Backup at $DATETIME"
 fi
 
-echo "Running: /usr/local/bin/restic -r $RESTIC_REPOSITORY --verbose backup $BACKUP_DIRS --exclude-file=$EXCLUDE_FILE"
-/usr/local/bin/restic -r $RESTIC_REPOSITORY --verbose backup $BACKUP_DIRS --exclude-file=$EXCLUDE_FILE
+echo "Running: restic -r $RESTIC_REPOSITORY --verbose backup $BACKUP_DIRS --exclude-file=$EXCLUDE_FILE"
+$(brew --prefix)/bin/restic -r $RESTIC_REPOSITORY --verbose backup $BACKUP_DIRS --exclude-file=$EXCLUDE_FILE
 
-/usr/local/bin/restic forget --keep-last $KEEP_SNAPSHOTS
+$(brew --prefix)/bin/restic forget --keep-last $KEEP_SNAPSHOTS
 
 # ensure cache dir has good permissions
 chown -R matt:staff $RESTIC_CACHE_DIR

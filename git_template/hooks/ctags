@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-PATH="/usr/local/bin:$PATH"
+PATH="$(brew --prefix)/bin:$PATH"
 trap 'rm -f "$$.tags"' EXIT
 git ls-files | \
     ctags --tag-relative -L - -f"$$.tags" --languages=-javascript,sql

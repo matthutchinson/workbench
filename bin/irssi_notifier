@@ -8,5 +8,5 @@ set -e
 (ssh kessel -o PermitLocalCommand=no         \
   ": > .irssi/fnotify ; tail -f .irssi/fnotify " | \
 while read network channel message; do                     \
-  /usr/local/bin/terminal-notifier -appIcon "file:///Users/matt/code/workbench/irssi/chat.png" -sound "submarine" -title "${network}/${channel}" -message "$(echo "${message}" | sed 's/[\<|\>]//g')"; \
+  $(brew --prefix)/bin/terminal-notifier -appIcon "file:///Users/matt/code/workbench/irssi/chat.png" -sound "submarine" -title "${network}/${channel}" -message "$(echo "${message}" | sed 's/[\<|\>]//g')"; \
 done)
