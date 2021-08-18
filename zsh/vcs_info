@@ -88,6 +88,13 @@ function git-status-fetch {
   # fetch git status (if not already fetched)
   if (( ! ${+user_data[git_status]} )); then
     user_data[git_status]="$(git status --porcelain --ignore-submodules --find-renames --branch)"
+    local status_lines="$(echo "$user_data[git_status]" | wc -l)"
+    # first line is branch info
+    if [[ $status_lines -gt 1 ]]; then
+      user_data[has_status]=true
+    else
+      user_data[has_status]=false
+    fi
   fi
 }
 
@@ -209,7 +216,7 @@ function +vi-git-action {
   build-segments
   git-status-fetch
 
-  if [[ ! -z ${user_data[git_status]} ]]; then
+  if [[ ${user_data[has_status]} = true ]]; then
     hook_com[action]=${user_data[changes_act]}
   else
     hook_com[action]=${user_data[divider_act]}
@@ -281,7 +288,7 @@ function +vi-git-branch {
   fi
 
   if git-status-has-unpushed-changes "${user_data[git_status]}"; then
-    branch_icon="%{%K{010}%F{005}%}${branch_icon}%{%K{010}%F{013}%}"
+    branch_icon="%{%K{010}%F{003}%}${branch_icon}%{%K{010}%F{013}%}"
   fi
 
   segment+=" ${branch_icon} ${branch} "
@@ -299,7 +306,7 @@ function +vi-git-revision {
   if [[ ! -z ${revision} ]]; then
     local segment=" ${revision[0,$revision_limit]} "
 
-    if [[ ! -z ${user_data[git_status]} ]]; then
+    if [[ ${user_data[has_status]} = true ]]; then
       hook_com[revision]=${user_data[changes_rev]}
     else
       if [[ ! -z ${hook_com[action_orig]} ]]; then
@@ -325,7 +332,7 @@ function +vi-git-copied-files {
   # and THIS hook is the first one. All others MUST append.
   hook_com[staged]=""
 
-  if [[ ! -z ${user_data[git_status]} ]]; then
+  if [[ ${user_data[has_status]} = true ]]; then
     if [[ ! -z ${hook_com[action_orig]} ]]; then
       hook_com[staged]+=${user_data[actions_stg]}
     else
