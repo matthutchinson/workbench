@@ -79,6 +79,7 @@ brew "ruby-install"
 brew "restic"
 brew "mupdf"
 brew "fswatch"
+brew "irssi"
 
 tap "heroku/brew"
 brew "heroku"
