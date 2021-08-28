@@ -29,12 +29,11 @@ eval "$(direnv hook zsh)"
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
 [ -d $(brew --prefix)/Caskroom/google-cloud-sdk ] && source $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 # ensure chruby exists in non-interactive shells
-if [ -d /opt/dev/sh/chruby ]; then
-  type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
-fi
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
 
 ################################################################################
 # Benchmarking - https://blog.jonlu.ca/posts/speeding-up-zsh
 ################################################################################
 # add `zmodload zsh/zprof` above
 # then run `zprof` in new shells
+

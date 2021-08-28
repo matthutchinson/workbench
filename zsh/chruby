@@ -1,8 +1,10 @@
 #!/usr/bin/env zsh
 
 # https://github.com/postmodern/chruby#auto-switching
-source $(brew --prefix)/share/chruby/chruby.sh
-source $(brew --prefix)/share/chruby/auto.sh
+if [ ! -d /opt/dev/sh/chruby ]; then
+  source $(brew --prefix)/share/chruby/chruby.sh
+  source $(brew --prefix)/share/chruby/auto.sh
+fi
 
 if [[ $TMUX ]]; then
   # ensure hooks are enabled
