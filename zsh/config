@@ -121,3 +121,6 @@ cdpath=( $HOME ~/apps ~/code ~/src/github.com/Shopify $cdpath )
 
 # fix GPG TTY issue
 export GPG_TTY=$(tty)
+
+# vault should use login keychain
+export AWS_VAULT_KEYCHAIN_NAME=login

@@ -9,14 +9,12 @@ function build {
     "memory" \
     "cpu_temp" \
     "cpu" \
-    "env_info" \
   )
 
   local dividers=(
     "#[fg=colour213,bg=colour000]" \
     "" \
     " " \
-    "  " \
     "  " \
     "  " \
   )
