@@ -18,12 +18,6 @@ if [ -d $HOME/.zsh ]; then
 fi
 
 ################################################################################
-# direnv - https://github.com/direnv/direnv
-################################################################################
-export DIRENV_LOG_FORMAT=  # comment this to debug or be verbose
-eval "$(direnv hook zsh)"
-
-################################################################################
 # shopify dev - https://github.com/Shopify/dev
 ################################################################################
 [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
@@ -31,7 +25,15 @@ eval "$(direnv hook zsh)"
 # ensure chruby exists in non-interactive shells
 if [ -d /opt/dev/sh/chruby ]; then
   [[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+  # swap ordering of hooks so direnv happens last (ensures good PATH ordering)
+  precmd_functions=(${precmd_functions[@]/_direnv_hook} _direnv_hook)
 fi
+
+################################################################################
+# direnv - https://github.com/direnv/direnv
+################################################################################
+export DIRENV_LOG_FORMAT=  # comment this to debug or be verbose
+eval "$(direnv hook zsh)"
 
 ################################################################################
 # PATH
@@ -43,4 +45,3 @@ export PATH=~/bin:$PATH
 ################################################################################
 # add `zmodload zsh/zprof` above
 # then run `zprof` in new shells
-

@@ -68,11 +68,3 @@ alias gpf='git push --force-with-lease'
 
 alias gpr='gh pr create'
 alias gcsi='gh issue list --label "Core Services"'
-
-################################################################################
-# Disabled corrections
-################################################################################
-
-alias rspec='nocorrect rspec'
-alias spring='nocorrect spring'
-alias rg='nocorrect rg'
