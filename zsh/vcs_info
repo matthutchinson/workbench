@@ -71,7 +71,7 @@ function git-status-has-unpushed-changes { grep -m 1 '\s\[ahead\s[0-9]\+\]' <<< 
 function sigil-icon                      { local sigil="%{$1%G%} "; echo "$(margin-trim $sigil)" }
 
 function string-pad {
-  # right pad a string ($1) with a number ($2) of spaces
+  # right pad a string ($1) with a number of spaces ($2)
   local pad_str=$1
   local pad_count=$2
 
@@ -115,7 +115,7 @@ function tmux-format-status {
 
   # right pad status to max length (left_status_pad) (prevents shifting center status)
   local raw_status=$(echo $formatted | sed 's/#\[[^]]*\]//g')
-  echo "$(string-pad $formatted $(($left_status_pad - ${#raw_status})))"
+  echo "$(string-pad "$formatted" $(($left_status_pad - ${#raw_status})))"
 }
 
 function tmux-set-status {
@@ -134,7 +134,7 @@ function tmux-update-status {
     tmux-set-status $status_location "${default_status%?}${new_status}"
   else
     # right pad default status
-    local padded_status=$(string-pad $default_status $(($left_status_pad-1)))
+    local padded_status=$(string-pad "$default_status" $(($left_status_pad-1)))
     tmux-set-status $status_location "$padded_status"
   fi
 }
