@@ -71,9 +71,9 @@ function git-status-has-unpushed-changes { grep -m 1 '\s\[ahead\s[0-9]\+\]' <<< 
 function sigil-icon                      { local sigil="%{$1%G%} "; echo "$(margin-trim $sigil)" }
 
 function string-pad {
-  # pad a srting ($1) to a certain length ($2) with spaces
+  # right pad a string ($1) with a number ($2) of spaces
   local pad_str=$1
-  let pad_count=$2
+  local pad_count=$2
 
   while [ $pad_count -gt 0 ]
   do
