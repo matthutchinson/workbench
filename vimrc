@@ -325,15 +325,15 @@ vmap <leader>c gc
 map <leader>U :UltiSnipsEdit<cr>
 
 " fugitive
-map <leader>gg :Gpull<cr>
-map <leader>gc :Gcommit<space>
-map <leader>gp :Gpush<cr>
-map <leader>gs :Gstatus<cr>
-map <leader>gb :Gblame<cr>
-map <leader>gd :Gdiff<cr>
-map <leader>ge :Gedit<cr>
-map <leader>gl :Glog -250<cr><cr>:copen<cr><cr>
-map <leader>gL :Glog -250 --<cr><cr>:copen<cr><cr>
+map <leader>gs :Git<cr>
+map <leader>gb :Git blame<cr>
+map <leader>gp :Git push<cr>
+map <leader>gg :Git pull<cr>
+map <leader>gc :Git commit<space>
+map <leader>gd :Git diff<cr>
+map <leader>ge :Git amend<cr>
+map <leader>gl :Gclog -250<cr><cr>:copen<cr><cr>
+map <leader>gL :Gclog -250 --<cr><cr>:copen<cr><cr>
 
 " vimdiff apply (local/remote) and move to next hunk
 nmap <leader>dl :diffget LOCAL<cr>]c
