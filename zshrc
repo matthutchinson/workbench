@@ -45,3 +45,5 @@ export PATH=~/bin:$PATH
 ################################################################################
 # add `zmodload zsh/zprof` above
 # then run `zprof` in new shells
+
+[[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)
