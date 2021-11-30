@@ -92,7 +92,7 @@ function pkill {
 
 function _fzf_git_branch {
   # fzf a local branch, trim leading whitespace, and "*"
-  echo $(git branch --verbose | sed 's/^. //' | fzf | sed 's/ .*$//' | xargs echo)
+  echo $(git branch --format="%(refname:short) | %(committerdate:relative) | %(objectname:short) | %(contents:subject)" --verbose | sed 's/^. //' | fzf | sed 's/ .*$//' | xargs echo)
 }
 
 # choose branch and pass as last arg to a command, or copy branch name

@@ -10,8 +10,8 @@
   branch = auto
   interactive = auto
 [color "branch"]
-  current = yellow reverse
-  local = yellow
+  current = blue reverse
+  local = blue
   remote = green
 [color "diff"]
   meta = yellow
