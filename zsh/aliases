@@ -58,11 +58,12 @@ alias rst='touch ./tmp/restart.txt'
 alias gb='git branch --verbose'
 alias gg='git pull'
 alias gp='git push'
+alias gpf='git push --force-with-lease'
 alias gl="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | vim -R -c 'set filetype=git nowrap' -"
 alias grm='git rebase main -i'
 alias grmm='git rebase master -i'
-alias gca='git commit --amend --no-edit'
-alias gpf='git push --force-with-lease'
+alias gca='git amend'
+alias gup='git upstream'
 
 # GitHub CLI - https://cli.github.com
 
