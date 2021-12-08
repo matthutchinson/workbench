@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+brew_prefix="$(brew --prefix)"
+
+if [ -d ${brew_prefix}/opt/chruby ]; then
+  # define a chruby func that sources chruby from brew, and calls chruby with args
+  [[ -f ${brew_prefix}/opt/chruby/share/chruby/chruby.sh ]] &&
+    type chruby >/dev/null 2>&1 ||
+    chruby () { source ${brew_prefix}/opt/chruby/share/chruby/chruby.sh; chruby "$@"; }
+fi

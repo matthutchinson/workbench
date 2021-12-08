@@ -13,6 +13,7 @@
 source /Users/matt/.config/restic/env
 
 DATETIME=`date`
+brew_prefix="$(brew --prefix)"
 
 if [ "$1" == "--local" ]; then
   echo "Starting Backup (local) at $DATETIME"
@@ -22,9 +23,9 @@ else
 fi
 
 echo "Running: restic -r $RESTIC_REPOSITORY --verbose backup $BACKUP_DIRS --exclude-file=$EXCLUDE_FILE"
-$(brew --prefix)/bin/restic -r $RESTIC_REPOSITORY --verbose backup $BACKUP_DIRS --exclude-file=$EXCLUDE_FILE
 
-$(brew --prefix)/bin/restic forget --keep-last $KEEP_SNAPSHOTS
+${brew_prefix}/bin/restic -r $RESTIC_REPOSITORY --verbose backup $BACKUP_DIRS --exclude-file=$EXCLUDE_FILE
+${brew_prefix}/bin/restic forget --keep-last $KEEP_SNAPSHOTS
 
 # ensure cache dir has good permissions
 chown -R matt:staff $RESTIC_CACHE_DIR

@@ -6,13 +6,14 @@
 
 export FZF_DEFAULT_OPTS='--height 40% --reverse'   # set style
 export FZF_DEFAULT_COMMAND="rg -l --color never --files ." # use rg
+brew_prefix="$(brew --prefix)"
 
 # fzf auto-completion and key bindings
-if [ -d $(brew --prefix)/opt/fzf ]; then
+if [ -d ${brew_prefix}/opt/fzf ]; then
   if [[ $- == *i* ]]; then
-    source "$(brew --prefix)/opt/fzf/shell/completion.zsh" 2> /dev/null
+    source "${brew_prefix}/opt/fzf/shell/completion.zsh" 2> /dev/null
   fi
-  source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
+  source "${brew_prefix}/opt/fzf/shell/key-bindings.zsh"
 fi
 
 # helper function
