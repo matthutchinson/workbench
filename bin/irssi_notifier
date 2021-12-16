@@ -5,7 +5,7 @@ set -e
 # notifications for irssi screen sessions
 # requires terminal-notifier - https://github.com/julienXX/terminal-notifier
 
-(ssh kessel -o PermitLocalCommand=no         \
+(ssh hoth -o PermitLocalCommand=no         \
   ": > .irssi/fnotify ; tail -f .irssi/fnotify " | \
 while read network channel message; do                     \
   $(brew --prefix)/bin/terminal-notifier -appIcon "file:///Users/matt/code/workbench/irssi/chat.png" -sound "submarine" -title "${network}/${channel}" -message "$(echo "${message}" | sed 's/[\<|\>]//g')"; \

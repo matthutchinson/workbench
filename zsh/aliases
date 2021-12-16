@@ -5,8 +5,8 @@
 ################################################################################
 
 alias fhp='cd ~/Documents/firehose/job\ prep/;ll;mate ~/Documents/firehose/resources/mentor_session_test.rb;open https://www.thefirehoseproject.com/courses'
-alias irc='ssh kessel.lan -t "screen -x"'
-alias ircr='ssh kessel -t "screen -x"'
+alias irc='ssh hoth -t "screen -x"'
+alias ircr='ssh hoth.wan -t "screen -x"'
 alias scratch='vi ~/Documents/system/notes/scratch.md'
 alias todos='vi ~/Documents/system/notes/todos.md'
 alias secrets='vi ~/Documents/system/notes/secrets.enc.md'

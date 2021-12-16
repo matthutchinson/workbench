@@ -72,9 +72,9 @@ puts '  Pruning direnv ...'
 `direnv prune`
 
 # kessel must exist in ~/.ssh/config
-puts '  Syncing irssi config with Kessel ...'
+puts '  Syncing irssi config with hoth ...'
 Dir.chdir("#{workbench_path}/irssi") do
-  `tar cf - * | ssh kessel '(cd ~/.irssi; tar xf - )'`
+  `tar cf - * | ssh hoth '(cd ~/.irssi; tar xf - )'`
 end
 
 puts "\n  All done!"
