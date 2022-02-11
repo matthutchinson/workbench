@@ -1,4 +1,6 @@
 tap "homebrew/cask"
+tap "puma/puma"
+tap "heroku/brew"
 
 # https://github.com/dylanaraps/neofetch
 brew "neofetch"
@@ -68,7 +70,6 @@ brew "less"
 brew "wget"
 brew "puma/puma/puma-dev"
 brew "yarn"
-brew "rabbitmq"
 brew "memcached"
 brew "redis"
 brew "mercurial"
@@ -80,6 +81,4 @@ brew "restic"
 brew "mupdf"
 brew "fswatch"
 brew "irssi"
-
-tap "heroku/brew"
 brew "heroku"
