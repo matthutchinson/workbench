@@ -160,10 +160,10 @@ nnoremap <leader>g :Commits<cr>
 nnoremap <silent> vv <C-w>v
 
 " function keys
-map <F2> :sp ~/Documents/system/notes/vim help.md<cr>
-map <F3> :sp ~/Documents/system/notes/todos.md<cr>
-map <F4> :sp ~/Documents/system/notes/scratch.md<cr>
-map <F5> :sp ~/Documents/system/notes/secrets.enc.md<cr>
+map <F2> :sp scp://matt@hoth.wan//home/matt/notes/vim_help.md<cr>
+map <F3> :sp scp://matt@hoth.wan//home/matt/notes/todos.md<cr>
+map <F4> :sp scp://matt@hoth.wan//home/matt/notes/scratch.md<cr>
+map <F5> :sp scp://matt@hoth.wan//home/matt/notes/secrets.enc.md<cr>
 " F6 formats and tidy up
 noremap <F6> mmgg=G'm
 inoremap <silent> <F6> <Esc> mmgg=G'mi
