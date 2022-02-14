@@ -64,7 +64,6 @@
   excludesfile = /Users/matt/.gitignore
   editor = vim
 	attributesfile = /Users/matt/.gitattributes
-	commitGraph = true
 [repack]
   usedeltabaseoffset = true
 [apply]
@@ -108,23 +107,10 @@
 	verbose = true
 [diff]
 	noprefix = true
-	algorithm = patience
 [diff "rspec"]
   xfuncname = "^[ \t]*((RSpec|describe|context|it|before|after|around|feature|scenario|background)[ \t].*)$"
 [pull]
 	rebase = false
-[gc]
-	writeCommitGraph = true
-[protocol]
-	version = 2
-[url "https://github.com/Shopify/"]
-	insteadOf = git@github.com:Shopify/
-	insteadOf = git@github.com:shopify/
-	insteadOf = ssh://git@github.com/Shopify/
-	insteadOf = ssh://git@github.com/shopify/
-[credential]
-	helper =
-	helper = store --file /opt/dev/var/private/git_credential_store
 [pager]
   diff = delta
   log = delta
@@ -142,3 +128,5 @@
   hunk-header-decoration-style = yellow box
 [branch]
   sort = -committerdate
+[include]
+	path = /Users/matt/.config/dev/gitconfig
