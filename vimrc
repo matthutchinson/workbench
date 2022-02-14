@@ -159,11 +159,18 @@ nnoremap <leader>g :Commits<cr>
 " vv to generate new vertical split
 nnoremap <silent> vv <C-w>v
 
+" work out where shared notes are
+let shared_note_path='~/Documents/system/notes'
+if isdirectory('~/Library/Mobile\ Documents/com\~apple\~CloudDocs/notes')
+  let shared_note_path='~/Library/Mobile\ Documents/com\~apple\~CloudDocs/notes'
+endif
+
 " function keys
-map <F2> :sp ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/notes/vim_help.md<cr>
-map <F3> :sp ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/notes/todos.md<cr>
-map <F4> :sp ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/notes/scratch.md<cr>
-map <F5> :sp ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/notes/notes/secrets.enc.md<cr>
+map <expr> <F2> ':sp ' . shared_note_path . '/vim_help.md<cr>'
+map <expr> <F3> ':sp ' . shared_note_path . '/todos.md<cr>'
+map <expr> <F4> ':sp ' . shared_note_path . '/scratch.md<cr>'
+map <expr> <F5> ':sp ' . shared_note_path . '/secrets.enc.md<cr>'
+
 " F6 formats and tidy up
 noremap <F6> mmgg=G'm
 inoremap <silent> <F6> <Esc> mmgg=G'mi
