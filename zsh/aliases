@@ -4,21 +4,13 @@
 # Misc
 ################################################################################
 
-function shared_note_path {
-  if [ -d "~/Library/Mobile\ Documents/com\~apple\~CloudDocs/notes/" ]; then
-    echo ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/notes/$1
-  else
-    echo ~/Documents/system/notes/$1
-  fi
-}
-
 alias fhp='cd ~/Documents/firehose/job\ prep/;ll;mate ~/Documents/firehose/resources/mentor_session_test.rb;open https://www.thefirehoseproject.com/courses'
 alias irc='ssh hoth -t "screen -x"'
 alias ircr='ssh hoth.wan -t "screen -x"'
-alias scratch='vi '`shared_note_path scratch.md`
-alias todos='vi '`shared_note_path todos.md`
-alias secrets='vi '`shared_note_path secrets.enc.md`
-alias plan='vi '`shared_note_path plans/$(date "+%Y").md`
+alias scratch='vi ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/notes/scratch.md'
+alias todos='vi ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/notes/todos.md'
+alias secrets='vi ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/notes/secrets.enc.md'
+alias plan='vi -c ":$" ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/notes/plans/'`date "+%Y"`'.md'
 alias reload='source ~/.zshrc'
 alias vnc-hoth='ssh -f hoth.vnc.tunnel -N; open vnc://localhost:5999'
 alias tml='tmux ls'
