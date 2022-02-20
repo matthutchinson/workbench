@@ -17,3 +17,4 @@ irssi/fnotify
 tmux/plugins/*
 tmux/resurrect
 Brewfile.lock.json
+config/spin
