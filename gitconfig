@@ -130,3 +130,5 @@
   sort = -committerdate
 [include]
 	path = /Users/matt/.config/dev/gitconfig
+[sequence]
+	editor = interactive-rebase-tool
