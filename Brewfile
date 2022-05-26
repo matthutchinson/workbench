@@ -56,6 +56,8 @@ brew "fx"
 # https://deno.land
 brew "deno"
 
+brew "imagemagick"
+brew "vips"
 brew "scmpuff"
 brew "exiftool"
 brew "node"

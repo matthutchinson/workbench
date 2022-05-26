@@ -421,9 +421,10 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
-" ale linting engine, don't lint on edits, only opens/saves
+" ale linting engine, don't lint on edits, opens, only saves
 let g:ale_lint_on_text_changed = "never"
 let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_enter = 0
 
 " #### Functions
 

@@ -12,6 +12,7 @@ config/gh
 config/restic/env
 config/shadowenv
 config/gcloud
+config/containers
 irssi/certs/*.pem
 irssi/fnotify
 tmux/plugins/*
