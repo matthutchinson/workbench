@@ -1,14 +1,5 @@
 servers = (
   {
-    address = "chat.freenode.net";
-    chatnet = "Freenode";
-    port = "6697";
-    use_tls = "yes";
-    tls_cert = "/home/matt/.irssi/certs/freenode.pem";
-    tls_verify = "yes";
-    autoconnect = "yes";
-  },
-  {
     address = "irc.perl.org";
     chatnet = "Perl";
     port = "6667";
@@ -37,9 +28,7 @@ chatnets = {
 };
 
 channels = (
-  { name = "#freenode"; chatnet = "Freenode"; autojoin = "No"; },
-  { name = "#irssi"; chatnet = "Freenode"; autojoin = "No"; },
-  { name = "#cabal"; chatnet = "Perl"; autojoin = "No"; }
+  { name = "#cabal"; chatnet = "Perl"; autojoin = "Yes"; }
 );
 
 aliases = {
@@ -307,9 +296,9 @@ settings = {
     term_force_colors = "yes";
     scrollback_time = "7day ";
   };
-  "fe-common/core" = { 
+  "fe-common/core" = {
     theme = "solarized-universal";
-    hilight_color = "= %R"; 
+    hilight_color = "= %R";
   };
   "perl/core/scripts" = {
     usercount_show_zero = "yes";
@@ -338,13 +327,13 @@ windows = {
   2 = { name = "hilight"; };
 };
 mainwindows = {
-  1 = { 
+  1 = {
     first_line = "8";
     lines = "46";
     first_column = "0";
     columns = "102";
   };
-  2 = { 
+  2 = {
     first_line = "1";
     lines = "7";
     first_column = "0";
