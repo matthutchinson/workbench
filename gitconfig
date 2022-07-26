@@ -75,6 +75,7 @@
 	account = personal
 [init]
 	templatedir = ~/.git_template
+	defaultBranch = main
 [url "git://github.com/"]
   # Read-only
   insteadOf = gh:
