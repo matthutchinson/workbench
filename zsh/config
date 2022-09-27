@@ -64,7 +64,7 @@ bindkey "\e[B" history-beginning-search-forward-end
 autoload -Uz colors && colors
 export CLICOLOR=1
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
-export GREP_OPTIONS="--color"
+export GREP_OPTIONS="--color=auto"
 
 ################################################################################
 # Completion
@@ -124,3 +124,26 @@ export GPG_TTY=$(tty)
 
 # vault should use login keychain
 export AWS_VAULT_KEYCHAIN_NAME=login
+
+# Enable persistent REPL history for `node`.
+NODE_REPL_HISTORY_FILE=~/.node_history
+# Allow 32³ entries; the default is 1000.
+NODE_REPL_HISTORY_SIZE=32768
+
+# Never delete "unused" libraries. This removes readline, openssl, etc
+# that Ruby depends on, forcing confusing periodic reinstalls.
+export HOMEBREW_NO_INSTALL_CLEANUP=1
+
+# Globally disable unused, informational Brewfile.lock.json
+export HOMEBREW_BUNDLE_NO_LOCK=1
+
+################################################################################
+# Man pages
+################################################################################
+
+# highlight section titles
+export LESS_TERMCAP_md="${yellow}"
+export LESS=-XFR
+
+# don’t clear the screen after quitting
+export MANPAGER="less -X"

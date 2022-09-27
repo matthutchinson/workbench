@@ -27,6 +27,7 @@ def route(index_or_name)
 end
 
 # show Rails app name and env name in prompt
+# TODO: fix prompt in rails apps, and methods
 if defined?(Rails)
   app_env  = Rails.env[0...3]
   app_name = if defined?(Rails.application.class.module_parent_name)
@@ -49,12 +50,8 @@ IRB.conf[:PROMPT][:RAILS] = {
 }
 IRB.conf[:PROMPT_MODE] = :RAILS
 
-if defined?(Freeagent)
-  def company
-    @_company ||= Company.find_by_subdomain('fac')
-  end
-
-  def user
-    @_user ||= company.account_owner
+if defined?(Emphasis)
+  def me
+    @_me ||= User.find_by(email: "matt@hiddenloop.com")
   end
 end

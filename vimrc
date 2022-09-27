@@ -58,9 +58,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'dense-analysis/ale'     " ALE
   Plug 'maximbaz/lightline-ale' " Lint status in lightline
 
-  " shopify
-  Plug 'Shopify/shadowenv'      " load shadowenv when changing dirs
-
   " snippets
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " snippets
 call plug#end()

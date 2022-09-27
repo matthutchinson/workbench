@@ -1,9 +1,9 @@
 [user]
-	name = Matthew Hutchinson
-	email = matt@hiddenloop.com
-	signingkey = 89B04DE88C710FA0
-[includeIf "gitdir/i:**/Shopify/**"]
-  path = ~/.gitconfig-shopify
+  name = Matthew Hutchinson
+  email = matt@hiddenloop.com
+  signingkey = 89B04DE88C710FA0
+[includeIf "gitdir/i:~/Work/**"]
+  path = ~/.gitconfig-37signals
 [color]
   status = auto
   diff = auto
@@ -57,17 +57,25 @@
   autocorrect = 1
 [sendemail]
   smtpserver = smtp.example.com
-  aliasesfile = /Users/matt/.gitaliases
+  aliasesfile = ~/.gitaliases
   aliasfiletype = mailrc
 [core]
   legacyheaders = false
-  excludesfile = /Users/matt/.gitignore
+  excludesfile = ~/.gitignore
   editor = vim
-	attributesfile = /Users/matt/.gitattributes
+  attributesfile = ~/.gitattributes
+  # Treat spaces before tabs and all kinds of trailing whitespace as an error
+  # [default] trailing-space: looks for spaces at the end of a line
+  # [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+  whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+  # Make `git rebase` safer on OS X
+  # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+  trustctime = false
 [repack]
   usedeltabaseoffset = true
 [apply]
-  whitespace = nowarn
+  # Detect whitespace errors when applying a patch
+  whitespace = fix
 [push]
   # push current branch even if you've never pushed it before
   default = current
@@ -86,10 +94,10 @@
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	required = true
-	process = git-lfs filter-process
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
 [diff "exif"]
 	textconv = exiftool
 [merge]
@@ -111,7 +119,7 @@
 [diff "rspec"]
   xfuncname = "^[ \t]*((RSpec|describe|context|it|before|after|around|feature|scenario|background)[ \t].*)$"
 [pull]
-	rebase = false
+  rebase = true
 [pager]
   diff = delta
   log = delta
@@ -129,7 +137,11 @@
   hunk-header-decoration-style = yellow box
 [branch]
   sort = -committerdate
-[include]
-	path = /Users/matt/.config/dev/gitconfig
 [sequence]
-	editor = interactive-rebase-tool
+  editor = interactive-rebase-tool
+[tag]
+  forceSignAnnotated = true
+[fetch]
+  prune = true
+[credential]
+  helper = osxkeychain

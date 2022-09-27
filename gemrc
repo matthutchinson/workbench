@@ -1,5 +1,4 @@
 ---
-gem: --no-document
 :sources:
 - https://rubygems.org/
 :update_sources: true
@@ -7,3 +6,6 @@ gem: --no-document
 :verbose: true
 :benchmark: false
 :bulk_threshold: 1000
+:concurrent_downloads: 8
+disable_default_gem_server: true
+gem: "--no-document"

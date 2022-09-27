@@ -2,6 +2,9 @@ tap "homebrew/cask"
 tap "puma/puma"
 tap "heroku/brew"
 
+# don't forget to set default shell to /opt/homebrew/bin/zsh
+brew "zsh"
+
 # https://github.com/dylanaraps/neofetch
 brew "neofetch"
 

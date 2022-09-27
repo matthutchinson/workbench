@@ -18,18 +18,6 @@ if [ -d $HOME/.zsh ]; then
 fi
 
 ################################################################################
-# shopify dev - https://github.com/Shopify/dev
-################################################################################
-[ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
-[ -d $(brew --prefix)/Caskroom/google-cloud-sdk ] && source $(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
-# ensure chruby exists in non-interactive shells
-if [ -d /opt/dev/sh/chruby ]; then
-  [[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
-  # swap ordering of hooks so direnv happens last (ensures good PATH ordering)
-  precmd_functions=(${precmd_functions[@]/_direnv_hook} _direnv_hook)
-fi
-
-################################################################################
 # direnv - https://github.com/direnv/direnv
 ################################################################################
 export DIRENV_LOG_FORMAT=  # comment this to debug or be verbose
@@ -40,12 +28,38 @@ eval "$(direnv hook zsh)"
 ################################################################################
 export PATH=~/bin:$PATH
 
+# Don't hash command lookups, allowing us to use ./bin/* commands relative to 
+# the current working directory.
+export PATH="./bin:$PATH"
+set +h
+
+################################################################################
+# Brew
+################################################################################
+
+if [ -d /opt/homebrew ]; then
+  HOMEBREW_PREFIX=/opt/homebrew
+else
+  HOMEBREW_PREFIX=/usr/local
+fi
+
+eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
+
+################################################################################
+# 37signals
+################################################################################
+
+eval "$(rbenv init --no-rehash -)"
+eval "$(nodenv init --no-rehash -)"
+eval "$(work init -)"
+eval "$(37 init -)"
+
+export GOPATH="$HOME/go"
+export NODE_PATH="$(brew --prefix)/lib/node_modules:$NODE_PATH"
+export PATH="$HOME/.rbenv/bin:$GOPATH/bin:$(brew --prefix)/share/npm/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+
 ################################################################################
 # Benchmarking - https://blog.jonlu.ca/posts/speeding-up-zsh
 ################################################################################
 # add `zmodload zsh/zprof` above
 # then run `zprof` in new shells
-
-[[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)
-
-[[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)

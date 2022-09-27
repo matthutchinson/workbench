@@ -5,40 +5,15 @@ require 'irb/completion'
 require 'irb/ext/save-history'
 require "amazing_print"
 
-loaded                  = []
 IRB.conf[:AUTO_INDENT]  = true
 IRB.conf[:SAVE_HISTORY] = 1000
-
-# use gem install wirble hirb pry pry-nav
-%w(wirble hirb pry pry-nav).each do |gem|
-  begin
-    require gem
-    loaded << gem
-  rescue LoadError
-  end
-end
+IRB.conf[:PROMPT_MODE]  = :SIMPLE
+IRB.conf[:USE_READLINE] = true
+IRB.conf[:BACK_TRACE_LIMIT] = 1000
+IRB.conf[:HISTORY_FILE] = File.expand_path('.irb_history', ENV['HOME'])
 
 # use Amazing Print
 AmazingPrint.irb! if defined?(AmazingPrint)
-
-# configure wirble
-if defined?(Wirble)
-  Wirble.init
-  Wirble.colorize
-
-  colors = Wirble::Colorize.colors.merge({
-    :object_class  => :purple,
-    :symbol        => :purple,
-    :symbol_prefix => :purple
-  })
-
-  Wirble::Colorize.colors = colors
-end
-
-# enable hirb
-if defined?(Hirb)
-  Hirb::View.enable
-end
 
 # some helper methods
 def save_file(data, filename)
@@ -68,17 +43,5 @@ class Object
   end
 end
 
-# load railsrc if it exists
-railsrc_path = File.expand_path('~/.railsrc')
-
-if (ENV['RAILS_ENV'] || defined? Rails) && File.exist?(railsrc_path)
-  begin
-    load railsrc_path
-    loaded << 'railsrc'
-  rescue Exception => e
-    puts "Could not load: #{ railsrc_path } - #{e.message}"
-  end
-end
-
-# explain what loaded OK
-puts "> all systems are go #{loaded.join('/') + " " if loaded.length > 0}<"
+# ready!
+puts "> all systems are go <"
