@@ -2,8 +2,6 @@
   name = Matthew Hutchinson
   email = matt@hiddenloop.com
   signingkey = 89B04DE88C710FA0
-[includeIf "gitdir/i:~/Work/**"]
-  path = ~/.gitconfig-37signals
 [color]
   status = auto
   diff = auto
