@@ -24,16 +24,6 @@ export DIRENV_LOG_FORMAT=  # comment this to debug or be verbose
 eval "$(direnv hook zsh)"
 
 ################################################################################
-# PATH
-################################################################################
-export PATH=~/bin:$PATH
-
-# Don't hash command lookups, allowing us to use ./bin/* commands relative to 
-# the current working directory.
-export PATH="./bin:$PATH"
-set +h
-
-################################################################################
 # Brew
 ################################################################################
 
@@ -57,6 +47,18 @@ eval "$(37 init -)"
 export GOPATH="$HOME/go"
 export NODE_PATH="$(brew --prefix)/lib/node_modules:$NODE_PATH"
 export PATH="$HOME/.rbenv/bin:$GOPATH/bin:$(brew --prefix)/share/npm/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+
+################################################################################
+# PATH
+################################################################################
+
+# Don't hash command lookups, allowing us to use ./bin/* commands relative to
+# the current working directory.
+export PATH="./bin:$PATH"
+set +h
+
+# add home bin path
+export PATH=~/bin:$PATH
 
 ################################################################################
 # Benchmarking - https://blog.jonlu.ca/posts/speeding-up-zsh
