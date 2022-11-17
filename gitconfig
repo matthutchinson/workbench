@@ -40,7 +40,6 @@
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
 	delete-merged = !git branch --merged main | egrep -v \"(^\\*|^  main$)\" | xargs git branch --delete
 	delete-gone = !git fetch --prune && git branch --verbose | awk '/\\[gone]/{print $1}' | xargs git branch --delete --force
-	restart = !git checkout . && git checkout master && git pull && git clean -fd
 	upstream = !git push -u origin HEAD
 
 	# see https://tekin.co.uk/2020/06/jump-from-a-git-commit-to-the-pr-in-one-command
