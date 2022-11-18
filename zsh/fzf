@@ -114,13 +114,14 @@ alias gbc="gbp git checkout"
 # fzf a local branch to delete
 function gbd {
   local branch=$(_fzf_git_branch)
+  local main=$(git_main_branch)
 
   if [[ ($# -eq 0) && (! -z $branch) ]]; then
     _echo_and_execute "git branch -D $branch"
-    if [[ ($? -ne 0) && ($branch != 'main') ]]; then
+    if [[ ($? -ne 0) && ($branch != $main) ]]; then
       # deleting current branch, explain you can't and checkout main
-      echo "⚠️". "you are already on this branch, checking out main"
-      git checkout main
+      echo "⚠️". "you are already on this branch, checking out $main"
+      git checkout $main
     fi
     return
   fi
