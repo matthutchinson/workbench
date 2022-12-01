@@ -10,3 +10,4 @@ tmux/plugins/*
 tmux/resurrect
 Brewfile.lock.json
 zsh/secrets
+config/configstore/update-notifier-npm.json

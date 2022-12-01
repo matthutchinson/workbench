@@ -49,6 +49,7 @@ alias rdbmt='rake db:migrate RAILS_ENV=test'
 alias tdl='tail -f ./log/development.log'
 alias tdlp="tdl | egrep 'Completed|Processing|Parameters\:'"
 alias rst='touch ./tmp/restart.txt'
+alias rspec='nocorrect rspec'
 
 ################################################################################
 # Git

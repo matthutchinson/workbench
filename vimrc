@@ -410,6 +410,13 @@ let g:lightline#ale#indicator_warnings = "  "
 let g:lightline#ale#indicator_errors = "  "
 let g:lightline#ale#indicator_ok = ""
 
+" ALE lint and fix options
+let g:ale_cspell_options = "--config ~/.config/cspell/cspell.json"
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'ruby': ['rubocop'],
+\}
+
 " UltiSnips triggers
 let g:UltiSnipsExpandTrigger="<S-tab>"
 let g:UltiSnipsJumpForwardTrigger="<S-tab>"

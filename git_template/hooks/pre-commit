@@ -1,0 +1,29 @@
+#!/bin/sh
+#
+# Check for ruby style errors with rubocop
+
+red='\033[0;31m'
+green='\033[0;32m'
+yellow='\033[0;33m'
+NC='\033[0m'
+
+# Only proceed if rubocop is available
+rubocop -v >/dev/null 2>&1 || { exit 0; }
+
+# Only check staged files
+FILES="$(git diff --cached --name-only --diff-filter=AMC | grep "\.rb$" | tr '\n' ' ')"
+
+if [ -n "$FILES" ]
+then
+  # Run rubocop on the staged files
+  rubocop ${FILES}
+
+  if [ $? -ne 0 ]; then
+    echo "${red}[Ruby Style][Error]: Fix the issues and commit again${NC}"
+    exit 1
+  fi
+else
+  echo "${green}[Ruby Style][Info]: No files to check${NC}"
+fi
+
+exit 0
