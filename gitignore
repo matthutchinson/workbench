@@ -21,3 +21,4 @@ config/shadowenv
 .agignore
 .byebug_history
 *.swp
+infrastructure/haybales/vendor
