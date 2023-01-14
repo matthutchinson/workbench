@@ -68,9 +68,6 @@ end
 # make sure vim backup dir exists
 `mkdir -p ~/.vim/tmp`
 
-puts '  Pruning direnv ...'
-`direnv prune`
-
 # kessel must exist in ~/.ssh/config
 puts '  Syncing irssi config with hoth ...'
 Dir.chdir("#{workbench_path}/irssi") do

@@ -17,7 +17,6 @@ config/nix*
 config/shadowenv
 *.tags
 .shadowenv.d
-.envrc
 .agignore
 .byebug_history
 *.swp

@@ -26,9 +26,6 @@ brew "htop"
 # https://httpie.org
 brew "httpie"
 
-# https://direnv.net
-brew "direnv"
-
 # https://github.com/julienXX/terminal-notifier
 brew "terminal-notifier"
 
