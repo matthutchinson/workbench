@@ -61,13 +61,13 @@ brew "deno"
 
 brew "imagemagick"
 brew "vips"
+brew "mupdf"
 brew "scmpuff"
 brew "exiftool"
 brew "node"
 brew "node@14"
 brew "fzf"
 brew "postgresql"
-brew "git"
 brew "ctags"
 brew "vim"
 brew "git-delta"
@@ -83,8 +83,13 @@ brew "awscli"
 brew "chruby"
 brew "ruby-install"
 brew "restic"
-brew "mupdf"
 brew "fswatch"
 brew "irssi"
 brew "heroku"
+
+# git
+brew "git"
 brew "git-interactive-rebase-tool"
+
+tap 'dirk/quickhook'
+brew 'quickhook'
