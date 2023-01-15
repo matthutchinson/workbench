@@ -6,8 +6,7 @@
 # commit message file. If the hook fails with a non-zero status, the commit is
 # aborted.
 #
-# Adds a ticket/story id, a commit template and the current playing tune!
-# (tune idea from: http://tinyurl.com/h6ro823)
+# Current Music playing idea from https://github.com/mroth/git-muzak
 #
 # see here for details:  https://git-scm.com/docs/githooks#_prepare_commit_msg
 
@@ -19,16 +18,10 @@ prepareTemplateMessage() {
     template_content="\n$(cat $template_file)\n"
   fi
 
-  # prefix with story id from the current git branch if present
-  if [ -n "$story_id_from_git_branch" ]
-  then
-    prefix="[$story_id_from_git_branch] "
-  fi
-
   # add the currently playing iTunes track
-  current_song=`osascript -e 'tell application "iTunes" to if player state is playing then "\n(♬ listening to) : " & artist of current track & " / " & name of current track & "\n"'`
+  # current_song=`osascript -e 'tell application "Music" to if player state is playing then "\n(♬ listening to) : " & artist of current track & " / " & name of current track & "\n"'`
 
-  echo $prefix "short message\n$template_content$current_song\n$(cat $1)" > $1
+  echo $prefix "short message\n$template_content\n$(cat $1)" > $1
 }
 
 # handle various args this script can be invoked with
