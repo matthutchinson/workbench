@@ -416,6 +416,10 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'ruby': ['rubocop'],
 \}
+" disable 'erb' linter since https://github.com/dense-analysis/ale/issues/4167
+let g:ale_linters = {
+\   'eruby': ['erblint', 'erubi', 'erubis', 'ruumba'],
+\}
 
 " UltiSnips triggers
 let g:UltiSnipsExpandTrigger="<S-tab>"
