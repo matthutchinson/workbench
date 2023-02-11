@@ -51,6 +51,7 @@ alias tdlp="tdl | egrep 'Completed|Processing|Parameters\:'"
 alias tdlnc="tdl | egrep -v -e '^.*(\[ActionCable\]|\[Action Cable\]|\[Socket\]).*$'"
 alias rst='touch ./tmp/restart.txt'
 alias rspec='nocorrect rspec'
+alias dev='nocorrect dev'
 
 ################################################################################
 # Git
