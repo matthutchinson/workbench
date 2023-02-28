@@ -42,6 +42,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-endwise'     " end certain structures automatically
   Plug 'tpope/vim-unimpaired'  " complementary pairs of mappings
   Plug 'tpope/vim-dispatch'    " async building (tests, running etc.)
+  Plug 'mattn/emmet-vim'       " fast HTML/CSS authoring
 
   " tmux
   Plug 'benmills/vimux'                 " launch commands in tmux windows
