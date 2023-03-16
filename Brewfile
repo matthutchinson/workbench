@@ -56,6 +56,10 @@ brew "fx"
 # https://deno.land
 brew "deno"
 
+# to tunnel e.g. cloudflared tunnel --url http://localhost:3000
+brew "cloudflared"
+brew "agrinman/tap/tunnelto"
+
 brew "imagemagick"
 brew "vips"
 brew "mupdf"
