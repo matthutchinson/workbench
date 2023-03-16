@@ -143,4 +143,4 @@
 [credential]
   helper = osxkeychain
 [include]
-	path = ~/.gitconfig.shipyard
+  path = ~/.gitconfig.shipyard
