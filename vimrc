@@ -581,11 +581,14 @@ if !exists("autocommands_loaded")
   au BufNewFile,BufRead /private/etc/apache2/*.conf* set ft=apache
   au BufRead,BufNewFile {Capfile,Gemfile,Appraisals,Rakefile,Thorfile,bluepill.pill,config.ru,.caprc,.irbrc,irb_tempfile*} set ft=ruby
 
-  " markdown todos, toggle with Ctrl+Space and auto-insert
+  " markdown todos, toggle with Ctrl+Space and auto-insert, fix tab and shifting
   au Filetype markdown map <silent><buffer> <C-@> :call ToggleTodo()<cr>
   au Filetype markdown inoremap <expr><buffer> <CR> getline('.') =~ ' *\- \[ ] $' ? '<c-U><Esc>0i' : '<CR>'.AddTodo()
   au Filetype markdown nnoremap <expr><buffer> o "o".AddTodo()
   au Filetype markdown nnoremap <expr><buffer> O "O".AddTodo()
+  au Filetype markdown set softtabstop=2
+  au Filetype markdown set tabstop=2
+  au Filetype markdown set shiftwidth=2
 
   " rust / cargo
   au Filetype rust map <Leader>r :w\|:call VimuxRunCommand("clear; cargo run")<cr>

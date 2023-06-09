@@ -137,6 +137,9 @@ export HOMEBREW_NO_INSTALL_CLEANUP=1
 # Globally disable unused, informational Brewfile.lock.json
 export HOMEBREW_BUNDLE_NO_LOCK=1
 
+# set a high ulimit to avoid file descriptor issues (check `sysctl kern.maxfilesperproc` for max)
+ulimit -Sn 122880
+
 ################################################################################
 # Man pages
 ################################################################################

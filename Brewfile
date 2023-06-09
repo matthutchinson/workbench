@@ -62,7 +62,7 @@ brew "agrinman/tap/tunnelto"
 
 brew "imagemagick"
 brew "vips"
-brew "mupdf"
+brew "mupdf-tools"
 brew "scmpuff"
 brew "exiftool"
 brew "node"

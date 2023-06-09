@@ -48,7 +48,7 @@ alias rdbtp='rake db:prepare RAILS_ENV=test'
 alias rdbmt='rake db:migrate RAILS_ENV=test'
 alias tdl='tail -f ./log/development.log'
 alias tdlp="tdl | egrep 'Completed|Processing|Parameters\:'"
-alias tdlnc="tdl | egrep -v -e '^.*(\[ActionCable\]|\[Action Cable\]|\[Socket\]).*$'"
+alias tdlnc="tdl | egrep -v -e '^.*(Job Load|\[ActionCable\]|\[Action Cable\]|\[Socket\]).*$'"
 alias rst='touch ./tmp/restart.txt'
 alias rspec='nocorrect rspec'
 alias dev='nocorrect dev'
@@ -69,4 +69,3 @@ alias gup='git upstream'
 # GitHub CLI - https://cli.github.com
 
 alias gpr='gh pr create'
-alias gcsi='gh issue list --label "Core Services"'
