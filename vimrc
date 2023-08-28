@@ -413,14 +413,18 @@ let g:lightline#ale#indicator_ok = ""
 
 " ALE lint and fix options
 let g:ale_cspell_options = "--config ~/.config/cspell/cspell.json"
+let g:ale_ruby_ruby_executable = "ruby "
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'ruby': ['rubocop'],
 \}
 " disable 'erb' linter since https://github.com/dense-analysis/ale/issues/4167
+" disabled 'ruby -w -c' since its noisey about regexps
 let g:ale_linters = {
 \   'eruby': ['erblint', 'erubi', 'erubis', 'ruumba'],
+\   'ruby': ['brakeman', 'cspell', 'debride', 'rails_best_practices', 'reek', 'rubocop', 'solargraph', 'sorbet', 'standardrb']
 \}
+
 
 " UltiSnips triggers
 let g:UltiSnipsExpandTrigger="<S-tab>"

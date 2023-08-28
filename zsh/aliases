@@ -52,6 +52,7 @@ alias tdlnc="tdl | egrep -v -e '^.*(Job Load|\[ActionCable\]|\[Action Cable\]|\[
 alias rst='touch ./tmp/restart.txt'
 alias rspec='nocorrect rspec'
 alias dev='nocorrect dev'
+alias kamal='nocorrect kamal'
 
 ################################################################################
 # Git
