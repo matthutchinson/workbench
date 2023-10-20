@@ -54,6 +54,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mhinz/vim-startify'    " nicer start screen with MRU
   Plug 'mattn/webapi-vim'      " web requests (for gist-vim)
   Plug 'mattn/gist-vim'        " post gists
+  Plug 'github/copilot.vim'    " github copilot
 
   " linting
   Plug 'dense-analysis/ale'     " ALE
@@ -158,10 +159,10 @@ nnoremap <leader>g :Commits<cr>
 nnoremap <silent> vv <C-w>v
 
 " function keys
-map <F2> :sp ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/notes/vim_help.md<cr>
-map <F3> :sp ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/notes/todos.md<cr>
-map <F4> :sp ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/notes/scratch.md<cr>
-map <F5> :sp ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/notes/notes/secrets.enc.md<cr>
+map <F2> :sp ~/Documents/system/notes/vim_help.md<cr>
+map <F3> :sp ~/Documents/system/notes/todos.md<cr>
+map <F4> :sp ~/Documents/system/notes/scratch.md<cr>
+map <F5> :sp ~/Documents/system/notes/secrets.enc.md<cr>
 " F6 formats and tidy up
 noremap <F6> mmgg=G'm
 inoremap <silent> <F6> <Esc> mmgg=G'mi
@@ -353,10 +354,14 @@ let g:ascii = [
       \ ''
       \]
 
+" startify
 let g:startify_change_to_vcs_root = 1
 let g:startify_custom_header =
       \ 'map(g:ascii + startify#fortune#quote(), "\"   \".v:val")'
 
+" copilot
+let g:copilot_node_command =
+  \ "~/.nodenv/versions/18.12.1/bin/node"
 
 " gist-vim
 let g:gist_open_browser_after_post = 1

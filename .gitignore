@@ -12,4 +12,5 @@ Brewfile.lock.json
 zsh/secrets
 config/configstore/update-notifier-npm.json
 config/op*
+config/github-copilot*
 

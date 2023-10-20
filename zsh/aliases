@@ -48,11 +48,14 @@ alias rdbtp='rake db:prepare RAILS_ENV=test'
 alias rdbmt='rake db:migrate RAILS_ENV=test'
 alias tdl='tail -f ./log/development.log'
 alias tdlp="tdl | egrep 'Completed|Processing|Parameters\:'"
-alias tdlnc="tdl | egrep -v -e '^.*(Job Load|\[ActionCable\]|\[Action Cable\]|\[Socket\]).*$'"
+alias tdlnc="tdl | egrep -v -e '^.*(\[ActionCable\]|\[Action Cable\]|\[Socket\]|\[ActiveJob\]|\[Active Job\]).*$'"
 alias rst='touch ./tmp/restart.txt'
 alias rspec='nocorrect rspec'
 alias dev='nocorrect dev'
 alias kamal='nocorrect kamal'
+
+# run tests for all tests files that have changed in this branch (from master)
+alias rtc='rails test $(git diff --name-only master test | grep -v "test/fixtures" | tr "\n" " ")'
 
 ################################################################################
 # Git
