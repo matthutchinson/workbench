@@ -55,7 +55,8 @@ alias dev='nocorrect dev'
 alias kamal='nocorrect kamal'
 
 # run tests for all tests files that have changed in this branch (from master)
-alias rtc='rails test $(git diff --name-only master test | grep -v "test/fixtures" | tr "\n" " ")'
+# filters out deleted tests
+alias rtc='rails test $(git diff --diff-filter=d --name-only master test | grep "_test.rb" | tr "\n" " ")'
 
 ################################################################################
 # Git
