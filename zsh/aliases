@@ -54,6 +54,9 @@ alias rspec='nocorrect rspec'
 alias dev='nocorrect dev'
 alias kamal='nocorrect kamal'
 
+# reschema your rails app, recreate db and load schema (no seeding)
+alias rscheme='rails db:drop;rails db:create;rails db:schema:load'
+
 # run tests for all tests files that have changed in this branch (from master)
 # filters out deleted tests
 alias rtc='rails test $(git diff --diff-filter=d --name-only master test | grep "_test.rb" | tr "\n" " ")'
