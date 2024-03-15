@@ -1,7 +1,7 @@
 [user]
   name = Matthew Hutchinson
   email = matt@hiddenloop.com
-  signingkey = 89B04DE88C710FA0
+	signingkey = 89B04DE88C710FA0
 [color]
   status = auto
   diff = auto
@@ -142,5 +142,3 @@
   prune = true
 [credential]
   helper = osxkeychain
-[include]
-	path = ~/.gitconfig.shipyard

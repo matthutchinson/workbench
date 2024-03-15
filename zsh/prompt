@@ -71,6 +71,7 @@ function seasonal_chevrons {
       ;;
   esac
 
+  chevrons="%F{006}❯%F{004}❯%F{011}❯%f"
   echo -en $chevrons
 }
 

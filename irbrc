@@ -1,9 +1,11 @@
 #!/usr/bin/ruby
 
-require 'rubygems'
-require 'irb/completion'
-require 'irb/ext/save-history'
-require "amazing_print"
+begin
+  require 'rubygems'
+  require 'irb/completion'
+  require "amazing_print"
+rescue LoadError
+end
 
 IRB.conf[:AUTO_INDENT]  = true
 IRB.conf[:SAVE_HISTORY] = 1000
