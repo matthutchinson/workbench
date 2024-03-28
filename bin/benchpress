@@ -54,7 +54,7 @@ puts '  Updating vim with Plug...'
 `vim +PlugUpgrade +PlugUpdate +PlugClean! +qa! > /dev/null 2>&1`
 
 # ensure tmux tpm exists (https://github.com/tmux-plugins/tpm)
-if File.exists?("#{ENV['HOME']}/.tmux/plugins/tpm")
+if File.exist?("#{ENV['HOME']}/.tmux/plugins/tpm")
   puts '  Updating/cleaning tmux plugins...'
   `~/.tmux/plugins/tpm/bin/update_plugins all`
   `~/.tmux/plugins/tpm/bin/clean_plugins`
