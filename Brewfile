@@ -1,6 +1,8 @@
-tap "homebrew/cask"
 tap "puma/puma"
 tap "heroku/brew"
+
+# brew the latest version of alacritty
+cask "alacritty"
 
 # don't forget to set default shell to /opt/homebrew/bin/zsh
 brew "zsh"
@@ -68,7 +70,7 @@ brew "exiftool"
 brew "node"
 brew "node@14"
 brew "fzf"
-brew "postgresql"
+brew "postgresql@14"
 brew "ctags"
 brew "vim"
 brew "git-delta"
