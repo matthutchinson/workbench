@@ -1,0 +1,69 @@
+[colors]
+draw_bold_text_with_bright_colors = false
+
+[colors.bright]
+black = "0x000000"
+blue = "0xa7adba"
+cyan = "0xab7967"
+green = "0x343d46"
+magenta = "0xdfe1e8"
+red = "0xd08770"
+white = "0x65737d"
+yellow = "0x4f5b66"
+
+[colors.normal]
+black = "0x000000"
+blue = "0x8fa1b3"
+cyan = "0x96b5b4"
+green = "0xa3be8c"
+magenta = "0xb48ead"
+red = "0xbf616a"
+white = "0xc0c5ce"
+yellow = "0xebcb8b"
+
+[colors.primary]
+background = "0x000000"
+foreground = "0xc0c5ce"
+
+[font]
+size = 14
+
+[font.glyph_offset]
+x = 0
+y = 3
+
+[font.normal]
+family = "SFMono Nerd Font"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 3
+
+[[keyboard.bindings]]
+chars = "#"
+key = "Key3"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bp"
+key = "Up"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bn"
+key = "Down"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "N"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = " "
+key = "Space"
+mods = "Alt"
+
+[window]
+startup_mode = "Fullscreen"
