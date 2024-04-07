@@ -56,15 +56,9 @@ bindkey "\e[B" history-beginning-search-forward-end
 
 ################################################################################
 # Colours
-#
-# I've modifed ocean-dark from ocean, with black bg and extra colours in the 256
-# space. See http://chriskempson.com/projects/base16/ for details.
 ################################################################################
 
 autoload -Uz colors && colors
-export CLICOLOR=1
-export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
-export GREP_OPTIONS="--color=auto"
 
 ################################################################################
 # Completion

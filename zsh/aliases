@@ -29,6 +29,12 @@ alias cat='bat --theme=TwoDark' # https://github.com/sharkdp/bat
 alias ping='prettyping'         # https://github.com/denilsonsa/prettyping
 alias top='htop'                # http://hisham.hm/htop/
 
+# always enable colored `grep` output`
+
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
+
 ################################################################################
 # Quick cds
 ################################################################################
