@@ -22,7 +22,6 @@ local powerline_branch='%{%G%}'
 local powerline_line_number='%{%G%}'
 local powerline_lock='%{%G%}'
 local powerline_vi_edit='%{%G%}'
-local powerline_prompt='%{%G%}'
 
 ################################################################################
 # Detect editing-mode
@@ -36,9 +35,9 @@ function zle-keymap-select() {
 zle -N zle-keymap-select
 
 function vi_mode_prompt_info {
-  local mode_indicator="%{%K{236}%F{238}%}$powerline_hard_right_divider"
-  mode_indicator+="%{%K{238}%F{002}%} $powerline_vi_edit "
-  mode_indicator+="%{%K{238}%F{236}%}$powerline_hard_right_divider%{%f%k%}"
+  local mode_indicator="%{%K{235}%F{239}%}$powerline_hard_right_divider"
+  mode_indicator+="%{%K{239}%F{016}%} $powerline_vi_edit "
+  mode_indicator+="%{%K{239}%F{235}%}$powerline_hard_right_divider%{%f%k%}"
   echo "${${KEYMAP/vicmd/$mode_indicator}/(main|viins)/}"
 }
 
@@ -48,30 +47,29 @@ function vi_mode_prompt_info {
 
 function seasonal_chevrons {
   local date=$(date)
-  local chevrons="❯❯❯"
+  local chevron='❭'
 
   case $date in
     # spring
     *Mar*|*Apr*|*May*)
-      chevrons="%F{magenta}❯%F{cyan}❯%F{green}❯%f"
+      chevrons="%F{magenta}$chevron%F{cyan}$chevron%F{green}$chevron%f"
       ;;
     # summer
     *Jun*|*Jul*|*Aug*)
-      chevrons="%F{cyan}❯%F{green}❯%F{yellow}❯%f"
+      chevrons="%F{cyan}$chevron%F{green}$chevron%F{yellow}$chevron%f"
       ;;
     # fall
     *Sep*|*Oct*|*Nov*)
-      chevrons="%F{yellow}❯%F{009}❯%F{magenta}❯%f"
+      chevrons="%F{yellow}$chevron%F{009}$chevron%F{138}$chevron%f"
       ;;
     # winter
     *Dec*|*Jan*|*Feb*)
-      chevrons="%F{006}❯%F{004}❯%F{011}❯%f"
+      chevrons="%F{006}$chevron%F{004}$chevron%F{067}$chevron%f"
       ;;
     *)
       ;;
   esac
 
-  chevrons="%F{006}❯%F{004}❯%F{011}❯%f"
   echo -en $chevrons
 }
 
@@ -81,15 +79,15 @@ PROMPT="$(seasonal_chevrons) %{%b%f%k%}"
 # Right
 ################################################################################
 
-RPROMPT="%{%K{000}%F{233}%}$powerline_hard_right_divider%{%f%k%}"
+RPROMPT="%{%K{016}%F{233}%}$powerline_hard_right_divider%{%f%k%}"
 RPROMPT+="%{%K{233}%F{234}%}$powerline_hard_right_divider%{%f%k%}"
-RPROMPT+="%{%K{234}%F{236}%}$powerline_hard_right_divider%{%f%k%}"
+RPROMPT+="%{%K{234}%F{235}%}$powerline_hard_right_divider%{%f%k%}"
 
 # show editing mode in prompt
 RPROMPT+='$(vi_mode_prompt_info)'
 
 # path %~ (truncate start if > 50 chars)
-RPROMPT+='%{%K{236}%F{247}%} %50[<…]%~%<< %{%f%k%}'
+RPROMPT+='%{%K{235}%F{243}%} %50[<…]%~%<< %{%f%k%}'
 
 # show vcs info (see ~/.zsh/vcs_info.zsh)
 if hash git >/dev/null 2>&1; then

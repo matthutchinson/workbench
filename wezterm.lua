@@ -18,16 +18,16 @@ config.window_close_confirmation = "NeverPrompt"
 
 -- Color
 config.color_scheme = 'iceberg-dark'
-config.bold_brightens_ansi_colors = false
 config.colors = {
   foreground = '#C0C5CE',
   background = '#000000',
 }
 
 -- Font
-config.font = wezterm.font('BerkeleyMono Nerd Font', { weight = 'Regular' })
+config.font = wezterm.font('BerkeleyMono Nerd Font')
 config.font_size = 14
 config.line_height = 1.05
+config.bold_brightens_ansi_colors = false
 
 -- Return config
 return config
