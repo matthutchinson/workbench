@@ -405,12 +405,11 @@ let g:lightline = {
     \  'linter_errors': 'lightline#ale#errors',
     \  'linter_ok': 'lightline#ale#ok',
   \ },
-  \ 'separator': { 'left': '', 'right': '' },
-  \ 'subseparator': { 'left': '', 'right': '' }
 \ }
 
-" ALE lightline icons
-let g:lightline#ale#indicator_checking = ""
+let g:lightline.separator = { 'left': '', 'right': '' }
+let g:lightline.subseparator = { 'left': '', 'right': '' }
+
 let g:lightline#ale#indicator_infos = "  "
 let g:lightline#ale#indicator_warnings = "  "
 let g:lightline#ale#indicator_errors = "  "

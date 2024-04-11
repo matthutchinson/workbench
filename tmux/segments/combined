@@ -12,7 +12,7 @@ function build {
   )
 
   local dividers=(
-    "#[fg=colour213,bg=colour000]" \
+    "#[fg=colour213,bg=colour016]" \
     "" \
     " " \
     "  " \
