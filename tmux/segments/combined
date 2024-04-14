@@ -4,11 +4,11 @@ set -e
 function build {
   local segments=(
     "lan_ip" \
-    "battery" \
-    "disk" \
-    "memory" \
-    "cpu_temp" \
-    "cpu" \
+    # "battery" \
+    # "disk" \
+    # "memory" \
+    # "cpu_temp" \
+    # "cpu" \
   )
 
   local dividers=(

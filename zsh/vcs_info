@@ -144,10 +144,10 @@ function build-segments {
   # appearance differs between tmux (left status) or zsh (right prompt)
   if (( ! ${+user_data[divider_rev]} )); then
     # colours
-    local branch_bg=10
-    local branch_fg=013
-    local revision_bg=11
-    local revision_fg=013
+    local branch_bg=000
+    local branch_fg=015
+    local revision_bg=008
+    local revision_fg=015
     local changes_bg=015
     local changes_fg=013
     local action_fg=234
@@ -158,13 +158,13 @@ function build-segments {
     # fetch status and color the changes segment bg/fg
     git-status-fetch
     if git-status-has-unstaged-files "${user_data[git_status]}"; then
-      changes_bg=006
+      changes_bg=004
       changes_fg=000
     elif git-status-has-modified-files "${user_data[git_status]}"; then
       changes_bg=002
       changes_fg=000
     elif git-status-has-staged-files "${user_data[git_status]}"; then
-      changes_bg=003
+      changes_bg=137
       changes_fg=000
     fi
 
