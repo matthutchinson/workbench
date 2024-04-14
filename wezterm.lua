@@ -30,5 +30,8 @@ config.font_size = 14.5
 config.line_height = 1.1
 config.bold_brightens_ansi_colors = false
 
+-- Harfbuzz (disable ligatures)
+-- config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
+
 -- Return config
 return config
