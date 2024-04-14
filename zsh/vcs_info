@@ -277,7 +277,7 @@ function +vi-git-branch {
 
   # truncate long branch names
   local branch_limit=20
-  local branch_icon='%{%G%}'
+  local branch_icon="%{%G%}"
 
   if [ ${#branch} -gt $branch_limit ]; then
     branch="${branch[0,(( $branch_limit-1 ))]}…"
@@ -288,7 +288,7 @@ function +vi-git-branch {
   fi
 
   if git-status-has-unpushed-changes "${user_data[git_status]}"; then
-    branch_icon="%{%K{010}%F{003}%}${branch_icon}%{%K{010}%F{013}%}"
+    branch_icon="%{%K{$branch_bg}%F{001}%}${branch_icon}%{%K{$branch_bg}%F{$branch_fg}%}"
   fi
 
   segment+=" ${branch_icon} ${branch} "
