@@ -1,64 +1,70 @@
 #!/usr/bin/env bash
 set -e
 
-function battery_status {
-  ioreg -c AppleSmartBattery -w0 | \
-    grep -o '"[^"]*" = [^ ]*' | \
-    sed -e 's/= //g' -e 's/"//g' | \
-    sort | \
-    while read key value; do
-      # extract key value pairs
+__battery_osx() {
+  # icons
+  local battery_full="󱊣"
+  local battery_med="󱊢"
+  local battery_empty="󱊡"
+  local battery_charge="󰂄"
+  local adapter=""
+
+  # color ranges
+  local bg_colors=(088 172 003 002 000)
+  local fg_colors=(015 000 000 000 250)
+
+  ioreg -c AppleSmartBattery -w0 |
+    grep -o '"[^"]*" = [^ ]*' |
+    sed -e 's/= //g' -e 's/"//g' |
+    sort |
+    while read -r key value; do
       case $key in
         "MaxCapacity")
-          local max=$value;;
+          export maxcap=$value
+          ;;
         "CurrentCapacity")
-          local current=$value;;
-        "IsCharging")
-          local is_charging=$value;;
+          export curcap=$value
+          ;;
+        "ExternalConnected")
+          export extconnect=$value
+          ;;
         "FullyCharged")
-          local fully_charged=$value;;
+          export fully_charged=$value
+          ;;
       esac
+      if [[ -n $maxcap && -n $curcap && -n $extconnect ]]; then
+        local charge=$(pmset -g batt | grep -o "[0-9][0-9]*\%" | rev | cut -c 2- | rev)
+        local charge=99
+        local range=$(($charge / (100 / ${#bg_colors[*]})))
+        local bg_color=${bg_colors[$range]}
+        local fg_color=${fg_colors[$range]}
+        local end_segment="#[bg=colour$bg_color,fg=colour236]"
+        local status=""
 
-      if [[ -n $max && -n $current ]]; then
-        local icon=""
-        local percent=100
-        local bg_color=042
-        local fg_color=000
-        local prev_color=011
-        local status_line="#[fg=colour$prev_color,bg=default]#[default]"
-
-        if [[ "$fully_charged" == "No" ]]; then
-          percent=$((100 * $current / $max))
+        if [[ ("$fully_charged" == "Yes" || $charge -eq 100) && $extconnect == "Yes" ]]; then
+          echo "#[bg=colour016,fg=colour236]"
+          return
         fi
 
-        # color range
-        local bg_colors=(160 167 173 179 002)
-        local fg_colors=(255 000 000 000 000)
-        local range=$(($percent / (100 / ${#bg_colors[*]})))
-
-        # not fully charged? show the segment
-        if (( $percent < 100 )); then
-          bg_color=${bg_colors[$range]}
-          fg_color=${fg_colors[$range]}
-
-          # is charging? show icon
-          if [[ $fully_charged == "Yes" ]]; then
-            icon="♥"
-          elif [[ $is_charging == "Yes" ]]; then
-            icon=""
+        if [[ "$extconnect" == "Yes" ]]; then
+          status="$adapter $charge%"
+        else
+          if [[ $charge -lt 50 ]]; then
+            status="$battery_empty $charge%"
+          elif [[ $charge -lt 80 ]]; then
+            status="$battery_med $charge%"
           else
-            icon="♡"
+            status="$battery_full $charge%"
           fi
-          status_line="#[bg=colour233,fg=colour$bg_color]#[bg=colour$bg_color,fg=colour$fg_color] $icon $percent% #[fg=colour$prev_color,bg=colour$bg_color]#[default]"
         fi
 
-        echo $status_line
+        echo "#[bg=colour233,fg=colour$bg_color]#[bg=colour$bg_color,fg=colour$fg_color] $status $end_segment"
         break
       fi
     done
-}
+  }
 
 case $(uname -s) in
   "Darwin")
-    battery_status;;
+    __battery_osx;;
   esac

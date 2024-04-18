@@ -13,4 +13,4 @@ zsh/secrets
 config/configstore/update-notifier-npm.json
 config/op*
 config/github-copilot*
-
+config/configstore

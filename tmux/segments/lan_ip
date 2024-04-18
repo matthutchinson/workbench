@@ -22,7 +22,7 @@ function lan_ip {
   fi
 
   if [ -n "$lan_ip" ]; then
-    echo "#[bg=colour016,fg=colour236]#[bg=colour236,fg=colour007] ${lan_ip} #[bg=colour236,fg=colour016]#[default]"
+    echo "#[bg=colour236,fg=colour007] ${lan_ip} #[bg=colour236,fg=colour016]#[default]"
   fi
 }
 

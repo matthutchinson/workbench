@@ -591,6 +591,7 @@ if !exists("autocommands_loaded")
 
   " markdown todos, toggle with Ctrl+Space and auto-insert, fix tab and shifting
   au Filetype markdown noremap <silent><buffer> <F8> :call ToggleTodo()<cr>
+  au Filetype markdown noremap <silent><buffer> <c-@> :call ToggleTodo()<cr>
   au Filetype markdown inoremap <expr><buffer> <CR> getline('.') =~ ' *\- \[ ] $' ? '<c-U><Esc>0i' : '<CR>'.AddTodo()
   au Filetype markdown nnoremap <expr><buffer> o "o".AddTodo()
   au Filetype markdown nnoremap <expr><buffer> O "O".AddTodo()
