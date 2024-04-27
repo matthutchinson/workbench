@@ -25,6 +25,9 @@ brew "gping"
 # http://hisham.hm/htop/
 brew "htop"
 
+# btop, like htop - https://github.com/aristocratos/btop
+brew "btop"
+
 # https://httpie.org
 brew "httpie"
 
