@@ -152,8 +152,9 @@ function build-segments {
     local changes_fg=013
     local action_fg=234
     local action_bg=103
+
     local tmux_status_bg=233
-    local prompt_bg=236
+    local prompt_bg=235
 
     # fetch status and color the changes segment bg/fg
     git-status-fetch
