@@ -30,13 +30,11 @@ fi
 eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 
 ################################################################################
-# 37signals
+# ENV Tooling
 ################################################################################
 
 eval "$(rbenv init --no-rehash -)"
 eval "$(nodenv init --no-rehash -)"
-eval "$(work init -)"
-eval "$(37 init -)"
 
 export GOPATH="$HOME/go"
 export NODE_PATH="$(brew --prefix)/lib/node_modules:$NODE_PATH"
