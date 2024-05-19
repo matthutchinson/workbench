@@ -7,6 +7,9 @@ cask "alacritty"
 # don't forget to set default shell to /opt/homebrew/bin/zsh
 brew "zsh"
 
+# https://mitmproxy.org
+brew "mitmproxy"
+
 # https://github.com/dylanaraps/neofetch
 brew "neofetch"
 

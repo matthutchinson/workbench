@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # install useful gems I want on all rubies
-gem install inch heroku overmind iStats lolcommits foreman amazing_print pry pry-doc pry-nav github-auth travis colorls mailcatcher --no-document
+gem install inch heroku overmind foreman iStats lolcommits foreman amazing_print pry pry-doc pry-nav github-auth travis colorls mailcatcher --no-document
 
 # workaround for mailcatcher issue - https://github.com/sj26/mailcatcher/issues/512
 gem install thin -v 1.5.1 -- --with-cflags="-Wno-error=implicit-function-declaration"
