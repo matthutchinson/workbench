@@ -25,6 +25,7 @@ config.colors = {
 }
 
 -- Font
+
 config.font = wezterm.font('BerkeleyMono Nerd Font')
 config.font_size = 14.5
 config.line_height = 1.1
@@ -32,6 +33,11 @@ config.bold_brightens_ansi_colors = false
 
 -- Harfbuzz (disable ligatures)
 -- config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
+
+-- DHH
+-- config.color_scheme = 'tokyonight_night'
+-- config.font = wezterm.font('Cascadia Mono')
+-- config.font_size = 15.0
 
 -- Return config
 return config
