@@ -220,6 +220,7 @@ set laststatus=2             " always show a status bar
 set cursorline               " only use cursorline for current window
 set cpoptions+=$             " show $ to indicate editing range
 set listchars=tab:▸\ ,eol:¬  " use these special chars with :set list
+set relativenumber           " show relative line numbers
 
 " speedy scrolling
 syntax sync minlines=100
@@ -227,7 +228,6 @@ set nocursorcolumn
 set ttyfast
 set ttyscroll=3
 set lazyredraw
-set relativenumber " show relative line numbers
 
 " general
 set encoding=utf-8
@@ -424,7 +424,9 @@ let g:ale_fixers = {
 \}
 " disable 'erb' linter since https://github.com/dense-analysis/ale/issues/4167
 " disabled 'ruby -w -c' since its noisey about regexps
+" disable 'ember-template-lint' for handlebars (too noisey)
 let g:ale_linters = {
+\   'handlebars': [],
 \   'eruby': ['erblint', 'erubi', 'erubis', 'ruumba'],
 \   'ruby': ['brakeman', 'cspell', 'debride', 'rails_best_practices', 'reek', 'rubocop', 'solargraph', 'sorbet', 'standardrb']
 \}
