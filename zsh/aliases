@@ -70,6 +70,7 @@ alias rscheme='rails db:drop;rails db:create;rails db:schema:load'
 # run tests for all tests files that have changed in this branch (from master)
 # filters out deleted tests
 alias rtc='rails test $(git diff --diff-filter=d --name-only master test | grep "_test.rb" | tr "\n" " ")'
+alias rstc='rspec $(git diff --diff-filter=d --name-only master spec | grep "_spec.rb" | tr "\n" " ")'
 
 ################################################################################
 # Git
