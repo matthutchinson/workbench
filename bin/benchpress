@@ -4,6 +4,7 @@ path = File.expand_path('./', File.dirname(__FILE__))
 bin_path = File.symlink?(path) ? File.readlink(path) : path
 workbench_path = File.expand_path('.././', bin_path)
 host = `hostname`.gsub(/\.|local|\n$/, '')
+irssi_host = "chunnel.wan"
 
 puts "Installing the workbench (on #{host})"
 
@@ -69,9 +70,9 @@ end
 `mkdir -p ~/.vim/tmp`
 
 # kessel must exist in ~/.ssh/config
-puts '  Syncing irssi config with hoth ...'
+puts "  Syncing irssi config with #{irssi_host} ..."
 Dir.chdir("#{workbench_path}/irssi") do
-  `tar cf - * | ssh hoth '(cd ~/.irssi; tar xf - )'`
+  `tar cf - * | ssh #{irssi_host} '(cd ~/.irssi; tar xf - )'`
 end
 
 puts "\n  All done!"
