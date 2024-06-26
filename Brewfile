@@ -1,5 +1,7 @@
+# taps
 tap "puma/puma"
 tap "heroku/brew"
+tap 'dirk/quickhook'
 
 # brew the latest version of alacritty
 cask "alacritty"
@@ -10,12 +12,6 @@ cask "mitmproxy"
 # don't forget to set default shell to /opt/homebrew/bin/zsh
 brew "zsh"
 
-# https://github.com/dylanaraps/neofetch
-brew "neofetch"
-
-# https://asciinema.erg
-brew "asciinema"
-
 # bat, like cat - https://github.com/sharkdp/bat
 brew "bat"
 
@@ -25,10 +21,7 @@ brew "prettyping"
 # https://github.com/orf/gping
 brew "gping"
 
-# http://hisham.hm/htop/
-brew "htop"
-
-# btop, like htop - https://github.com/aristocratos/btop
+# https://github.com/aristocratos/btop
 brew "btop"
 
 # https://httpie.org
@@ -61,22 +54,20 @@ brew "jq"
 # https://github.com/antonmedv/fx
 brew "fx"
 
-# https://deno.land
-brew "deno"
-
 # to tunnel e.g. cloudflared tunnel --url http://localhost:3000
 brew "cloudflared"
 brew "agrinman/tap/tunnelto"
 
+# general
 brew "imagemagick"
 brew "vips"
 brew "mupdf-tools"
 brew "scmpuff"
 brew "exiftool"
 brew "node"
-brew "node@14"
 brew "fzf"
 brew "postgresql@14"
+brew "mysql"
 brew "ctags"
 brew "vim"
 brew "neovim"
@@ -100,6 +91,4 @@ brew "heroku"
 # git
 brew "git"
 brew "git-interactive-rebase-tool"
-
-tap 'dirk/quickhook'
 brew 'quickhook'

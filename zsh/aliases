@@ -29,7 +29,7 @@ alias f='vi $(fzf --preview="cat {}")'
 
 alias cat='bat --theme=TwoDark' # https://github.com/sharkdp/bat
 alias ping='prettyping'         # https://github.com/denilsonsa/prettyping
-alias top='htop'                # http://hisham.hm/htop/
+alias top='btop'                # https://github.com/aristocratos/btop
 
 # always enable colored `grep` output`
 
