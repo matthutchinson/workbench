@@ -4,11 +4,11 @@ tap "heroku/brew"
 # brew the latest version of alacritty
 cask "alacritty"
 
+# https://mitmproxy.org
+cask "mitmproxy"
+
 # don't forget to set default shell to /opt/homebrew/bin/zsh
 brew "zsh"
-
-# https://mitmproxy.org
-brew "mitmproxy"
 
 # https://github.com/dylanaraps/neofetch
 brew "neofetch"
