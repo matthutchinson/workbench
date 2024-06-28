@@ -359,10 +359,6 @@ let g:startify_change_to_vcs_root = 1
 let g:startify_custom_header =
       \ 'map(g:ascii + startify#fortune#quote(), "\"   \".v:val")'
 
-" copilot
-let g:copilot_node_command =
-  \ "~/.nodenv/versions/18.12.1/bin/node"
-
 " gist-vim
 let g:gist_open_browser_after_post = 1
 let g:gist_detect_filetype = 1

@@ -29,9 +29,6 @@ eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 # ENV Tooling
 ################################################################################
 
-#eval "$(rbenv init --no-rehash -)"
-#eval "$(nodenv init --no-rehash -)"
-
 eval "$($HOMEBREW_PREFIX/opt/mise/bin/mise activate zsh)"
 
 export GOPATH="$HOME/go"
