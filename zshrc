@@ -21,11 +21,7 @@ fi
 # Brew
 ################################################################################
 
-if [ -d /opt/homebrew ]; then
-  HOMEBREW_PREFIX=/opt/homebrew
-else
-  HOMEBREW_PREFIX=/usr/local
-fi
+HOMEBREW_PREFIX=/opt/homebrew
 
 eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 
@@ -33,12 +29,14 @@ eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 # ENV Tooling
 ################################################################################
 
-eval "$(rbenv init --no-rehash -)"
-eval "$(nodenv init --no-rehash -)"
+#eval "$(rbenv init --no-rehash -)"
+#eval "$(nodenv init --no-rehash -)"
+
+eval "$($HOMEBREW_PREFIX/opt/mise/bin/mise activate zsh)"
 
 export GOPATH="$HOME/go"
-export NODE_PATH="$(brew --prefix)/lib/node_modules:$NODE_PATH"
-export PATH="$HOME/.rbenv/bin:$GOPATH/bin:$(brew --prefix)/share/npm/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+export NODE_PATH="$HOMEBREW_PREFIX/lib/node_modules:$NODE_PATH"
+export PATH="$HOME/.rbenv/bin:$GOPATH/bin:$HOMEBREW_PREFIX/share/npm/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 
 ################################################################################
 # PATH

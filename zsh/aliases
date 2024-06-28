@@ -59,9 +59,6 @@ alias tdl='tail -f ./log/development.log'
 alias tdlp="tdl | egrep 'Completed|Processing|Parameters\:'"
 alias tdlnc="tdl | egrep -v -e '^.*(\[ActionCable\]|\[Action Cable\]|\[Socket\]|\[ActiveJob\]|\[Active Job\]).*$'"
 alias rst='touch ./tmp/restart.txt'
-alias rspec='nocorrect rspec'
-alias dev='nocorrect dev'
-alias kamal='nocorrect kamal'
 alias sshot='open ./tmp/screenshots'
 
 # reschema your rails app, recreate db and load schema (no seeding)
@@ -86,5 +83,9 @@ alias gca='git amend'
 alias gup='git upstream'
 
 # GitHub CLI - https://cli.github.com
-
 alias gpr='gh pr create'
+
+# autocorrect fixes
+alias rspec='nocorrect rspec'
+alias dev='nocorrect dev'
+alias kamal='nocorrect kamal'
