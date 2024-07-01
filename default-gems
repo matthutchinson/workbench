@@ -1,0 +1,16 @@
+# default gems for all rubies with mise
+inch
+overmind
+foreman
+overcommit
+iStats
+lolcommits
+foreman
+amazing_print
+pry
+pry-doc
+pry-nav
+github-auth
+colorls
+mailcatcher
+thin = 1.5.1 -- --with-cflags="-Wno-error=implicit-function-declaration"
