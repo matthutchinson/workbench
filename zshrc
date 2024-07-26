@@ -33,7 +33,8 @@ eval "$($HOMEBREW_PREFIX/opt/mise/bin/mise activate zsh)"
 
 export GOPATH="$HOME/go"
 export NODE_PATH="$HOMEBREW_PREFIX/lib/node_modules:$NODE_PATH"
-export PATH="$HOME/.rbenv/bin:$GOPATH/bin:$HOMEBREW_PREFIX/share/npm/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+export NODE_OPTIONS="--openssl-legacy-provider"
+export PATH="$GOPATH/bin:$HOMEBREW_PREFIX/share/npm/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 
 ################################################################################
 # PATH

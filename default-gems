@@ -13,4 +13,4 @@ pry-nav
 github-auth
 colorls
 mailcatcher
-thin = 1.5.1 -- --with-cflags="-Wno-error=implicit-function-declaration"
+# thin = 1.5.1 -- --with-cflags="-Wno-error=implicit-function-declaration"
