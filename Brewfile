@@ -3,9 +3,6 @@ tap "puma/puma"
 tap "heroku/brew"
 tap 'dirk/quickhook'
 
-# brew the latest version of alacritty
-cask "alacritty"
-
 # https://mitmproxy.org
 cask "mitmproxy"
 
