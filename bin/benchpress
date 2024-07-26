@@ -69,10 +69,9 @@ end
 # make sure vim backup dir exists
 `mkdir -p ~/.vim/tmp`
 
-# kessel must exist in ~/.ssh/config
 puts "  Syncing irssi config with #{irssi_host} ..."
 Dir.chdir("#{workbench_path}/irssi") do
-  `tar cf - * | ssh #{irssi_host} '(cd ~/.irssi; tar xf - )'`
+  `tar cf - --no-xattrs * | ssh #{irssi_host} '(cd ~/.irssi; tar xf - )'`
 end
 
 puts "\n  All done!"
