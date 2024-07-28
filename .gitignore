@@ -15,3 +15,4 @@ config/op*
 config/github-copilot*
 config/configstore
 config/zed
+config/btop/*.log
