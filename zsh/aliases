@@ -6,7 +6,7 @@
 
 alias irc='ssh chunnel.wan -t "screen -x"'
 alias ircl='ssh chunnel -t "screen -x"'
-alias plan='vi -c ":$" ~/Documents/Obsidian\ Vault/Plan/'`date "+%Y"`'.md'
+alias plan='vi -c ":$" ~/Obsidian\ Vault/Plan/'`date "+%Y"`'.md'
 alias reload='source ~/.zshrc'
 alias vnc-hoth='ssh -f hoth.vnc.tunnel -N; open vnc://localhost:5999'
 alias tml='tmux ls'

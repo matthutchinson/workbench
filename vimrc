@@ -162,7 +162,7 @@ nnoremap <leader>g :Commits<cr>
 nnoremap <silent> vv <C-w>v
 
 " function keys
-map <F2> :sp ~/Documents/Obsidian Vault/🛟 Vim Help.md<cr>
+map <F2> :sp ~/Obsidian Vault/🛟 Vim Help.md<cr>
 " F6 formats and tidy up
 noremap <F6> mmgg=G'm
 inoremap <silent> <F6> <Esc> mmgg=G'mi
