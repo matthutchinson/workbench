@@ -4,13 +4,9 @@
 # Misc
 ################################################################################
 
-alias fhp='cd ~/Documents/firehose/job\ prep/;ll;mate ~/Documents/firehose/resources/mentor_session_test.rb;open https://www.thefirehoseproject.com/courses'
 alias irc='ssh chunnel.wan -t "screen -x"'
 alias ircl='ssh chunnel -t "screen -x"'
-alias scratch='vi ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/Documents/system/notes/scratch.md'
-alias todos='vi ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/Documents/system/notes/todos.md'
-alias secrets='vi ~/Library/Mobile\ Documents/com\~apple\~CloudDocs/Documents/system/notes/secrets.enc.md'
-alias plan='vi -c ":$" ~/Documents/system/notes/plans/'`date "+%Y"`'.md'
+alias plan='vi -c ":$" ~/Documents/Obsidian\ Vault/Plan/'`date "+%Y"`'.md'
 alias reload='source ~/.zshrc'
 alias vnc-hoth='ssh -f hoth.vnc.tunnel -N; open vnc://localhost:5999'
 alias tml='tmux ls'
