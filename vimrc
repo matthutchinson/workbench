@@ -62,6 +62,9 @@ call plug#begin('~/.vim/plugged')
 
   " snippets
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' " snippets
+
+  " syntax
+  Plug 'jparise/vim-graphql'    " graphql syntax highlighing, indenting
 call plug#end()
 
 " #### Shortcuts
