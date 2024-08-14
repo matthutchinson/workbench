@@ -16,3 +16,4 @@ config/github-copilot*
 config/configstore
 config/zed
 config/btop/*.log
+config/spin
