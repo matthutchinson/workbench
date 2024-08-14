@@ -142,4 +142,6 @@
 [fetch]
   prune = true
 [credential]
-  helper = osxkeychain
+	helper = osxkeychain
+[includeIf "gitdir:~/src/"]
+	path = /Users/matt/.gitconfig-shopify

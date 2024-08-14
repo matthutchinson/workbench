@@ -83,5 +83,4 @@ alias gpr='gh pr create'
 
 # autocorrect fixes
 alias rspec='nocorrect rspec'
-alias dev='nocorrect dev'
 alias kamal='nocorrect kamal'

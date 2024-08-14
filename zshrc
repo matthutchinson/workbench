@@ -29,7 +29,9 @@ eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 # ENV Tooling
 ################################################################################
 
-eval "$($HOMEBREW_PREFIX/opt/mise/bin/mise activate zsh)"
+if [[ $HOST != 'shopify' ]]; then
+  eval "$($HOMEBREW_PREFIX/opt/mise/bin/mise activate zsh)"
+fi
 
 export GOPATH="$HOME/go"
 export NODE_PATH="$HOMEBREW_PREFIX/lib/node_modules:$NODE_PATH"
@@ -46,6 +48,13 @@ set +h
 
 # add home bin path
 export PATH=~/bin:$PATH
+
+# shopify
+if [[ $HOST == 'shopify' ]]; then
+  [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
+  [[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
+  [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
+fi
 
 ################################################################################
 # Benchmarking - https://blog.jonlu.ca/posts/speeding-up-zsh

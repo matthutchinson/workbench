@@ -1,2 +1,5 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
-eval "$(mise hook-env --shell zsh)"
+
+if [[ $HOST != 'shopify' ]]; then
+  eval "$(mise hook-env --shell zsh)"
+fi
