@@ -29,7 +29,7 @@ eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 # ENV Tooling
 ################################################################################
 
-if [[ $HOST != 'shopify' ]]; then
+if [[ ! $HOST =~ ^shopify ]]; then
   eval "$($HOMEBREW_PREFIX/opt/mise/bin/mise activate zsh)"
 fi
 
