@@ -142,7 +142,7 @@
   prune = true
 [credential]
 	helper = osxkeychain
-[includeIf "gitdir:~/src/"]
-	path = /Users/matt/.gitconfig-shopify
 [include]
 	path = /Users/matt/.config/dev/gitconfig
+[includeIf "gitdir:~/src/"]
+	path = /Users/matt/.gitconfig-shopify
