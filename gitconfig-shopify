@@ -1,6 +1,6 @@
 [user]
   name = Matthew Hutchinson
   email = matt.hutchinson@shopify.com
-	signingkey = 9F23B4BA2AC502F2D90F388F62646362EDEFCEB8
+	signingkey = 62646362EDEFCEB8
 [core]
-  editor = "code -w"
+  editor = "code -w
