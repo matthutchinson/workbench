@@ -111,6 +111,7 @@
 	autosquash = true
 [commit]
 	verbose = true
+	gpgSign = true
 [diff]
 	noprefix = true
 [diff "rspec"]
