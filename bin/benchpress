@@ -54,6 +54,10 @@ end
 puts '  Updating vim with Plug...'
 `vim +PlugUpgrade +PlugUpdate +PlugClean! +qa! > /dev/null 2>&1`
 
+puts '  Setting key repeats...'
+`defaults write NSGlobalDomain KeyRepeat -int 1`
+`defaults write NSGlobalDomain InitialKeyRepeat -int 15`
+
 # ensure tmux tpm exists (https://github.com/tmux-plugins/tpm)
 if File.exist?("#{ENV['HOME']}/.tmux/plugins/tpm")
   puts '  Updating/cleaning Tmux plugins...'

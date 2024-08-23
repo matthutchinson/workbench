@@ -17,6 +17,9 @@ alias tree='colorls --tree' # tree with dirs first
 alias wget='wget --no-hsts' # stop logging .hsts files
 alias help='tldr'  # http://tldr.sh
 
+alias stfu="osascript -e 'set volume output muted true'"
+alias flushdns="dscacheutil -flushcache"
+
 alias f='vi $(fzf --preview="cat {}")'
 
 ################################################################################
