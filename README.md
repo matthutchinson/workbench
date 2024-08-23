@@ -13,9 +13,8 @@ $ ./bin/benchpress
 
 * Vim
 * Tmux
-* Tmuxinator
 * ZSH
-* Dot files for ctags, ack, ag, rsync, synergy, rails, irb, gems and more
+* Dot files
 * Global git hooks and custom merges
 
 ### Tmux
