@@ -54,7 +54,7 @@ end
 puts '  Updating vim with Plug...'
 `vim +PlugUpgrade +PlugUpdate +PlugClean! +qa! > /dev/null 2>&1`
 
-puts '  Setting key repeats...'
+puts '  Setting faster key repeats...'
 `defaults write NSGlobalDomain KeyRepeat -int 1`
 `defaults write NSGlobalDomain InitialKeyRepeat -int 15`
 
