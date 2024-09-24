@@ -124,7 +124,7 @@
   reflog = delta
   show = delta
 [delta]
-  side-by-side = true
+  side-by-side = false
   features = decorations
   navigate = true
   whitespace-error-style = 22 reverse
