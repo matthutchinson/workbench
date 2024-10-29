@@ -3,4 +3,5 @@
 --exclude=tmp
 --exclude=log
 --exclude=vendor/bundle/gems
+--exclude=app/assets/javascripts
 --languages=-javascript,-sql

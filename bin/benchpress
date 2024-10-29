@@ -57,6 +57,7 @@ puts '  Updating vim with Plug...'
 puts '  Setting faster key repeats...'
 `defaults write NSGlobalDomain KeyRepeat -int 1`
 `defaults write NSGlobalDomain InitialKeyRepeat -int 15`
+`defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false`
 
 # ensure tmux tpm exists (https://github.com/tmux-plugins/tpm)
 if File.exist?("#{ENV['HOME']}/.tmux/plugins/tpm")

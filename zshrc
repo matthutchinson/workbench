@@ -61,3 +61,6 @@ fi
 ################################################################################
 # add `zmodload zsh/zprof` above
 # then run `zprof` in new shells
+
+# Shopify Hydrogen alias to local projects
+alias h2='$(npm prefix -s)/node_modules/.bin/shopify hydrogen'

@@ -74,7 +74,6 @@ map <Esc>[Z <S-Tab>
 map <Esc>[24~ <F12>
 
 map <leader>w :w!<cr>
-map <leader>w :w!<cr>
 map <leader>e :new <C-R>=expand("%:p:h")<cr><cr>
 map <leader>r :w !%:p<cr>
 map <leader>ev :sp ~/.vimrc<cr>
@@ -107,7 +106,10 @@ nnoremap <leader>q gqip
 nmap <C-n> :cn<cr>
 nmap <C-p> :cp<cr>
 
-" buffers (next with tab, prev with S-tab or backspace)
+" buffers
+" dont close splt when closing buffer
+command Bd bp\|bd \#
+" (next with tab, prev with S-tab or backspace)
 nmap <Tab> :bn<cr>
 nmap <S-Tab> :bp<cr>
 nnoremap <bs> :bp<cr>
@@ -311,10 +313,14 @@ nmap <leader>a: :Tabularize /:\zs<cr>
 vmap <leader>a: :Tabularize /:\zs<cr>
 
 " vimux
-nmap <Leader>vp :VimuxPromptCommand<cr>
-nmap <Leader>vl :VimuxRunLastCommand<cr>
-nmap <Leader>vi :VimuxInspectRunner<cr>
-nmap <Leader>vz :VimuxZoomRunner<cr>
+nmap <leader>vp :VimuxPromptCommand<cr>
+nmap <leader>vl :VimuxRunLastCommand<cr>
+nmap <leader>vi :VimuxInspectRunner<cr>
+nmap <leader>vz :VimuxZoomRunner<cr>
+
+" shopify
+nmap <leader>dt :VimuxRunCommand('dev test ' . expand('%') . ':' . line('.'))<cr>
+nmap <leader>dT :VimuxRunCommand('dev test ' . expand('%'))<cr>
 
 " commentary
 nmap <leader>c gcc
