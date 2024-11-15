@@ -49,12 +49,12 @@ end
 #====
 
 # show queries
-if defined? ActiveRecord
+if defined? ActiveRecord::Base
   ActiveRecord::Base.logger = Logger.new STDOUT
 end
 
 # show requests, e.g. use app.get '/'
-if defined? ActionController
+if defined? ActionController::Base
   ActionController::Base.logger = Logger.new STDOUT
 end
 
