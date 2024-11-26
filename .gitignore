@@ -17,3 +17,4 @@ config/configstore
 config/zed
 config/btop/*.log
 config/spin
+config/lnav
