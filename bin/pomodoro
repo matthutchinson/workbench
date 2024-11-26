@@ -1,0 +1,115 @@
+#!/usr/bin/env ruby
+
+require 'bloops'
+require 'io/console'
+require 'tty-cursor'
+require 'pastel'
+
+TOTAL_TIME = 25 * 60  # 25 minutes in seconds
+CHIRP_TIME = 5 * 60   # 5 minutes in seconds
+
+BUNNY_FRAMES = [
+  ["(\\(\\ ",
+   "(-.-)",
+   "o_(\")(\")"],
+
+  ["(\\(\\ ",
+   "(-.-)",
+   "(\")(\"o_"],
+
+  [" /(\\/",
+   "(-.-))",
+   "(\")(\"o_"]
+].freeze
+
+def format_time(seconds)
+  minutes = seconds / 60
+  seconds = seconds % 60
+  format("%02d:%02d", minutes, seconds)
+end
+
+def play_chirp
+  b = Bloops.new
+  b.tempo = 120
+  sound = b.sound Bloops::SQUARE
+  sound.volume = 0.3
+  sound.sustain = 0.1
+  b.tune sound, "C6 8"
+  b.play
+  sleep 0.5
+end
+
+def play_wild_song
+  b = Bloops.new
+  b.tempo = 360
+  sound = b.sound Bloops::SAWTOOTH
+  sound.volume = 0.5
+  sound.sustain = 0.1
+  sound.attack = 0.1
+  sound.decay = 0.1
+  b.tune sound, "C5 8 E5 8 G5 8 C6 8 G5 8 E5 8 C6 4 B5 4 A5 4 G5 4 F5 8 A5 8 C6 8 F6 8 C6 8 A5 8 F6 4 E6 4 D6 4 C6 4"
+  b.play
+  sleep 8 while !b.stopped?
+end
+
+def clear_entire_screen(cursor)
+  print cursor.clear_screen
+  print cursor.move_to(0, 0)
+end
+
+def draw_frame(cursor, pastel, x, y, frame, remaining)
+  clear_entire_screen(cursor)
+
+  # Draw timer at the top
+  print "Pomodoro: #{format_time(remaining)} remaining"
+
+  # Draw bunny
+  BUNNY_FRAMES[frame].each_with_index do |line, index|
+    print cursor.move_to(x, y + index)
+    print pastel.magenta(line)
+  end
+
+  $stdout.flush
+end
+
+# Initialize variables
+cursor = TTY::Cursor
+pastel = Pastel.new
+frame = 0
+x_pos = 0
+x_direction = 1
+
+start_time = Time.now
+end_time = start_time + TOTAL_TIME
+chirp_played = false
+
+# Prepare terminal
+system('clear') || system('cls')
+print cursor.hide
+
+begin
+  loop do
+    remaining = (end_time - Time.now).to_i
+    break if remaining <= 0
+
+    draw_frame(cursor, pastel, x_pos, 2, frame, remaining)
+
+    if remaining <= CHIRP_TIME && !chirp_played
+      play_chirp
+      chirp_played = true
+    end
+
+    x_pos += x_direction
+    if x_pos > 50 || x_pos < 0
+      x_direction *= -1
+    end
+
+    frame = (frame + 1) % BUNNY_FRAMES.length
+    sleep 0.2
+  end
+ensure
+  clear_entire_screen(cursor)
+  print cursor.show
+  puts "Pomodoro finished! Time for a break, mon ami!"
+  play_wild_song
+end
