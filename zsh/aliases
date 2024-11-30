@@ -21,6 +21,7 @@ alias stfu="osascript -e 'set volume output muted true'"
 alias flushdns="dscacheutil -flushcache"
 
 alias f='vi $(fzf --preview="cat {}")'
+alias shoppy='ssh shopify -t $(brew --prefix)/bin/tmux attach-session'
 
 ################################################################################
 # Overrides
