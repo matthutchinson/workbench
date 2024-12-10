@@ -18,3 +18,5 @@ config/zed
 config/btop/*.log
 config/spin
 config/lnav
+config/graphite
+config/uv

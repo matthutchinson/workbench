@@ -114,8 +114,6 @@
 	gpgSign = true
 [diff]
 	noprefix = true
-[diff "rspec"]
-  xfuncname = "^[ \t]*((RSpec|describe|context|it|before|after|around|feature|scenario|background)[ \t].*)$"
 [pull]
   rebase = true
 [pager]
@@ -144,4 +142,4 @@
 [credential]
 	helper = osxkeychain
 [include]
-	path = /Users/matt/.config/dev/gitconfig
+	path = ~/.config/dev/gitconfig
