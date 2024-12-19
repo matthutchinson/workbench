@@ -1,0 +1,3 @@
+#!/bin/sh
+
+shortcuts run wow &
