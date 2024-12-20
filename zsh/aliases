@@ -21,7 +21,13 @@ alias stfu="osascript -e 'set volume output muted true'"
 alias flushdns="dscacheutil -flushcache"
 
 alias f='vi $(fzf --preview="cat {}")'
+
+################################################################################
+# Shopify
+################################################################################
+
 alias shoppy='ssh shopify -t $(brew --prefix)/bin/tmux attach-session'
+alias vscode='spin code shopify shopify--storefront-renderer; spin code shopify shopify--shopify/areas/core/shopify'
 
 ################################################################################
 # Overrides
