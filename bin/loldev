@@ -1,0 +1,77 @@
+#!/usr/bin/env ruby
+
+require "rbconfig"
+require "fileutils"
+
+class LOLDev
+  PLUGINS = %w(
+    tumblr
+    twitter
+    slack
+    dotcom
+    term_output
+    uploldz
+    sample_plugin
+    loltext
+    lolsrv
+    tranzlate
+  )
+
+  def self.print_help
+    filename = File.basename(__FILE__)
+
+    puts "Usage: #{filename} open"
+    puts "       #{filename} run <script_path>"
+  end
+
+  def initialize(command, script_path = nil)
+    @command = command
+    @script_path = script_path
+  end
+
+  def execute
+    case @command
+    when /open|-o/
+      open
+    when /run|-r/
+      run
+    else
+      LOLDev.print_help
+    end
+  end
+
+  private
+
+    def open
+      puts "Opening plugin URLs..."
+
+      PLUGINS.each do |plugin|
+        system "open https://github.com/lolcommits/lolcommits-#{plugin}"
+      end
+    end
+
+    def run
+      puts "Running script #{@script_path} in plugin directories..."
+      path_prefix = "#{ENV["HOME"]}/code/lolcommits-plugins"
+
+      PLUGINS.each do |plugin|
+        run_script("#{path_prefix}/lolcommits-#{plugin}")
+      end
+    end
+
+    def run_script(path)
+      if Dir.exist?(path)
+        Dir.chdir(path) { system(@script_path) }
+      else
+        raise "Unknown plugin directory: #{path}"
+      end
+    end
+end
+
+# check args
+if ARGV.empty? || (ARGV[0] == "run" && ARGV.length < 2)
+  LOLDev.print_help
+  exit 1
+end
+
+LOLDev.new(ARGV[0], ARGV[1..-1].join(" ")).execute
