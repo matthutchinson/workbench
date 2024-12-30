@@ -8,14 +8,14 @@ class LOLDev
     tumblr
     twitter
     slack
-    dotcom
-    term_output
-    uploldz
-    sample_plugin
-    loltext
-    lolsrv
-    tranzlate
   )
+    # dotcom
+    # term_output
+    # uploldz
+    # sample_plugin
+    # loltext
+    # lolsrv
+    # tranzlate
 
   def self.print_help
     filename = File.basename(__FILE__)
