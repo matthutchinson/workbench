@@ -5,17 +5,17 @@ require "fileutils"
 
 class LOLDev
   PLUGINS = %w(
+    dotcom
+    term_output
+    uploldz
+    sample_plugin
+    loltext
+    lolsrv
+    tranzlate
     tumblr
     twitter
     slack
   )
-    # dotcom
-    # term_output
-    # uploldz
-    # sample_plugin
-    # loltext
-    # lolsrv
-    # tranzlate
 
   def self.print_help
     filename = File.basename(__FILE__)
