@@ -5,7 +5,7 @@
 ################################################################################
 
 export FZF_DEFAULT_OPTS='--height 40% --reverse'   # set style
-export FZF_DEFAULT_COMMAND="rg -l --color never --files ." # use rg
+export FZF_DEFAULT_COMMAND="rg -l --color never --files --hidden ." # use rg
 brew_prefix="$(brew --prefix)"
 
 # fzf auto-completion and key bindings
