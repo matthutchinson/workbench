@@ -3,6 +3,12 @@ tap "puma/puma"
 tap "heroku/brew"
 tap 'dirk/quickhook'
 
+# https://wezfurlong.org/wezterm
+cask "wezterm"
+
+# https://ghostty.org
+cask "ghostty"
+
 # https://mitmproxy.org
 cask "mitmproxy"
 
