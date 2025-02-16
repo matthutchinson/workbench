@@ -20,3 +20,4 @@ config/spin
 config/lnav
 config/graphite
 config/uv
+config/containers
