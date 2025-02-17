@@ -91,11 +91,6 @@
 	required = true
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
-[filter "lfs"]
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
-    clean = git-lfs clean -- %f
 [diff "exif"]
 	textconv = exiftool
 [merge]
@@ -143,3 +138,8 @@
 	helper = osxkeychain
 [include]
 	path = ~/.config/dev/gitconfig
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
