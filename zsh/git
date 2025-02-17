@@ -26,6 +26,14 @@ function git-search() {
 }
 
 ################################################################################
+# delete all remote branches, except main and master and production
+################################################################################
+
+function git-delete-remote() {
+  git branch -r | grep -v 'main\|master\|production' | cut -d'/' -f2- | while read remote; do; git push origin :"$remote"; done
+}
+
+################################################################################
 # auto-squash with master
 ################################################################################
 
