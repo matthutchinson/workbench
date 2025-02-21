@@ -31,7 +31,7 @@ eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 
 HOSTNAME=$(hostname)
 
-if [[ ! $HOSTNAME =~ ^Mac ]]; then
+if [[ ! $HOSTNAME =~ ^shopify ]]; then
   eval "$($HOMEBREW_PREFIX/opt/mise/bin/mise activate zsh)"
 fi
 

@@ -35,7 +35,7 @@
   last = log -p -n1 --pretty=fuller
   today = log --since='1 Day Ago'
   recent = log --stat --since='3 Hours Ago' --graph --pretty=oneline --abbrev-commit --date=relative
-  me = log --author='Matt.* Hutchinson'
+  me = log -i --author='matt.*hutchinson'
   prune-remotes = remote prune origin
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
 	delete-merged = !git branch --merged main | egrep -v \"(^\\*|^  main$)\" | xargs git branch --delete
