@@ -1,6 +1,5 @@
 # taps
 tap "puma/puma"
-tap "heroku/brew"
 tap 'dirk/quickhook'
 
 # https://wezfurlong.org/wezterm
