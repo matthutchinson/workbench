@@ -21,3 +21,5 @@ config/lnav
 config/graphite
 config/uv
 config/containers
+config/psst
+config/roast

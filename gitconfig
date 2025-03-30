@@ -138,10 +138,10 @@
 	helper = osxkeychain
 [include]
 	path = ~/.config/dev/gitconfig
+[maintenance]
+	repo = /Users/matt/world/trees/root/src
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[maintenance]
-	repo = /Users/matt/world/trees/root/src
