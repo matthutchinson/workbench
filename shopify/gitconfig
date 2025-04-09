@@ -1,0 +1,8 @@
+[user]
+  name = Matthew Hutchinson
+  email = matt.hutchinson@shopify.com
+  signingkey = 60BB8933000EA09E4B05A36DF11FBBAF4CD85DA0
+[gpg]
+  program = /opt/dev/bin/gpg-auto-pin
+[commit]
+  gpgSign = true

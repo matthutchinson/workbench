@@ -134,10 +134,14 @@
   forceSignAnnotated = true
 [fetch]
   prune = true
-[credential]
-	helper = osxkeychain
 [include]
 	path = ~/.config/dev/gitconfig
+[includeIf "gitdir/i:~/src/"]
+  path = ~/.shopify/gitconfig
+[includeIf "gitdir/i:~/world/"]
+  path = ~/.shopify/gitconfig
+[credential]
+  helper = osxkeychain
 [maintenance]
 	repo = /Users/matt/world/trees/root/src
 [filter "lfs"]
