@@ -1,3 +1,0 @@
-#!/bin/sh
-
-~/mame_arm64/mame -video mister -aspect 4:3 -switchres -monitor arcade_15 -mister_window -mister_ip "192.168.50.131" -mister_compression lz4 -skip_gameinfo -syncrefresh -nothrottle
