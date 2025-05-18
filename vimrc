@@ -65,6 +65,7 @@ call plug#begin('~/.vim/plugged')
 
   " syntax
   Plug 'jparise/vim-graphql'    " graphql syntax highlighing, indenting
+  Plug 'chr4/nginx.vim'         " nginx syntax highlighting
 call plug#end()
 
 " #### Shortcuts
@@ -343,6 +344,12 @@ map <leader>gL :Gclog -250 --<cr><cr>:copen<cr><cr>
 " vimdiff apply (local/remote) and move to next hunk
 nmap <leader>dl :diffget LOCAL<cr>]c
 nmap <leader>dr :diffget REMOTE<cr>]c
+
+if &diff
+  map <leader>1 :diffget LOCAL<CR>
+  map <leader>2 :diffget BASE<CR>
+  map <leader>3 :diffget REMOTE<CR>
+endif
 
 " ALE
 nnoremap <leader>l :ALENextWrap<cr>

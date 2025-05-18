@@ -94,9 +94,9 @@
 [diff "exif"]
 	textconv = exiftool
 [merge]
-  tool = opendiff
-  ;tool = vimdiff
-  ;conflictStyle = diff3
+  ; tool = opendiff
+  tool = vimdiff
+  conflictStyle = diff3
 [mergetool]
   keepBackup = false
   prompt = false
@@ -140,8 +140,6 @@
   path = ~/.shopify/gitconfig
 [includeIf "gitdir/i:~/world/"]
   path = ~/.shopify/gitconfig
-[credential]
-  helper = osxkeychain
 [maintenance]
 	repo = /Users/matt/world/trees/root/src
 [filter "lfs"]
