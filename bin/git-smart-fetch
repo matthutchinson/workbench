@@ -1,0 +1,211 @@
+#!/bin/bash
+
+set -o pipefail
+
+ERROR_FILE=$(mktemp /tmp/git-smart-fetch.error.XXXXXX)
+OUTPUT_FILE=$(mktemp /tmp/git-smart-fetch.output.XXXXXX)
+trap 'rm -f "$ERROR_FILE" "$OUTPUT_FILE"' EXIT INT TERM HUP
+
+# Check for verbose flag and prepare arguments for git fetch
+VERBOSE=false
+FETCH_ARGS=()
+# Iterate over a copy of original arguments to safely build FETCH_ARGS
+_TEMP_ORIGINAL_ARGS=("$@")
+for arg_val in "${_TEMP_ORIGINAL_ARGS[@]}"; do
+  if [ "$arg_val" = "--verbose" ]; then
+    VERBOSE=true
+  else
+    FETCH_ARGS+=("$arg_val")
+  fi
+done
+set -- "${FETCH_ARGS[@]}" # Update $@ for subsequent git fetch "$@" calls
+
+# Track faulty refs for summary
+FAULTY_REFS=()
+FIXED_REFS=()
+FAILED_REFS=()
+
+# Spinner function
+spinner() {
+  local pid=$1
+  local delay=0.1
+  local spinstr='|/-\'
+
+  # Don't show spinner in verbose mode
+  if [ "$VERBOSE" = true ]; then
+    wait $pid
+    return
+  fi
+
+  echo -n "Fetching "
+  while kill -0 $pid 2>/dev/null; do
+    local temp=${spinstr#?}
+    printf "[%c]" "$spinstr"
+    local spinstr=$temp${spinstr%"$temp"}
+    sleep $delay
+    printf "\b\b\b"
+  done
+  printf "\b\b\b\b\b\b\b\b\b        \b\b\b\b\b\b\b\b\b"
+}
+
+# Function to output messages based on verbosity
+log() {
+  if [ "$VERBOSE" = true ]; then
+    echo "$@"
+  fi
+}
+
+# Find the git directory for the current repo
+GIT_DIR=$(git rev-parse --git-dir)
+if [ -z "$GIT_DIR" ]; then
+  echo "Error: Not inside a Git repository or 'git rev-parse --git-dir' failed." >&2
+  exit 1
+fi
+
+# Fetch and capture errors
+if [ "$VERBOSE" = true ]; then
+  git fetch "$@" 2>&1 | tee "$ERROR_FILE"
+  FETCH_STATUS=${PIPESTATUS[0]}
+else
+  git fetch "$@" > "$OUTPUT_FILE" 2>&1 &
+  FETCH_PID=$!
+  spinner $FETCH_PID
+  wait $FETCH_PID
+  FETCH_STATUS=$?
+  cat "$OUTPUT_FILE" > "$ERROR_FILE"
+fi
+
+if [ $FETCH_STATUS -ne 0 ]; then
+  # Extract problematic refs
+  PROBLEM_REFS=$(grep -o "refs/remotes/origin/[^ '\"\`]*" "$ERROR_FILE" | sort -u)
+  if [ -n "$PROBLEM_REFS" ]; then
+    echo "Found problematic refs:"
+    echo "$PROBLEM_REFS"
+    echo "Automatically fixing refs..."
+
+    # Add problematic refs to the tracking array
+    FIXED_REF_COUNT=0
+    while IFS= read -r ref; do
+      FAULTY_REFS+=("$ref")
+    done <<< "$PROBLEM_REFS"
+
+    # Remember count of problematic refs for validation
+    TOTAL_PROBLEM_REFS=${#FAULTY_REFS[@]}
+
+    # Fix path conflicts (when a path component exists as a file but should be a directory)
+    for ref in $PROBLEM_REFS; do
+      SHORT_REF=${ref#refs/remotes/origin/}
+
+      # Check for git directories - use the primary one and look for evidence of a secondary location in errors
+      SECONDARY_GIT_DIR=$(grep -o "/[^[:space:]]*/git[^[:space:]]*/refs/remotes" "$ERROR_FILE" | grep -v "$GIT_DIR" | head -1 | sed 's|/refs/remotes.*$||')
+
+      for git_root in "$GIT_DIR" ${SECONDARY_GIT_DIR:+"$SECONDARY_GIT_DIR"}; do
+        # Skip if directory doesn't exist
+        [ ! -d "$git_root" ] && continue
+
+        # Try to fix both the ref itself and its log
+        for path_type in "refs/remotes/origin" "logs/refs/remotes/origin"; do
+          # Build the full path for the ref (without the final component)
+          full_path="$git_root/$path_type"
+
+          # Create path component by component to detect conflicts
+          current=""
+          IFS='/' read -ra PARTS <<< "$SHORT_REF"
+
+          # Process all but the last component (which should be a file)
+          for ((i=0; i<${#PARTS[@]}-1; i++)); do
+            part="${PARTS[i]}"
+            current="$current/$part"
+            component_path="$full_path$current"
+
+            # If component exists as a file but should be a directory, remove it
+            if [ -f "$component_path" ] && [ ! -d "$component_path" ]; then
+              log "Found conflict: $component_path exists as a file but should be a directory. Removing..."
+              if rm -f "$component_path"; then
+                log "Successfully removed $component_path"
+              else
+                log "Failed to remove $component_path"
+                FAILED_REFS+=("$ref")
+                continue
+              fi
+            fi
+
+            # Now create the directory if it doesn't exist
+            if [ ! -d "$component_path" ]; then
+              mkdir -p "$component_path"
+            fi
+          done
+        done
+      done
+
+      log "Removing $ref (thorough cleanup)"
+
+      # Remove ref using git command first - ensure we're using the correct git directory
+      if [ "$git_root" = "$GIT_DIR" ]; then
+        if git update-ref -d "$ref" 2>/dev/null; then
+          log "Successfully removed ref using git update-ref"
+          FIXED_REFS+=("$ref")
+        else
+          log "Failed to remove ref using git update-ref"
+        fi
+      fi
+
+      # Remove from packed-refs file if present
+      if [ -f "${git_root}/packed-refs" ]; then
+        grep -v "$ref" "${git_root}/packed-refs" > "${git_root}/packed-refs.new"
+        mv "${git_root}/packed-refs.new" "${git_root}/packed-refs"
+      fi
+
+      # Remove files directly as backup method
+      rm -f "${git_root}/${ref}"
+      rm -f "${git_root}/logs/${ref}"
+    done
+
+    # Try fetching again, using original arguments and capturing status/output
+    log "Re-attempting fetch with arguments:"
+    for arg in "$@"; do
+      log "  $arg"
+    done
+    if [ "$VERBOSE" = true ]; then
+      git fetch "$@" 2>&1 | tee "$ERROR_FILE"
+      FETCH_STATUS=${PIPESTATUS[0]}
+    else
+      echo "Re-fetching..."
+      git fetch "$@" > "$OUTPUT_FILE" 2>&1 &
+      FETCH_PID=$!
+      spinner $FETCH_PID
+      wait $FETCH_PID
+      FETCH_STATUS=$?
+      cat "$OUTPUT_FILE" > "$ERROR_FILE"
+    fi
+
+    if [ $FETCH_STATUS -eq 0 ]; then
+      echo "✓ Re-fetch successful."
+
+      # Verify our fixes actually addressed the problems
+      NEW_PROBLEM_REFS=$(grep -o "refs/remotes/origin/[^ '\"\`]*" "$ERROR_FILE" 2>/dev/null | sort -u)
+      if [ -n "$NEW_PROBLEM_REFS" ]; then
+        echo "⚠ Note: Some problematic refs may still exist despite successful fetch."
+        log "$NEW_PROBLEM_REFS"
+      fi
+    else
+      echo "⚠ Re-fetch failed with status: $FETCH_STATUS."
+      log "Check $ERROR_FILE for details."
+      # PROBLEM_REFS might need to be re-evaluated here if re-fetch also fails with ref issues
+      # For now, we'll just report the failure of the re-fetch.
+    fi
+  fi
+fi
+
+# Display summary report
+if [ ${#FAULTY_REFS[@]} -eq 0 ]; then
+  echo "✓ No faulty refs encountered"
+else
+  echo "⚠ Found ${#FAULTY_REFS[@]} faulty ref(s)"
+  if [ ${#FIXED_REFS[@]} -gt 0 ]; then
+    echo "✓ Successfully fixed ${#FIXED_REFS[@]} ref(s)"
+  fi
+  if [ ${#FAILED_REFS[@]} -gt 0 ]; then
+    echo "✗ Failed to fix ${#FAILED_REFS[@]} ref(s)"
+  fi
+fi
