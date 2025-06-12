@@ -52,7 +52,7 @@ set +h
 export PATH=~/bin:$PATH
 
 # shopify
-if [[ $HOSTNAME =~ ^shopify ]]; then
+if [[ $HOSTNAME != dagobah ]]; then
   [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
   [ -f $HOME/.shopify/zshrc.sh ] && source $HOME/.shopify/zshrc.sh
   [[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
