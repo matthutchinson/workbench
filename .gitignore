@@ -23,4 +23,5 @@ config/uv
 config/containers
 config/psst
 config/roast
+config/insomnia
 shopify/zshrc.sh
