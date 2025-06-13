@@ -88,9 +88,6 @@ brew "irssi"
 brew "heroku"
 brew "mise"
 
-# mame
-brew "mame"
-
 # git
 brew "git"
 brew "git-interactive-rebase-tool"
