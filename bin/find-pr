@@ -1,0 +1,96 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "Usage: $0 <commit-sha>"
+  exit 1
+fi
+
+COMMIT_SHA=$1
+echo "Looking for PR for commit: $COMMIT_SHA"
+
+# Get the commit log
+echo "Getting commit log..."
+COMMIT_LOG=$(git show --format=full $COMMIT_SHA 2>/dev/null)
+
+if [ -z "$COMMIT_LOG" ]; then
+  echo "Commit not found: $COMMIT_SHA"
+  exit 1
+fi
+
+# Extract repo and commit info from the log
+echo "Extracting repo and commit info..."
+REPO_COMMIT_INFO=$(echo "$COMMIT_LOG" | grep -o "Shopify/[a-zA-Z0-9_-]\+@[a-zA-Z0-9]\+" | head -1)
+
+if [ -z "$REPO_COMMIT_INFO" ]; then
+  echo "No repo/commit info found in log. Trying standard PR search..."
+  PR_JSON=$(gh pr list --search $COMMIT_SHA --repo=shop/world --state merged --json url --limit 1)
+else
+  # Split into repo and commit parts
+  REPO=$(echo "$REPO_COMMIT_INFO" | cut -d '@' -f 1)
+  TARGET_COMMIT=$(echo "$REPO_COMMIT_INFO" | cut -d '@' -f 2)
+
+  echo "Found repo: $REPO"
+  echo "Found commit: $TARGET_COMMIT"
+
+  # Get the full commit SHA if we only have a partial
+  if [ ${#TARGET_COMMIT} -lt 40 ]; then
+    echo "Looking up full commit SHA for $TARGET_COMMIT in $REPO..."
+    FULL_COMMIT=$(gh api repos/$REPO/commits/$TARGET_COMMIT --jq .sha 2>/dev/null)
+
+    if [ -n "$FULL_COMMIT" ]; then
+      TARGET_COMMIT=$FULL_COMMIT
+      echo "Full commit SHA: $TARGET_COMMIT"
+    else
+      echo "Couldn't find full SHA, using partial: $TARGET_COMMIT"
+    fi
+  fi
+
+  # Run the gh pr list command
+  echo "Running: gh pr list --search $TARGET_COMMIT --repo=$REPO --state merged --json url --limit 1"
+  PR_JSON=$(gh pr list --search $TARGET_COMMIT --repo=$REPO --state merged --json url --limit 1)
+fi
+
+# Extract and open the PR URL
+if [ -n "$PR_JSON" ] && [ "$PR_JSON" != "[]" ]; then
+  PR_URL=$(echo $PR_JSON | jq -r '.[0].url')
+  echo "Opening PR: $PR_URL"
+  open "$PR_URL"
+  exit 0
+else
+  echo "No PR found via GitHub search. Trying to find merge commit manually..."
+
+  # Try to find a merge commit
+  echo "Running: git rev-list --all --merges --parents | grep \"$COMMIT_SHA\" | head -1 | cut -d' ' -f1"
+  MERGE_COMMIT=$(git rev-list --all --merges --parents | grep "$COMMIT_SHA" | head -1 | cut -d' ' -f1)
+
+  if [ -n "$MERGE_COMMIT" ]; then
+    echo "Found merge commit: $MERGE_COMMIT"
+    MERGE_MSG=$(git show --format=full $MERGE_COMMIT)
+
+    # Extract PR number
+    PR_NUMBER=$(echo "$MERGE_MSG" | grep -o "Merge pull request #[0-9]\+" | grep -o "#[0-9]\+" | tr -d '#')
+
+    if [ -n "$PR_NUMBER" ]; then
+      echo "Found PR number: $PR_NUMBER"
+
+      # Extract repo from Imported-From
+      IMPORTED_REPO=$(echo "$MERGE_MSG" | grep -o "Imported-From: Shopify/[a-zA-Z0-9_-]\+" | sed 's/Imported-From: //')
+
+      if [ -n "$IMPORTED_REPO" ]; then
+        echo "Found imported repo: $IMPORTED_REPO"
+        echo "Running: gh pr view $PR_NUMBER --web --repo=$IMPORTED_REPO"
+        gh pr view $PR_NUMBER --web --repo=$IMPORTED_REPO
+        exit 0
+      else
+        # Default to shop/world if no repo found
+        echo "No imported repo found, using shop/world"
+        echo "Running: gh pr view $PR_NUMBER --web --repo=shop/world"
+        gh pr view $PR_NUMBER --web --repo=shop/world
+        exit 0
+      fi
+    fi
+  fi
+
+  echo "All attempts failed. No PR found for commit: $COMMIT_SHA"
+  exit 1
+fi
