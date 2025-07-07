@@ -114,7 +114,7 @@ zstyle ':completion:*:options-single-letter' ignored-patterns '???*'
 
 # easy cd to apps and code
 typeset -U cdpath
-cdpath=( $HOME ~/apps ~/code ~/code/lolcommits-plugins ~/src/github.com/Shopify $cdpath )
+cdpath=( $HOME ~/apps ~/code ~/code/world/areas/core/ ~/code/lolcommits-plugins $cdpath )
 
 # fix GPG TTY issue
 export GPG_TTY=$(tty)

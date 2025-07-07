@@ -4,8 +4,7 @@
 # Misc
 ################################################################################
 
-alias irc='ssh chunnel.wan -t "screen -x"'
-alias ircl='ssh chunnel -t "screen -x"'
+alias irc='ssh monolith -t "/usr/local/bin/docker exec -it irssi-chat screen -x"'
 alias plan='FINDDATES=$(date "+%b\ %d\|")$(date -v "-1d" "+%b\ %d\|")$(date "+%b"); vi +\?"$FINDDATES" +":nohl" /Users/matt/Obsidian\ Vault/Plan/$(date "+%Y").md'
 alias reload='source ~/.zshrc'
 alias vnc-hoth='ssh -f hoth.vnc.tunnel -N; open vnc://localhost:5999'
