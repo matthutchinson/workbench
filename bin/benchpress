@@ -4,7 +4,6 @@ path = File.expand_path('./', File.dirname(__FILE__))
 bin_path = File.symlink?(path) ? File.readlink(path) : path
 workbench_path = File.expand_path('.././', bin_path)
 host = `hostname`.gsub(/\.|local|\n$/, '')
-irssi_host = "chunnel.wan"
 
 puts "Installing the workbench (on #{host})"
 
@@ -73,10 +72,5 @@ end
 
 # make sure vim backup dir exists
 `mkdir -p ~/.vim/tmp`
-
-puts "  Syncing irssi config with #{irssi_host} ..."
-Dir.chdir("#{workbench_path}/irssi") do
-  `tar cf - --no-xattrs * | ssh #{irssi_host} '(cd ~/.irssi; tar xf - )'`
-end
 
 puts "\n  All done!"
