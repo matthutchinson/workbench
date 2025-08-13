@@ -28,6 +28,9 @@ alias f='vi $(fzf --preview="cat {}")'
 
 alias shoppy='ssh shopify -t $(brew --prefix)/bin/tmux attach-session'
 alias vscode='spin code shopify shopify--storefront-renderer; spin code shopify shopify--shopify/areas/core/shopify'
+alias core="dev cd shopify"
+alias sfr="dev cd storefront-renderer"
+alias clear_sorbet="core && cd tmp/sorbet_cache && rm -rf 'session*'"
 
 ################################################################################
 # Overrides
