@@ -1,0 +1,27 @@
+# The syntax is "key = value". The whitespace around the equals doesn't matter.
+
+# general
+fullscreen = true
+confirm-close-surface = false
+
+# appearance
+cursor-style = block
+cursor-style-blink = false
+bold-is-bright = false
+
+# font
+font-family = "BerkeleyMono Nerd Font Plus Font Awesome Plus Font Awesome Extension Plus Octicons"
+font-size = 14
+adjust-cell-height = 15%
+# font-feature = -calt, -liga, -dlig # disable ligatures
+
+# colors
+theme = "Iceberg Dark"
+foreground = E0E0E0
+background = 000000
+cursor-color = FFFFFF
+
+# DHH
+# font-family = "Cascadia Mono"
+# font-size = 14
+# theme = "TokyoNight"
