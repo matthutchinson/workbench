@@ -1,0 +1,24 @@
+#!/bin/bash
+# Find all shadowenv projects and collect their GEM_HOME
+used_gems=""
+for shadowenv_dir in $(find ~/world -name ".shadowenv.d" -type d 2>/dev/null); do
+  project_dir=$(dirname "$shadowenv_dir")
+  cd "$project_dir" 2>/dev/null
+  gem_home=$(shadowenv exec -- sh -c 'echo $GEM_HOME' 2>/dev/null)
+  if [ -n "$gem_home" ]; then
+    used_gems="$used_gems$(basename "$gem_home")\n"
+  fi
+done
+
+# Get unique list of used gems
+used_list=$(echo -e "$used_gems" | sort -u | grep -v '^$')
+
+# Identify unused directories
+echo "Unused gem directories (safe to remove):"
+for dir in ~/.dev/gem/*; do
+  basename=$(basename "$dir")
+  if ! echo "$used_list" | grep -q "^$basename$"; then
+    echo "Trashing $dir"
+    trash $dir
+  fi
+done
