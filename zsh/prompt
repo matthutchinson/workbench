@@ -79,6 +79,7 @@ PROMPT="$(seasonal_chevrons) %{%b%f%k%}"
 # Right
 ################################################################################
 
+ZLE_RPROMPT_INDENT=0
 RPROMPT="%{%K{016}%F{233}%}$powerline_hard_right_divider%{%f%k%}"
 RPROMPT+="%{%K{233}%F{234}%}$powerline_hard_right_divider%{%f%k%}"
 RPROMPT+="%{%K{234}%F{235}%}$powerline_hard_right_divider%{%f%k%}"

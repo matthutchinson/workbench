@@ -5,15 +5,15 @@ fullscreen = true
 confirm-close-surface = false
 
 # appearance
-cursor-style = block
+cursor-style = bar
 cursor-style-blink = false
 bold-is-bright = false
 
 # font
 font-family = "BerkeleyMono Nerd Font Plus Font Awesome Plus Font Awesome Extension Plus Octicons"
-font-size = 14
+font-size = 15
 adjust-cell-height = 15%
-# font-feature = -calt, -liga, -dlig # disable ligatures
+font-feature = -calt, -liga, -dlig # disable ligatures
 
 # colors
 theme = "Iceberg Dark"
@@ -23,5 +23,4 @@ cursor-color = FFFFFF
 
 # DHH
 # font-family = "Cascadia Mono"
-# font-size = 14
 # theme = "TokyoNight"
