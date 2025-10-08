@@ -68,3 +68,6 @@ fi
 
 # Shopify Hydrogen alias to local projects
 alias h2='$(npm prefix -s)/node_modules/.bin/shopify hydrogen'
+
+# Added by tec agent
+[[ -x /Users/matt/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/matt/.local/state/tec/profiles/base/current/global/init zsh)"
