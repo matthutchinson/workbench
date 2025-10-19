@@ -1,0 +1,60 @@
+#!/usr/bin/env ruby
+#
+# gem install nokogiri
+
+require "nokogiri"
+require "open-uri"
+require "openssl"
+require "uri"
+
+class NBADownloader
+
+  TRANSMISSION_CMD = "/volume1/@appstore/transmission/bin/transmission-remote localhost:9091 --auth username:password"
+  BASE_URL = "https://sport-video.org.ua".freeze
+  DOWNLOAD_PATH = "/volume1/Media/Sports".freeze
+
+  def initialize
+    @doc = Nokogiri::HTML(
+      URI.open("#{BASE_URL}/basketball.html", ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE).read
+    )
+  end
+
+  def download(team)
+    if url = find_url(team)
+      queue_torrent_download(url)
+    end
+  end
+
+  private
+
+    attr_reader :doc, :site
+
+    def queue_torrent_download(url)
+      return if already_downloading?(url)
+      cmd = "#{TRANSMISSION_CMD} --add #{url} --download-dir #{DOWNLOAD_PATH}"
+      log cmd
+    end
+
+    def already_downloading?(url)
+      false
+    end
+
+    def log(msg)
+      puts msg
+    end
+
+    def find_url(team)
+      links = doc.xpath("//a[contains(@href, '#{team}') and contains(@href, '.torrent')]")
+      if links.any?
+        href = links.first.attributes["href"].value
+        path = URI::DEFAULT_PARSER.escape(href)
+        URI.parse("#{BASE_URL}/#{path}")
+      end
+    end
+end
+
+nfl = NBADownloader.new
+
+["Thunder"].each do |team|
+  nfl.download(team)
+end
