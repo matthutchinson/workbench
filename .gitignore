@@ -25,3 +25,4 @@ config/psst
 config/roast
 config/insomnia
 shopify/zshrc.sh
+config/schemas/**/*.log
