@@ -90,6 +90,7 @@ alias gl="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | vim -R -c '
 alias grm='git rebase $(git_main_branch) -i'
 alias gca='git amend'
 alias gup='git upstream'
+alias gdm='git diff main | sed -E "s#areas/core/(.*)/##g" | vim -'
 
 # GitHub CLI - https://cli.github.com
 alias gpr='gh pr create'
