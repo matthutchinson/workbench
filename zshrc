@@ -71,3 +71,6 @@ alias h2='$(npm prefix -s)/node_modules/.bin/shopify hydrogen'
 
 # Added by tec agent
 [[ -x /Users/matt/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/matt/.local/state/tec/profiles/base/current/global/init zsh)"
+
+# cloudplatform: add Shopify clusters to your local kubernetes config
+export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/matt/.kube/config:/Users/matt/.kube/config.shopify.cloudplatform

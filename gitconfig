@@ -128,8 +128,6 @@
   hunk-header-decoration-style = yellow box
 [branch]
   sort = -committerdate
-[sequence]
-  editor = interactive-rebase-tool
 [tag]
   forceSignAnnotated = true
 [fetch]

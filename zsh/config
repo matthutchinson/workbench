@@ -69,7 +69,7 @@ export GREP_OPTIONS="--color=auto"
 
 # faster compinit, don't check ~/.zcompdump every time, only once/day
 autoload -Uz compinit
-if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
+if [ $(date +'%j') != $(/usr/bin/stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
   compinit
 else
   compinit -C
