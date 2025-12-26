@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 <domain.name.com>"
+  exit 1
+fi
+
+echo | openssl s_client -connect $1:443 -servername $1 2>/dev/null | openssl x509 -noout -text
