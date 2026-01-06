@@ -27,3 +27,4 @@ config/insomnia
 shopify/zshrc.sh
 config/schemas/**/*.log
 config/local-mcp-tunnel*
+config/wish.*

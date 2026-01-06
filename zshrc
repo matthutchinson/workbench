@@ -58,6 +58,16 @@ if [[ $HOSTNAME != dagobah ]]; then
   [[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
   [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
   [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
+  # Added by tec agent
+  [[ -x /Users/matt/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/matt/.local/state/tec/profiles/base/current/global/init zsh)"
+
+  # fix fzf path
+  export PATH=/opt/homebrew/opt/fzf/bin:$PATH
+  # Shopify Hydrogen alias to local projects
+  alias h2='$(npm prefix -s)/node_modules/.bin/shopify hydrogen'
+
+  # cloudplatform: add Shopify clusters to your local kubernetes config
+  export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/matt/.kube/config:/Users/matt/.kube/config.shopify.cloudplatform
 fi
 
 ################################################################################
@@ -66,11 +76,3 @@ fi
 # add `zmodload zsh/zprof` above
 # then run `zprof` in new shells
 
-# Shopify Hydrogen alias to local projects
-alias h2='$(npm prefix -s)/node_modules/.bin/shopify hydrogen'
-
-# Added by tec agent
-[[ -x /Users/matt/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/matt/.local/state/tec/profiles/base/current/global/init zsh)"
-
-# cloudplatform: add Shopify clusters to your local kubernetes config
-export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/matt/.kube/config:/Users/matt/.kube/config.shopify.cloudplatform
