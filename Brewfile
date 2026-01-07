@@ -88,6 +88,10 @@ brew "irssi"
 brew "heroku"
 brew "mise"
 
+# AI
+brew "opencode"
+cask "opencode-desktop"
+
 # git
 brew "git"
 brew "git-interactive-rebase-tool"
