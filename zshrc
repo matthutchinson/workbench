@@ -76,3 +76,10 @@ fi
 # add `zmodload zsh/zprof` above
 # then run `zprof` in new shells
 
+
+# bun completions
+[ -s "/Users/matt/.bun/_bun" ] && source "/Users/matt/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
