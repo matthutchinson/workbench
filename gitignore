@@ -21,3 +21,4 @@ config/shadowenv
 .byebug_history
 *.swp
 infrastructure/haybales/vendor
+.beads

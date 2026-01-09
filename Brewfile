@@ -91,6 +91,7 @@ brew "mise"
 # AI
 brew "opencode"
 cask "opencode-desktop"
+brew "steveyegge/beads/bd"
 
 # git
 brew "git"
