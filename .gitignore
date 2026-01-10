@@ -25,6 +25,7 @@ config/psst
 config/roast
 config/insomnia
 shopify/zshrc.sh
+shopify/bin
 config/schemas/**/*.log
 config/local-mcp-tunnel*
 config/wish.*

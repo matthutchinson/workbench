@@ -61,8 +61,9 @@ if [[ $HOSTNAME != dagobah ]]; then
   # Added by tec agent
   [[ -x /Users/matt/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/matt/.local/state/tec/profiles/base/current/global/init zsh)"
 
-  # fix fzf path
+  # fix fzf path and add a shopify bin path
   export PATH=/opt/homebrew/opt/fzf/bin:$PATH
+  export PATH=$HOME/.shopify/bin:$PATH
   # Shopify Hydrogen alias to local projects
   alias h2='$(npm prefix -s)/node_modules/.bin/shopify hydrogen'
 
