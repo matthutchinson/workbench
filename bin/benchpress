@@ -15,6 +15,7 @@ Dir.chdir(workbench_path) do
 
   Dir.glob('*') do |item|
     next if ['README.md', 'launchd', 'Brewfile', 'Brewfile.lock.json'].include?(item)
+
     if ['bin'].include?(item)
       `rm -rf ~/#{item}`
       `ln -sfh #{workbench_path}/#{item} ~/`
@@ -38,7 +39,7 @@ else
     script_name = launchd_script.split('/').last
     launch_agent_dir = "#{ENV['HOME']}/Library/LaunchAgents"
 
-    if File.exists?("#{launch_agent_dir}/#{script_name}")
+    if File.exist?("#{launch_agent_dir}/#{script_name}")
       puts "    - #{script_name} (unloading) ..."
       `sudo launchctl unload -w #{launch_agent_dir}/#{script_name} > /dev/null`
     end
@@ -72,5 +73,8 @@ end
 
 # make sure vim backup dir exists
 `mkdir -p ~/.vim/tmp`
+
+# link plan file for `finger username`
+`ln -s ~/Obsidian\ Vault/Plan/#{Date.today.year}.md ~/.plan`
 
 puts "\n  All done!"
