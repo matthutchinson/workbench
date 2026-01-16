@@ -87,8 +87,23 @@ RPROMPT+="%{%K{234}%F{235}%}$powerline_hard_right_divider%{%f%k%}"
 # show editing mode in prompt
 RPROMPT+='$(vi_mode_prompt_info)'
 
-# path %~ (truncate start if > 50 chars)
-RPROMPT+='%{%K{235}%F{243}%} %50[<…]%~%<< %{%f%k%}'
+# path: use worldpath style in specified dirs, truncated path elsewhere
+WORLDPATH_DIRS=("$HOME/src" "$HOME/world")
+
+function current_prompt_path {
+  for dir in "${WORLDPATH_DIRS[@]}"; do
+    if [[ $PWD = $dir* ]]; then
+      # remove any colour codes
+      worldpath | sed "s/\x1b\[[0-9;]*m//g"
+      return
+    fi
+  done
+  print -P "%50[<…]%~%<<"
+}
+
+RPROMPT+='%{%K{235}%F{243}%} '
+RPROMPT+='$(current_prompt_path) '
+RPROMPT+='%{%f%k%}'
 
 # show vcs info (see ~/.zsh/vcs_info.zsh)
 if hash git >/dev/null 2>&1; then
