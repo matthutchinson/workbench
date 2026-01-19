@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require "date"
+
 path = File.expand_path('./', File.dirname(__FILE__))
 bin_path = File.symlink?(path) ? File.readlink(path) : path
 workbench_path = File.expand_path('.././', bin_path)
