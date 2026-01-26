@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require "date"
+require "fileutils"
 
 path = File.expand_path('./', File.dirname(__FILE__))
 bin_path = File.symlink?(path) ? File.readlink(path) : path
@@ -77,6 +78,4 @@ end
 `mkdir -p ~/.vim/tmp`
 
 # link plan file for `finger username`
-`ln -s ~/Obsidian\ Vault/Plan/#{Date.today.year}.md ~/.plan`
-
-puts "\n  All done!"
+FileUtils.ln_sf("#{ENV['HOME']}/Obsidian\ Vault/Plan/#{Date.today.year}.md", "#{ENV['HOME']}/.plan")
