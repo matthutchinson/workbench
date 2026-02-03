@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.matt.world-refresh</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/matt/bin/refresh-world.sh</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>8</integer>
+        <key>Minute</key>
+        <integer>55</integer>
+    </dict>
+    <key>StandardOutPath</key>
+    <string>/Users/matt/Library/Logs/world-refresh-stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/matt/Library/Logs/world-refresh-stderr.log</string>
+</dict>
+</plist>

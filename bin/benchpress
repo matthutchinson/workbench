@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
-require "date"
-require "fileutils"
+require 'date'
+require 'fileutils'
 
 path = File.expand_path('./', File.dirname(__FILE__))
 bin_path = File.symlink?(path) ? File.readlink(path) : path
@@ -28,28 +29,26 @@ Dir.chdir(workbench_path) do
     end
   end
 
-  puts "  Brew bundle ..."
+  puts '  Brew bundle ...'
   `brew bundle`
 end
 
 # install/update enabled launchd's
-launchd_scripts = Dir.glob("#{workbench_path}/launchd/enabled/*")
+launchd_scripts = Dir.glob("#{workbench_path}/launchd/#{host.downcase}/enabled/*")
 if launchd_scripts.empty?
-  puts "  No launchd scripts to apply ..."
+  puts '  No launchd scripts to apply ...'
 else
-  puts "  Installing user launchd scripts (~/Library/LaunchAgents) ..."
+  puts '  Installing user launchd scripts (~/Library/LaunchAgents) ...'
   launchd_scripts.each do |launchd_script|
     script_name = launchd_script.split('/').last
-    launch_agent_dir = "#{ENV['HOME']}/Library/LaunchAgents"
 
-    if File.exist?("#{launch_agent_dir}/#{script_name}")
-      puts "    - #{script_name} (unloading) ..."
-      `sudo launchctl unload -w #{launch_agent_dir}/#{script_name} > /dev/null`
+    if `launchctl list | grep #{script_name}`.empty?
+      puts "    - #{script_name} (exists, unloading) ..."
+      `launchctl bootout gui/$(id -u) #{launchd_script}`
     end
 
     puts "    - #{script_name} (loading) ..."
-    `sudo cp #{launchd_script} #{launch_agent_dir}`
-    `sudo launchctl load -w #{launch_agent_dir}/#{script_name}`
+    `launchctl bootstrap gui/$(id -u) -w #{launchd_script}`
   end
 end
 
