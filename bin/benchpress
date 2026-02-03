@@ -30,7 +30,7 @@ Dir.chdir(workbench_path) do
   end
 
   puts '  Brew bundle ...'
-  `brew bundle`
+  `HOMEBREW_NO_ENV_HINTS=1 brew bundle`
 end
 
 # install/update enabled launchd's
