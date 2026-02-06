@@ -38,6 +38,8 @@ launchd_scripts = Dir.glob("#{workbench_path}/launchd/#{host.downcase}/enabled/*
 if launchd_scripts.empty?
   puts '  No launchd scripts to apply ...'
 else
+  # use this command if you need to trigger a daily laptop wake
+  #   sudo pmset repeat cancel && sudo pmset repeat wake MTWRFSU 08:50:00
   puts '  Installing user launchd scripts (~/Library/LaunchAgents) ...'
   launchd_scripts.each do |launchd_script|
     script_name = launchd_script.split('/').last
