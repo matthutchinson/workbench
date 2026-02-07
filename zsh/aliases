@@ -12,6 +12,7 @@ alias vnc-hoth='ssh -f hoth.vnc.tunnel -N; open vnc://localhost:5999'
 alias tml='tmux ls'
 alias lc='colorls' # https://github.com/athityakumar/colorls
 alias ll='colorls -lA --sd --gs -t' # 1 per line, newest & dirs first, git info
+alias ivi='vi $(fzf -m --style full --preview "fzf-preview.sh {}" --bind "focus:transform-header:file --brief {}")' # interactive vi, fzf find and open multiple
 
 alias tree='colorls --tree' # tree with dirs first
 alias wget='wget --no-hsts' # stop logging .hsts files
