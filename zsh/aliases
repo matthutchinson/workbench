@@ -28,10 +28,8 @@ alias f='vi $(fzf --preview="cat {}")'
 ################################################################################
 
 alias shoppy='ssh shopify -t $(brew --prefix)/bin/tmux attach-session'
-alias vscode='spin code shopify shopify--storefront-renderer; spin code shopify shopify--shopify/areas/core/shopify'
 alias core="dev cd shopify"
 alias sfr="dev cd storefront-renderer"
-alias clear_sorbet="core && cd tmp/sorbet_cache && rm -rf 'session*'"
 
 ################################################################################
 # Overrides
@@ -42,7 +40,6 @@ alias ping='prettyping'         # https://github.com/denilsonsa/prettyping
 alias top='btop'                # https://github.com/aristocratos/btop
 
 # always enable colored `grep` output`
-
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
@@ -71,13 +68,8 @@ alias tdlnc="tdl | egrep -v -e '^.*(\[ActionCable\]|\[Action Cable\]|\[Socket\]|
 alias rst='touch ./tmp/restart.txt'
 alias sshot='open ./tmp/screenshots'
 
-# reschema your rails app, recreate db and load schema (no seeding)
-alias rscheme='rails db:drop;rails db:create;rails db:schema:load'
-
-# run tests for all tests files that have changed in this branch (from master)
-# filters out deleted tests
-alias rtc='rails test $(git diff --diff-filter=d --name-only master test | grep "_test.rb" | tr "\n" " ")'
-alias rstc='rspec $(git diff --diff-filter=d --name-only master spec | grep "_spec.rb" | tr "\n" " ")'
+# run tests for all tests files that have changed in this branch, filters out deleted tests
+alias rtc='rails test $(git diff --diff-filter=d --name-only main test | grep "_test.rb" | tr "\n" " ")'
 
 ################################################################################
 # Git
@@ -97,6 +89,4 @@ alias gdm='git diff main | sed -E "s#areas/core/(.*)/##g" | vim -'
 alias gpr='gh pr create'
 
 # autocorrect fixes
-alias rspec='nocorrect rspec'
 alias kamal='nocorrect kamal'
-alias amp='nocorrect amp'
