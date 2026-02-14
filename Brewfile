@@ -62,6 +62,7 @@ brew "agrinman/tap/tunnelto"
 
 # general
 brew "imagemagick"
+brew "uv"
 brew "vips"
 brew "mupdf-tools"
 brew "scmpuff"

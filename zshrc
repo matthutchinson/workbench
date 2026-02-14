@@ -48,8 +48,9 @@ export PATH="$GOPATH/bin:$HOMEBREW_PREFIX/share/npm/bin:/usr/local/bin:/usr/loca
 export PATH="./bin:$PATH"
 set +h
 
-# add home bin path
+# add home and local bin paths
 export PATH=~/bin:$PATH
+export PATH="/Users/matt/.local/bin:$PATH"
 
 # shopify
 if [[ $HOSTNAME != dagobah ]]; then
@@ -76,7 +77,6 @@ fi
 ################################################################################
 # add `zmodload zsh/zprof` above
 # then run `zprof` in new shells
-
 
 # bun completions
 [ -s "/Users/matt/.bun/_bun" ] && source "/Users/matt/.bun/_bun"
