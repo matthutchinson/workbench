@@ -31,3 +31,4 @@ config/local-mcp-tunnel*
 config/wish.*
 config/slack-mcp
 config/qmd
+config/quick
