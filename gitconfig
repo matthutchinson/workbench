@@ -136,6 +136,7 @@
 [include]
 	path = ~/.config/dev/gitconfig
 	path = /Users/matt/.config/dev/gitconfig
+	path = /Users/matt/.config/dev/gitconfig
 [includeIf "gitdir/i:~/src/"]
   path = ~/.shopify/gitconfig
 [includeIf "gitdir/i:~/world/"]

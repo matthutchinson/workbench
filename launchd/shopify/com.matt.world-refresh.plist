@@ -6,7 +6,7 @@
     <string>com.matt.world-refresh</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/Users/matt/bin/refresh-world.sh</string>
+        <string>/Users/matt/bin/worldrefresh</string>
     </array>
     <key>StartCalendarInterval</key>
     <dict>

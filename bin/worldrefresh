@@ -7,7 +7,7 @@
 
 set -euo pipefail
 
-LOG_FILE="$HOME/Library/Logs/world-refresh.log"
+LOG_FILE="${LOG_FILE:-/dev/stdout}"
 STOREFRONT_DIR="$HOME/world/trees/root/src/areas/core/storefront"
 SHOPIFY_DIR="$HOME/world/trees/root/src/areas/core/shopify"
 
