@@ -202,12 +202,9 @@ nnoremap <Right> <nop>
 filetype plugin indent on
 runtime macros/matchit.vim
 
-" enable true color in TMUX see :help xterm-true-color for details
-let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-set termguicolors
 
 " appearance
+set termguicolors
 :silent! colorscheme iceberg " https://cocopon.github.io/iceberg.vim/
 set bg=dark                  " use the dark theme (not light)
 syntax on                    " turn on syntax highlighting
@@ -224,6 +221,13 @@ set cursorline               " only use cursorline for current window
 set cpoptions+=$             " show $ to indicate editing range
 set listchars=tab:▸\ ,eol:¬  " use these special chars with :set list
 set relativenumber           " show relative line numbers
+
+" cursor
+if has("termguicolors")
+  let &t_SI = "\e[6 q"     " Insert mode: I-beam
+  let &t_EI = "\e[2 q"     " Normal mode: solid block
+  let &t_SR = "\e[4 q"     " Replace/Visual: underline or coloured block
+endif
 
 " speedy scrolling
 syntax sync minlines=100
