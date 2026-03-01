@@ -142,3 +142,5 @@
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+[maintenance]
+	repo = /Users/matt/world/trees/root/src
