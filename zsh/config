@@ -62,6 +62,7 @@ autoload -Uz colors && colors
 export CLICOLOR=1
 export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 export GREP_OPTIONS="--color=auto"
+export BAT_THEME="Nord"
 
 ################################################################################
 # Completion

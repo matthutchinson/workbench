@@ -3,24 +3,25 @@
 # general
 fullscreen = true
 confirm-close-surface = false
+macos-titlebar-style = hidden
 
 # cursor
 cursor-style = block
-cursor-color = E0E0E0
+# cursor-color = E0E0E0
 
 # font
 font-family = "BerkeleyMono Nerd Font Plus Font Awesome Plus Font Awesome Extension Plus Octicons"
-font-size = 15
-adjust-cell-height = 15%
+font-size = 16
+adjust-cell-height=15%
 font-feature = -calt, -liga, -dlig # disable ligatures
 
 # colors & theme
-theme = "Iceberg Dark"
+theme = Iceberg Dark
 bold-is-bright = false
-foreground = E0E0E0
 background = 000000
+# foreground = E0E0E0
 
-# see https://github.com/sahaj-b/ghostty-cursor-shaders
+# shaders https://github.com/sahaj-b/ghostty-cursor-shaders
 custom-shader = shaders/cursor_warp.glsl
 # custom-shader = shaders/cursor_sweep.glsl
 # custom-shader = shaders/cursor_tail.glsl

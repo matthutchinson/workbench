@@ -35,9 +35,9 @@ alias sfr="dev cd storefront-renderer"
 # Overrides
 ################################################################################
 
-alias cat='bat --theme=TwoDark' # https://github.com/sharkdp/bat
-alias ping='prettyping'         # https://github.com/denilsonsa/prettyping
-alias top='btop'                # https://github.com/aristocratos/btop
+alias cat='bat' # https://github.com/sharkdp/bat
+alias ping='prettyping'      # https://github.com/denilsonsa/prettyping
+alias top='btop'             # https://github.com/aristocratos/btop
 
 # always enable colored `grep` output`
 alias grep="grep --color=auto"
