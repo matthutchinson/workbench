@@ -23,5 +23,3 @@ set -g status-right "#(~/.tmux/segments/combined)#[fg=colour213,bg=colour016] %H
 set -g window-status-separator ""
 set -g window-status-format "#[bg=#111111,fg=colour238] #I #[fg=colour244]#W  #[default]"
 set -g window-status-current-format "#[bg=#111111,fg=colour008]#[bg=colour008,fg=colour255] #W #[bg=#111111,fg=colour008]#[default]"
-set -g window-status-style "fg=#6b7089"
-set -g window-status-separator ""
