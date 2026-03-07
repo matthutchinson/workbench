@@ -22,7 +22,6 @@
   untracked = cyan
 [alias]
   ctags = !.git/hooks/ctags
-	pr = "!funct() { open \"`git web-url`/pull/`git pr-number $1`\" ;}; funct"
   br = branch
   ci = commit
   co = checkout
@@ -32,32 +31,28 @@
   amend = commit --amend --no-edit
   plre = pull --rebase
   unstage = reset HEAD
+	uncommit = reset --soft HEAD~1
   last = log -p -n1 --pretty=fuller
   today = log --since='1 Day Ago'
   recent = log --stat --since='3 Hours Ago' --graph --pretty=oneline --abbrev-commit --date=relative
   me = log -i --author='matt.*hutchinson'
-  prune-remotes = remote prune origin
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
 	delete-merged = !git branch --merged main | egrep -v \"(^\\*|^  main$)\" | xargs git branch --delete
 	delete-gone = !git fetch --prune && git branch --verbose | awk '/\\[gone]/{print $1}' | xargs git branch --delete --force
-	upstream = !git push -u origin HEAD
+	upstream = push -u origin HEAD
+	sdiff = "!git diff \"$@\" | sed -E -e \"s#areas/core/[^/]+/##g\" #"
 
 	# see https://tekin.co.uk/2020/06/jump-from-a-git-commit-to-the-pr-in-one-command
 	merge-commits = "!funct() { git log --merges --reverse --oneline --ancestry-path $1..origin | grep \"Merge pull request\";  }; funct"
 	pr-number = "!funct() { git merge-commits $1 | head -n1 | sed -n \"s/^.*Merge pull request #\\\\s*\\\\([0-9]*\\\\).*$/\\\\1/p\"; }; funct"
 	web-url = "!funct() { git config remote.origin.url | sed -e\"s/git@/https:\\/\\//\" -e\"s/\\.git$//\" | sed -E \"s/(\\/\\/[^:]*):/\\1\\//\"; }; funct"
-	uncommit = reset --soft HEAD~1
-	sdiff = "!git diff \"$@\" | sed -E -e \"s#areas/core/[^/]+/##g\" #"
+	pr = "!funct() { open \"`git web-url`/pull/`git pr-number $1`\" ;}; funct"
 [format]
   # git log uses --pretty format by default, so this changes the default
   # e.g. 4436819 [23 hours ago] (Gabe Berke-Williams) One line prompt
   pretty = %C(yellow)%h%Creset %Cgreen[%cr]%Creset (%an) %s
 [help]
   autocorrect = 1
-[sendemail]
-  smtpserver = smtp.example.com
-  aliasesfile = ~/.gitaliases
-  aliasfiletype = mailrc
 [core]
   legacyheaders = false
   excludesfile = ~/.gitignore
@@ -67,9 +62,6 @@
   # [default] trailing-space: looks for spaces at the end of a line
   # [default] space-before-tab: looks for spaces before tabs at the beginning of a line
   whitespace = space-before-tab,-indent-with-non-tab,trailing-space
-  # Make `git rebase` safer on OS X
-  # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
-  trustctime = false
 [repack]
   usedeltabaseoffset = true
 [apply]
@@ -78,26 +70,17 @@
 [push]
   # push current branch even if you've never pushed it before
   default = current
-[heroku]
-	account = personal
 [init]
 	templatedir = ~/.git_template
 	defaultBranch = main
 [url "git://github.com/"]
-  # Read-only
   insteadOf = gh:
 [github]
 	user = matthutchinson
-[filter "media"]
-	required = true
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
 [diff "exif"]
 	textconv = exiftool
 [merge]
   tool = opendiff
-  ; tool = vimdiff
-  ; conflictStyle = diff3
 [mergetool]
   keepBackup = false
   prompt = false
@@ -139,8 +122,12 @@
   path = ~/.shopify/gitconfig
 [includeIf "gitdir/i:~/world/"]
   path = ~/.shopify/gitconfig
-[maintenance]
-	repo = /Users/matt/world/trees/root/src
+[filter "media"]
+	required = true
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+[maintenance]
+	repo = /Users/matt/world/git

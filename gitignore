@@ -22,3 +22,4 @@ config/shadowenv
 *.swp
 infrastructure/haybales/vendor
 .beads
+.agents
