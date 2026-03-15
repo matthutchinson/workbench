@@ -23,3 +23,5 @@ config/shadowenv
 infrastructure/haybales/vendor
 .beads
 .agents
+.agents/*
+.quickhook

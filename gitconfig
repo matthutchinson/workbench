@@ -126,8 +126,8 @@
 	required = true
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
+[maintenance]
+	repo = /Users/matt/world/git
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-[maintenance]
-	repo = /Users/matt/world/git
