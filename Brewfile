@@ -60,6 +60,9 @@ brew "fx"
 brew "cloudflared"
 brew "agrinman/tap/tunnelto"
 
+# monitor network
+brew "matthart1983/tap/netwatch"
+
 # general
 brew "imagemagick"
 brew "uv"
