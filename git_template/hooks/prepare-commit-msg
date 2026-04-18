@@ -18,9 +18,6 @@ prepareTemplateMessage() {
     template_content="\n$(cat $template_file)\n"
   fi
 
-  # add the currently playing iTunes track
-  # current_song=`osascript -e 'tell application "Music" to if player state is playing then "\n(♬ listening to) : " & artist of current track & " / " & name of current track & "\n"'`
-
   echo $prefix "short message\n$template_content\n$(cat $1)" > $1
 }
 
