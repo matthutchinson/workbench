@@ -60,7 +60,7 @@ brew "fx"
 brew "cloudflared"
 brew "agrinman/tap/tunnelto"
 
-# monitor network
+# monitor network - https://github.com/matthart1983/netwatch
 brew "matthart1983/tap/netwatch"
 
 # general
