@@ -94,7 +94,8 @@ brew "mise"
 
 # AI
 brew "opencode"
-cask "opencode-desktop"
+brew "llama.cpp"
+brew "hf"
 
 # git
 brew "git"
