@@ -40,7 +40,7 @@
 	delete-merged = !git branch --merged main | egrep -v \"(^\\*|^  main$)\" | xargs git branch --delete
 	delete-gone = !git fetch --prune && git branch --verbose | awk '/\\[gone]/{print $1}' | xargs git branch --delete --force
 	upstream = push -u origin HEAD
-	sdiff = "!git diff \"$@\" | sed -E -e \"s#areas/core/[^/]+/##g\" #"
+  sdiff = "!git diff \"$@\" | sed -E -e \"s#[a|b]/areas/core/[^/]+/##g\" #"
 
 	# see https://tekin.co.uk/2020/06/jump-from-a-git-commit-to-the-pr-in-one-command
 	merge-commits = "!funct() { git log --merges --reverse --oneline --ancestry-path $1..origin | grep \"Merge pull request\";  }; funct"
@@ -91,8 +91,6 @@
 [commit]
 	verbose = true
 	gpgSign = true
-[diff]
-	noprefix = true
 [pull]
   rebase = true
 [pager]

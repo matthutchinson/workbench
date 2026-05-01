@@ -32,3 +32,4 @@ config/wish.*
 config/slack-mcp
 config/qmd
 config/quick
+config/web-production-validation
