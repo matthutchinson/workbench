@@ -92,3 +92,4 @@ alias gpr='gh pr create'
 
 # autocorrect fixes
 alias kamal='nocorrect kamal'
+alias pi='nocorrect pi'

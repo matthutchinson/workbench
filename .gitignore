@@ -3,6 +3,7 @@ vim/tmp
 vim/plugged
 vim/undodir
 vim/autoload/plug.vim
+vim/after/plugin/shopify_*.vim
 config/gh
 irssi/certs/*.pem
 irssi/fnotify
@@ -33,3 +34,5 @@ config/slack-mcp
 config/qmd
 config/quick
 config/web-production-validation
+config/agent-tools
+config/peon-ping

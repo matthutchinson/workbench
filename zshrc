@@ -53,35 +53,10 @@ export PATH=~/bin:$PATH
 export PATH="/Users/matt/.local/bin:$PATH"
 
 # shopify
-if [[ $HOSTNAME != dagobah ]]; then
-  [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
-  [ -f $HOME/.shopify/zshrc.sh ] && source $HOME/.shopify/zshrc.sh
-  [[ -f /opt/dev/sh/chruby/chruby.sh ]] && { type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; } }
-  [[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
-  [ -f /opt/dev/dev.sh ] && source /opt/dev/dev.sh
-  # Added by tec agent
-  [[ -x /Users/matt/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/matt/.local/state/tec/profiles/base/current/global/init zsh)"
-
-  # fix fzf path and add a shopify bin path
-  export PATH=/opt/homebrew/opt/fzf/bin:$PATH
-  export PATH=$HOME/.shopify/bin:$PATH
-  # Shopify Hydrogen alias to local projects
-  alias h2='$(npm prefix -s)/node_modules/.bin/shopify hydrogen'
-
-  # cloudplatform: add Shopify clusters to your local kubernetes config
-  export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/matt/.kube/config:/Users/matt/.kube/config.shopify.cloudplatform
-fi
+[ -f $HOME/.shopify/zshrc.sh ] && source $HOME/.shopify/zshrc.sh
 
 ################################################################################
 # Benchmarking - https://blog.jonlu.ca/posts/speeding-up-zsh
 ################################################################################
 # add `zmodload zsh/zprof` above
 # then run `zprof` in new shells
-
-# bun completions
-[ -s "/Users/matt/.bun/_bun" ] && source "/Users/matt/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-export MYSQL=1
