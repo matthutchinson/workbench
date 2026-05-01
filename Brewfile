@@ -94,8 +94,8 @@ brew "mise"
 
 # AI
 brew "opencode"
-brew "llama.cpp"
-brew "hf"
+brew "llama.cpp" # local llms
+brew "hf" # hugging face
 
 # git
 brew "git"
