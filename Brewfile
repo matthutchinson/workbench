@@ -91,6 +91,7 @@ brew "fswatch"
 brew "irssi"
 brew "heroku"
 brew "mise"
+brew "rom-tools"
 
 # AI
 brew "opencode"
