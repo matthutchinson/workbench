@@ -1,26 +1,17 @@
 #!/usr/bin/ruby
 
 require 'rubygems'
-require 'irb/completion'
+require "amazing_print" rescue LoadError
 
-begin
-  require "amazing_print"
-rescue LoadError
-end
-
+IRB.conf[:SHOW_BANNER]  = true
 IRB.conf[:AUTO_INDENT]  = true
 IRB.conf[:SAVE_HISTORY] = 1000
 IRB.conf[:PROMPT_MODE]  = :SIMPLE
-IRB.conf[:USE_READLINE] = true
-IRB.conf[:BACK_TRACE_LIMIT] = 1000
 IRB.conf[:HISTORY_FILE] = File.expand_path('.irb_history', ENV['HOME'])
 
-# use Amazing Print
-AmazingPrint.irb! if defined?(AmazingPrint)
-
-# some helper methods
-def save_file(data, filename)
-  File.open(filename, 'w') { |f| f.write(data) }
+if defined?(AmazingPrint)
+  AmazingPrint.irb!
+  AmazingPrint.rdbg!
 end
 
 class Object
@@ -33,10 +24,10 @@ class Object
 
   # print documentation, use like this;
   #
-  #   ri 'Array#pop'
-  #   Array.ri
-  #   Array.ri :pop
-  #   arr.ri :pop
+  #  ri 'Array#pop'
+  #  Array.ri
+  #  Array.ri :pop
+  #  arr.ri :pop
   def ri(method = nil)
     unless method && method =~ /^[A-Z]/ # if class isn't specified
       klass = self.kind_of?(Class) ? name : self.class.name
@@ -46,35 +37,33 @@ class Object
   end
 end
 
-#====
-
-# show queries
-if defined? ActiveRecord::Base
-  ActiveRecord::Base.logger = Logger.new STDOUT
-end
-
-# show requests, e.g. use app.get '/'
-if defined? ActionController::Base
-  ActionController::Base.logger = Logger.new STDOUT
-end
-
-# run queries
-def sql(query)
-  ActiveRecord::Base.connection.select_all(query)
-end
-
-# get a specific route via index or name
-def route(index_or_name)
-  case index_or_name
-    when Integer
-      Rails.application.routes.routes[index_or_name]
-    when Symbol # named route
-      Rails.application.routes.named_routes.get index_or_name
-    end
-end
-
-# show Rails app name and env name in prompt
 if defined?(Rails)
+  # show queries
+  if defined? ActiveRecord::Base
+    ActiveRecord::Base.logger = Logger.new STDOUT
+  end
+
+  # show requests, e.g. use app.get '/'
+  if defined? ActionController::Base
+    ActionController::Base.logger = Logger.new STDOUT
+  end
+
+  # run queries
+  def sql(query)
+    ActiveRecord::Base.connection.select_all(query)
+  end
+
+  # get a specific route via index or name
+  def route(index_or_name)
+    case index_or_name
+      when Integer
+        Rails.application.routes.routes[index_or_name]
+      when Symbol # named route
+        Rails.application.routes.named_routes.get index_or_name
+      end
+  end
+
+  # show Rails app name and env name in prompt
   app_env  = Rails.env[0...3]
   app_name = if defined?(Rails.application.class.module_parent_name)
                Rails.application.class.module_parent_name
@@ -94,6 +83,3 @@ if defined?(Rails)
     :AUTO_INDENT => true,
   }
 end
-
-# ready!
-puts "> all systems are go <"

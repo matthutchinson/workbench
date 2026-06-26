@@ -63,6 +63,9 @@ brew "agrinman/tap/tunnelto"
 # monitor network - https://github.com/matthart1983/netwatch
 brew "matthart1983/tap/netwatch"
 
+# editor
+brew "vim"
+
 # general
 brew "imagemagick"
 brew "uv"
@@ -74,8 +77,6 @@ brew "fzf"
 brew "postgresql@14"
 brew "mysql"
 brew "ctags"
-brew "vim"
-brew "neovim"
 brew "git-delta"
 brew "less"
 brew "wget"

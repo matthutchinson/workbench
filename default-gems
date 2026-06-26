@@ -1,4 +1,5 @@
 # default gems for all rubies with mise
+irb
 neovim
 overmind
 foreman
