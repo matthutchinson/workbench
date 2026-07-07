@@ -60,3 +60,6 @@ export PATH="/Users/matt/.local/bin:$PATH"
 ################################################################################
 # add `zmodload zsh/zprof` above
 # then run `zprof` in new shells
+
+# Added by tec agent
+[[ -x /Users/matt/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/matt/.local/state/tec/profiles/base/current/global/init zsh)"
