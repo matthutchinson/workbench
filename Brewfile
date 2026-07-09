@@ -65,6 +65,7 @@ brew "matthart1983/tap/netwatch"
 
 # editor
 brew "vim"
+brew "lua-language-server"
 
 # general
 brew "imagemagick"
