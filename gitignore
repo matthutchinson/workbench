@@ -25,3 +25,5 @@ infrastructure/haybales/vendor
 .agents
 .agents/*
 .quickhook
+docs/superpowers*
+docs/superpowers/*

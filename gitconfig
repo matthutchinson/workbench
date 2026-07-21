@@ -126,11 +126,11 @@
 	smudge = git-media-smudge %f
 [maintenance]
 	repo = /Users/matt/world/git
-	repo = /Users/matt/src/github.com/shopify-playground/ucp-studio
+	repo = /Users/matt/src/github.com/Shopify/second-brain
 	repo = /Users/matt/src/github.com/ShopifyUS/cardsink
 	repo = /Users/matt/src/github.com/ShopifyUS/cardserver
+[shop-world "stale-pr-cutoff"]
+	main = 1784219334
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-[shop-world "stale-pr-cutoff"]
-	main = 1783216103
