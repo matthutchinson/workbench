@@ -36,3 +36,4 @@ config/quick
 config/web-production-validation
 config/agent-tools
 config/peon-ping
+config/nvim/lazy-lock.json
