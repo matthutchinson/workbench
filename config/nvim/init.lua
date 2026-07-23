@@ -2,13 +2,13 @@ print("advent of neovim")
 
 require("config.lazy")
 
--- default tabbing 2 spaces
+-- default tabbing (spaces)
 vim.opt.shiftwidth = 2
 
 -- mirror with system clipboard
 vim.opt.clipboard = "unnamedplus"
 
--- play with vim cmd to se lua highlight
+-- play with vim cmd to see lua highlight
 -- vim.cmd [[hi @function.builtin.lua guifg=red]]
 
 -- always show numbers as relative
@@ -28,9 +28,9 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 -- bindings to quickly run lua code
-vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>") -- file
-vim.keymap.set("n", "<space>x", ":.lua<CR>") -- current line
-vim.keymap.set("v", "<space>x", ":lua<CR>") -- selection
+vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>") -- file
+vim.keymap.set("n", "<leader>x", ":.lua<CR>")                 -- current line
+vim.keymap.set("v", "<leader>x", ":lua<CR>")                  -- selection
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode

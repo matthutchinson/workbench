@@ -15,22 +15,33 @@ return {
         buffers = {
           theme = "dropdown",
         }
+      },
+      extensions = {
+        fzf = {}
       }
     }
 
-    local telescope = require("telescope.builtin")
-    local themes = require("telescope.themes")
+    require("telescope").load_extension("fzf")
+    local builtin = require("telescope.builtin")
 
-    vim.keymap.set("n", "<space>", telescope.find_files)      -- browse files
-    vim.keymap.set("n", "<space>r", telescope.lsp_references) -- browse refs
-    vim.keymap.set("n", "<space>gs", telescope.git_status)    -- browse git status
-    vim.keymap.set("n", "<space>b", telescope.buffers)        -- browse open buffers
-    vim.keymap.set("n", "<space>h", telescope.help_tags)      -- browse all help
+    vim.keymap.set("n", "<leader>fd", builtin.find_files)     -- browse files in dirs
+    vim.keymap.set("n", "<leader>fr", builtin.lsp_references) -- browse refs
+    vim.keymap.set("n", "<leader>gs", builtin.git_status)     -- browse git status
+    vim.keymap.set("n", "<leader>b", builtin.buffers)         -- browse open buffers
+    vim.keymap.set("n", "<leader>h", builtin.help_tags)       -- browse all help
 
-    vim.keymap.set("n", "<space>en", function()               -- edit nvim config
-      telescope.find_files {
+    vim.keymap.set("n", "<leader>en", function()              -- edit nvim config
+      builtin.find_files {
         cwd = vim.fn.stdpath("config")
       }
     end)
+
+    vim.keymap.set("n", "<leader>ep", function() -- edit nvim config
+      builtin.find_files {
+        cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
+      }
+    end)
+
+    require("config.telescope.multigrep").setup()
   end,
 }
