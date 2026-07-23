@@ -130,7 +130,7 @@
 	repo = /Users/matt/src/github.com/ShopifyUS/cardsink
 	repo = /Users/matt/src/github.com/ShopifyUS/cardserver
 [shop-world "stale-pr-cutoff"]
-	main = 1784219334
+	main = 1784305653
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
