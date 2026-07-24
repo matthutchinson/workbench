@@ -1,16 +1,19 @@
 ################################################################################
-# Interactive shell environment
-################################################################################
-
-################################################################################
 # brew - https://brew.sh
 ################################################################################
 [ -d "/opt/homebrew" ] && export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 [ -d "/usr/local" ] && export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
+HOMEBREW_PREFIX=/opt/homebrew
+
+eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
+
 ################################################################################
 # source files in ~/.zsh
 ################################################################################
+
+HOSTNAME=$(hostname)
+
 if [ -d $HOME/.zsh ]; then
   for zsh_config in $HOME/.zsh/*(.); do
     source $zsh_config
@@ -18,29 +21,7 @@ if [ -d $HOME/.zsh ]; then
 fi
 
 ################################################################################
-# Brew
-################################################################################
-
-HOMEBREW_PREFIX=/opt/homebrew
-
-eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
-
-################################################################################
-# ENV Tooling
-################################################################################
-
-HOSTNAME=$(hostname)
-
-if [[ $HOSTNAME =~ ^dagobah ]]; then
-  eval "$($HOMEBREW_PREFIX/opt/mise/bin/mise activate zsh)"
-fi
-
-export GOPATH="$HOME/go"
-export NODE_PATH="$HOMEBREW_PREFIX/lib/node_modules:$NODE_PATH"
-export PATH="$GOPATH/bin:$HOMEBREW_PREFIX/share/npm/bin:/usr/local/bin:/usr/local/sbin:$PATH"
-
-################################################################################
-# PATH
+# PATH setup
 ################################################################################
 
 # Don't hash command lookups, allowing us to use ./bin/* commands relative to
@@ -51,6 +32,12 @@ set +h
 # add home and local bin paths
 export PATH=~/bin:$PATH
 export PATH="/Users/matt/.local/bin:$PATH"
+
+if [[ $HOSTNAME =~ ^dagobah ]]; then
+  export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+  # activate mise en place, after PATH edits
+  eval "$($HOMEBREW_PREFIX/opt/mise/bin/mise activate zsh)"
+fi
 
 # shopify
 [ -f $HOME/.shopify/zshrc.sh ] && source $HOME/.shopify/zshrc.sh
