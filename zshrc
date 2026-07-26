@@ -50,3 +50,6 @@ fi
 
 # Added by tec agent
 [[ -x /Users/matt/.local/state/tec/profiles/base/current/global/init ]] && eval "$(/Users/matt/.local/state/tec/profiles/base/current/global/init zsh)"
+
+# Pi
+export PATH="/Users/matt/.local/share/mise/installs/node/26.5.0/bin:$PATH"

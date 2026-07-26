@@ -1,4 +1,11 @@
-print("advent of neovim")
+-- play with vim cmd to see built in lua functions highlighted in another colour
+-- execute a command exactly like typing :hi @function.builtin.lua guifg=red
+-- [[ ]] is a long string, equivalent to '' or "", but escapes quotes OK
+-- () around calling the vim function are optional
+-- @ is the start of a treesitter capture (identifying the highlight target group)
+-- vim.cmd [[highlight @function.builtin.lua guibg=#441122]]
+
+print("advent of neovim!")
 
 require("config.lazy")
 
@@ -7,9 +14,6 @@ vim.opt.shiftwidth = 2
 
 -- mirror with system clipboard
 vim.opt.clipboard = "unnamedplus"
-
--- play with vim cmd to see lua highlight
--- vim.cmd [[hi @function.builtin.lua guifg=red]]
 
 -- always show numbers as relative
 vim.opt.number = true
@@ -34,7 +38,6 @@ vim.keymap.set("v", "<leader>x", ":lua<CR>")                  -- selection
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),

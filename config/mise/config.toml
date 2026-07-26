@@ -1,6 +1,6 @@
 [tools]
 ruby = { version = "latest", postinstall = "gem install irb neovim overmind foreman overcommit iStats lolcommits amazing_print pry pry-doc pry-nav github-auth colorls mailcatcher ruby-lsp" }
-node = { version = "latest", postinstall = "npm install -g eslint prettier nodemon tree-sitter-cli" }
+node = { version = "latest", postinstall = "npm install -g eslint prettier nodemon tree-sitter-cli neovim" }
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby"]
