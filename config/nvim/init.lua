@@ -31,10 +31,35 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
--- bindings to quickly run lua code
+-- bindings
+
+-- quickly run lua code
 vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>") -- file
 vim.keymap.set("n", "<leader>x", ":.lua<CR>")                 -- current line
 vim.keymap.set("v", "<leader>x", ":lua<CR>")                  -- selection
+
+-- quickfix window
+vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>")   -- Alt+j next item (meta is alt key)
+vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>")   -- Alt+k prev item
+vim.keymap.set("n", "<M-w>", "<cmd>cwindow<CR>") -- Alt+w open quickfix window if we have results
+
+local function toggle_quickfix()
+  local qf_win = nil
+  for _, win in ipairs(vim.fn.getwininfo()) do
+    if win.quickfix == 1 then
+      qf_win = win.winid
+      break
+    end
+  end
+
+  if qf_win then
+    vim.cmd("cclose")
+  else
+    vim.cmd("copen")
+  end
+end
+
+vim.keymap.set("n", "<M-q>", toggle_quickfix, { desc = "Toggle quickfix window" })
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
