@@ -45,7 +45,7 @@ brew "gh"
 brew "overmind"
 
 # https://tldr.sh
-brew "tldr"
+brew "tlrc"
 
 # https://github.com/BurntSushi/ripgrep
 brew "rg"
@@ -71,7 +71,6 @@ brew "lua-language-server"
 brew "imagemagick"
 brew "uv"
 brew "vips"
-brew "mupdf-tools"
 brew "scmpuff"
 brew "exiftool"
 brew "fzf"
