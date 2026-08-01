@@ -70,3 +70,27 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.hl_op()
   end,
 })
+
+-- Terminals should'nt have line numbering
+vim.api.nvim_create_autocmd('TermOpen', {
+  group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
+  callback = function()
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+  end,
+})
+
+local chan_id = 0
+vim.keymap.set("n", "<leader>st", function()
+  vim.cmd.vnew()
+  vim.cmd.term()
+  vim.cmd.wincmd("J")
+  vim.api.nvim_win_set_height(0, 15)
+  vim.cmd.startinsert()
+
+  chan_id = vim.bo.channel
+end)
+
+vim.keymap.set("n", "<leader>echo", function()
+  vim.fn.chansend(chan_id, { "echo 'hi'\r\n" })
+end)
