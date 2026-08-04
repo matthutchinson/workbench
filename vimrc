@@ -428,6 +428,10 @@ let g:lightline#ale#indicator_warnings = "  "
 let g:lightline#ale#indicator_errors = "  "
 let g:lightline#ale#indicator_ok = ""
 
+" Copilot - use language server bundled with copilot.vim instead of global npx
+let g:copilot_version = v:false
+let g:copilot_node_command = exepath('node')
+
 " ALE lint and fix options
 let g:ale_cspell_options = "--config ~/.config/cspell/cspell.json"
 let g:ale_ruby_ruby_executable = "ruby "
