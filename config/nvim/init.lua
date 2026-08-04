@@ -22,6 +22,11 @@ vim.opt.relativenumber = true
 -- auto create directory path when writing if path doesn't exist
 vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function(args)
+    -- Skip URL buffers (e.g. oil://) whose name isn't a real filesystem path,
+    -- otherwise mkdir() creates a bogus "oil:/..." directory tree.
+    if args.match:find("://") then
+      return
+    end
     local file = vim.fn.fnamemodify(args.match, ":p")
     local dir = vim.fn.fnamemodify(file, ":h")
 
