@@ -27,3 +27,4 @@ infrastructure/haybales/vendor
 .quickhook
 docs/superpowers*
 docs/superpowers/*
+oil:/*
