@@ -13,12 +13,18 @@ return {
       columns = {
         "icon",
         -- "permissions",
-        "size",
+        -- "size",
         "mtime",
       },
+      keymaps = {
+        ["<C-h>"] = false,
+      },
+      view_options = {
+        show_hidden = true,
+      }
     })
 
-    -- open current files parent dir
+    -- open current file parent dir
     vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
   end,
 }
