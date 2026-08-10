@@ -1,7 +1,9 @@
 -- play with vim cmd to see built in lua functions highlighted in another colour
 -- execute a command exactly like typing :hi @function.builtin.lua guifg=red
+--
+-- Lua Basics
 -- [[ ]] is a long string, equivalent to '' or "", but escapes quotes OK
--- () around calling the vim function are optional
+-- () around calling a lua function are optional
 -- @ is the start of a treesitter capture (identifying the highlight target group)
 -- vim.cmd [[highlight @function.builtin.lua guibg=#441122]]
 
@@ -84,6 +86,8 @@ vim.api.nvim_create_autocmd('TermOpen', {
     vim.opt.relativenumber = false
   end,
 })
+-- back to normal mode in terminals with esc,esc
+vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
 
 local chan_id = 0
 vim.keymap.set("n", "<leader>st", function()

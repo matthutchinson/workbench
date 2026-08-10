@@ -1,23 +1,28 @@
 return {
   "neovim/nvim-lspconfig",
-  dependencies = { {
-    "folke/lazydev.nvim",
-    ft = "lua",   -- only load on lua files
-    opts = {
-      library = {
-        -- See the configuration section for more details
-        -- Load luvit types when the `vim.uv` word is found
-        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+  dependencies = {
+    'saghen/blink.cmp',
+    {
+      "folke/lazydev.nvim",
+      ft = "lua", -- only load on lua files
+      opts = {
+        library = {
+          -- See the configuration section for more details
+          -- Load luvit types when the `vim.uv` word is found
+          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        },
       },
     },
   },
-  },
   config = function()
-    vim.lsp.enable('lua_ls')     -- brew install lua-language-server
-    vim.lsp.enable('ruby_lsp')   -- gem install ruby-lsp
+    vim.lsp.enable('lua_ls')   -- brew install lua-language-server
+    vim.lsp.enable('ruby_lsp') -- gem install ruby-lsp
 
     -- e.g ff to format the current buffer (in normal mode) would be
     vim.keymap.set("n", "ff", function() vim.lsp.buf.format() end)
+
+    -- make lsp aware of blink completion capabilities
+    vim.lsp.config('*', { capabilities = require('blink.cmp').get_lsp_capabilities() })
 
     vim.api.nvim_create_autocmd('LspAttach', {
       -- note no buffer arg, happing on all attaches in nv
