@@ -70,7 +70,7 @@ alias rtc='rails test $(git diff --diff-filter=d --name-only main test | grep "_
 ################################################################################
 
 alias gb='git branch --verbose'
-alias gg='git pull'
+alias gg='git fetch origin $BR'
 alias gp='git push'
 alias gpf='git push --force-with-lease'
 alias gl="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | vim -R -c 'set filetype=git nowrap' -"

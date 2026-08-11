@@ -103,6 +103,9 @@ nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<cr>
 " format paragraphs to textwidth
 nnoremap <leader>q gqip
 
+" find the PR for the Git SHA under the cursor
+nnoremap <leader>fp :call FindPr()<cr>
+
 " quick fix window nav
 nmap <C-n> :cn<cr>
 nmap <C-p> :cp<cr>
@@ -463,6 +466,19 @@ let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
 
 " #### Functions
+
+function! FindPr()
+  let sha = expand('<cword>')
+
+  if sha !~# '^\x\{7,40}$'
+    echohl WarningMsg
+    echom 'Not a Git SHA: ' . sha
+    echohl None
+    return
+  endif
+
+  execute '!~/.shopify/bin/find-pr ' . shellescape(sha)
+endfunction
 
 " lightline bar components
 function! LightLineModified()
