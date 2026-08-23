@@ -24,6 +24,7 @@ return {
     require("telescope").load_extension("fzf")
     local builtin = require("telescope.builtin")
 
+    vim.keymap.set("n", "<leader>.", builtin.find_files)      -- browse files in dirs
     vim.keymap.set("n", "<leader>fd", builtin.find_files)     -- browse files in dirs
     vim.keymap.set("n", "<leader>fr", builtin.lsp_references) -- browse refs
     vim.keymap.set("n", "<leader>gs", builtin.git_status)     -- browse git status
@@ -31,12 +32,10 @@ return {
     vim.keymap.set("n", "<leader>h", builtin.help_tags)       -- browse all help
 
     vim.keymap.set("n", "<leader>en", function()              -- edit nvim config
-      builtin.find_files {
-        cwd = vim.fn.stdpath("config")
-      }
+      builtin.find_files { cwd = vim.fn.stdpath("config") }
     end)
 
-    vim.keymap.set("n", "<leader>ep", function() -- edit nvim config
+    vim.keymap.set("n", "<leader>ep", function() -- edit nvim lazy packages
       builtin.find_files {
         cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
       }

@@ -6,7 +6,7 @@ return {
     keymap = { preset = 'cmdline' }, -- default for auto popup, cmdline for tab/s-tab
     appearance = { nerd_font_variant = 'mono' },
     completion = {
-      menu = { auto_show = false },        -- toggle always showing completion menu
+      menu = { auto_show = true },         -- toggle always showing completion menu
       documentation = { auto_show = true } -- toggle floating doc window on/off
     },
     sources = { default = { 'lsp', 'path', 'snippets', 'buffer' } },

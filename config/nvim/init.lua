@@ -45,6 +45,9 @@ vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>") -- file
 vim.keymap.set("n", "<leader>x", ":.lua<CR>")                 -- current line
 vim.keymap.set("v", "<leader>x", ":lua<CR>")                  -- selection
 
+-- searching
+vim.keymap.set("n", "<Esc>", "<cmd>nohls<CR>") -- remove search highlighting
+
 -- quickfix window
 vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>")   -- Alt+j next item (meta is alt key)
 vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>")   -- Alt+k prev item

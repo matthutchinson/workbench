@@ -52,5 +52,6 @@ end
 
 -- create a :Floaterminal command for the func above
 vim.api.nvim_create_user_command("Floaterminal", toggle_terminal, {})
+
 -- create a mapping in both normal and term modes
 vim.keymap.set({ "n", "t" }, "<leader><leader>t", toggle_terminal)
