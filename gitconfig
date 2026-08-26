@@ -128,9 +128,9 @@
 	repo = /Users/matt/world/git
 	repo = /Users/matt/src/github.com/shopify-playground/ucp-studio
 	repo = /Users/matt/src/github.com/ShopifyUS/cardserver
-	repo = /Users/matt/src/github.com/ShopifyUS/cardsink
+	repo = /Users/matt/src/github.com/Shopify/infrastructure
 [shop-world "stale-pr-cutoff"]
-	main = 1786133479
+	main = 1787601622
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

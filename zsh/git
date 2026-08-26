@@ -5,8 +5,10 @@
 ################################################################################
 
 if hash scmpuff >/dev/null 2>&1; then
-  eval "$(scmpuff init -s)"
+  eval "$(scmpuff init -s --aliases=false)"
 fi
+
+alias gss='scmpuff_status'
 
 ################################################################################
 # master or main local branch name

@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 
 require 'rubygems'
-require "amazing_print" rescue LoadError
+# require "amazing_print" rescue LoadError
 
 IRB.conf[:SHOW_BANNER]  = true
 IRB.conf[:AUTO_INDENT]  = true
@@ -9,10 +9,10 @@ IRB.conf[:SAVE_HISTORY] = 1000
 IRB.conf[:PROMPT_MODE]  = :SIMPLE
 IRB.conf[:HISTORY_FILE] = File.expand_path('.irb_history', ENV['HOME'])
 
-if defined?(AmazingPrint)
-  AmazingPrint.irb!
-  AmazingPrint.rdbg!
-end
+# if defined?(AmazingPrint)
+#   AmazingPrint.irb!
+#   AmazingPrint.rdbg!
+# end
 
 class Object
   # return a list of methods defined locally for a particular object. Useful
