@@ -15,6 +15,7 @@ config/dev
 config/gcloud
 config/nix*
 config/shadowenv
+config/hey-cli
 *.tags
 .shadowenv.d
 .agignore

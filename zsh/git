@@ -8,7 +8,11 @@ if hash scmpuff >/dev/null 2>&1; then
   eval "$(scmpuff init -s --aliases=false)"
 fi
 
-alias gss='scmpuff_status'
+if [[ $HOSTNAME =~ ^dagobah ]]; then
+  alias gs='scmpuff_status'
+else
+  alias gss='scmpuff_status'
+fi
 
 ################################################################################
 # master or main local branch name

@@ -11,6 +11,9 @@ cask "ghostty"
 # https://mitmproxy.org
 cask "mitmproxy"
 
+# https://github.com/basecamp/hey-cli
+cask "basecamp/tap/hey"
+
 # don't forget to set default shell to /opt/homebrew/bin/zsh
 brew "zsh"
 
