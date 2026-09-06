@@ -65,23 +65,6 @@ alias sshot='open ./tmp/screenshots'
 # run tests for all tests files that have changed in this branch, filters out deleted tests
 alias rtc='rails test $(git diff --diff-filter=d --name-only main test | grep "_test.rb" | tr "\n" " ")'
 
-################################################################################
-# Git
-################################################################################
-
-alias gb='git branch --verbose'
-alias gg='git fetch origin $BR'
-alias gp='git push'
-alias gpf='git push --force-with-lease'
-alias gl="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | vim -R -c 'set filetype=git nowrap' -"
-alias grm='git rebase $(git_main_branch) -i'
-alias gca='git amend'
-alias gup='git upstream'
-alias gdm='git diff main | sed -E "s#areas/core/(.*)/##g" | vim -'
-
-# GitHub CLI - https://cli.github.com
-alias gpr='gh pr create'
-
 # autocorrect fixes
 alias kamal='nocorrect kamal'
 alias pi='nocorrect pi'

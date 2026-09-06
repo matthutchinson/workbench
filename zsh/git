@@ -8,11 +8,29 @@ if hash scmpuff >/dev/null 2>&1; then
   eval "$(scmpuff init -s --aliases=false)"
 fi
 
+################################################################################
+# aliases
+################################################################################
+
+alias gb='git branch --verbose'
+alias gp='git push'
+alias gpf='git push --force-with-lease'
+alias gl="git log --graph --pretty=format:'%h - %d %s (%cr) <%an>' | vim -R -c 'set filetype=git nowrap' -"
+alias grm='git rebase $(git_main_branch) -i'
+alias gca='git amend'
+alias gup='git upstream'
+alias gdm='git diff main | sed -E "s#areas/core/(.*)/##g" | vim -'
+
 if [[ $HOSTNAME =~ ^dagobah ]]; then
   alias gs='scmpuff_status'
+  alias gg='git pull'
 else
   alias gss='scmpuff_status'
+  alias gg='git fetch origin $BR'
 fi
+
+# GitHub CLI - https://cli.github.com
+alias gpr='gh pr create'
 
 ################################################################################
 # master or main local branch name
