@@ -26,7 +26,7 @@ if [[ $HOSTNAME =~ ^dagobah ]]; then
   alias gg='git pull'
 else
   alias gss='scmpuff_status'
-  alias gg='git fetch origin $BR'
+  alias gg='git pull origin $BR'
 fi
 
 # GitHub CLI - https://cli.github.com

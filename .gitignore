@@ -38,3 +38,4 @@ config/agent-tools
 config/peon-ping
 config/nvim/lazy-lock.json
 config/herdr
+config/shop-partner-cli

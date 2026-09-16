@@ -126,9 +126,8 @@
 	smudge = git-media-smudge %f
 [maintenance]
 	repo = /Users/matt/world/git
-	repo = /Users/matt/src/github.com/shopify-playground/ucp-studio
 [shop-world "stale-pr-cutoff"]
-	main = 1788216536
+	main = 1789318333
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
