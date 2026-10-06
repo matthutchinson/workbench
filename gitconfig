@@ -127,7 +127,7 @@
 [maintenance]
 	repo = /Users/matt/world/git
 [shop-world "stale-pr-cutoff"]
-	main = 1789318333
+	main = 1791209629
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

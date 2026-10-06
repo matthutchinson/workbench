@@ -339,7 +339,8 @@ map <leader>U :UltiSnipsEdit<cr>
 
 " fugitive
 map <leader>gs :Git<cr>
-map <leader>gb :Git blame<cr>
+map <leader>gb :GBrowse @github<cr>
+map <leader>gbl :Git blame<cr>
 map <leader>gp :Git push<cr>
 map <leader>gg :Git pull<cr>
 map <leader>gc :Git commit<space>
