@@ -25,7 +25,7 @@ return {
     local builtin = require("telescope.builtin")
 
     vim.keymap.set("n", "<leader>.", builtin.find_files)      -- browse files in dirs
-    vim.keymap.set("n", "<leader>fd", builtin.find_files)     -- browse files in dirs
+    vim.keymap.set("n", "<leader>ff", builtin.find_files)     -- browse files in dirs
     vim.keymap.set("n", "<leader>fr", builtin.lsp_references) -- browse refs
     vim.keymap.set("n", "<leader>gs", builtin.git_status)     -- browse git status
     vim.keymap.set("n", "<leader>b", builtin.buffers)         -- browse open buffers
