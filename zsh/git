@@ -20,12 +20,11 @@ alias grm='git rebase $(git_main_branch) -i'
 alias gca='git amend'
 alias gup='git upstream'
 alias gdm='git diff main | sed -E "s#areas/core/(.*)/##g" | vim -'
+alias gs='scmpuff_status'
 
 if [[ $HOSTNAME =~ ^dagobah ]]; then
-  alias gs='scmpuff_status'
   alias gg='git pull'
 else
-  alias gss='scmpuff_status'
   alias gg='git pull origin $BR'
 fi
 
